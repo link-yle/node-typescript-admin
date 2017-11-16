@@ -6,7 +6,7 @@
 /out-tsc
 
 # dependencies
-/node_modules
+**/*/node_modules
 
 # IDEs and editors
 /.idea
@@ -15,7 +15,6 @@
 .c9/
 *.launch
 .settings/
-*.sublime-workspace
 
 # IDE - VSCode
 .vscode/*
@@ -40,3 +39,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+/**/*/coverage/
+
+Youssef_Sherif-FSD.zip
+Assignment.pdf
