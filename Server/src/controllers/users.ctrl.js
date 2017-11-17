@@ -1,7 +1,7 @@
 
 const utility = require('../helpers/utility.js')
-const usersModel = require('../models/donors.model')
-const {getToken} = require('../modules/auth')
+const usersModel = require('../models/users.model')
+const {getToken} = require('../core/authentication')
 
 function signup(req, res) {
     const newUser = new usersModel(req.body)
@@ -20,7 +20,7 @@ function login(req, res) {
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) throw err;
             console.log(isMatch)
-            const token = getToken(user._id, user.role, req.app.get('mobileSecret'))
+            const token = getToken(user._id, user.role, req.app.get('userSecret'))
             return res.staus.json({user, token})
         });
     })

@@ -1,7 +1,7 @@
 
 
 const utility = require('../helpers/utility.js')
-const usersModel = require('../models/donors.model')
+const usersModel = require('../models/users.model')
 
 function removeTimeZone(req, res) {
     return usersModel.findByIdAndUpdate(

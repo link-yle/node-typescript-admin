@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const timeZoneSchema = require('./timezones.model')
+const timeZoneSchema = require('./timezone.schema')
 const ROLES = require('../config/rolesConstants')
 
 const roles_enum = {
