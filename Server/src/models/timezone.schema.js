@@ -14,6 +14,8 @@ const timeZoneSchema = new Schema({
     gmtTimeDifference: {
         type: Number,
         required: true,
+        min: -12,
+        max: 14
     },
 })
 

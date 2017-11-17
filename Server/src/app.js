@@ -22,7 +22,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors())
-routesMiddleware(app)
+app.use(`/users`, require(`./routes/users.router`))
+
 app.use(express.static(root))
 app.use(fallback('index.html', { root: root }))
 

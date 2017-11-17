@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const timeZoneSchema = require('./timezones.model')
+const ROLES = require('../config/rolesConstants')
 
 const roles_enum = {
-    values: ['regular', 'manager', 'admin'],
+    values: [ROLES.regular, ROLES.manager, ROLES.admin],
     message: '`{VALUE}` is not a valid user role.'
 };
 
