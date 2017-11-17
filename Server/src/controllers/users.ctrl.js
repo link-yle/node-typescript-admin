@@ -1,11 +1,6 @@
 
 const utility = require('../helpers/utility.js')
-const { findOneAndUpdate, add, remove, getOneById } = require('../query/donors.query.js')
 const usersModel = require('../models/donors.model')
-
-
-
-
 
 function addUser(req, res) {
     const newUser = new usersModel(req.body)
@@ -45,7 +40,7 @@ function findUserAndUpdateInfo(req, res) {
         .catch(err => utility.badRequest(res, err))
 }
 
-function findUserAndUpdateAndAssignRole(req, res) {
+function findUserAndUpdateRole(req, res) {
     if (!req.params._id) utility.missingData(res, '_id')
     return usersModel.findById(req.params._id)
         .then((user) => {
@@ -59,6 +54,7 @@ function findUserAndUpdateAndAssignRole(req, res) {
         .catch(err => utility.badRequest(res, err))
 }
 
+
 function getUser(req, res) {
     if (!req.params._id) utility.missingData(res, '_id')
     return usersModel.findById(req.params._id).lean().exec()
@@ -66,21 +62,18 @@ function getUser(req, res) {
         .catch(err => utility.badRequest(res, err))
 }
 
-
+function getUsers() {
+    return usersModel.find().select('_id name email timeZones role').lean().exec()
+}
 
 function removeUser(req, res) {
-    return usersModel.remove(req.params.id)
+    return usersModel.findByIdAndRemove(req.params.id)
         .then(() => {
             res.status(200).json("Ok")
         })
         .catch(err => utility.badRequest(res, 'to remove user'))
 }
 
-function getDonorInfoById(req, res) {
-    return getOneById(req.params.id)
-        .then((item) => res.status(200).json(item))
-        .catch(err => utility.badRequest(res, 'to add your info'))
-}
 
 
-module.exports = { addUser, login, getUser, removeUser, getDonorInfoById }
+module.exports = { addUser, login, getUser, removeUser, getUsers, findUserAndUpdateRole, findUserAndUpdateInfo }
