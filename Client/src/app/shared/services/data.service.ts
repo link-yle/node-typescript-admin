@@ -63,8 +63,8 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    getTimeZones(id) {
-        return this.http.get(`${this.donorsEndPoint}/timeZones/${id}`)
+    getTimeZones() {
+        return this.http.get(`${this.donorsEndPoint}/users/timeZones/`)
             .map(res => {
                 return res.json()
             })

@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { HomeComponent } from './home.component';
 
-fdescribe('Home Component', () => {
+describe('Home Component', () => {
     let comp: HomeComponent;
     let fixture: ComponentFixture<HomeComponent>;
     let sb: SnackBarService

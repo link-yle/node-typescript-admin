@@ -1,11 +1,12 @@
-// Angular Imports
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-
-// This Module's Components
 import { TimingsComponent } from './timings.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports: [
+        ReactiveFormsModule,
+        CommonModule
 
     ],
     declarations: [
