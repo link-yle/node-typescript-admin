@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { DataService } from '../shared/services/data.service';
 import { GlobalValidators } from '../shared/services/global-validators.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -13,7 +14,9 @@ export class HomeComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
         private dataService: DataService,
-        private sb: SnackBarService) {
+        private sb: SnackBarService,
+        private router: Router
+    ) {
     }
 
     ngOnInit() {
@@ -25,6 +28,13 @@ export class HomeComponent implements OnInit {
             email: ['', GlobalValidators.mailFormat],
             password: ['', GlobalValidators.passwordFormat],
         })
+    }
+
+    onSubmit(loginForm) {
+        this.dataService.login(loginForm).subscribe(
+            data => this.router.navigate(['/time']),
+            error => this.sb.emitErrorSnackBar()
+        )
     }
 
 

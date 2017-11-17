@@ -47,7 +47,15 @@ export class DataService {
             .catch(this.handleError);
     }
 
-    addUser(item) {
+    signup(item) {
+        return this.http.post(`${this.donorsEndPoint}`, item, this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(this.handleError);
+    }
+
+    login(item) {
         return this.http.post(`${this.donorsEndPoint}`, item, this.requestOptions)
             .map(res => {
                 return res.json()

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../shared/services/data.service';
@@ -15,7 +16,9 @@ export class SignupComponent implements OnInit {
 
     constructor(private fb: FormBuilder,
         private dataService: DataService,
-        private sb: SnackBarService) {
+        private sb: SnackBarService,
+        private router: Router
+    ) {
     }
 
     ngOnInit() {
@@ -31,9 +34,19 @@ export class SignupComponent implements OnInit {
         })
     }
 
+    onSubmit(obj) {
+        this.dataService.signup(obj).subscribe(
+            data => this.router.navigate(['/time']),
+            error => this.sb.emitErrorSnackBar()
+        )
+    }
 
     isIncorrectMailFormat(control) {
         return this.form.get(control).hasError('incorrectMailFormat')
+    }
+
+    isIncorrectPasswordFormat(control) {
+        return this.form.get(control).hasError('incorrectPasswordFormat')
     }
 
     unSimilarPassword(control) {

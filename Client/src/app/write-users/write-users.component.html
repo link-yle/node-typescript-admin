@@ -1,0 +1,7 @@
+<form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
+    <div class="form-group">
+        <label for="">Name </label>
+        <input type="text" class="form-control" id="" placeholder="Enter your first name" formControlName="firstName">
+    </div>
+</form>
+<button>Sign Up</button>

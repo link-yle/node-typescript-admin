@@ -1,53 +1,53 @@
-import { globalValidators } from './global-validators';
+import { GlobalValidators } from './global-validators.service';
 
 describe('Global Validators', () => {
 
     const control = { value: 'ahmed' }
     it('should check mail validity', () => {
-        expect(globalValidators.mailFormat({ value: 'ahmed' })).not.toBe(null)
-        expect(globalValidators.mailFormat({ value: 'ahmed@gmail' })).toBe(null)
+        expect(GlobalValidators.mailFormat({ value: 'ahmed' })).not.toBe(null)
+        expect(GlobalValidators.mailFormat({ value: 'ahmed@gmail' })).toBe(null)
     })
 
 
     it('should check password validity', () => {
-        expect(globalValidators.passwordFormat({ value: '12345' })).not.toBe(null)
-        expect(globalValidators.passwordFormat({ value: '12345r' })).toBe(null)
-        expect(globalValidators.passwordFormat({ value: 'sffgfd2' })).toBe(null)
-        expect(globalValidators.passwordFormat({ value: '45454545455' })).not.toBe(null)
+        expect(GlobalValidators.passwordFormat({ value: '12345' })).not.toBe(null)
+        expect(GlobalValidators.passwordFormat({ value: '12345r' })).toBe(null)
+        expect(GlobalValidators.passwordFormat({ value: 'sffgfd2' })).toBe(null)
+        expect(GlobalValidators.passwordFormat({ value: '45454545455' })).not.toBe(null)
     })
 
     // describe('Location validation', () => {
 
     //     describe('Longitude', () => {
     //         it('should not accept above range', () => {
-    //             expect(globalValidators.longitudeFormat({ value: 181 })).not.toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: 181 })).not.toBe(null)
     //         })
     //         it('should not accept below range', () => {
-    //             expect(globalValidators.longitudeFormat({ value: -181 })).not.toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: -181 })).not.toBe(null)
     //         })
     //         it('should accept within range', () => {
-    //             expect(globalValidators.longitudeFormat({ value: 89 })).toBe(null)
-    //             expect(globalValidators.longitudeFormat({ value: -89 })).toBe(null)
-    //             expect(globalValidators.longitudeFormat({ value: 0 })).toBe(null)
-    //             expect(globalValidators.longitudeFormat({ value: 10 })).toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: 89 })).toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: -89 })).toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: 0 })).toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: 10 })).toBe(null)
     //         })
     //         it('should accept ranges not acceptable by latitude', () => {
-    //             expect(globalValidators.longitudeFormat({ value: 105 })).toBe(null)
-    //             expect(globalValidators.longitudeFormat({ value: -150 })).toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: 105 })).toBe(null)
+    //             expect(GlobalValidators.longitudeFormat({ value: -150 })).toBe(null)
     //         })
     //     })
     //     describe('Latitude', () => {
     //         it('should not accept above range', () => {
-    //             expect(globalValidators.latitudeFormat({ value: 91 })).not.toBe(null)
+    //             expect(GlobalValidators.latitudeFormat({ value: 91 })).not.toBe(null)
     //         })
     //         it('should not accept below range', () => {
-    //             expect(globalValidators.latitudeFormat({ value: -91 })).not.toBe(null)
+    //             expect(GlobalValidators.latitudeFormat({ value: -91 })).not.toBe(null)
     //         })
     //         it('should accept within range', () => {
-    //             expect(globalValidators.latitudeFormat({ value: 89 })).toBe(null)
-    //             expect(globalValidators.latitudeFormat({ value: -89 })).toBe(null)
-    //             expect(globalValidators.latitudeFormat({ value: 0 })).toBe(null)
-    //             expect(globalValidators.latitudeFormat({ value: 10 })).toBe(null)
+    //             expect(GlobalValidators.latitudeFormat({ value: 89 })).toBe(null)
+    //             expect(GlobalValidators.latitudeFormat({ value: -89 })).toBe(null)
+    //             expect(GlobalValidators.latitudeFormat({ value: 0 })).toBe(null)
+    //             expect(GlobalValidators.latitudeFormat({ value: 10 })).toBe(null)
     //         })
 
     //     })
