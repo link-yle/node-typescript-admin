@@ -20,10 +20,10 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.buildForm()
     }
 
-    buildForm() {
+    private buildForm() {
         this.form = this.fb.group({
             email: ['', GlobalValidators.mailFormat],
             password: ['', GlobalValidators.passwordFormat],
