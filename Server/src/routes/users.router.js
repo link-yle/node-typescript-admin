@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const { signup, getUser, getUsers, findUserAndUpdateRole, removeUser, findUserAndUpdateInfo, login } = require('../controllers/users.ctrl')
 const { addTimeZone, removeTimeZone, updateTimeZone } = require('../controllers/timezones.ctrl')
-const { verifyUser } = require('../modules/authentication')
-const { authorize } = require('../modules/autherization')
+const { verifyUser } = require('../core/authentication')
+const { authorize } = require('../core/autherization')
 const ROLES = require('../config/rolesConstants')
 
 router.post('/', signup)
