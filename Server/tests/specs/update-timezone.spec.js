@@ -1,11 +1,15 @@
-const { connectToDb } = require('../helpers/requestsSpecHelper')
+const { setup } = require('../helpers/requestsSpecHelper')
 const faker = require('faker')
+let server, request
 
 describe("Users endpoint", function () {
     beforeAll(() => {
-        connectToDb()
+        [server, request] = setup()
     })
-    describe("delete timezone", function () {
+    afterAll(() => {
+        server.close()
+    })
+    describe("update timezone", function () {
 
         const newUser = {
             name: faker.name.firstName(),
@@ -21,6 +25,11 @@ describe("Users endpoint", function () {
             name: 'timeZone1',
             city: 'Cairo',
             gmtTimeDifference: 6
+        }
+        const updatedTimeZone = {
+            name: 'timeZone2',
+            city: 'Cairo2',
+            gmtTimeDifference: 9
         }
         let id
         let userToken
@@ -45,19 +54,22 @@ describe("Users endpoint", function () {
                 })
             })
 
-            fit("should delete successfully ", function (done) {
-                request.delete(`/users/${id}/timezones/${timeZoneId}`)
+            it("should update successfully ", function (done) {
+                request.put(`/users/${id}/timezones/${timeZoneId}`)
                     .set({ 'Authorization': `Bearer ${userToken}` })
-                    .send(newTimeZone)
+                    .send(updatedTimeZone)
                     .end((err, res) => {
                         expect(res.status).toEqual(200)
-                        expect(res.body.timeZones.length).toEqual(0)
+                        expect(res.body.timeZones.length).toEqual(1)
+                        expect(res.body.timeZones[0].name).toEqual(updatedTimeZone.name)
+                        expect(res.body.timeZones[0].city).toEqual(updatedTimeZone.city)
+                        expect(res.body.timeZones[0].gmtTimeDifference).toEqual(updatedTimeZone.gmtTimeDifference)
                         done();
                     })
             })
 
             it("should respond by 404 error when id is not provided ", function (done) {
-                request.delete(`/users/${id}/timezones/`)
+                request.put(`/users/${id}/timezones/`)
                     .set({ 'Authorization': `Bearer ${userToken}` })
                     .send(newTimeZone)
                     .end((err, res) => {
@@ -67,7 +79,7 @@ describe("Users endpoint", function () {
             })
 
             it("should respond by 400 error when wrong id is provided ", function (done) {
-                request.delete(`/users/${id}/timezones/1`)
+                request.put(`/users/${id}/timezones/1`)
                     .set({ 'Authorization': `Bearer ${userToken}` })
                     .send(newTimeZone)
                     .end((err, res) => {

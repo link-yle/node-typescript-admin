@@ -66,15 +66,20 @@ function findUserAndUpdateRole(req, res) {
 }
 
 
-function getUser(req, res) {
+function getUserDetails(req, res) {
     const id = req.params._id
-    return usersModel.findById(id).lean().exec()
+    return usersModel.findById(id).select('_id name email timeZones role').lean().exec()
         .then((user) => res.status(200).json(user))
         .catch(err => utility.badRequest(res, err))
 }
 
-function getUsers() {
-    return usersModel.find().select('_id name email timeZones role').lean().exec()
+function getUsers(req, res) {
+    return usersModel.find().select('_id name email role').lean().exec()
+    .then(users=>{
+        return res.status(200).json(users)
+    })
+    .catch(err=>console.log(err)
+    )
 }
 
 function removeUser(req, res) {
@@ -87,4 +92,4 @@ function removeUser(req, res) {
 
 
 
-module.exports = { signup, login, getUser, removeUser, getUsers, findUserAndUpdateRole, findUserAndUpdateInfo }
+module.exports = { signup, login, getUserDetails, removeUser, getUsers, findUserAndUpdateRole, findUserAndUpdateInfo }
