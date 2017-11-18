@@ -38,7 +38,7 @@ describe("Users endpoint", function () {
             })
         })
 
-        fit("should not allow unauthenticated users", function (done) {
+        it("should not allow unauthenticated users", function (done) {
             request.put(`/users/${user._id}/info`).send(updatedInfoPayload).end((err, res) => {
                 expect(res.status).toBe(401)
                 done();
@@ -46,7 +46,7 @@ describe("Users endpoint", function () {
         })
 
 
-        fit("should update", function (done) {
+        it("should update", function (done) {
             request.put(`/users/${user._id}/info`)
             .set({'Authorization': `Bearer ${token}`})
             .send(updatedInfoPayload)
@@ -57,7 +57,7 @@ describe("Users endpoint", function () {
                 done();
             })
         })
-        fit("should return 404 if no id is provided", function (done) {
+        it("should return 404 if no id is provided", function (done) {
             request.put(`/users/info`)
             .set({'Authorization': `Bearer ${token}`})
             .send(updatedInfoPayload)
@@ -66,7 +66,7 @@ describe("Users endpoint", function () {
                 done();
             })
         })
-        fit("should not allow other regular users to update", function (done) {
+        it("should not allow other regular users to update", function (done) {
             request.put(`/users/${user._id}/info`)
             .set({'Authorization': `Bearer x${token}`})
             .send(updatedInfoPayload)

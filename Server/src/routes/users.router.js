@@ -17,6 +17,6 @@ router.post('/:id/timezones', verifyUser, authorize([ROLES.admin], { selfAuthori
 router.delete('/:id/timezones', verifyUser, authorize([ROLES.admin], { selfAuthorized: true }), removeTimeZone)
 router.put('/:id/timezones', verifyUser, authorize([ROLES.admin], { selfAuthorized: true }), updateTimeZone)
 
-router.patch('/:id/roles', verifyUser, authorize([ROLES.admin], { selfAuthorized: false }), findUserAndUpdateRole)
+router.patch('/:id/role', verifyUser, authorize([ROLES.admin], { selfAuthorized: false }), findUserAndUpdateRole)
 
 module.exports = router
