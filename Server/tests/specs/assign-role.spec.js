@@ -1,10 +1,10 @@
-const { setup } = require('./helpers/requestsSpecHelper')
+const { setup } = require('../helpers/requestsSpecHelper')
 const faker = require('faker')
-
+const { adminCredentials, managerCredentials} = require('../constants/credentials')
 
 let server, request
 
-fdescribe("Users endpoint", function () {
+describe("Users endpoint", function () {
     beforeAll(() => {
         [server, request] = setup()
     })
@@ -12,14 +12,6 @@ fdescribe("Users endpoint", function () {
         server.close()
     })
     describe("Updating user role", function () {
-        const adminCredentials = {
-            email: 'admin@test.com',
-            password: '1234567a'
-        }
-        const managerCredentials = {
-            email: 'manager@test.com',
-            password: '1234567a'
-        }
         let adminToken
         let newUserId
         beforeAll((done) => {
@@ -111,7 +103,7 @@ fdescribe("Users endpoint", function () {
             })
 
 
-            fit("should not update role as manager ", function (done) {
+            it("should not update role as manager ", function (done) {
                 request.patch(`/users/${newUserId}/role`)
                     .set({ 'Authorization': `Bearer ${managerToken}` })
                     .send({ role: 'manager' })
@@ -121,7 +113,7 @@ fdescribe("Users endpoint", function () {
                     })
             })
 
-            fit("should not update role as admin ", function (done) {
+            it("should not update role as admin ", function (done) {
                 request.patch(`/users/${newUserId}/role`)
                     .set({ 'Authorization': `Bearer ${managerToken}` })
                     .send({ role: 'admin' })
@@ -131,7 +123,7 @@ fdescribe("Users endpoint", function () {
                     })
             })
 
-            fit("should not update role as regular ", function (done) {
+            it("should not update role as regular ", function (done) {
                 request.patch(`/users/${newUserId}/role`)
                     .set({ 'Authorization': `Bearer ${managerToken}` })
                     .send({ role: 'regular' })

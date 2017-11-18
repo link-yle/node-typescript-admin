@@ -80,9 +80,9 @@ function getUsers() {
 function removeUser(req, res) {
     return usersModel.findByIdAndRemove(req.params.id)
         .then(() => {
-            res.status(200).json("Ok")
+            return res.status(200).json("Ok")
         })
-        .catch(err => utility.badRequest(res, 'to remove user'))
+        .catch(err => res.status(400).send(err))
 }
 
 

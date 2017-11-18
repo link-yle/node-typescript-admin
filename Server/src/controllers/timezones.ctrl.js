@@ -4,26 +4,31 @@ const utility = require('../helpers/utility.js')
 const usersModel = require('../models/users.model')
 
 function removeTimeZone(req, res) {
-    return usersModel.findByIdAndUpdate(
+    return usersModel.findOneAndUpdate(
         { _id: req.params.id },
-        { $pull: { timeZones: { _id: req.params.id } } },
-        { safe: true }
+        { $pull: { timeZones: { _id: req.params.timeZoneId } }},
+        {new:true}
     )
-        .then(() => {
-            res.status(200).json("Ok")
-        })
-        .catch(err => utility.badRequest(res, 'to remove timeZone'))
+    .then((user) => {
+        return res.status(200).json(user)
+    })
+    .catch(err => {
+        utility.badRequest(res, 'to delete timeZone')
+    })
 }
 
 function addTimeZone(req, res) {
     return usersModel.findOneAndUpdate(
         { _id: req.params.id },
-        { $push: { timeZones: req.body } })
-        .then((err, user) => {
-            if (err) return utility.badRequest(res, 'to add timeZone')
+        { $push: { timeZones: req.body } },
+        {new: true}
+    )
+        .then((user) => {
             return res.status(200).json(user)
         })
-        .catch(err => utility.badRequest(res, 'to add timeZone'))
+        .catch(err => {
+            utility.badRequest(res, 'to add timeZone')
+        })
 }
 
 function updateTimeZone(req, res) {

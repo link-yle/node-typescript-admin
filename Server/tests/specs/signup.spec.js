@@ -1,4 +1,4 @@
-const { setup } = require('./helpers/requestsSpecHelper')
+const { setup } = require('../helpers/requestsSpecHelper')
 const faker = require('faker')
 let server, request, socket_io, firstUser
 
