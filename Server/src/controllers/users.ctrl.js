@@ -1,18 +1,20 @@
 
 const utility = require('../helpers/utility.js')
 const usersModel = require('../models/users.model')
-const {getToken} = require('../core/authentication')
-const {userSecret} = require('../config/commonConstants')
+const { getToken } = require('../core/authentication')
+const { userSecret } = require('../config/commonConstants')
 
 
 function signup(req, res) {
     const newUser = new usersModel(req.body)
+    newUser.timeZones = []
+    newUser.role = 'regular'
     newUser.save(req.body)
         .then(added => {
             return res.status(200).json(added)
         })
         .catch(err => {
-            if (err.code===11000 && err.index===0) return res.status(409).json('Email already exists')
+            if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
             else return res.status(400).json(err)
         })
 }
@@ -24,36 +26,37 @@ function login(req, res) {
         if (err) throw err;
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) return res.status(400).send('An error occurred while trying to check your password')
-            if(!isMatch) return res.status(403).send('Wrong password')
+            if (!isMatch) return res.status(403).send('Wrong password')
             const token = getToken(user._id, user.role, req.app.get(userSecret))
             user.password = undefined
-            return res.status(200).json({user, token})
+            return res.status(200).json({ user, token })
         });
     })
 }
 
 
 function findUserAndUpdateInfo(req, res) {
-    if (!req.params._id) utility.missingData(res, '_id')
-    return usersModel.findById(req.params._id)
-        .then((user) => {
-            user.name = req.body.name
-            user.email = req.body.email
-            user.save().then((err, user) => {
-                return res.status(200).json(user)
-            })
-            .catch(err=>{
-                if (err.code===11000 && err.index===0) return res.status(409).json('Email already exists')
-                return utility.badRequest(res, 'save updated info')
-            })
-
+    const id = req.params.id
+    return usersModel.findOne({ _id:  id}).exec((err, user) => {
+        if (err) return utility.badRequest(res, err)
+        if(!user) utility.notFound(res, 'user')
+        user.name = req.body.name
+        user.email = req.body.email
+        user.password = undefined
+        return res.status(200).send(user)
+        user.save().then((err, user) => {
+            return res.status(200).json(user)
         })
-        .catch(err => utility.badRequest(res, err))
+        .catch(err=>{
+            if (err.code===11000 && err.index===0) return res.status(409).json('Email already exists')
+            return utility.badRequest(res, 'save updated info')
+        })
+    })
 }
 
 function findUserAndUpdateRole(req, res) {
-    if (!req.params._id) utility.missingData(res, '_id')
-    return usersModel.findById(req.params._id)
+    const id = req.params.id
+    return usersModel.findById(id)
         .then((user) => {
             user.role = req.body.role
             user.save().then((err, user) => {
@@ -67,8 +70,8 @@ function findUserAndUpdateRole(req, res) {
 
 
 function getUser(req, res) {
-    if (!req.params._id) utility.missingData(res, '_id')
-    return usersModel.findById(req.params._id).lean().exec()
+    const id = req.params._id
+    return usersModel.findById(id).lean().exec()
         .then((user) => res.status(200).json(user))
         .catch(err => utility.badRequest(res, err))
 }

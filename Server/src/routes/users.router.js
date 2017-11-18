@@ -8,7 +8,7 @@ const ROLES = require('../config/rolesConstants')
 router.post('/', signup)
 router.post('/login', login)
 
-router.patch('/:id/info', verifyUser, authorize([ROLES.manager, ROLES.admin], { selfAuthorized: true }), findUserAndUpdateInfo)
+router.put('/:id/info', verifyUser, authorize([ROLES.manager, ROLES.admin], { selfAuthorized: true }), findUserAndUpdateInfo)
 router.delete('/:id', verifyUser, authorize([ROLES.admin, ROLES.manager], { selfAuthorized: false }), removeUser)
 router.get('/:id', verifyUser, authorize([ROLES.admin, ROLES.manager], { selfAuthorized: false }), getUser)
 router.get('/', verifyUser, authorize([ROLES.admin, ROLES.manager], { selfAuthorized: false }), getUsers)

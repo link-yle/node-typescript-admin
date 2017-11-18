@@ -29,7 +29,7 @@ function addTimeZone(req, res) {
 function updateTimeZone(req, res) {
     return usersModel.findOneById(x)
         .then((err, user) => {
-            user.timeZones[user.timeZones.findIndex(timeZone => timeZone._id === req.params._id)] = req.body
+            user.timeZones[user.timeZones.findIndex(timeZone => timeZone._id === req.params.id)] = req.body
             user.save().then((err, user) => {
                 if (err) return utility.badRequest(res, 'to update timeZone')
                 return res.status(200).json(user)

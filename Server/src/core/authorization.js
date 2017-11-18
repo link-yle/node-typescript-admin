@@ -2,11 +2,12 @@
 function authorize(roles, options) {
     return function (req, res, next) {
         const role = req.decoded.role
-        const isTheSameUser = () => req.decoded._id === req.params.id        
-        if ((options.selfAllowed && isTheSameUser()) || roles.find((item => item === role))) {
-            next()
+        const isTheSameUser = () => req.decoded._id === req.params.id    
+        if ((options.selfAuthorized && isTheSameUser()) || roles.find((item => item === role))) {
+            return next()
         }
-        return res.status(403).send('Not Authorized.');
+        else return res.status(403).send('Not Authorized.');
+        
     }
 }
 

@@ -2,7 +2,7 @@ const { setup } = require('./helpers/requestsSpecHelper')
 const faker = require('faker')
 let server, request, socket_io, firstUser
 
-fdescribe("Users endpoint", function () {
+describe("Users endpoint", function () {
 	beforeAll(() => {
 		[server, request] = setup()
 	})
