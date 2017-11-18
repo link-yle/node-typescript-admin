@@ -11,9 +11,8 @@ userSchema.path('email').validate((email) =>
 
 // password validation
 userSchema.path('password').validate(password => {
-    if (!this.isModified('password')) return true
-    else return passwordRegex.test(password)
-}, 'Password must be at least 8 characters and contain at least one letter and one number.');
+     return passwordRegex.test(password)
+}, 'Password must be at least 6 characters and contain at least one letter and one number.');
 
 
 userSchema.pre('save', function (next) {

@@ -9,7 +9,7 @@ describe("Users endpoint", function () {
 	afterAll(() => {
         server.close()
 	})
-	describe("Adding user", function () {
+	describe("Sign up", function () {
 		const newUser = {
 			name: faker.name.firstName(),
 			email: faker.internet.email(),
@@ -17,13 +17,18 @@ describe("Users endpoint", function () {
 			password: '456565654ds'
 		}
 
-		it("should add user in case ip is not provided", function (done) {
+		it("should add user", function (done) {
 			request.post('/users').send(newUser).end((err, res) => {
 				expect(res.status).toEqual(200)
 				expect(res.body.name).toBe(newUser.name)
 				expect(res.body.email).toBe(newUser.email)
 				expect(res.body.role).toBe('regular')
-				expect(res.body.password).toBe('regular')
+				done();
+			})
+		})
+		it("should not allow duplicate emails", function (done) {
+			request.post('/users').send(newUser).end((err, res) => {
+				expect(res.status).toEqual(409)
 				done();
 			})
 		})

@@ -2,10 +2,10 @@
 const mongoose = require("mongoose")
 
 function connectToOriginalDb(){
-    return mongoose.connect(process.env.MONGODB_URI || 'mongodb://admin:admin@ds113136.mlab.com:13136/timezones', { useMongoClient: true});
+    return mongoose.connect(process.env.mongodbTimezoneURI, { useMongoClient: true});
 }
 function connectToTestDb(){
-    return mongoose.connect(process.env.MONGODB_URI || 'mongodb://admin:admin@ds113136.mlab.com:13136/timezones', { useMongoClient: true});
+    return mongoose.connect(process.env.mongodbTimezoneURI, { useMongoClient: true});
 }
 
 

@@ -6,7 +6,7 @@ function authorize(roles, options) {
         if ((options.selfAllowed && isTheSameUser()) || roles.find((item => item === role))) {
             next()
         }
-        return res.status(401).send('Not Authorized.');
+        return res.status(403).send('Not Authorized.');
     }
 }
 

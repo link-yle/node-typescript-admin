@@ -9,13 +9,14 @@ const fallback = require('express-history-api-fallback')
 const express = require('express')
 const root = __dirname + '/public'
 const app = express();
-
+const {userSecret, actualSecret} = require('./config/commonConstants')
 
 
 winstonLogger.configure()
 app.disable('etag')
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.set(userSecret, actualSecret)
 app.use(morganLogger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
