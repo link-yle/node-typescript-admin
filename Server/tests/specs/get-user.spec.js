@@ -1,7 +1,6 @@
 const { setup } = require('../helpers/requestsSpecHelper')
-const faker = require('faker')
 let server, request
-const { managerCredentials, adminCredentials } = require('../constants/credentials')
+const { adminCredentials } = require('../constants/credentials')
 describe("Users endpoint", function () {
 	beforeAll(() => {
 		[server, request] = setup()
@@ -19,7 +18,7 @@ describe("Users endpoint", function () {
 		})
 
 
-		fit("should get users successfully ", function (done) {
+		it("should get users successfully ", function (done) {
 			request.get('/users/')
 				.set({ 'Authorization': `Bearer ${token}` })
 				.end((err, res) => {
@@ -31,7 +30,7 @@ describe("Users endpoint", function () {
 		})
 
 
-		fit("should get userDetials successfully as admin", function (done) {
+		it("should get userDetials successfully as admin", function (done) {
 			request.get('/users/')
 				.set({ 'Authorization': `Bearer ${token}` })
 				.end((err, res) => {
@@ -41,9 +40,8 @@ describe("Users endpoint", function () {
 						.set({ 'Authorization': `Bearer ${token}` })
 						.end((err, res) => {
 							expect(res.status).toBe(200)
-							expect(Array.isArray(res.body.timeZones)).toBe(true)
+							done();
 						})
-					done();
 				})
 		})
 
