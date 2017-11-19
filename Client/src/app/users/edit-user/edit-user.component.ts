@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-    moduleId: module.id,
-    selector: 'write-users',
+    selector: 'app-edit-user',
     templateUrl: 'write-users.component.html',
     styleUrls: ['write-users.component.scss']
 })
-export class WriteUsersComponent {
+export class EditUserComponent {
 
 }

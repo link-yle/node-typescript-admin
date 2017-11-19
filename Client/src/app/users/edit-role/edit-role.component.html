@@ -1,0 +1,12 @@
+<div class="col-md-6">
+    <div class="form-group">
+        <select class="form-control"  name="role" [(ngModel)]="userRole">
+            <!-- <option disabled  value="" >Subcategory</option> -->
+            <option value="regular">Regular</option>
+            <option value="manager">Manager</option>
+            <option value="admin">Admin</option>
+                
+        </select>
+    </div>
+    <button (click)="onAssignClick()" >Assign Role</button>
+</div>
