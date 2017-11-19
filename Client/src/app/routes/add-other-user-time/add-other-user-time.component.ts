@@ -3,11 +3,10 @@ import { Router } from '@angular/router';
 import { SelectedUserService } from '../../shared/services/selectedUser.service';
 
 @Component({
-    selector: 'app-other-user-time',
-    templateUrl: 'other-user-time.component.html',
-    styleUrls: ['other-user-time.component.scss']
+    selector: 'app-add-other-user-time',
+    templateUrl: 'add-other-user-time.component.html',
 })
-export class AddMyTimeComponent implements OnInit {
+export class AddOtherUserTimeComponent implements OnInit {
     profileId: string
     constructor(
         private selectedUserService: SelectedUserService,

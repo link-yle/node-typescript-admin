@@ -1,4 +1,3 @@
-import { SelectedUserService } from '../selectedUser.service';
 import { FormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -9,6 +8,7 @@ import { SnackBarService } from '../../shared/services/snackbar.service';
 import { EditRoleComponent } from './edit-role.component';
 import { DataService } from '../../shared/services/data.service';
 import { CommonModule } from '@angular/common';
+import { SelectedUserService } from '../../shared/services/selectedUser.service';
 
 describe('Home Component', () => {
     let comp: EditRoleComponent;

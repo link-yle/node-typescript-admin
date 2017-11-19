@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-edit-other-user-time',
     templateUrl: 'edit-other-user-time.component.html',
-    styleUrls: ['edit-other-user-time.component.scss']
 })
 export class EditOtherUserTimeComponent implements OnInit {
     profileId: string

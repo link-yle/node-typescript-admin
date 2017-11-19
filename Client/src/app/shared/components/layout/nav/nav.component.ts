@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { DataService } from '../services/data.service';
-import { AuthService } from '../services/auth.service';
-import { ManagerClaimsService } from '../services/manager-claims.service';
+import { AuthService } from '../../../services/auth.service';
+import { ManagerClaimsService } from '../../../services/manager-claims.service';
 
 @Component({
     selector: 'app-nav',
@@ -9,7 +8,8 @@ import { ManagerClaimsService } from '../services/manager-claims.service';
     styleUrls: ['nav.component.scss'],
 })
 export class NavComponent {
-    constructor(private dataService: DataService, private authService: AuthService,
+    constructor(
+        private authService: AuthService,
         private managerClaimsService: ManagerClaimsService,
         ) { }
 

@@ -1,13 +1,12 @@
 import { DataService } from '../../shared/services/data.service';
 import { Component, OnInit } from '@angular/core';
-import { SelectedUserService } from '../selectedUser.service';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../../shared/services/snackbar.service';
+import { SelectedUserService } from '../../shared/services/selectedUser.service';
 
 @Component({
     selector: 'app-edit-role',
     templateUrl: 'edit-role.component.html',
-    styleUrls: ['edit-role.component.scss']
 })
 export class EditRoleComponent implements OnInit {
     userRole: string

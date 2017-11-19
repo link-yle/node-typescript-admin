@@ -38,5 +38,9 @@ export class TimingsComponent implements OnInit {
         )
     }
 
+    onEditTimeClick() {
+        // this.router.navigate(['/edit-time'])
+    }
+
 
 }

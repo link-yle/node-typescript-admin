@@ -1,32 +1,43 @@
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataService } from '../../shared/services/data.service';
-import { Component } from '@angular/core';
-import { SelectedUserService } from '../../shared/services/selectedUser.service';
-import { User } from '../../shared/models/user.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from '../../../services/data.service';
+import { SelectedUserService } from '../../../services/selectedUser.service';
+import { User } from '../../../models/user.model';
+import { SnackBarService } from '../../../services/snackbar.service';
+import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 
 @Component({
     selector: 'app-edit-user',
     templateUrl: 'edit-user.component.html',
     styleUrls: ['edit-user.component.scss']
 })
-export class EditUserComponent {
-    public selectedUser: User
+export class EditUserComponent implements OnInit {
+    @Input() user: User
+    public form: FormGroup
     constructor(
         private dataService: DataService,
-        private selectedUserService: SelectedUserService,
-        private route: ActivatedRoute,
-        private router: Router
+        private fb: FormBuilder,
+        private sb: SnackBarService,
+        private globalValidatorsService: GlobalValidatorsService
     ) { }
 
     ngOnInit() {
-        this.selectedUser =  this.selectedUserService.get()
-        if(this.selectedUser) 
-        this.route.params.forEach(params => {
-            let userId = params["userId"];
-            //call your function, like getUserInfo()
+        this.buildForm()
+    }
+
+    private buildForm() {
+        this.form = this.fb.group({
+            name: [this.user.name, Validators.required],
+            email: [this.user.email, this.globalValidatorsService.mailFormat],
         })
     }
 
-
+    onSubmit() {
+        this.dataService.updateUserInfo(this.user._id, { name: this.user.name, email: this.user.email }).subscribe(
+            data => this.sb.emitSuccessSnackBar(),
+            error => this.sb.emitErrorSnackBar()
+        )
+    }
 
 }

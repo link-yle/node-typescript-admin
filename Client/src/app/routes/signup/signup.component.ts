@@ -1,10 +1,10 @@
+import { GlobalValidatorsService } from '../../shared/services/global-validators.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../shared/services/data.service';
-import { SnackBarService } from '../shared/services/snackbar.service';
-import { GlobalValidators } from '../shared/services/global-validators.service';
-import { User } from '../shared/models/user.model';
+import { DataService } from '../../shared/services/data.service';
+import { SnackBarService } from '../../shared/services/snackbar.service';
+import { User } from '../../shared/models/user.model';
 
 @Component({
     moduleId: module.id,
@@ -18,7 +18,8 @@ export class SignupComponent implements OnInit {
     constructor(private fb: FormBuilder,
         private dataService: DataService,
         private sb: SnackBarService,
-        private router: Router
+        private router: Router,
+        private globalValidatorsService: GlobalValidatorsService
     ) {
     }
 
@@ -29,8 +30,8 @@ export class SignupComponent implements OnInit {
     private buildForm() {
         this.form = this.fb.group({
             name: ['', Validators.required],
-            email: ['', GlobalValidators.mailFormat],
-            password: ['', GlobalValidators.passwordFormat],
+            email: ['', this.globalValidatorsService.mailFormat],
+            password: ['', this.globalValidatorsService.passwordFormat],
             confirmPassword: ['', Validators.required],
         })
     }

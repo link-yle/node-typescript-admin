@@ -1,9 +1,9 @@
+import { GlobalValidatorsService } from '../../shared/services/global-validators.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { SnackBarService } from '../shared/services/snackbar.service';
-import { DataService } from '../shared/services/data.service';
-import { GlobalValidators } from '../shared/services/global-validators.service';
 import { Router } from '@angular/router';
+import { DataService } from '../../shared/services/data.service';
+import { SnackBarService } from '../../shared/services/snackbar.service';
 
 @Component({
     selector: 'app-home',
@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit {
     constructor(private fb: FormBuilder,
         private dataService: DataService,
         private sb: SnackBarService,
-        private router: Router
+        private router: Router,
+        private globalValidatorsService: GlobalValidatorsService
     ) {
     }
 
@@ -25,8 +26,8 @@ export class HomeComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            email: ['', GlobalValidators.mailFormat],
-            password: ['', GlobalValidators.passwordFormat],
+            email: ['', this.globalValidatorsService.mailFormat],
+            password: ['', this.globalValidatorsService.passwordFormat],
         })
     }
 

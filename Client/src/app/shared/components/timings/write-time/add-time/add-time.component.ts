@@ -1,35 +1,26 @@
-import { AuthService } from '../../../shared/services/auth.service';
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { SnackBarService } from '../../../shared/services/snackbar.service';
-import { DataService } from '../../../shared/services/data.service';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Timezone } from '../../../shared/models/timezone.model';
+import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Timezone } from '../../../../models/timezone.model';
+import { SnackBarService } from '../../../../services/snackbar.service';
+import { DataService } from '../../../../services/data.service';
 
 @Component({
     selector: 'app-add-time',
     templateUrl: 'add-time.component.html',
-    styleUrls: ['add-time.component.scss']
 })
-export class AddTimeComponent {
-    form
+export class AddTimeComponent implements OnInit {
+    timeZone: Timezone
     @Input() profileId: string
     @Output() added = new EventEmitter
-    constructor(private fb: FormBuilder,
+    constructor(
         private dataService: DataService,
         private sb: SnackBarService,
-        private authService: AuthService
-    ) {
-        this.buildForm()
+    ) { }
+
+    ngOnInit() {
+        this.timeZone = { name: '', city: '', gmtTimeDifference: 0 }
     }
 
-    private buildForm() {
-        this.form = this.fb.group({
-            name: ['', Validators.required],
-            city: ['', Validators.required],
-            gmtTimeDifference: ['', Validators.required],
-        })
-    }
 
     onSubmitted(x: Timezone) {
         this.dataService.addTimeZone(this.profileId, x).subscribe(

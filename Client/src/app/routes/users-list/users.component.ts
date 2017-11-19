@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { SelectedUserService } from '../shared/services/selectedUser.service';
-import { AdminClaimsService } from '../shared/services/admin-claims.service';
+import { AdminClaimsService } from '../../shared/services/admin-claims.service';
+import { SelectedUserService } from '../../shared/services/selectedUser.service';
 
 @Component({
     selector: 'app-users',

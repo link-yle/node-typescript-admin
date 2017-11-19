@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Timezone } from '../shared/models/timezone.model';
+import { Timezone } from '../models/timezone.model';
 
 @Injectable()
 export class TimingsService {

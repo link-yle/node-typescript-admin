@@ -5,7 +5,6 @@ import { AuthService } from '../../shared/services/auth.service';
 @Component({
     selector: 'app-add-my-time',
     templateUrl: 'add-my-time.component.html',
-    styleUrls: ['add-my-time.component.scss']
 })
 export class AddMyTimeComponent implements OnInit {
     profileId: string
