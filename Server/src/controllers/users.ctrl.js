@@ -24,6 +24,7 @@ function signup(req, res) {
 function login(req, res) {
     usersModel.findOne({ email: req.body.email }, (err, user) => {
         if (err) throw err;
+        if(!user) return utility.notFound(res, 'user')
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) return res.status(400).json('An error occurred while trying to check your password')
             if (!isMatch) return res.status(403).json('Wrong password')
@@ -57,7 +58,10 @@ function findUserAndUpdateInfo(req, res) {
 function findUserAndUpdateRole(req, res) {
     const id = req.params.id
     return usersModel.update({ _id: id }, { role: req.body.role })
-        .then((user => res.status(200).json(user)))
+        .then((user => {
+            if(!user) return utility.notFound(res, 'user')
+            res.status(200).json(user)
+        }))
         .catch(err => {
             console.log(err)
 
