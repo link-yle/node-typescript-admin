@@ -19,11 +19,17 @@ describe('Signup Component', () => {
     let sb: SnackBarService
 
     const user = {
-        name: 'Ahmed'
+        name: 'Ahmed',
+        password: '454565',
+        email: 'sads@ewew.com'
+
     }
 
     const dataServiceStub = {
         signUp(data) {
+            return Observable.of(data)
+        },
+        login(data) {
             return Observable.of(data)
         }
     }

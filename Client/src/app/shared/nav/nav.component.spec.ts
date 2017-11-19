@@ -1,3 +1,4 @@
+import { AuthService } from '../services/auth.service';
 import { DebugElement, OnInit } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -10,11 +11,10 @@ import { NavComponent } from './nav.component';
 import { SharedModule } from '../shared.module';
 
 
-describe('Success Component', () => {
+describe('Nav Component', () => {
 
     let comp: NavComponent;
     let fixture: ComponentFixture<NavComponent>;
-    let de: DebugElement;
     let el: HTMLElement;
     let dataService: DataService
     beforeEach(() => {
@@ -23,6 +23,7 @@ describe('Success Component', () => {
             declarations: [],
             providers: [
                 {provide: DataService, useValue: {}},
+                {provide: AuthService, useValue: {}},
             ],
         });
         fixture = TestBed.createComponent(NavComponent);
@@ -32,7 +33,7 @@ describe('Success Component', () => {
     });
 
 
-    it("should load", () => {
+    it('should load', () => {
         expect(comp).toBeTruthy()
     })
 

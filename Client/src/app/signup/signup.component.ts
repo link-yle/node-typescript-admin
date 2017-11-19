@@ -1,9 +1,10 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../shared/services/data.service';
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { GlobalValidators } from '../shared/services/global-validators.service';
+import { User } from '../shared/models/user.model';
 
 @Component({
     moduleId: module.id,
@@ -22,34 +23,39 @@ export class SignupComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.buildForm()
     }
 
-    buildForm() {
+    private buildForm() {
         this.form = this.fb.group({
-            firstName: ['', Validators.required],
+            name: ['', Validators.required],
             email: ['', GlobalValidators.mailFormat],
             password: ['', GlobalValidators.passwordFormat],
             confirmPassword: ['', Validators.required],
         })
     }
 
-    onSubmit(obj) {
+    onSubmit(obj: User) {
         this.dataService.signup(obj).subscribe(
-            data => this.router.navigate(['/time']),
+            data => {
+                this.dataService.login({ email: obj.email, password: obj.password }).subscribe(
+                    data => this.router.navigate(['/time']),
+                    error => this.sb.emitErrorSnackBar()
+                )
+            },
             error => this.sb.emitErrorSnackBar()
         )
     }
 
-    isIncorrectMailFormat(control) {
+    isIncorrectMailFormat(control: string) {
         return this.form.get(control).hasError('incorrectMailFormat')
     }
 
-    isIncorrectPasswordFormat(control) {
+    isIncorrectPasswordFormat(control: string) {
         return this.form.get(control).hasError('incorrectPasswordFormat')
     }
 
-    unSimilarPassword(control) {
+    unSimilarPassword(control: string) {
         return this.form.get('password').value !== this.form.get('confirmPassword').value
     }
 }

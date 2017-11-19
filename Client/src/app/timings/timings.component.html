@@ -19,11 +19,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let item for timeZones">
+                            <tr *ngFor="let item of timeZones">
                                 <td>{{item.name}}</td>
                                 <td>{{item.city}}</td>
                                 <td>{{item.gmtTimeDifference}}</td>
-                                <td class="text-center" routerLink="['/update-time']"><i class="fa fa-edit  text-default"> </i></td>
+                                <td class="text-center" routerLink="['/edit-time']"><i class="fa fa-edit  text-default"> </i></td>
                                 <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
                             </tr>
                         </tbody>

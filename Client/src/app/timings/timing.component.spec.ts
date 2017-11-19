@@ -1,3 +1,4 @@
+import { AuthService } from '../shared/services/auth.service';
 import { TimingsModule } from './timings.module';
 import { SnackBarService } from '../shared/services/snackbar.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -8,7 +9,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { TimingsComponent } from './timings.component';
 
-fdescribe('Home Component', () => {
+describe('Timings Component', () => {
     let comp: TimingsComponent;
     let fixture: ComponentFixture<TimingsComponent>;
     let sb: SnackBarService
@@ -27,16 +28,34 @@ fdescribe('Home Component', () => {
             name: 'AEDT', city: 'Sydney', gmtTimeDifference: 2, id: '56'
         },
     ]
-
+    const fakeUserDetails = {
+        name: 'Y',
+        roles: 'regular',
+        timeZones: fakeTimeZones
+    }
     const dataServiceStub = {
         deleteTimeZone(data) {
             return Observable.of('Ok')
         },
         getTimeZones() {
             return Observable.of(fakeTimeZones)
+        },
+        getUserDetails () {
+            return Observable.of(fakeUserDetails)
         }
 
     }
+
+    const authServiceStub = {
+        getProfile() {
+            return {
+                _id: '123'
+            }
+        }
+
+    }
+
+
     let dataService: DataService
     const SnackBarServiceStub = {
         emitSuccessSnackBar(message) {
@@ -54,6 +73,7 @@ fdescribe('Home Component', () => {
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
                 { provide: SnackBarService, useValue: SnackBarServiceStub },
+                { provide: AuthService, useValue: authServiceStub },
             ],
         });
         fixture = TestBed.createComponent(TimingsComponent);
@@ -70,7 +90,7 @@ fdescribe('Home Component', () => {
         })
         describe('Scenario: Success', () => {
             beforeEach(() => {
-                dataService.getTimeZones = () => Observable.of(fakeTimeZones)
+                dataService.getUserDetails = () => Observable.of(fakeTimeZones)
                 comp.ngOnInit()
             })
             it('should successfully post', () => {
@@ -81,7 +101,7 @@ fdescribe('Home Component', () => {
 
         describe('Scenario: Error', () => {
             beforeEach(() => {
-                dataService.getTimeZones = () => Observable.throw('Error')
+                dataService.getUserDetails = () => Observable.throw('Error')
                 comp.ngOnInit()
             })
             it('should respond to error', () => {
