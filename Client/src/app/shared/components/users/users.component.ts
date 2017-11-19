@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { AuthService } from '../shared/services/auth.service';
 import { SelectedUserService } from '../shared/services/selectedUser.service';
+import { AdminClaimsService } from '../shared/services/admin-claims.service';
 
 @Component({
     selector: 'app-users',
@@ -11,16 +11,17 @@ import { SelectedUserService } from '../shared/services/selectedUser.service';
 export class UsersComponent {
 
     constructor(
-        private authService: AuthService,
+        private adminClaimsService: AdminClaimsService,
         private router: Router,
         private selectedUserService: SelectedUserService
     ) { }
+
     isAdmin() {
-        return this.authService.getProfile().role === 'admin'
+        return this.adminClaimsService.canActivate()
     }
 
     onChangeRoleClick(selectedUser) {
         this.selectedUserService.set(selectedUser)
-        this.router.navigate(['/edit-role'])
+        this.router.navigate(['/role'])
     }
 }

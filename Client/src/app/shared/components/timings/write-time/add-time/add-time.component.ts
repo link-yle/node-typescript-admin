@@ -1,5 +1,5 @@
 import { AuthService } from '../../../shared/services/auth.service';
-import { Component } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { SnackBarService } from '../../../shared/services/snackbar.service';
 import { DataService } from '../../../shared/services/data.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,10 +13,11 @@ import { Router } from '@angular/router';
 })
 export class AddTimeComponent {
     form
+    @Input() profileId: string
+    @Output() added = new EventEmitter
     constructor(private fb: FormBuilder,
         private dataService: DataService,
         private sb: SnackBarService,
-        private router: Router,
         private authService: AuthService
     ) {
         this.buildForm()
@@ -31,10 +32,10 @@ export class AddTimeComponent {
     }
 
     onSubmitted(x: Timezone) {
-        this.dataService.addTimeZone(this.authService.getProfile()._id, x).subscribe(
+        this.dataService.addTimeZone(this.profileId, x).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar()
-                this.router.navigate(['/timing'])
+                this.added.emit()
             },
             error => this.sb.emitErrorSnackBar()
 

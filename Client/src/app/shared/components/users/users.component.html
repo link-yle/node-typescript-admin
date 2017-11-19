@@ -13,7 +13,8 @@
                                 <th>Name</th>
                                 <th>Role</th>
                                 <th>Email</th>
-                                <th class="text-center">Update</th>
+                                <th class="text-center">Update User Info</th>
+                                <th class="text-center">Timings</th>
                                 <th class="text-center">Delete</th>
                                 <th *ngIf="isAdmin()" class="text-center">Change Role</th>
                             </tr>
@@ -24,6 +25,7 @@
                                 <td>{{item.role}}</td>
                                 <td>{{item.email}}</td>
                                 <td class="text-center" [routerLink]="['users/', item._id]"><i class="fa fa-edit  text-default"> </i></td>
+                                <td *ngIf="isAdmin()" class="text-center" [routerLink]="['users/', item._id], 'time'"><i class="fa fa-user-o text-warning"> </i></td>
                                 <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
                                 <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)"><i class="fa fa-user-o text-warning"> </i></td>
                             </tr>
