@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectedUserService } from '../../../shared/services/selectedUser.service';
+import { SelectedUserService } from '../../shared/services/selectedUser.service';
 
 @Component({
     selector: 'app-other-user-time',

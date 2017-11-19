@@ -13,7 +13,8 @@
             <p class="navbar-text">Different Roles</p>
         </div>
         
-        <button type="button" class="btn-primary" (click)="logout()" routerLink='/my-time'> My timings   </button>
+        <button *ngIf="isLoggedIn()" type="button" class="btn-primary" (click)="logout()" routerLink='/my-time'> My timings   </button>
+        <button *ngIf="isLoggedIn()" type="button" class="btn-primary" routerLink='/my-profile'> My profile   </button>
         <button *ngIf="isAtleastManager()" type="button" class="btn-primary" routerLink='/users'> Users   </button>
         <button *ngIf="isLoggedIn()" type="button" class="btn-primary" (click)="logout()"> Logout   </button>
         <!-- /.navbar-collapse -->

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { DataService } from '../../shared/services/data.service';
-import { SnackBarService } from '../../shared/services/snackbar.service';
-import { GlobalValidators } from '../../shared/services/global-validators.service';
+import { DataService } from '../../../services/data.service';
+import { SnackBarService } from '../../../services/snackbar.service';
+import { GlobalValidators } from '../../../services/global-validators.service';
 
 @Component({
     selector: 'app-write-time',
