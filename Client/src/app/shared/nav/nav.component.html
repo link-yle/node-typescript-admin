@@ -12,7 +12,10 @@
             <a class="navbar-brand" href="#">Timezones</a>
             <p class="navbar-text">Different Roles</p>
         </div>
-        <button type="button" class="btn-primary" (click)="logout()"> Logout   </button>
+        
+        <button type="button" class="btn-primary" (click)="logout()" routerLink='/my-time'> My timings   </button>
+        <button *ngIf="isAtleastManager()" type="button" class="btn-primary" routerLink='/users'> Users   </button>
+        <button *ngIf="isLoggedIn()" type="button" class="btn-primary" (click)="logout()"> Logout   </button>
         <!-- /.navbar-collapse -->
     </div>
     <!-- /.container-fluid -->

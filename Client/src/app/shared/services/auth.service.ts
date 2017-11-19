@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
         return window.localStorage.getItem('access_token')
     }
 
-    public getProfile() {
+    public getProfile(): User {
         const profile = window.localStorage.getItem('profile')
         return JSON.parse(profile)
     }
