@@ -25,8 +25,8 @@ function login(req, res) {
     usersModel.findOne({ email: req.body.email }, (err, user) => {
         if (err) throw err;
         user.comparePassword(req.body.password, (err, isMatch) => {
-            if (err) return res.status(400).send('An error occurred while trying to check your password')
-            if (!isMatch) return res.status(403).send('Wrong password')
+            if (err) return res.status(400).json('An error occurred while trying to check your password')
+            if (!isMatch) return res.status(403).json('Wrong password')
             const token = getToken(user._id, user.role, req.app.get(userSecret))
             user.password = undefined
             return res.status(200).json({ user, token })
@@ -43,7 +43,7 @@ function findUserAndUpdateInfo(req, res) {
         user.name = req.body.name
         user.email = req.body.email
         user.password = undefined
-        return res.status(200).send(user)
+        return res.status(200).json(user)
         user.save().then((err, user) => {
             return res.status(200).json(user)
         })
@@ -87,7 +87,7 @@ function removeUser(req, res) {
         .then(() => {
             return res.status(200).json("Ok")
         })
-        .catch(err => res.status(400).send(err))
+        .catch(err => res.status(400).json(err))
 }
 
 

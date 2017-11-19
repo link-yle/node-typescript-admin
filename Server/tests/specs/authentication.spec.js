@@ -19,7 +19,7 @@ class MockResponse {
         toBeSpied.notAuthorized()
         return this
     }
-    send(str) {
+    json(str) {
 
     }
 }

@@ -16,7 +16,7 @@ describe("Acting as same user", function () {
             toBeSpied.notAuthorized()
             return this
         }
-        send(str) {
+        json(str) {
 
         }
     }

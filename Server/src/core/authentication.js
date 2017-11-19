@@ -13,12 +13,12 @@ function getToken(_id, role, secret) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') { 
         const token = req.headers.authorization.split(' ')[1] 
         jwt.verify(token, req.app.get(userSecret), function (err, decoded) {
-            if (err) return res.status(401).send('Failed to authenticate token.');
+            if (err) return res.status(401).json('Failed to authenticate token.');
             req.decoded = decoded;
             next();
         });
     }
-    else return res.status(401).send('No token provided for admin.'); 
+    else return res.status(401).json('No token provided for admin.'); 
 }
 
 
