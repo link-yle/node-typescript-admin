@@ -22,7 +22,7 @@ import { EditMyInfoComponent } from './routes/edit-my-info/edit-my-info.componen
 import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-other-user-info.component';
 import { AddOtherUserTimeComponent } from './routes/add-other-user-time/add-other-user-time.component';
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
-import { HomeComponent } from './routes/home/home.component';
+import { LoginComponent } from './routes/login/login.component';
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';
 import { UsersComponent } from './routes/users-list/users.component';
 
@@ -38,7 +38,7 @@ import { UsersComponent } from './routes/users-list/users.component';
     EditOtherUserInfoComponent,
     EditOtherUserTimeComponent,
     EditRoleComponent,
-    HomeComponent,
+    LoginComponent,
     MyTimeComponent,
     OtherUserTimeComponent,
     SignupComponent,

@@ -6,11 +6,11 @@ import { Observable } from 'rxjs/Observable';
 import { DataService } from '../shared/services/data.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
-import { HomeComponent } from './home.component';
+import { LoginComponent } from './home.component';
 
 describe('Home Component', () => {
-    let comp: HomeComponent;
-    let fixture: ComponentFixture<HomeComponent>;
+    let comp: LoginComponent;
+    let fixture: ComponentFixture<LoginComponent>;
     let sb: SnackBarService
 
     const user = {
@@ -41,7 +41,7 @@ describe('Home Component', () => {
                 { provide: SnackBarService, useValue: SnackBarServiceStub },
             ],
         });
-        fixture = TestBed.createComponent(HomeComponent);
+        fixture = TestBed.createComponent(LoginComponent);
         comp = fixture.componentInstance;
 
         dataService = fixture.debugElement.injector.get(DataService);

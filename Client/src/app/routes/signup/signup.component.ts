@@ -36,12 +36,18 @@ export class SignupComponent implements OnInit {
         })
     }
 
-    onSubmit(obj: User) {
-        this.dataService.signup(obj).subscribe(
+    test() {
+        this.router.navigate(['/my-time'])
+    }
+
+    onSubmit() {
+        this.dataService.signup(this.form.value).subscribe(
             data => {
-                this.dataService.login({ email: obj.email, password: obj.password }).subscribe(
-                    data => this.router.navigate(['/time']),
-                    error => this.sb.emitErrorSnackBar()
+                this.dataService.login({ email: this.form.value.email, password: this.form.value.password }).subscribe(
+                    data => this.router.navigate(['/my-time']),
+                    error => {
+                        this.sb.emitErrorSnackBar(error)
+                    }
                 )
             },
             error => this.sb.emitErrorSnackBar()
@@ -56,7 +62,8 @@ export class SignupComponent implements OnInit {
         return this.form.get(control).hasError('incorrectPasswordFormat')
     }
 
-    unSimilarPassword(control: string) {
-        return this.form.get('password').value !== this.form.get('confirmPassword').value
+    unSimilarPassword(controlStr: string) {
+        const formControl = this.form.get(controlStr);
+        return this.form.get('password').value !== formControl.value && !formControl.pristine
     }
 }

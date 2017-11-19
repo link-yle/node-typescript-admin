@@ -1,3 +1,4 @@
+import { SignupComponent } from './routes/signup/signup.component';
 import { EditMyInfoComponent } from './routes/edit-my-info/edit-my-info.component';
 import { TokenExpiryService } from './shared/services/token-expiry.service';
 import { NgModule } from '@angular/core'
@@ -5,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router'
 import { AuthService } from './shared/services/auth.service';
 import { ManagerClaimsService } from './shared/services/manager-claims.service';
 import { AdminClaimsService } from './shared/services/admin-claims.service';
-import { HomeComponent } from './routes/home/home.component';
+import { LoginComponent } from './routes/login/login.component';
 import { MyTimeComponent } from './routes/my-time/my-time.component';
 import { AddTimeComponent } from './shared/components/timings/write-time/add-time/add-time.component';
 import { EditimeComponent } from './shared/components/timings/write-time/edit-time/edit-time.component';
@@ -15,7 +16,8 @@ import { OtherUserTimeComponent } from './routes/other-user-time/other-user-time
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';
 
 const paths: Routes = [
-    { path: 'home', component: HomeComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignupComponent     },
     {
         path: 'my-time', component: MyTimeComponent, canActivate: [TokenExpiryService],
         children: [
@@ -43,8 +45,8 @@ const paths: Routes = [
 
         ]
     },
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    { path: '', redirectTo: 'my-time', pathMatch: 'full' },
+    { path: '**', redirectTo: 'my-time', pathMatch: 'full' }
 ]
 
 

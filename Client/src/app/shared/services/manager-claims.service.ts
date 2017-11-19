@@ -12,7 +12,8 @@ export class ManagerClaimsService implements CanActivate {
 
     public canActivate(): boolean {
         const authorizedRoles = ['admin', 'manager']
-        if (authorizedRoles.includes(this.authService.getProfile().role)) return true
+        const profile = this.authService.getProfile()
+        if (!profile || authorizedRoles.includes(profile.role)) return false
         else return false
     }
 }

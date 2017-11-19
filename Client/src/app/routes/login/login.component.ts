@@ -6,10 +6,10 @@ import { DataService } from '../../shared/services/data.service';
 import { SnackBarService } from '../../shared/services/snackbar.service';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: 'home.component.html',
+    selector: 'app-login',
+    templateUrl: 'login.component.html',
 })
-export class HomeComponent implements OnInit {
+export class LoginComponent implements OnInit {
     form: FormGroup
 
     constructor(private fb: FormBuilder,
@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
 
     onSubmit(loginForm) {
         this.dataService.login(loginForm).subscribe(
-            data => this.router.navigate(['/time']),
+            data => this.router.navigate(['/my-time']),
             error => this.sb.emitErrorSnackBar()
         )
     }

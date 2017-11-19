@@ -13,6 +13,7 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 import { NavComponent } from './components/layout/nav/nav.component';
 import { TimingsComponent } from './components/timings/view-time/timings.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -23,7 +24,8 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
     ReactiveFormsModule,
     MaterialModule,
     HttpModule,
-    RouterModule
+    RouterModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   exports: [
@@ -38,9 +40,8 @@ import { EditUserComponent } from './components/users/edit-user/edit-user.compon
     AddTimeComponent,
     EditimeComponent,
     TimeZoneFormComponent,
-    EditUserComponent
-
-
+    EditUserComponent,
+    BrowserAnimationsModule
   ],
   declarations: [
     NavComponent,
