@@ -49,4 +49,10 @@ export class TimingsComponent implements OnInit {
         this.addClicked.emit()
     }
 
+    getTime(gmtTimeDifference) {
+        const t = new Date()
+        t.setHours(t.getHours() + gmtTimeDifference)
+        return `${t.getHours()}: ${t.getMinutes()}`
+    }
+
 }

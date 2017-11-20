@@ -13,6 +13,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>City</th>
+                                <th>Current Time</th>
                                 <th>GMT Time Difference</th>
                                 <th class="text-center">Update</th>
                                 <th class="text-center">Delete</th>
@@ -22,6 +23,7 @@
                             <tr *ngFor="let item of timeZones">
                                 <td>{{item.name}}</td>
                                 <td>{{item.city}}</td>
+                                <td>{{getTime(item.gmtTimeDifference)}}</td>
                                 <td>{{item.gmtTimeDifference}}</td>
                                 <td class="text-center" (click)="onEditTimeClick(item)" ><i class="fa fa-edit  text-default"> </i></td>
                                 <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
