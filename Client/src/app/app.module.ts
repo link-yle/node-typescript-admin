@@ -1,3 +1,4 @@
+import { EmptyComponent } from './routes/empty/empty.component';
 import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './routes/signup/signup.component';
 import { OtherUserTimeComponent } from './routes/other-user-time/other-user-time.component';
@@ -42,7 +43,8 @@ import { AuthGuardService } from './shared/services/auth.guard.service';
     MyTimeComponent,
     OtherUserTimeComponent,
     SignupComponent,
-    UsersComponent
+    UsersComponent,
+    EmptyComponent
   ],
   imports: [
     AppRoutingModule,

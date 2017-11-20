@@ -40,7 +40,6 @@ export class DataService {
     login(item: UserCredentials) {
         return this.http.post(`${this.usersEndPoint}/login`, item, this.requestOptions)
             .map(res => {
-                this.authService.saveProfileAndToken(res.json().token, res.json().user)
                 return res.json()
             })
             .catch(err => this.handleError(err));

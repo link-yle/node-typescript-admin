@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
-    selector: 'app-home-layout',
-    templateUrl: 'home-layout.component.html',
+    selector: 'app-authenticated-navbar',
+    templateUrl: 'authenticated-navbar.component.html',
 })
-export class HomeLayoutComponent {
+export class AuthenticatedNavbarComponent {
     constructor(
         private authService: AuthService,
     ) { }

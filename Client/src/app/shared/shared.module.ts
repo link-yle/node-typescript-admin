@@ -1,3 +1,4 @@
+import { AuthenticatedNavbarComponent } from './components/layout/authenticated-navbar/authenticated-navbar.component';
 import { TimeZoneFormComponent } from './components/timings/write-time/shared/timezone-form/timezone-form.component';
 import { EditimeComponent } from './components/timings/write-time/edit-time/edit-time.component';
 import { AddTimeComponent } from './components/timings/write-time/add-time/add-time.component';
@@ -15,7 +16,6 @@ import { TimingsComponent } from './components/timings/view-time/timings.compone
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
-import { HomeLayoutComponent } from './components/layout/home-layout/home-layout.component';
 
 
 
@@ -34,7 +34,7 @@ import { HomeLayoutComponent } from './components/layout/home-layout/home-layout
     FooterComponent,
     NavComponent,
     LoginLayoutComponent,
-    HomeLayoutComponent,
+    AuthenticatedNavbarComponent,
     MaterialModule,
     HttpModule,
     FormsModule,
@@ -56,7 +56,7 @@ import { HomeLayoutComponent } from './components/layout/home-layout/home-layout
     TimeZoneFormComponent,
     EditUserComponent,
     LoginLayoutComponent,
-    HomeLayoutComponent
+    AuthenticatedNavbarComponent
 
   ],
 })
