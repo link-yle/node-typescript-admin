@@ -5,7 +5,6 @@ import { MyTimeComponent } from './routes/my-time/my-time.component';
 import { EditMyTimeComponent } from './routes/edit-my-time/edit-my-time.component';
 import { AddMyTimeComponent } from './routes/add-my-time/add-my-time.component';
 import { ManagerClaimsService } from './shared/services/manager-claims.service';
-import { TokenExpiryService } from './shared/services/token-expiry.service';
 import { TimingsService } from './shared/services/timings.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -25,6 +24,7 @@ import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-o
 import { LoginComponent } from './routes/login/login.component';
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';
 import { UsersComponent } from './routes/users-list/users.component';
+import { AuthGuardService } from './shared/services/auth.guard.service';
 
 @NgModule({
   declarations: [
@@ -53,12 +53,12 @@ import { UsersComponent } from './routes/users-list/users.component';
     AuthService,
     SnackBarService,
     TimingsService,
-    TokenExpiryService,
     SelectedUserService,
     GlobalValidatorsService,
     ManagerClaimsService,
     DataService,
-    AdminClaimsService
+    AdminClaimsService,
+    AuthGuardService
 
   ],
   bootstrap: [AppComponent]

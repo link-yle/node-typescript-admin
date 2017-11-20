@@ -1,9 +1,10 @@
+import { CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
-
     public saveProfileAndToken(token, user): void {
         window.localStorage.setItem(`profile`, JSON.stringify(user))
         window.localStorage.setItem('id_token', token)
@@ -21,6 +22,13 @@ export class AuthService {
     public logout() {
         window.localStorage.removeItem('id_token')
         window.localStorage.removeItem('profile')
+    }
+
+    public isAuthenticated(): boolean {
+        const token = localStorage.getItem('id_token');
+        if (!token) return false
+        const jwtHelper: JwtHelper = new JwtHelper();
+        return !jwtHelper.isTokenExpired(token);
     }
 
 }

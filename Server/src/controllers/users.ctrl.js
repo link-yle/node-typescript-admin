@@ -71,8 +71,8 @@ function findUserAndUpdateRole(req, res) {
 
 
 function getUserDetails(req, res) {
-    const id = req.params._id
-    return usersModel.findById(id).select('_id name email timeZones role').lean().exec()
+    const id = req.params.id
+    return usersModel.findById(id).select('_id name email timeZones role').lean().populate('timeZones').exec()
         .then((user) => res.status(200).json(user))
         .catch(err => utility.badRequest(res, err))
 }

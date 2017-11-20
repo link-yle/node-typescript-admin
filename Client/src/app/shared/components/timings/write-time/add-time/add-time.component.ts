@@ -28,7 +28,7 @@ export class AddTimeComponent implements OnInit {
                 this.sb.emitSuccessSnackBar()
                 this.added.emit()
             },
-            error => this.sb.emitErrorSnackBar()
+            error => this.sb.emitErrorSnackBar(error)
 
         )
     }

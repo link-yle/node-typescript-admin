@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
                     }
                 )
             },
-            error => this.sb.emitErrorSnackBar()
+            error => this.sb.emitErrorSnackBar(error)
         )
     }
 

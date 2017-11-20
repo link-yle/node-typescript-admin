@@ -1,5 +1,5 @@
 import { DataService } from '../../../services/data.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../../../services/snackbar.service';
 import { AuthService } from '../../../services/auth.service';
@@ -13,6 +13,7 @@ import { AuthService } from '../../../services/auth.service';
 export class TimingsComponent implements OnInit {
     timeZones = []
     @Input() profileId: string
+    @Output() addClicked = new EventEmitter()
     constructor(
         private dataService: DataService,
         private sb: SnackBarService,
@@ -26,15 +27,15 @@ export class TimingsComponent implements OnInit {
 
     private getData() {
         this.dataService.getUserDetails(this.profileId).subscribe(
-            data => this.timeZones = data,
-            error => this.sb.emitErrorSnackBar()
+            data => this.timeZones = data.timeZones,
+            error => this.sb.emitErrorSnackBar(error)
         )
     }
 
     onDeleteClick(item) {
         this.dataService.deleteTimeZone(this.profileId, item._id).subscribe(
             data => this.getData(),
-            error => this.sb.emitErrorSnackBar()
+            error => this.sb.emitErrorSnackBar(error)
         )
     }
 
@@ -42,5 +43,8 @@ export class TimingsComponent implements OnInit {
         // this.router.navigate(['/edit-time'])
     }
 
+    onAddClick() {
+        this.addClicked.emit()
+    }
 
 }

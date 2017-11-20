@@ -28,7 +28,7 @@ export class EditimeComponent implements OnInit {
             data => {
                 this.sb.emitSuccessSnackBar()
             },
-            error => this.sb.emitErrorSnackBar()
+            error => this.sb.emitErrorSnackBar(error)
         )
     }
 }

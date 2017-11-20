@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../../../../../services/data.service';
 import { SnackBarService } from '../../../../../services/snackbar.service';
@@ -8,7 +8,7 @@ import { Timezone } from '../../../../../models/timezone.model';
     selector: 'app-timezone-form',
     templateUrl: 'timezone-form.component.html',
 })
-export class TimeZoneFormComponent {
+export class TimeZoneFormComponent implements OnInit {
     form: FormGroup
     @Input() timeZone: Timezone
     @Output() submitted = new EventEmitter();
@@ -19,6 +19,9 @@ export class TimeZoneFormComponent {
         private sb: SnackBarService) {
     }
 
+    ngOnInit() {
+        this.buildForm()
+    }
     onSubmit() {
         this.submitted.emit(this.form.value);
     }

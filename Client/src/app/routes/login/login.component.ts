@@ -34,7 +34,9 @@ export class LoginComponent implements OnInit {
     onSubmit(loginForm) {
         this.dataService.login(loginForm).subscribe(
             data => this.router.navigate(['/my-time']),
-            error => this.sb.emitErrorSnackBar()
+            error => {
+                this.sb.emitErrorSnackBar(error)
+            }
         )
     }
 

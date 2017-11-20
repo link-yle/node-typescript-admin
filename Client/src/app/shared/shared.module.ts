@@ -14,6 +14,8 @@ import { NavComponent } from './components/layout/nav/nav.component';
 import { TimingsComponent } from './components/timings/view-time/timings.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
+import { HomeLayoutComponent } from './components/layout/home-layout/home-layout.component';
 
 
 
@@ -31,6 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   exports: [
     FooterComponent,
     NavComponent,
+    LoginLayoutComponent,
+    HomeLayoutComponent,
     MaterialModule,
     HttpModule,
     FormsModule,
@@ -50,7 +54,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddTimeComponent,
     EditimeComponent,
     TimeZoneFormComponent,
-    EditUserComponent
+    EditUserComponent,
+    LoginLayoutComponent,
+    HomeLayoutComponent
 
   ],
 })

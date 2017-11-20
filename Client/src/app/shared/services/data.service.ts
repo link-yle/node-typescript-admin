@@ -13,19 +13,27 @@ import { Observable } from 'rxjs/Observable';
 import { Timezone } from '../models/timezone.model';
 import { UserCredentials } from '../models/userCredentials';
 import { UserInfo } from '../models/userInfo.model';
+import { Router } from '@angular/router';
 @Injectable()
 export class DataService {
     private requestOptions
     private usersEndPoint
 
-    constructor(private http: Http, private authService: AuthService) {
+    constructor
+        (private http: Http, private authService: AuthService,
+        private router: Router,
+        private sb: SnackBarService
+        ) {
         if (environment.production) this.usersEndPoint = '/users'
         else this.usersEndPoint = 'http://localhost:3000/users'
         this.setRequestOptions()
     }
 
     private setRequestOptions() {
-        const requestHeaders = new Headers({ 'Content-Type': 'application/json', 'Authorization': this.authService.getToken() });
+        const requestHeaders = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.authService.getToken()}`
+        });
         this.requestOptions = new RequestOptions({ headers: requestHeaders });
     }
 
@@ -35,7 +43,7 @@ export class DataService {
                 this.authService.saveProfileAndToken(res.json().token, res.json().user)
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
     signup(item: User) {
@@ -43,42 +51,42 @@ export class DataService {
             .map(res => {
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
 
     updateUserInfo(id: string, data: UserInfo) {
-        return this.http.put(`${this.usersEndPoint}/users/${id}`, data, this.requestOptions)
+        return this.http.put(`${this.usersEndPoint}/${id}`, data, this.requestOptions)
             .map(res => {
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
 
     deleteUser(id: string) {
-        return this.http.delete(`${this.usersEndPoint}/${id}`)
+        return this.http.delete(`${this.usersEndPoint}/${id}`, this.requestOptions)
             .map(res => {
                 return 'OK'
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
     getUsers() {
-        return this.http.get(`${this.usersEndPoint}/users/`)
+        return this.http.get(`${this.usersEndPoint}/`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
 
     getUserDetails(userId: string) {
-        return this.http.get(`${this.usersEndPoint}/users/${userId}`)
+        return this.http.get(`${this.usersEndPoint}/${userId}`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
 
@@ -88,7 +96,7 @@ export class DataService {
             .map(res => {
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
     addTimeZone(userId: string, data: Timezone) {
@@ -96,15 +104,15 @@ export class DataService {
             .map(res => {
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
     deleteTimeZone(userId: string, timeZoneId: string) {
-        return this.http.delete(`${this.usersEndPoint}/${userId}/timezones/${timeZoneId}`)
+        return this.http.delete(`${this.usersEndPoint}/${userId}/timezones/${timeZoneId}`, this.requestOptions)
             .map(res => {
                 return 'OK'
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
 
@@ -114,7 +122,7 @@ export class DataService {
             .map(res => {
                 return res.json()
             })
-            .catch(this.handleError);
+            .catch(err => this.handleError(err));
     }
 
 
@@ -129,6 +137,10 @@ export class DataService {
             errMsg = error.message ? error.message : error.toString();
         }
         console.error(errMsg);
+        if (error.status === 403 || error.status === 401) {
+            this.sb.emitErrorSnackBar(error)
+            this.router.navigate(['login'])
+        }
         return Observable.throw(errMsg);
     }
 

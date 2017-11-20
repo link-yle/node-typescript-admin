@@ -36,7 +36,7 @@ export class EditUserComponent implements OnInit {
     onSubmit() {
         this.dataService.updateUserInfo(this.user._id, { name: this.user.name, email: this.user.email }).subscribe(
             data => this.sb.emitSuccessSnackBar(),
-            error => this.sb.emitErrorSnackBar()
+            error => this.sb.emitErrorSnackBar(error)
         )
     }
 

@@ -11,7 +11,7 @@ router.post('/login', login)
 router.put('/:id/info', verifyUser, authorize([ROLES.manager, ROLES.admin], { selfAuthorized: true }), findUserAndUpdateInfo)
 router.delete('/:id', verifyUser, authorize([ROLES.admin, ROLES.manager], { selfAuthorized: false }), removeUser)
 router.get('/', verifyUser, authorize([ROLES.admin, ROLES.manager], { selfAuthorized: false }), getUsers)
-router.get('/:id', verifyUser, authorize([ROLES.admin], { selfAuthorized: false }), getUserDetails)
+router.get('/:id', verifyUser, authorize([ROLES.admin], { selfAuthorized: true }), getUserDetails)
 
 router.post('/:id/timezones', verifyUser, authorize([ROLES.admin], { selfAuthorized: true }), addTimeZone)
 router.delete('/:id/timezones/:timeZoneId', verifyUser, authorize([ROLES.admin], { selfAuthorized: true }), removeTimeZone)

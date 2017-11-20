@@ -23,7 +23,7 @@ describe('Service: Snack bar Service', () => {
 
 
     it('should emit error snack bar when message argumnet is not provided', () => {
-        service.emitErrorSnackBar()
+        service.emitErrorSnackBar('error')
     });
     it('should emit error snack bar when message argumnet provided', () => {
         service.emitErrorSnackBar('Error!')
