@@ -1,3 +1,4 @@
+import { Timezone } from '../../../models/timezone.model';
 import { DataService } from '../../../services/data.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
@@ -14,6 +15,7 @@ export class TimingsComponent implements OnInit {
     timeZones = []
     @Input() profileId: string
     @Output() addClicked = new EventEmitter()
+    @Output() editClicked = new EventEmitter()
     constructor(
         private dataService: DataService,
         private sb: SnackBarService,
@@ -39,8 +41,8 @@ export class TimingsComponent implements OnInit {
         )
     }
 
-    onEditTimeClick() {
-        // this.router.navigate(['/edit-time'])
+    onEditTimeClick(item: Timezone) {
+        this.editClicked.emit(item)
     }
 
     onAddClick() {

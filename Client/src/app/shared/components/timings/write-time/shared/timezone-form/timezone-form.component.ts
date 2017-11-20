@@ -20,7 +20,7 @@ export class TimeZoneFormComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.buildForm()
+        if (this.timeZone) this.buildForm()
     }
     onSubmit() {
         this.submitted.emit(this.form.value);

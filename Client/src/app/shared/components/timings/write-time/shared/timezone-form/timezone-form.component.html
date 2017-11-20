@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
+<form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form && timeZone">
     
     <div class="form-group">
         <label for="">Name </label>
@@ -12,6 +12,6 @@
         <label for="">GMT Time difference </label>
         <input type="number" class="form-control" id="" min="-12" max="14" placeholder="Enter Gmt Time Difference" formControlName="gmtTimeDifference">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
 </form>
 

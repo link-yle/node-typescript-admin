@@ -17,10 +17,12 @@ export class EditimeComponent implements OnInit {
         private dataService: DataService,
         private sb: SnackBarService,
         private timingsService: TimingsService,
+        private router: Router
     ) { }
 
     ngOnInit() {
         this.timeZone = this.timingsService.getSelectedTiming()
+        if (!this.timeZone) this.router.navigate(['/my-time'])
     }
 
     onSubmitted(x: Timezone) {

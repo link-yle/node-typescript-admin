@@ -25,7 +25,7 @@ const paths: Routes = [
             { path: 'my-profile', component: EditMyInfoComponent, },
             { path: 'my-time', component: MyTimeComponent, },
             { path: 'my-time/add', component: AddMyTimeComponent, },
-            { path: 'my-time/:id', component: EditMyTimeComponent },
+            { path: 'my-time/edit', component: EditMyTimeComponent },
             { path: 'users', component: UsersComponent, canActivate: [ManagerClaimsService], },
             { path: 'users/:id', component: EditUserComponent, canActivate: [ManagerClaimsService], },
             { path: 'users/:id/role', component: EditRoleComponent, canActivate: [AdminClaimsService] },

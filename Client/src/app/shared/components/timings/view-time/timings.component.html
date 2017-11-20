@@ -13,7 +13,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>City</th>
-                                <th>gmtTimeDifference</th>
+                                <th>GMT Time Difference</th>
                                 <th class="text-center">Update</th>
                                 <th class="text-center">Delete</th>
                             </tr>
@@ -23,7 +23,7 @@
                                 <td>{{item.name}}</td>
                                 <td>{{item.city}}</td>
                                 <td>{{item.gmtTimeDifference}}</td>
-                                <td class="text-center" (click)="onEditTimeClick()" ><i class="fa fa-edit  text-default"> </i></td>
+                                <td class="text-center" (click)="onEditTimeClick(item)" ><i class="fa fa-edit  text-default"> </i></td>
                                 <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
                             </tr>
                         </tbody>
