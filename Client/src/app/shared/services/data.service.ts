@@ -26,7 +26,6 @@ export class DataService {
         ) {
         if (environment.production) this.usersEndPoint = '/users'
         else this.usersEndPoint = 'http://localhost:3000/users'
-        this.setRequestOptions()
     }
 
     private setRequestOptions() {
@@ -55,7 +54,8 @@ export class DataService {
 
 
     updateUserInfo(id: string, data: UserInfo) {
-        return this.http.put(`${this.usersEndPoint}/${id}`, data, this.requestOptions)
+        this.setRequestOptions()
+        return this.http.put(`${this.usersEndPoint}/${id}/info`, data, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -64,6 +64,7 @@ export class DataService {
 
 
     deleteUser(id: string) {
+        this.setRequestOptions()
         return this.http.delete(`${this.usersEndPoint}/${id}`, this.requestOptions)
             .map(res => {
                 return 'OK'
@@ -72,6 +73,7 @@ export class DataService {
     }
 
     getUsers() {
+        this.setRequestOptions()
         return this.http.get(`${this.usersEndPoint}/`, this.requestOptions)
             .map(res => {
                 return res.json()
@@ -81,6 +83,7 @@ export class DataService {
 
 
     getUserDetails(userId: string) {
+        this.setRequestOptions()
         return this.http.get(`${this.usersEndPoint}/${userId}`, this.requestOptions)
             .map(res => {
                 return res.json()
@@ -91,6 +94,7 @@ export class DataService {
 
 
     updateTimeZone(userId: string, timeZoneId: string, data: Timezone) {
+        this.setRequestOptions()
         return this.http.put(`${this.usersEndPoint}/${userId}/timezones/${timeZoneId}`, data, this.requestOptions)
             .map(res => {
                 return res.json()
@@ -99,6 +103,7 @@ export class DataService {
     }
 
     addTimeZone(userId: string, data: Timezone) {
+        this.setRequestOptions()
         return this.http.post(`${this.usersEndPoint}/${userId}/timezones`, data, this.requestOptions)
             .map(res => {
                 return res.json()
@@ -107,6 +112,7 @@ export class DataService {
     }
 
     deleteTimeZone(userId: string, timeZoneId: string) {
+        this.setRequestOptions()
         return this.http.delete(`${this.usersEndPoint}/${userId}/timezones/${timeZoneId}`, this.requestOptions)
             .map(res => {
                 return 'OK'
@@ -117,6 +123,7 @@ export class DataService {
 
 
     assignRole(id: string, data: { role: string }) {
+        this.setRequestOptions()
         return this.http.patch(`${this.usersEndPoint}/${id}/role`, data, this.requestOptions)
             .map(res => {
                 return res.json()
