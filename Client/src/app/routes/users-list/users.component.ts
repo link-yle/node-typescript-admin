@@ -53,4 +53,9 @@ export class UsersComponent implements OnInit {
         this.selectedUserService.set(item)
         this.router.navigate(['/users', item._id])
     }
+
+    onTimingsClick(item) {
+        this.selectedUserService.set(item)
+        this.router.navigate(['/users', item._id, 'time'])
+    }
 }

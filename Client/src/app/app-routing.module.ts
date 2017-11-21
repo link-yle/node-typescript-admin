@@ -20,6 +20,7 @@ import { EditUserComponent } from './shared/components/users/edit-user/edit-user
 import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-other-user-info.component';
 import { EmptyComponent } from './routes/empty/empty.component';
 import { LoginLayoutComponent } from './shared/components/layout/login-layout/login-layout.component';
+import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -38,7 +39,7 @@ const paths: Routes = [
             { path: 'users/:id/role', component: EditRoleComponent, canActivate: [AdminClaimsService] },
             { path: 'users/:id/time', component: OtherUserTimeComponent, canActivate: [AdminClaimsService], },
             { path: 'users/:id/time/add', component: AddOtherUserTimeComponent },
-            { path: 'users/:id/time/add/:id', component: EditOtherUserInfoComponent },
+            { path: 'users/:id/time/edit', component: EditOtherUserTimeComponent },
             { path: '', redirectTo: 'empty', pathMatch: 'full' },
             { path: '**', redirectTo: 'empty' }
         ]
