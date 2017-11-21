@@ -24,7 +24,7 @@ function signup(req, res) {
 function login(req, res) {
     usersModel.findOne({ email: req.body.email }, (err, user) => {
         if (err) throw err;
-        if(!user) return utility.notFound(res, 'user')
+        if (!user) return utility.notFound(res, 'user')
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) return res.status(400).json('An error occurred while trying to check your password')
             if (!isMatch) return res.status(403).json('Wrong password')
@@ -37,29 +37,24 @@ function login(req, res) {
 
 
 function findUserAndUpdateInfo(req, res) {
-    const id = req.params.id
-    return usersModel.findOne({ _id: id }).exec((err, user) => {
-        if (err) return utility.badRequest(res, err)
-        if (!user) utility.notFound(res, 'user')
-        user.name = req.body.name
-        user.email = req.body.email
-        user.password = undefined
-        return res.status(200).json(user)
-        user.save().then((err, user) => {
+    return usersModel.findOneAndUpdate(
+        { _id: req.params.id },
+        { email: req.body.email, name: req.body.name },
+        { new: true }
+    )
+        .then((err, user) => {
             return res.status(200).json(user)
         })
-            .catch(err => {
-                if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
-                return utility.badRequest(res, 'save updated info')
-            })
-    })
+        .catch(err => {
+            return utility.badRequest(res, 'save updated info')
+        })
 }
 
 function findUserAndUpdateRole(req, res) {
     const id = req.params.id
     return usersModel.update({ _id: id }, { role: req.body.role })
         .then((user => {
-            if(!user) return utility.notFound(res, 'user')
+            if (!user) return utility.notFound(res, 'user')
             res.status(200).json(user)
         }))
         .catch(err => {
@@ -79,11 +74,11 @@ function getUserDetails(req, res) {
 
 function getUsers(req, res) {
     return usersModel.find().select('_id name email role').lean().exec()
-    .then(users=>{
-        return res.status(200).json(users)
-    })
-    .catch(err=>console.log(err)
-    )
+        .then(users => {
+            return res.status(200).json(users)
+        })
+        .catch(err => console.log(err)
+        )
 }
 
 function removeUser(req, res) {
