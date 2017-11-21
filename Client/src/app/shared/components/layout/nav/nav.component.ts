@@ -7,9 +7,5 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
 
-    isAtleastManager() {
-        // return this.managerClaimsService.canActivate()
-    }
-
 
 }

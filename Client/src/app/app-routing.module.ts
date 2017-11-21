@@ -7,7 +7,6 @@ import { SignupComponent } from './routes/signup/signup.component';
 import { EditMyInfoComponent } from './routes/edit-my-info/edit-my-info.component';
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { ManagerClaimsService } from './shared/services/manager-claims.service';
 import { AdminClaimsService } from './shared/services/admin-claims.service';
 import { LoginComponent } from './routes/login/login.component';
 import { MyTimeComponent } from './routes/my-time/my-time.component';

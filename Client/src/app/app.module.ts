@@ -5,7 +5,6 @@ import { OtherUserTimeComponent } from './routes/other-user-time/other-user-time
 import { MyTimeComponent } from './routes/my-time/my-time.component';
 import { EditMyTimeComponent } from './routes/edit-my-time/edit-my-time.component';
 import { AddMyTimeComponent } from './routes/add-my-time/add-my-time.component';
-import { ManagerClaimsService } from './shared/services/manager-claims.service';
 import { TimingsService } from './shared/services/timings.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -57,7 +56,6 @@ import { AuthGuardService } from './shared/services/auth.guard.service';
     TimingsService,
     SelectedUserService,
     GlobalValidatorsService,
-    ManagerClaimsService,
     DataService,
     AdminClaimsService,
     AuthGuardService
