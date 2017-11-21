@@ -37,9 +37,9 @@ export class UsersComponent implements OnInit {
         return this.authService.getProfile().role === 'admin'
     }
 
-    onChangeRoleClick(selectedUser) {
-        this.selectedUserService.set(selectedUser)
-        this.router.navigate(['/role'])
+    onChangeRoleClick(item) {
+        this.selectedUserService.set(item)
+        this.router.navigate(['/users', item._id, 'role'])
     }
 
     onDeleteClick(selectedUser) {
