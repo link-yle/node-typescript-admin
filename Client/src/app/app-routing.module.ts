@@ -19,10 +19,13 @@ import { AddMyTimeComponent } from './routes/add-my-time/add-my-time.component';
 import { EditUserComponent } from './shared/components/users/edit-user/edit-user.component';
 import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-other-user-info.component';
 import { EmptyComponent } from './routes/empty/empty.component';
+import { LoginLayoutComponent } from './shared/components/layout/login-layout/login-layout.component';
 
 const paths: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent },
+    { path: 'login', component: LoginLayoutComponent, children: [
+        { path: '', component: LoginComponent },
+        { path: 'signup', component: SignupComponent },
+    ] },
     {
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [
             { path: 'empty', component: EmptyComponent, },
@@ -30,8 +33,8 @@ const paths: Routes = [
             { path: 'my-time', component: MyTimeComponent, },
             { path: 'my-time/add', component: AddMyTimeComponent, },
             { path: 'my-time/edit', component: EditMyTimeComponent },
-            { path: 'users', component: UsersComponent, canActivate: [ManagerClaimsService], },
-            { path: 'users/:id', component: EditUserComponent, canActivate: [ManagerClaimsService], },
+            { path: 'users', component: UsersComponent, },
+            { path: 'users/:id', component: EditOtherUserInfoComponent },
             { path: 'users/:id/role', component: EditRoleComponent, canActivate: [AdminClaimsService] },
             { path: 'users/:id/time', component: OtherUserTimeComponent, canActivate: [AdminClaimsService], },
             { path: 'users/:id/time/add', component: AddOtherUserTimeComponent },

@@ -1,10 +1,16 @@
 <app-nav>
     <ul class="nav navbar-nav">
-        <li routerLink='/my-time'><a href="javascript:void(0);" >My timings</a></li>
-        <li routerLink='/my-profile'><a href="javascript:void(0);" >My profile</a></li>
-        <li routerLink='/users'><a href="javascript:void(0);"  >Users</a></li>
-        <li (click)="logout()"><a href="javascript:void(0);"  >Logout</a></li>
+        <li routerLink='/my-time'><a href="javascript:void(0);">My timings</a></li>
+        <li routerLink='/my-profile'><a href="javascript:void(0);">My profile</a></li>
+        <li routerLink='/users'><a href="javascript:void(0);">Users</a></li>
+        <li (click)="logout()"><a href="javascript:void(0);">Logout</a></li>
     </ul>
 
 </app-nav>
-<router-outlet></router-outlet>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
