@@ -14,6 +14,7 @@ import { AuthService } from '../../../services/auth.service';
 export class TimingsComponent implements OnInit {
     timeZones = []
     @Input() profileId: string
+    @Input() title: string
     @Output() addClicked = new EventEmitter()
     @Output() editClicked = new EventEmitter()
     constructor(

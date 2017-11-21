@@ -25,7 +25,7 @@
                                 <td>{{item.role}}</td>
                                 <td>{{item.email}}</td>
                                 <td class="text-center" (click)="onUpdateClick(item)"><i class="fa fa-edit  text-default"> </i></td>
-                                <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)"><i class="fa fa-user-o text-warning"> </i></td>
+                                <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)"><i class="fa fa-clock-o text-warning"> </i></td>
                                 <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
                                 <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)"><i class="fa fa-user-o text-warning"> </i></td>
                             </tr>

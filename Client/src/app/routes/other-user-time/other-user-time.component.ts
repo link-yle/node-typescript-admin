@@ -9,7 +9,8 @@ import { Timezone } from '../../shared/models/timezone.model';
     templateUrl: 'other-user-time.component.html',
 })
 export class OtherUserTimeComponent implements OnInit {
-    public profileId
+    public profileId: string
+    public title: string
     constructor(
         private selectedUserService: SelectedUserService,
         private router: Router,
@@ -19,8 +20,11 @@ export class OtherUserTimeComponent implements OnInit {
      }
 
     ngOnInit() {
-        this.profileId = this.selectedUserService.get()._id
+        const user = this.selectedUserService.get()
+        this.profileId = user._id
+        this.title = `${user.name} Timings`
     }
+
     onAddClicked() {
         this.router.navigate(['users', this.profileId, 'time', 'add'])
     }
