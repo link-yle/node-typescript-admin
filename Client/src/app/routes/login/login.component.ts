@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
     onSubmit(loginForm) {
         this.dataService.login(loginForm).subscribe(
             data => {
-                this.authService.saveProfileAndToken(data.token, data.user)
+                this.authService.saveToken(data.token)
+                this.authService.saveProfile(data.user)
                 this.router.navigate(['empty'])
             },
             error => {

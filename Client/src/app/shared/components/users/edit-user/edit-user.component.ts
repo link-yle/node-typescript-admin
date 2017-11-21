@@ -1,6 +1,6 @@
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from '../../../services/data.service';
 import { SelectedUserService } from '../../../services/selectedUser.service';
 import { User } from '../../../models/user.model';
@@ -14,6 +14,7 @@ import { GlobalValidatorsService } from 'app/shared/services/global-validators.s
 })
 export class EditUserComponent implements OnInit {
     @Input() user: User
+    @Output() edited = new EventEmitter()
     public form: FormGroup
     constructor(
         private dataService: DataService,
@@ -23,7 +24,10 @@ export class EditUserComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.buildForm()
+        // setTimeout(() => {
+            this.buildForm()
+        // }, 100)
+
     }
 
     private buildForm() {
@@ -34,9 +38,15 @@ export class EditUserComponent implements OnInit {
     }
 
     onSubmit() {
-        this.dataService.updateUserInfo(this.user._id, { name: this.user.name, email: this.user.email }).subscribe(
-            data => this.sb.emitSuccessSnackBar(),
-            error => this.sb.emitErrorSnackBar(error)
+        const payload = { name: this.form.value.name, email: this.form.value.email }
+        this.dataService.updateUserInfo(this.user._id, payload).subscribe(
+            data => {
+                this.sb.emitSuccessSnackBar()
+                this.edited.emit(payload)
+            },
+            error => {
+                this.sb.emitErrorSnackBar(error)
+            }
         )
     }
 

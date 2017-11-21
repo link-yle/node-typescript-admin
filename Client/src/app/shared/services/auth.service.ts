@@ -5,9 +5,13 @@ import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
-    public saveProfileAndToken(token, user): void {
-        window.localStorage.setItem(`profile`, JSON.stringify(user))
+
+    public saveToken(token): void {
         window.localStorage.setItem('id_token', token)
+    }
+
+    public saveProfile(user) {
+        window.localStorage.setItem(`profile`, JSON.stringify(user))
     }
 
     public getToken() {

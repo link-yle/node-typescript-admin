@@ -24,7 +24,9 @@ export class TimingsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.getData()
+        // setTimeout(() => {
+            this.getData()
+        // }, 1)
     }
 
     private getData() {

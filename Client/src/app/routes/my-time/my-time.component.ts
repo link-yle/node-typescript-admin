@@ -8,18 +8,16 @@ import { Timezone } from '../../shared/models/timezone.model';
     selector: 'app-my-time',
     templateUrl: 'my-time.component.html',
 })
-export class MyTimeComponent implements OnInit {
+export class MyTimeComponent {
     public profileId
     constructor(
         private authService: AuthService,
         private router: Router,
         private route: ActivatedRoute,
         private timingsService: TimingsService
-    ) { }
-
-    ngOnInit() {
+    ) {
         this.profileId = this.authService.getProfile()._id
-    }
+     }
 
     onAddClicked() {
         this.router.navigate(['/my-time/add'])

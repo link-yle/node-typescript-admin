@@ -14,4 +14,10 @@ export class EditMyInfoComponent implements OnInit {
         this.user = this.authService.getProfile()
     }
 
+    onEdited(e) {
+        this.user.email = e.email
+        this.user.name = e.name
+        this.authService.saveProfile(this.user)
+    }
+
 }

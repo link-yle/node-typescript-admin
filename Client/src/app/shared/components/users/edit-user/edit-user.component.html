@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
+<form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form && user">
     <div class="form-group">
         <label for="">Name </label>
         <input type="text" class="form-control" id="" placeholder="Enter your first name" formControlName="name">
@@ -8,4 +8,4 @@
         <input type="text" class="form-control" id="" placeholder="Enter your first name" formControlName="email">
     </div>
 </form>
-<button (click)="onsubmit()">Submit</button>
+<button (click)="onSubmit()">Submit</button>
