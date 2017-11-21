@@ -8,9 +8,11 @@ import { User } from '../../shared/models/user.model';
 })
 export class EditMyInfoComponent implements OnInit {
     public user: User
+    public title: string
     constructor(private authService: AuthService) { }
 
     ngOnInit() {
+        this.title = `Update my Info `
         this.user = this.authService.getProfile()
     }
 

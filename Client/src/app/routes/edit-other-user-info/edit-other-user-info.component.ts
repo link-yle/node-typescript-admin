@@ -8,14 +8,21 @@ import { DataService } from '../../shared/services/data.service';
     selector: 'app-edit-other-user-info',
     templateUrl: 'edit-other-user-info.component.html',
 })
-export class EditOtherUserInfoComponent {
+export class EditOtherUserInfoComponent implements OnInit {
     public user: User
+    public title: string
     constructor(
         private selectedUserService: SelectedUserService,
         private router: Router,
     ) {
         this.user = this.selectedUserService.get()
-        if (!this.user) this.router.navigate(['users'])
+        if (!this.user) {
+            this.router.navigate(['users'])
+        }
+    }
+
+    ngOnInit() {
+        this.title = `Update ${this.user.name}'s  Info `
     }
 
 }

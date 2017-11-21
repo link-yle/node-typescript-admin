@@ -14,6 +14,7 @@ import { GlobalValidatorsService } from 'app/shared/services/global-validators.s
 })
 export class EditUserComponent implements OnInit {
     @Input() user: User
+    @Input() title: string
     @Output() edited = new EventEmitter()
     public form: FormGroup
     constructor(
