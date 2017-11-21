@@ -1,5 +1,7 @@
 <div class="col-md-6">
     <div class="form-group">
+                    <label for="role">{{this.selectedUserService.get().name}}'s  Role</label>
+                
         <select class="form-control"  name="role" [(ngModel)]="userRole">
             <!-- <option disabled  value="" >Subcategory</option> -->
             <option value="regular">Regular</option>
@@ -8,5 +10,5 @@
                 
         </select>
     </div>
-    <button (click)="onAssignClick()" >Assign Role</button>
+    <button class="btn btn-primary" (click)="onAssignClick()" >Assign Role</button>
 </div>
