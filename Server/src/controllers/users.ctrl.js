@@ -42,7 +42,7 @@ function findUserAndUpdateInfo(req, res) {
         { email: req.body.email, name: req.body.name },
         { new: true }
     )
-        .then((err, user) => {
+        .then(user => {
             return res.status(200).json(user)
         })
         .catch(err => {
