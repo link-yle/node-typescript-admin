@@ -5,7 +5,7 @@ function getToken(_id, role, secret) {
         _id: _id,
         role: role
     }, secret, {
-            expiresIn: 60 * 10
+            expiresIn: 60 * 60 * 24 * 365
         });
 }
 
