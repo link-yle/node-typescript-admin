@@ -1,39 +1,24 @@
-<div class="conter-wrapper">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Users
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Email</th>
-                                <th class="text-center">Update User Info</th>
-                                <th *ngIf="isAdmin()" class="text-center">Timings</th>
-                                <th class="text-center">Delete</th>
-                                <th *ngIf="isAdmin()" class="text-center">Change Role</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let item of users">
-                                <td>{{item.name}}</td>
-                                <td>{{item.role}}</td>
-                                <td>{{item.email}}</td>
-                                <td class="text-center" (click)="onUpdateClick(item)"><i class="fa fa-edit  text-default"> </i></td>
-                                <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)"><i class="fa fa-clock-o text-warning"> </i></td>
-                                <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
-                                <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)"><i class="fa fa-user-o text-warning"> </i></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<app-paneled-table title="Users">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Email</th>
+            <th class="text-center">Update User Info</th>
+            <th *ngIf="isAdmin()" class="text-center">Timings</th>
+            <th class="text-center">Delete</th>
+            <th *ngIf="isAdmin()" class="text-center">Change Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of users">
+            <td>{{item.name}}</td>
+            <td>{{item.role}}</td>
+            <td>{{item.email}}</td>
+            <td class="text-center" (click)="onUpdateClick(item)"><i class="fa fa-edit  text-default"> </i></td>
+            <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)"><i class="fa fa-clock-o text-warning"> </i></td>
+            <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
+            <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)"><i class="fa fa-user-o text-warning"> </i></td>
+        </tr>
+    </tbody>
+</app-paneled-table>

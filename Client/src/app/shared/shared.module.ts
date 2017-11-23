@@ -16,6 +16,7 @@ import { TimingsComponent } from './components/timings/view-time/timings.compone
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
+import { PaneledTableComponent } from './components/layout/paneled-table/paneled-table.component';
 
 
 
@@ -45,7 +46,8 @@ import { LoginLayoutComponent } from './components/layout/login-layout/login-lay
     EditimeComponent,
     TimeZoneFormComponent,
     EditUserComponent,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    PaneledTableComponent
   ],
   declarations: [
     NavComponent,
@@ -56,7 +58,8 @@ import { LoginLayoutComponent } from './components/layout/login-layout/login-lay
     TimeZoneFormComponent,
     EditUserComponent,
     LoginLayoutComponent,
-    AuthenticatedNavbarComponent
+    AuthenticatedNavbarComponent,
+    PaneledTableComponent
 
   ],
 })
