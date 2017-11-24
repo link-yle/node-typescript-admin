@@ -3,6 +3,7 @@ import { browser, $$, $, } from 'protractor';
 import { LoginPage } from './login.po';
 import { Layout } from './layout.po';
 import { InfoFormPage } from './info-form.po';
+import { UsersPage } from './users.po';
 
 describe('My Profile', () => {
 
@@ -17,19 +18,15 @@ describe('My Profile', () => {
         })
 
         fit('should update', () => {
-            CommonPage.editIcons.first().click()
+            const nameOfLastUserBeforeUpdate = UsersPage.nameOfLastUser
+            CommonPage.editIcons.last().click()
             InfoFormPage.clearFormName()
             const randomName: string = Math.random().toString(36).substring(7)
             InfoFormPage.submitForm(randomName)
             Layout.usersTab.click()
-            // Layout
-            // Layout.myProfileTab.click()
-
-            // browser.sleep(50)
-            // Layout.myTimingsTab.click()
-            // browser.sleep(500)
-            // const afterEditText = TimingsPage.lastRowCloumns.first().getText()
-            // expect(afterEditText).toBe(randomName)
+            const nameOfLastUserAfterUpdate = UsersPage.nameOfLastUser
+            expect(nameOfLastUserAfterUpdate).toBe(randomName)
+            expect(nameOfLastUserAfterUpdate).not.toBe(nameOfLastUserBeforeUpdate)
         })
 
     })
