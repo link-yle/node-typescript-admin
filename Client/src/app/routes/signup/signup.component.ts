@@ -36,15 +36,11 @@ export class SignupComponent implements OnInit {
         })
     }
 
-    test() {
-        this.router.navigate(['/my-time'])
-    }
-
     onSubmit() {
         this.dataService.signup(this.form.value).subscribe(
             data => {
                 this.dataService.login({ email: this.form.value.email, password: this.form.value.password }).subscribe(
-                    data => this.router.navigate(['/my-time']),
+                    data => this.router.navigate(['/']),
                     error => {
                         this.sb.emitErrorSnackBar(error)
                     }

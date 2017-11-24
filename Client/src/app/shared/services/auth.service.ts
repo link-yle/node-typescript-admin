@@ -35,4 +35,11 @@ export class AuthService {
         return !jwtHelper.isTokenExpired(token);
     }
 
+    public isAtleastManager() {
+        const user = this.getProfile()
+        if (!user) return false
+        else if (user.role === 'admin' || user.role === 'manager') return true
+        else return false
+    }
+
 }

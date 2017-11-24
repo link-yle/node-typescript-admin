@@ -16,6 +16,10 @@ export class AuthenticatedNavbarComponent {
         this.router.navigate(['/login'])
     }
 
+    isAtleastManager() {
+        return this.authService.isAtleastManager()
+    }
+
 
 
 }
