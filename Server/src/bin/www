@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const argv = require('minimist')(process.argv.slice(2))
 
 const app = require('../app');
 const http = require('http')
@@ -8,7 +9,13 @@ const port = normalizePort(process.env.PORT || '3000');
 
 app.set('port', port);
 const server = http.createServer(app)
-db.connectToOriginalDb()
+
+if (argv.t) {
+  db.connectToTestDb() 
+}
+else {
+  db.connectToOriginalDb()
+}
 
 /**
  * Listen on provided port, on all network interfaces.

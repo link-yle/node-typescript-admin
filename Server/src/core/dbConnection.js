@@ -5,7 +5,7 @@ function connectToOriginalDb(){
     return mongoose.connect(process.env.mongodbTimezoneURI, { useMongoClient: true});
 }
 function connectToTestDb(){
-    return mongoose.connect(process.env.mongodbTimezoneURI, { useMongoClient: true});
+    return mongoose.connect(process.env.mongodbTimezoneMockURI, { useMongoClient: true});
 }
 
 

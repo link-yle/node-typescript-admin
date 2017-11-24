@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./src/bin/www",
+    "e2e": "node ./src/bin/www -t",
     "coverage": "nodemon --exec istanbul cover node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
     "test": "nodemon --exec jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "dev": "nodemon ./src/bin/www"
@@ -25,6 +26,7 @@
     "istanbul": "^0.4.5",
     "jade": "^1.11.0",
     "jsonwebtoken": "^8.1.0",
+    "minimist": "^1.2.0",
     "mongoose": "^4.11.7",
     "morgan": "~1.8.1",
     "socket.io": "^1.7.4",
