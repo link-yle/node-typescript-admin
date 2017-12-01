@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+
 @Injectable()
 
 export class GlobalValidatorsService {
@@ -18,6 +19,13 @@ export class GlobalValidatorsService {
         return null;
     }
 
+    nameFormat(control) {
+        const REGEX = /(.*[a-z]){3}/i;
+        if (control.value && control.value !== '' &&  !REGEX.test(control.value)) {
+            return { 'incorrectPasswordFormat': true };
+        }
+        return null;
+    }
 
 }
 
