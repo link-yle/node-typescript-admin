@@ -146,6 +146,8 @@ export class DataService {
         if (error.status === 403 || error.status === 401) {
             this.sb.emitErrorSnackBar(error)
             this.router.navigate(['login'])
+        } else if (error.status === 422 && error.isJoi && error.details.length ) {
+            error.details.forEach(err => this.sb.emitErrorSnackBar(err.message));
         }
         return Observable.throw(errMsg);
     }
