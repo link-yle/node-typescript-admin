@@ -2,22 +2,6 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const SALT_WORK_FACTOR = 10
 const userSchema = require('./user.schema')
-const { emailRegex, passwordRegex, nameRegex } = require('../config/regexConstants')
-
-// email validation
-userSchema.path('email').validate(email =>
-    emailRegex.test(email),
-    'The email entered is invalid.')
-
-// password validation
-userSchema.path('password').validate(password => {
-     return passwordRegex.test(password)
-}, 'Password must be at least 6 characters and contain at least one letter and one number.');
-
-// password validation
-userSchema.path('name').validate(name => {
-    return nameRegex.test(name)
-}, 'Name must be atleast 3 letters.');
 
 
 userSchema.pre('save', function (next) {

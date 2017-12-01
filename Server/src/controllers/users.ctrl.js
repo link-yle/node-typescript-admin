@@ -3,20 +3,18 @@ const utility = require('../helpers/utility.js')
 const usersModel = require('../models/users.model')
 const { getToken } = require('../core/authentication')
 const { userSecret } = require('../config/commonConstants')
+const ROLES = require('../config/rolesConstants')
 
-
-function signup(req, res) {
+async function signup(req, res) { 
     const newUser = new usersModel(req.body)
     newUser.timeZones = []
-    newUser.role = 'regular'
-    newUser.save(req.body)
-        .then(added => {
-            return res.status(200).json(added)
-        })
-        .catch(err => {
-            if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
-            else return res.status(400).json(err)
-        })
+    newUser.role = ROLES.regular
+    const added = await newUser.save(req.body).catch(err => {
+        if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
+        else return utility.badRequest(res, 'signup you')
+    })
+    delete added.password
+    return res.status(200).json(added)
 }
 
 
@@ -73,12 +71,14 @@ function getUserDetails(req, res) {
 }
 
 function getUsers(req, res) {
-    return usersModel.find().select('_id name email role').lean().exec()
+    let query
+    if (req.decoded.role === ROLES.manager) query = usersModel.find({ role: ROLES.regular })
+    else query = usersModel.find()
+    return query.select('_id name email role').lean().exec()
         .then(users => {
             return res.status(200).json(users)
         })
-        .catch(err => console.log(err)
-        )
+        .catch(err => res.status(500).json("An error occurred while retrieving users"))
 }
 
 function removeUser(req, res) {

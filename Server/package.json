@@ -25,6 +25,7 @@
     "express-history-api-fallback": "^2.2.1",
     "istanbul": "^0.4.5",
     "jade": "^1.11.0",
+    "joi": "^13.0.2",
     "jsonwebtoken": "^8.1.0",
     "minimist": "^1.2.0",
     "mongoose": "^4.11.7",
