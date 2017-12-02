@@ -2,7 +2,6 @@
 const utility = require('../helpers/utility.js')
 const usersModel = require('../models/users.model')
 const { getToken } = require('../core/authentication')
-const { userSecret } = require('../config/commonConstants')
 const ROLES = require('../config/rolesConstants')
 
 async function signup(req, res) { 
@@ -26,7 +25,7 @@ function login(req, res) {
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (err) return res.status(400).json('An error occurred while trying to check your password')
             if (!isMatch) return res.status(403).json('Wrong password')
-            const token = getToken(user._id, user.role, req.app.get(userSecret))
+            const token = getToken(user._id, user.role, process.env.secret)
             user.password = undefined
             return res.status(200).json({ user, token })
         });
