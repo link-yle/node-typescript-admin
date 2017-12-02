@@ -45,8 +45,6 @@ function attachTimeZonePayloadSchema(req, res, next) {
 function attachUpdateRolePayloadSchema(req, res, next) {
     req.schema = Joi.object().keys({
         role: Joi.string().valid(ROLES.admin, ROLES.manager, ROLES.regular),
-        name: requiredNameSchema,
-        city: requiredNameSchema,
     })
     next()
 }

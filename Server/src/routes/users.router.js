@@ -3,7 +3,7 @@ const { signup, getUserDetails, getUsers, findUserAndUpdateRole, removeUser, fin
 const { addTimeZone, removeTimeZone, updateTimeZone } = require('../controllers/timezones.ctrl')
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
-const Validate = require('../core/validator')
+const Validate = require('../core/input-validator')
 
 router.post('/', Validate.attachSignupPayloadSchema, Validate.validateSchema, signup)
 router.post('/login', Validate.attachLoginPayloadSchema, Validate.validateSchema, login)
