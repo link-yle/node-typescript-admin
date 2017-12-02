@@ -8,7 +8,7 @@ function preventRegularUsers(req, res, next) {
     else return next()
 }
 
-async function removeUserAuth(req, res, next) {
+async function allowAdminAndManager(req, res, next) {
     const role = req.decoded.role
     switch (role) {
         case ROLES.regular: return res.status(403).json('Not Authorized.');
@@ -25,7 +25,7 @@ async function removeUserAuth(req, res, next) {
     }
 }
 
-async function updateUserInfoAuth(req, res, next) {
+async function allowSelfAdminAndManager(req, res, next) {
     const role = req.decoded.role
     switch (role) {
         case ROLES.regular:
@@ -65,5 +65,5 @@ async function fetchUserRoleFromBackend(id) {
     return (await usersModel.findById(id).select('role').lean().exec()).role
 }
 
-module.exports = { removeUserAuth, updateUserInfoAuth, preventRegularUsers, allowSelfAndAdminOnly, allowAdminOnly }
+module.exports = { allowAdminAndManager, allowSelfAdminAndManager, preventRegularUsers, allowSelfAndAdminOnly, allowAdminOnly }
 

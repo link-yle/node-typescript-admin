@@ -8,8 +8,8 @@ const Validate = require('../core/input-validator')
 router.post('/', Validate.attachSignupPayloadSchema, Validate.validateSchema, signup)
 router.post('/login', Validate.attachLoginPayloadSchema, Validate.validateSchema, login)
 
-router.put('/:id/info', verifyUser,  Authorize.updateUserInfoAuth,  Validate.attachInfoPayloadSchema, Validate.validateSchema, findUserAndUpdateInfo)
-router.delete('/:id', verifyUser, Authorize.removeUserAuth, removeUser)
+router.put('/:id/info', verifyUser,  Authorize.allowSelfAdminAndManager,  Validate.attachInfoPayloadSchema, Validate.validateSchema, findUserAndUpdateInfo)
+router.delete('/:id', verifyUser, Authorize.allowAdminAndManager, removeUser)
 router.get('/', verifyUser, Authorize.preventRegularUsers, getUsers)
 router.get('/:id', verifyUser, Authorize.allowSelfAndAdminOnly, getUserDetails)
 
