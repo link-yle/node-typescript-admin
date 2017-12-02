@@ -71,9 +71,9 @@ function getUserDetails(req, res) {
 
 function getUsers(req, res) {
     let query
-    if (req.decoded.role === ROLES.manager) query = usersModel.find({ role: ROLES.regular })
-    else query = usersModel.find()
-    return query.select('_id name email role').lean().exec()
+    if (req.decoded.role === ROLES.manager) query = usersModel.find({ role: ROLES.regular }).select('_id name email')
+    else query = usersModel.find().select('_id name email role')
+    return query.lean().exec()
         .then(users => {
             return res.status(200).json(users)
         })
