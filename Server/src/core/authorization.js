@@ -20,8 +20,6 @@ async function allowAdminAndManager(req, res, next) {
             } else {
                 return res.status(403).json('Not Authorized to manipulate non regular users.');
             }
-        default:
-            break;
     }
 }
 
@@ -39,23 +37,21 @@ async function allowSelfAdminAndManager(req, res, next) {
             } else {
                 return res.status(403).json('Not Authorized to manipulate non regular users.');
             }
-        default:
-            break;
     }
 }
 
 
-function allowSelfAndAdminOnly (req, res, next){
+function allowSelfAndAdminOnly(req, res, next) {
     const role = req.decoded.role
-    if (req.decoded._id === req.params.id || role===ROLES.admin) {
+    if (req.decoded._id === req.params.id || role === ROLES.admin) {
         return next()
     }
     else return res.status(403).json('Not Authorized.');
 }
 
-function allowAdminOnly (req, res, next){
+function allowAdminOnly(req, res, next) {
     const role = req.decoded.role
-    if (role===ROLES.admin) {
+    if (role === ROLES.admin) {
         return next()
     }
     else return res.status(403).json('Not Authorized.');
