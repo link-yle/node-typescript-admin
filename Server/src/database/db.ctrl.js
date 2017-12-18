@@ -53,7 +53,10 @@ module.exports = {
 
     async removeUser(id) {
         return await usersModel.findByIdAndRemove(id)
-    }
+    },
 
+    async getUserRole(id) {
+        return (await usersModel.findById(id).select('role').lean().exec()).role
+    }
 
 }

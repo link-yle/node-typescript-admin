@@ -1,6 +1,5 @@
 const ROLES = require('../config/rolesConstants')
-const usersModel = require('../models/users.model')
-
+const db = require('../database/db.ctrl')
 
 function preventRegularUsers(req, res, next) {
     const role = req.decoded.role
@@ -14,7 +13,7 @@ async function allowAdminAndManager(req, res, next) {
         case ROLES.regular: return res.status(403).json('Not Authorized.');
         case ROLES.admin: return next();
         case ROLES.manager:
-            const toBeAccessedRole = await fetchUserRoleFromBackend(req.params.id)
+            const toBeAccessedRole = await db.getUserRole(req.params.id)
             if (toBeAccessedRole === ROLES.regular) {
                 return next()
             } else {
@@ -31,7 +30,7 @@ async function allowSelfAdminAndManager(req, res, next) {
             else return res.status(403).json('Not Authorized.');
         case ROLES.admin: return next();
         case ROLES.manager:
-            const toBeAccessedRole = await fetchUserRoleFromBackend(req.params.id)
+            const toBeAccessedRole = await db.getUserRole(req.params.id)
             if (toBeAccessedRole === ROLES.regular) {
                 return next()
             } else {
@@ -55,10 +54,6 @@ function allowAdminOnly(req, res, next) {
         return next()
     }
     else return res.status(403).json('Not Authorized.');
-}
-
-async function fetchUserRoleFromBackend(id) {
-    return (await usersModel.findById(id).select('role').lean().exec()).role
 }
 
 module.exports = { allowAdminAndManager, allowSelfAdminAndManager, preventRegularUsers, allowSelfAndAdminOnly, allowAdminOnly }

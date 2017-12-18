@@ -1,8 +1,8 @@
-const { authorize } = require('../../src/core/authorization')
+const { allowAdminAndManager, allowAdminOnly, allowSelfAdminAndManager, allowSelfAndAdminOnly, preventRegularUsers } = require('../../src/core/authorization')
 const { admin, manager, regular } = require('../../src/config/rolesConstants')
+const proxyquire = require('proxyquire')
 
-
-describe("Acting as same user", function () {
+fdescribe("Auth", function () {
 
     class MockRequest {
         constructor(paramsId, decodedId, role) {
@@ -34,12 +34,11 @@ describe("Acting as same user", function () {
 
 
     describe('allowed admin only', () => {
-        const fn = authorize([admin], { selfAuthorized: false })
         it("should authorize admin successfully ", function () {
             const spyAuthorized = spyOn(toBeSpied, 'authorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '123', admin)
-            fn(req, res, next)
+            allowAdminOnly(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
         })
 
@@ -47,7 +46,7 @@ describe("Acting as same user", function () {
             const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', manager)
-            fn(req, res, next)
+            allowAdminOnly(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
 
@@ -56,7 +55,7 @@ describe("Acting as same user", function () {
             const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '123', regular)
-            fn(req, res, next)
+            allowAdminOnly(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
 
@@ -64,7 +63,7 @@ describe("Acting as same user", function () {
             const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '13', regular)
-            fn(req, res, next)
+            allowAdminOnly(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
     })
@@ -72,12 +71,11 @@ describe("Acting as same user", function () {
 
 
     describe('allowed admin and self only', () => {
-        const fn = authorize([admin], { selfAuthorized: true })
         it("should authorize admin successfully ", function () {
             const spyAuthorized = spyOn(toBeSpied, 'authorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', admin)
-            fn(req, res, next)
+            allowSelfAndAdminOnly(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
         })
 
@@ -85,7 +83,7 @@ describe("Acting as same user", function () {
             const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', manager)
-            fn(req, res, next)
+            allowSelfAndAdminOnly(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
 
@@ -94,7 +92,7 @@ describe("Acting as same user", function () {
             const spyAuthorized = spyOn(toBeSpied, 'authorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '123', regular)
-            fn(req, res, next)
+            allowSelfAndAdminOnly(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
         })
 
@@ -102,44 +100,70 @@ describe("Acting as same user", function () {
             const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '13', regular)
-            fn(req, res, next)
+            allowSelfAndAdminOnly(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
     })
 
 
     describe('allowed manager and admin', () => {
-        const fn = authorize([admin, manager], { selfAuthorized: false })
         it("should authorize admin successfully ", function () {
             const spyAuthorized = spyOn(toBeSpied, 'authorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', admin)
-            fn(req, res, next)
+            allowAdminAndManager(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
         })
 
-        it("should authorize manager ", function () {
+        it("should authorize manager ", async function () {
             const spyAuthorized = spyOn(toBeSpied, 'authorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', manager)
-            fn(req, res, next)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
         })
 
 
-        it("should not authorize self ", function () {
+        it("should not authorize self ", async function () {
             const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '123', regular)
-            fn(req, res, next)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
 
-        it("should not authorize other user ", function () {
+        it("should not authorize other user ", async function () {
             const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
             const res = new MockResponse()
             const req = new MockRequest('123', '13', regular)
-            fn(req, res, next)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyNotAuthorized).toHaveBeenCalled()
+        })
+
+        it("manager should not lookup managers ", async function () {
+            const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '13', manager)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(manager)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyNotAuthorized).toHaveBeenCalled()
+        })
+
+
+        it("manager should not lookup admins ", async function () {
+            const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '13', manager)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(admin)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
     })
@@ -149,6 +173,113 @@ describe("Acting as same user", function () {
 
 
 
+
+
+
+
+    describe('allowed manager and admin', () => {
+        it("should authorize admin successfully ", function () {
+            const spyAuthorized = spyOn(toBeSpied, 'authorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', admin)
+            allowSelfAdminAndManager(req, res, next)
+            expect(spyAuthorized).toHaveBeenCalled()
+        })
+
+        it("should authorize manager to lookup regular users", async function () {
+            const spyAuthorized = spyOn(toBeSpied, 'authorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', manager)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyAuthorized).toHaveBeenCalled()
+        })
+
+        it("should not authorize manager to lookup other managers", async function () {
+            const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', manager)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(manager)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyNotAuthorized).toHaveBeenCalled()
+        })
+
+
+        it("should not authorize manager to lookup other admins", async function () {
+            const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', manager)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(admin)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyNotAuthorized).toHaveBeenCalled()
+        })
+
+        it("should authorize admin to lookup any user", async function () {
+            const spyAuthorized = spyOn(toBeSpied, 'authorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', admin)
+
+            let dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
+            let auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyAuthorized).toHaveBeenCalled()
+
+            dbStub = { getUserRole: id => new Promise((res, rej) => res(manager)) }
+            auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyAuthorized).toHaveBeenCalledTimes(2)
+
+            dbStub = { getUserRole: id => new Promise((res, rej) => res(admin)) }
+            auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyAuthorized).toHaveBeenCalledTimes(3)
+        })
+
+        it("should not authorize self ", async function () {
+            const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '123', regular)
+            const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
+            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            await auth.allowAdminAndManager(req, res, next)
+            expect(spyNotAuthorized).toHaveBeenCalled()
+        })
+    })
+
+
+
+
+
+    describe('prevent regular users', () => {
+        it("should authorize admin successfully ", function () {
+            const spyAuthorized = spyOn(toBeSpied, 'authorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', admin)
+            preventRegularUsers(req, res, next)
+            expect(spyAuthorized).toHaveBeenCalled()
+        })
+
+        it("should authorize manager successfully ", function () {
+            const spyAuthorized = spyOn(toBeSpied, 'authorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', manager)
+            preventRegularUsers(req, res, next)
+            expect(spyAuthorized).toHaveBeenCalled()
+        })
+
+        it("should not authorize regular users ", function () {
+            const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
+            const res = new MockResponse()
+            const req = new MockRequest('123', '1253', regular)
+            preventRegularUsers(req, res, next)
+            expect(spyNotAuthorized).toHaveBeenCalled()
+        })
+
+
+    })
 
 
 
