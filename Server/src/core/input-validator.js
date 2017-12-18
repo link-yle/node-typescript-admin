@@ -10,7 +10,8 @@ class InputValidator {
         req.schema = Joi.object().keys({
             name: requiredNameSchema,
             password: Joi.string().regex(passwordRegex).required(),
-            email: Joi.string().email().required()
+            email: Joi.string().email().required(),
+            timeZones: Joi.array().empty()
         })
         validateSchema(req, res, next)
     

@@ -1,45 +1,22 @@
-
-
 const utility = require('../helpers/utility.js')
-const usersModel = require('../models/users.model')
+const db = require('../database/db.ctrl')
 
 async function removeTimeZone(req, res) {
-    const update = await usersModel.findOneAndUpdate(
-        { _id: req.params.id },
-        { $pull: { timeZones: { _id: req.params.timeZoneId } } },
-        { new: true }).catch(err => {
-            utility.badRequest(res, 'to delete timeZone')
-        })
+    const update = await db.removeTimeZone(req.params.id, req.params.timeZoneId)
     if (!update) return utility.notFound('Users')
     return res.status(200).json(update)
 }
 
-function addTimeZone(req, res) {
-    return usersModel.findOneAndUpdate(
-        { _id: req.params.id },
-        { $push: { timeZones: req.body } },
-        { new: true }
-    )
-        .then((user) => {
-            return res.status(200).json(user)
-        })
-        .catch(err => {
-            utility.badRequest(res, 'to add timeZone')
-        })
+async function addTimeZone(req, res) {
+    const user = await db.removeTimeZone(req.params.id, req.body)
+    .catch(err => utility.badRequest(res, 'to add timeZone'))
+    return res.status(200).json(user)
 }
 
-function updateTimeZone(req, res) {
-    return usersModel.findOneAndUpdate(
-        { _id: req.params.id, "timeZones._id": req.params.timeZoneId },
-        { $set: { "timeZones.$": req.body } },
-        { new: true }
-    )
-        .then(user => {
-            return res.status(200).json(user)
-        })
-        .catch(err => {
-            utility.badRequest(res, 'to remove timeZone')
-        })
+async function updateTimeZone(req, res) {
+    const user = await db.updateTimeZone(req.params.id, req.params.timeZoneId, req.body)
+    .catch(err => utility.badRequest(res, 'to remove timeZone'))
+    return res.status(200).json(user)
 }
 
 module.exports = { updateTimeZone, addTimeZone, removeTimeZone }

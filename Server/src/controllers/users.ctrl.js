@@ -3,12 +3,10 @@ const utility = require('../helpers/utility.js')
 const usersModel = require('../models/users.model')
 const { getToken } = require('../core/authentication')
 const ROLES = require('../config/rolesConstants')
+const db = require('../database/db.ctrl')
 
-async function signup(req, res) { 
-    const newUser = new usersModel(req.body)
-    newUser.timeZones = []
-    newUser.role = ROLES.regular
-    const added = await newUser.save(req.body).catch(err => {
+async function signup(req, res) {
+    const added = await db.addNewUser(req.body, ROLES.regular).catch(err => {
         if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
         else return utility.badRequest(res, 'signup you')
     })
@@ -33,59 +31,38 @@ function login(req, res) {
 }
 
 
-function findUserAndUpdateInfo(req, res) {
-    return usersModel.findOneAndUpdate(
-        { _id: req.params.id },
-        { email: req.body.email, name: req.body.name },
-        { new: true }
-    )
-        .then(user => {
-            return res.status(200).json(user)
-        })
-        .catch(err => {
-            return utility.badRequest(res, 'save updated info')
-        })
+async function findUserAndUpdateInfo(req, res) {
+    const user = await db.updateUserInfo(req.params.id,req.body.email, req.body.name)
+    .catch(err => utility.badRequest(res, 'save updated info'))
+    return res.status(200).json(user)
 }
 
-function findUserAndUpdateRole(req, res) {
-    const id = req.params.id
-    return usersModel.update({ _id: id }, { role: req.body.role })
-        .then((user => {
-            if (!user) return utility.notFound(res, 'user')
-            res.status(200).json(user)
-        }))
-        .catch(err => {
-            console.log(err)
-
-            utility.badRequest(res, 'save updated role')
-        })
+async function findUserAndUpdateRole(req, res) {
+    const user = db.updateRole(req.params.id, req.body.role).catch(err => utility.badRequest(res, 'save updated role'))
+    if (!user) return utility.notFound(res, 'user')
+    return res.status(200).json(user)
 }
 
 
-function getUserDetails(req, res) {
-    const id = req.params.id
-    return usersModel.findById(id).select('_id name email timeZones role').lean().populate('timeZones').exec()
-        .then((user) => res.status(200).json(user))
-        .catch(err => utility.badRequest(res, err))
+async function getUserDetails(req, res) {
+    const user = await db.getUserDetails(req.params.id).catch(err => utility.badRequest(res, err))
+    return res.status(200).json(user)
+
 }
 
-function getUsers(req, res) {
-    let query
-    if (req.decoded.role === ROLES.manager) query = usersModel.find({ role: ROLES.regular }).select('_id name email')
-    else query = usersModel.find().select('_id name email role')
-    return query.lean().exec()
-        .then(users => {
-            return res.status(200).json(users)
-        })
-        .catch(err => res.status(500).json("An error occurred while retrieving users"))
+async function getUsers(req, res) {
+    let users
+    if (req.decoded.role === ROLES.manager) {
+        users = await db.getRegularUsers().catch(err => res.status(500).json("An error occurred while retrieving users"))
+    } else {
+        users = await db.getAllUsers().catch(err => res.status(500).json("An error occurred while retrieving users"))
+    }
+    return res.status(200).json(users)
 }
 
-function removeUser(req, res) {
-    return usersModel.findByIdAndRemove(req.params.id)
-        .then(() => {
-            return res.status(200).json("Ok")
-        })
-        .catch(err => res.status(400).json(err))
+async function removeUser(req, res) {
+    await db.removeUser(req.params.id).catch(err => res.status(400).json(err))
+    return res.status(200).json("Ok")
 }
 
 
