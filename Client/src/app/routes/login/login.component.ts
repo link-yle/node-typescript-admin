@@ -1,5 +1,5 @@
 import { GlobalValidatorsService } from '../../shared/services/global-validators.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DataService } from '../../shared/services/data.service';
@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            email: ['', this.globalValidatorsService.mailFormat],
-            password: ['', this.globalValidatorsService.passwordFormat],
+            email: ['', Validators.compose([this.globalValidatorsService.mailFormat, Validators.required])],
+            password: ['', Validators.required],
         })
     }
 

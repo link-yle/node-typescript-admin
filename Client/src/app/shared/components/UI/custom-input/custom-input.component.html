@@ -1,0 +1,5 @@
+<div class="form-group" [formGroup]="parentFormGroup">
+    <label for="">{{label}} </label>
+    <input [type]="type" class="form-control" id="" [placeholder]="pH" [formControlName]="formControlNameInput">
+    <p *ngIf="isValidating" [hidden]="!validationFn(formControlNameInput)" class="text-danger"> {{errMsg}}</p>
+</div>

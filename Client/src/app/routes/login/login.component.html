@@ -1,14 +1,7 @@
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
-
-    <div class="form-group">
-        <label for="">Email Address </label>
-        <input type="email" class="form-control" id="" placeholder="Enter email address" formControlName="email">
-    </div>
-    <div class="form-group">
-        <label for="">Password </label>
-        <input type="password" class="form-control" id="" placeholder="Enter Password" formControlName="password">
-    </div>
-    <button type="submit" class="btn btn-success" [disabled]="!form.valid"> Login</button>
+    <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
+    <app-password-input [parentFormGroup]="form" ></app-password-input>
+    <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
 </form>
 <hr>
 

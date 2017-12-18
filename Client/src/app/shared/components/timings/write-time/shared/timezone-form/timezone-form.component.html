@@ -12,6 +12,6 @@
         <label for="">GMT Time difference </label>
         <input type="number" class="form-control" id="" min="-12" max="14" placeholder="Enter Gmt Time Difference" formControlName="gmtTimeDifference">
     </div>
-    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+    <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
 </form>
 

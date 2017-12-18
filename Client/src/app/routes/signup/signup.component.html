@@ -1,23 +1,16 @@
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
     <div class="form-group">
         <label for="">Name </label>
-        <input type="text" class="form-control" id="" placeholder="Enter your first name" formControlName="name">
+        <input type="text" class="form-control" id="" placeholder="Enter your name" formControlName="name">
+        <p [hidden]="!isIncorrectNameFormat('name')" class="text-danger"> Please Enter a that has atleast 3 letters and a maximum of 20 letters</p>
     </div>
-    <div class="form-group">
-        <label for="">Email Address </label>
-        <input type="email" class="form-control" id="" placeholder="Enter email address" formControlName="email">
-        <p [hidden]="!isIncorrectMailFormat('email')" class="text-danger"> Please Enter a valid email </p>
-    </div>
-    <div class="form-group">
-        <label for="">Password </label>
-        <input type="password" class="form-control" id="" placeholder="Enter Password" formControlName="password">
-        <p [hidden]="!isIncorrectPasswordFormat('password')" class="text-danger"> Please Enter a password of minimum 6 characters and contain a letter and a number</p>
-    </div>
+    <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
+    <app-password-input [parentFormGroup]="form" [isValidating]="true" ></app-password-input>
     <div class="form-group">
         <label for="">Confirm Password </label>
         <input type="password" class="form-control" id="" placeholder="Enter Password" formControlName="confirmPassword">
         <p [hidden]="!unSimilarPassword('confirmPassword')" class="text-danger"> Please enter a similar password </p>
     </div>
-    <button type="submit" class="btn btn-success" [disabled]="!form.valid"> Sign up</button>
+    <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
 </form>
 

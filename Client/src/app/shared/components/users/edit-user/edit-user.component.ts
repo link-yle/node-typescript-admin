@@ -33,8 +33,8 @@ export class EditUserComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            name: [this.user.name, Validators.required],
-            email: [this.user.email, this.globalValidatorsService.mailFormat],
+            name: [this.user.name, Validators.compose([Validators.required, this.globalValidatorsService.nameFormat])],
+            email: [this.user.email, Validators.compose([Validators.required, this.globalValidatorsService.mailFormat])],
         })
     }
 
@@ -49,6 +49,19 @@ export class EditUserComponent implements OnInit {
                 this.sb.emitErrorSnackBar(error)
             }
         )
+    }
+
+    isIncorrectMailFormat(control: string) {
+       
+        return this.form.get(control).hasError('incorrectMailFormat')
+    }
+
+    isIncorrectPasswordFormat(control: string) {
+        return this.form.get(control).hasError('incorrectPasswordFormat')
+    }
+
+    isIncorrectNameFormat(control: string) {
+        return this.form.get(control).hasError('incorrectNameFormat')
     }
 
 }

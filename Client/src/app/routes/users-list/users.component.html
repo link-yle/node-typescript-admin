@@ -21,4 +21,8 @@
             <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)"><i class="fa fa-user-o text-warning"> </i></td>
         </tr>
     </tbody>
+    <div class="col-xs-12 col-12">
+        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+    </div>
+
 </app-paneled-table>

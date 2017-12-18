@@ -9,15 +9,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
 import { SnackBarService } from './services/snackbar.service';
-import { MaterialModule } from '@angular/material';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { NavComponent } from './components/layout/nav/nav.component';
 import { TimingsComponent } from './components/timings/view-time/timings.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { PaneledTableComponent } from './components/layout/paneled-table/paneled-table.component';
-
+import { SubmitButtonComponent } from './components/UI/submit-button/submit-button.component';
+import { EmailInputComponent } from './components/UI/email-input/email-input.component';
+import { PasswordInputComponent } from './components/UI/password-input/password-input.component';
+import { CustomInputComponent } from './components/UI/custom-input/custom-input.component';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 @NgModule({
@@ -25,10 +27,9 @@ import { PaneledTableComponent } from './components/layout/paneled-table/paneled
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
+    AlertModule.forRoot(),
     HttpModule,
     RouterModule,
-    BrowserAnimationsModule
   ],
   providers: [],
   exports: [
@@ -36,7 +37,6 @@ import { PaneledTableComponent } from './components/layout/paneled-table/paneled
     NavComponent,
     LoginLayoutComponent,
     AuthenticatedNavbarComponent,
-    MaterialModule,
     HttpModule,
     FormsModule,
     ReactiveFormsModule,
@@ -46,8 +46,11 @@ import { PaneledTableComponent } from './components/layout/paneled-table/paneled
     EditimeComponent,
     TimeZoneFormComponent,
     EditUserComponent,
-    BrowserAnimationsModule,
-    PaneledTableComponent
+    PaneledTableComponent,
+    SubmitButtonComponent,
+    EmailInputComponent,
+    PasswordInputComponent,
+    CustomInputComponent
   ],
   declarations: [
     NavComponent,
@@ -59,7 +62,11 @@ import { PaneledTableComponent } from './components/layout/paneled-table/paneled
     EditUserComponent,
     LoginLayoutComponent,
     AuthenticatedNavbarComponent,
-    PaneledTableComponent
+    PaneledTableComponent,
+    SubmitButtonComponent,
+    EmailInputComponent,
+    PasswordInputComponent,
+    CustomInputComponent
 
   ],
 })

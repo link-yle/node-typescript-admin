@@ -50,12 +50,9 @@ export class SignupComponent implements OnInit {
         )
     }
 
-    isIncorrectMailFormat(control: string) {
-        return this.form.get(control).hasError('incorrectMailFormat')
-    }
 
-    isIncorrectPasswordFormat(control: string) {
-        return this.form.get(control).hasError('incorrectPasswordFormat')
+    isIncorrectNameFormat(control: string) {
+        return this.form.get(control).hasError('incorrectNameFormat')
     }
 
     unSimilarPassword(controlStr: string) {
