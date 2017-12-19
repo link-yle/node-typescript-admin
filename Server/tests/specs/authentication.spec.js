@@ -1,15 +1,12 @@
 const { getToken, verifyUser } = require('../../src/core/authentication')
+const env = Object.assign({}, process.env);
+
 
 class MockRequest {
     constructor(token) {
         this.decoded = {}
         this.headers = {
             authorization: `Bearer ${token}`
-        }
-        this.app = {
-            get(x) {
-                return 'secret'
-            }
         }
     }
 }
@@ -37,9 +34,15 @@ const next = () => toBeSpied.authorized()
 
 
 describe('Authentication', () => {
+    beforeAll(()=>{
+        process.env.secret = 'correct'
+    })
+    afterAll(() => {
+        process.env = env;
+    });
 
-    it("should authenticate token successfully ", function () {
-        const token = getToken('123', 'role', 'secret')
+    fit("should authenticate token successfully ", function () {
+        const token = getToken('123', 'role')
         const req = new MockRequest(token)
         const res = new MockResponse()
         const spyAuthorized = spyOn(toBeSpied, 'authorized')
@@ -48,23 +51,14 @@ describe('Authentication', () => {
     })
 
 
-    it("should not authenticate token if secret is wrong ", function () {
-        const token = getToken('123', 'role', 'wrongSecret')
-        const req = new MockRequest(token)
+    fit("should not authenticate token if secret is wrong ", function () {
+        const req = new MockRequest('wrong')
         const res = new MockResponse()
         const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
         verifyUser(req, res, next)
         expect(spyNotAuthorized).toHaveBeenCalled()
     })
 
-    it("should not authenticate token if token is wrong ", function () {
-        const token = getToken('123', 'role', 'secret') + 'wrong'
-        const req = new MockRequest(token)
-        const res = new MockResponse()
-        const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')
-        verifyUser(req, res, next)
-        expect(spyNotAuthorized).toHaveBeenCalled()
-    })
 
 })
 
