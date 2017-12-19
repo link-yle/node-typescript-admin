@@ -5,12 +5,12 @@ const request = require('supertest')
 
 
 function setup() {
-    db.connectToTestDb()
+    db.connectToOriginalDb()
     return [app.listen(6000), request(app)]
 }
 
 function connectToDb(){
-    db.connectToTestDb()
+    db.connectToOriginalDb()
 }
 module.exports = {
     setup , connectToDb

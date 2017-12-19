@@ -32,8 +32,8 @@ function login(req, res) {
 
 
 async function findUserAndUpdateInfo(req, res) {
-    const user = await db.updateUserInfo(req.params.id,req.body.email, req.body.name)
-    .catch(err => utility.badRequest(res, 'save updated info'))
+    const user = await db.updateUserInfo(req.params.id, req.body.email, req.body.name)
+        .catch(err => utility.badRequest(res, 'save updated info'))
     return res.status(200).json(user)
 }
 
@@ -50,14 +50,16 @@ async function getUserDetails(req, res) {
 
 }
 
-async function getUsers(req, res) {
-    let users
+async function getUsers(req, res, next) {
+    
+    let users, count
     if (req.decoded.role === ROLES.manager) {
-        users = await db.getRegularUsers().catch(err => res.status(500).json("An error occurred while retrieving users"))
+        [users, count] = await Promise.all([db.getRegularUsers({ limit: 10, skip: req.query.skip }), db.getRegularUsers()]).catch(err => next(err))
     } else {
-        users = await db.getAllUsers().catch(err => res.status(500).json("An error occurred while retrieving users"))
+        [users, count] = await Promise.all([db.getAllUsers({ limit: 10, skip: parseInt(req.query.skip) }), db.getAllUsersCount()])
+        .catch(err => {  global.log.error(err) } )
     }
-    return res.status(200).json(users)
+    return res.status(200).json({users, count})
 }
 
 async function removeUser(req, res) {

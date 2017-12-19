@@ -8,14 +8,14 @@ async function removeTimeZone(req, res, next) {
     return res.status(200).json(update)
 }
 
-async function addTimeZone(req, res) {
-    const user = await db.addTimeZone(req.params.id, req.body)
+async function addTimeZone(req, res, next) {
+    const user = await db.addTimeZone(req.params.id, req.body).catch(err=>next(err))
     .catch(err => utility.badRequest(res, 'to add timeZone'))
     return res.status(200).json(user)
 }
 
-async function updateTimeZone(req, res) {
-    const user = await db.updateTimeZone(req.params.id, req.params.timeZoneId, req.body)
+async function updateTimeZone(req, res, next) {
+    const user = await db.updateTimeZone(req.params.id, req.params.timeZoneId, req.body).catch(err=>next(err))
     .catch(err => utility.badRequest(res, 'to remove timeZone'))
     return res.status(200).json(user)
 }

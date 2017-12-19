@@ -43,12 +43,20 @@ module.exports = {
         return usersModel.findById(id).select('_id name email timeZones role').lean().populate('timeZones').exec()
     },
 
-    getAllUsers() {
-        return usersModel.find().select('_id name email role').lean().exec()
+    getAllUsers({limit, skip}) {
+        return usersModel.find().limit(limit).skip(skip).select('_id name email role').lean().exec()
     },
 
-    getRegularUsers() {
-        return usersModel.find({ role: ROLES.regular }).select('_id name email').lean().exec()
+    getAllUsersCount() {
+        return usersModel.find().count().exec()
+    },
+
+    getRegularUsers({limit, skip}) {
+        return usersModel.find({ role: ROLES.regular }).limit(limit).skip(skip).select('_id name email').lean().exec()
+    },
+
+    getRegularUsersCount() {
+        return usersModel.find({ role: ROLES.regular }).count().exec()
     },
 
     removeUser(id) {

@@ -4,7 +4,7 @@ const db = require('../database/db.ctrl')
 function preventRegularUsers(req, res, next) {
     const role = req.decoded.role
     if (role === ROLES.regular) return res.status(403).json('Not Authorized.');
-    else return next()
+    return next()
 }
 
 async function allowAdminAndManager(req, res, next) {

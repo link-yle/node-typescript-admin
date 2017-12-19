@@ -19,12 +19,12 @@ describe("Users endpoint", function () {
 
 
 		it("should get users successfully ", function (done) {
-			request.get('/users/')
+			request.get('/users?skip=10/')
 				.set({ 'Authorization': `Bearer ${token}` })
 				.end((err, res) => {
 					expect(res.status).toEqual(200)
-					expect(Array.isArray(res.body)).toBe(true)
-					expect(Array.isArray(res.body.timeZones)).toBe(false)
+					expect(Array.isArray(res.body.users)).toBe(true)
+					expect(Number.isInteger(res.body.count)).toBe(true)
 					done();
 				})
 		})
@@ -34,11 +34,14 @@ describe("Users endpoint", function () {
 			request.get('/users/')
 				.set({ 'Authorization': `Bearer ${token}` })
 				.end((err, res) => {
-					expect(res.status).toEqual(200)
-					expect(Array.isArray(res.body)).toBe(true)
-					request.get(`/users/${res.body[0]._id}`)
+					request.get(`/users/${res.body.users[0]._id}`)
 						.set({ 'Authorization': `Bearer ${token}` })
 						.end((err, res) => {
+							expect(res.body._id).toBeTruthy()
+							expect(res.body.name).toBeTruthy()
+							expect(res.body.email).toBeTruthy()
+							expect(res.body.timeZones).toBeTruthy()
+							expect(res.body.role).toBeTruthy()
 							expect(res.status).toBe(200)
 							done();
 						})
