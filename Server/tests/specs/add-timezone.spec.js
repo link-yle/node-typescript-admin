@@ -1,7 +1,6 @@
 const { setup } = require('../helpers/requestsSpecHelper')
 const faker = require('faker')
 let server, request
-const { adminCredentials, managerCredentials } = require('../constants/credentials')
 
 
 describe("Users endpoint", function () {

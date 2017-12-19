@@ -76,7 +76,7 @@ describe("Users endpoint", function () {
                     .set({ 'Authorization': `Bearer ${userToken}` })
                     .send(newTimeZone)
                     .end((err, res) => {
-                        expect(res.status).toEqual(400)
+                        expect(res.status).toEqual(422)
                         done();
                     })
             })

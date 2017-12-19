@@ -1,6 +1,5 @@
-
 const mongoose = require("mongoose")
-
+mongoose.Promise = Promise
 function connectToOriginalDb(){
     return mongoose.connect(process.env.mongodbTimezoneURI, { useMongoClient: true});
 }

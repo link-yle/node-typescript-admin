@@ -41,7 +41,7 @@ describe('Authentication', () => {
         process.env = env;
     });
 
-    fit("should authenticate token successfully ", function () {
+    it("should authenticate token successfully ", function () {
         const token = getToken('123', 'role')
         const req = new MockRequest(token)
         const res = new MockResponse()
@@ -51,7 +51,7 @@ describe('Authentication', () => {
     })
 
 
-    fit("should not authenticate token if secret is wrong ", function () {
+    it("should not authenticate token if secret is wrong ", function () {
         const req = new MockRequest('wrong')
         const res = new MockResponse()
         const spyNotAuthorized = spyOn(toBeSpied, 'notAuthorized')

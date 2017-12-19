@@ -2,7 +2,7 @@ const { allowAdminAndManager, allowAdminOnly, allowSelfAdminAndManager, allowSel
 const { admin, manager, regular } = require('../../src/config/rolesConstants')
 const proxyquire = require('proxyquire')
 
-fdescribe("Auth", function () {
+describe("Auth", function () {
 
     class MockRequest {
         constructor(paramsId, decodedId, role) {

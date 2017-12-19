@@ -2,8 +2,8 @@ const usersModel = require('../models/users.model')
 const ROLES = require('../config/rolesConstants')
 
 module.exports = {
-    async removeTimeZone(userId, timeZoneId) {
-        return await usersModel.findOneAndUpdate(
+    removeTimeZone(userId, timeZoneId) {
+        return usersModel.findOneAndUpdate(
             { _id: userId },
             { $pull: { timeZones: { _id: timeZoneId } } },
             { new: true })
@@ -51,8 +51,8 @@ module.exports = {
         return await usersModel.find({ role: ROLES.regular }).select('_id name email').lean().exec()
     },
 
-    async removeUser(id) {
-        return await usersModel.findByIdAndRemove(id)
+    removeUser(id) {
+        return usersModel.findByIdAndRemove(id)
     },
 
     async getUserRole(id) {

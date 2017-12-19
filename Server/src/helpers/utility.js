@@ -11,6 +11,12 @@ const notFound = (res, item) => {
     return res.status(400).json(`This ${item} is not found`)
 }
 
+const resourceNotFound = (item) => {
+    const r = new Error(`${item} not found`)
+    r.name='ResourceNotFound'
+    return r
+}
+
 module.exports = {
-     badRequest, missingData, notFound
+     badRequest, missingData, notFound, resourceNotFound
 }
