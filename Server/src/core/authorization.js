@@ -13,7 +13,7 @@ async function allowAdminAndManager(req, res, next) {
         case ROLES.regular: return res.status(403).json('Not Authorized.');
         case ROLES.admin: return next();
         case ROLES.manager:
-            const toBeAccessedRole = await db.getUserRole(req.params.id)
+            const toBeAccessedRole = await getUserRole(req.params.id, next)
             if (toBeAccessedRole === ROLES.regular) {
                 return next()
             } else {
@@ -30,7 +30,7 @@ async function allowSelfAdminAndManager(req, res, next) {
             else return res.status(403).json('Not Authorized.');
         case ROLES.admin: return next();
         case ROLES.manager:
-            const toBeAccessedRole = await db.getUserRole(req.params.id)
+            const toBeAccessedRole = await getUserRole(req.params.id, next)
             if (toBeAccessedRole === ROLES.regular) {
                 return next()
             } else {
@@ -55,6 +55,9 @@ function allowAdminOnly(req, res, next) {
     }
     else return res.status(403).json('Not Authorized.');
 }
+
+const getUserRole = async(_id, next) => await db.getUserRole(_id).catch(err=>next(err))
+
 
 module.exports = { allowAdminAndManager, allowSelfAdminAndManager, preventRegularUsers, allowSelfAndAdminOnly, allowAdminOnly }
 

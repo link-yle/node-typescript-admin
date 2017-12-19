@@ -18,28 +18,21 @@ module.exports = function setErrorHandlers(app) {
 
 
     app.use(function (req, res, next) {
-        global.log.error('eeeeeeeeeeeeeeeeeeee')
-        
-        
         var err = new Error('Not Found');
         err.status = 404;
         next(err);
     });
 
     // error handler
-    // app.use(function (err, req, res, next) {
-    //     // set locals, only providing error in development
-    //     res.locals.message = err.message;
-    //     res.locals.error = err;
+    app.use(function (err, req, res, next) {
+        // set locals, only providing error in development
+        res.locals.message = err.message;
+        res.locals.error = err;
 
-    //     // render the error page
-    //     res.status(err.status || 500);
-    //     res.render('error');
-    // });
-
-
-    app.use(function (req, res, next) {
-        return res.status(411)
+        // render the error page
+        res.status(err.status || 500);
+        res.render('error');
     });
+
 
 }
