@@ -81,7 +81,7 @@ describe("Users endpoint", function () {
 				done();
 			})
 		})
-		fit("should not have password in response", function (done) {
+		it("should not have password in response", function (done) {
 			request.post('/users/login').send(loginPayload).end((err, res) => {
 				expect(res.body.user.password).toBeFalsy()
 				done();
