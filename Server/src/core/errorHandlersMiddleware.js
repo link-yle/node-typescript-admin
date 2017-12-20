@@ -2,8 +2,9 @@ module.exports = function setErrorHandlers(app) {
     // catch 404 and forward to error handler
 
     app.use(function (err, req, res, next) {
+        if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
         if(err.name === 'ResourceNotFound')  {
-            return res.status(404).send(err.message)
+            return res.status(204).send(err.message)
         } else next(err)
 
     });
