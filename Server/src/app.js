@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors())
-app.use(`/users`, require(`./routes/users.router`))
+app.use(`/users`, require(`./routes/index`))
 
 app.use(express.static(root))
 app.use(fallback('index.html', { root: root }))

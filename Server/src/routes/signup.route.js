@@ -1,9 +1,10 @@
 
-const db = require('./add-new-user.db')
-const ROLES = require('../../config/rolesConstants')
-const { passwordRegex } = require('../../config/regexConstants')
+const db = require('../database/add-new-user.db')
+const ROLES = require('../config/rolesConstants')
+const { passwordRegex } = require('../config/regexConstants')
 const Joi = require('Joi')
-const validateRequestBody = require('../../core/input-validator')
+const validateRequestBody = require('../services/validate-request-body')
+
 
 module.exports = (req, res, next) => {
     validate(req, res, next)
@@ -21,5 +22,4 @@ const validate = (req, res, next) => {
         timeZones: Joi.array().empty()
     })
     validateRequestBody(req, res, next)
-
 }

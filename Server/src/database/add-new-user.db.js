@@ -1,4 +1,4 @@
-const usersModel = require('../../models/user.schema')
+const usersModel = require('../models/user.schema')
 
 module.exports = (payload, role) => {
     const newUser = new usersModel(payload)

@@ -1,4 +1,4 @@
-const comparePassword = require('../service/compare-password')
+const comparePassword = require('../services/compare-password')
 const usersModel = require('../models/users.model')
 
 

@@ -1,5 +1,8 @@
-const db = require('../database/add-timezone.db')
+const db = require('../database/add-record.db')
 const Joi = require('Joi')
+const validateRequestBody = require('../services/validate-request-body')
+
+
 
 module.exports =  (req, res, next)=> {
     validate(req, res, next)
@@ -13,9 +16,7 @@ const validate = (req, res, next) =>  {
         name: Joi.string().min(3).max(20).required(),
         city: Joi.string().min(3).max(20).required(),
     })
-    Joi.validate(req.body, req.schema, (err, value) => {
-        if (err) return res.status(422).json(err)
-        else return
-    });
+    validateRequestBody(req, res, next)
 }
+
 

@@ -1,10 +1,14 @@
 const { getToken } = require('../core/authentication')
-const comparePassword = require('../services')
+const comparePassword = require('../services/compare-password')
+const validateRequestBody = require('../services/validate-request-body')
+const Joi = require('Joi')
+const passwordRegex = require('../config/regexConstants').passwordRegex
+const apiResponseFactory = require('../services/api-response-factory')
 
 module.exports = (req, res, next) => {
     validate(req, res, next)
     return db.getUser(req.body.email).then(user => {
-        if (!user) return utility.resourceNotFound('user')
+        if (!user) return apiResponseFactory.resourceNotFound('user')
         return comparePassword(req.body.password, user.password).then(ok => {
             if (!ok) return res.status(401).send('Invalid credentials')
             user.password = undefined
@@ -20,13 +24,7 @@ const validate = (req, res, next) => {
         password: Joi.string().regex(passwordRegex).required(),
         email: Joi.string().email().required()
     })
-    validateSchema(req, res, next)
+    validateRequestBody(req, res, next)
 }
 
 
-module.exports =  (req, res, next) => {
-    Joi.validate(req.body, req.schema, (err, value) => {
-        if (err) return res.status(422).json(err)
-        else next()
-    });
-}

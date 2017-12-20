@@ -1,7 +1,7 @@
-const ROLES = require('../../config/rolesConstants')
-const db = require('./get-users.db')
+const ROLES = require('../config/rolesConstants')
+const db = require('../database/get-users.db')
 
-module.exportss = (req, res, next) => {
+module.exports = (req, res, next) => {
     let promise
     const query = { limit: 10, skip: parseInt(req.query.skip) }
     if (req.decoded.role === ROLES.manager) {

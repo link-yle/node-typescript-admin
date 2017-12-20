@@ -1,4 +1,4 @@
-const usersModel = require('../../models/users.model')
+const usersModel = require('../models/users.model')
 
 module.exports = (userId, timeZoneId) => {
     return usersModel.findOneAndUpdate(

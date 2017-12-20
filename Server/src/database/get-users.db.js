@@ -1,5 +1,5 @@
-const usersModel = require('../../models/users.model')
-const ROLES = require('../../config/rolesConstants')
+const usersModel = require('../models/users.model')
+const ROLES = require('../config/rolesConstants')
 
 module.exports = {
     getAllUsers({limit, skip}) {
