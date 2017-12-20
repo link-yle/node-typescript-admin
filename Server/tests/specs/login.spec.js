@@ -38,6 +38,7 @@ describe("Users endpoint", function () {
 				done();
 			})
 		})
+
 		it("should have token", function (done) {
 			request.post('/users/login').send(loginPayload).end((err, res) => {
 				expect(res.body.token).toBeTruthy()
@@ -80,7 +81,7 @@ describe("Users endpoint", function () {
 				done();
 			})
 		})
-		it("should not have password", function (done) {
+		fit("should not have password in response", function (done) {
 			request.post('/users/login').send(loginPayload).end((err, res) => {
 				expect(res.body.user.password).toBeFalsy()
 				done();
@@ -89,7 +90,7 @@ describe("Users endpoint", function () {
 		it("should not login in case password is incorrect", function (done) {
 			loginPayload.password = '12236565rew'
 			request.post('/users/login').send(loginPayload).end((err, res) => {
-				expect(res.status).toEqual(403)
+				expect(res.status).toEqual(401)
 				done();
 			})
 		})

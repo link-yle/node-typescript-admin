@@ -1,31 +1,28 @@
 
 const utility = require('../helpers/utility.js')
-const usersModel = require('../models/users.model')
 const { getToken } = require('../core/authentication')
 const ROLES = require('../config/rolesConstants')
 const db = require('../database/db.ctrl')
+const R = require('ramda')
 process.on('unhandledRejection', up => { throw up })
+const bcrypt = require('bcrypt')
+
 
 function signup(req, res, next) {
-    return db.addNewUser(req.body, ROLES.regular).then(added => {
-        delete added.password
-        return res.status(200).json(added)
-    }).catch(e => next(e))
+    return db.addNewUser(req.body, ROLES.regular).then(added => res.status(200).json(R.dissoc('password', added))).catch(e => next(e))
 }
 
 
 
-function login(req, res) {
-    return usersModel.findOne({ email: req.body.email }, (err, user) => {
-        if (err) throw err;
-        if (!user) return utility.notFound(res, 'user')
-        user.comparePassword(req.body.password, (err, isMatch) => {
-            if (err) return res.status(400).json('An error occurred while trying to check your password')
-            if (!isMatch) return res.status(403).json('Wrong password')
-            const token = getToken(user._id, user.role, process.env.secret)
+
+function login(req, res, next) {
+    return db.getUser(req.body.email).then(user => {
+        if (!user) return utility.resourceNotFound('user')
+        return comparePassword( req.body.password, user.password).then(ok => {
+            if (!ok) return res.status(401).send('Invalid credentials')
             user.password = undefined
-            return res.status(200).json({ user, token })
-        });
+            return res.status(200).send({user: user, token: getToken(user._id, user.role)})
+        }).catch(err => next(err))
     })
 }
 
@@ -37,16 +34,14 @@ function findUserAndUpdateInfo(req, res, next) {
 }
 
 function findUserAndUpdateRole(req, res, next) {
-    return db.updateRole(req.params.id, req.body.role).then(user => {
-        if (!user) return utility.resourceNotFound('user')
-        return res.status(200).json(user)
-    }).catch(err => next(err))
+    return db.updateRole(req.params.id, req.body.role).then(user => user ? res.status(200).json(user) : utility.resourceNotFound('user'))
+        .catch(err => next(err))
 
 }
 
 
 function getUserDetails(req, res, next) {
-    return db.getUserDetails(req.params.id).then(x=>res.status(200).json(x)).catch(err => next(err))
+    return db.getUserDetails(req.params.id).then(x => res.status(200).json(x)).catch(err => next(err))
 }
 
 function getUsers(req, res, next) {
@@ -61,9 +56,10 @@ function getUsers(req, res, next) {
 }
 
 function removeUser(req, res, next) {
-    return db.removeUser(req.params.id).then(()=>res.status(200).json("Ok")).catch(err => next(err))
+    return db.removeUser(req.params.id).then(() => res.status(200).json("Ok")).catch(err => next(err))
 }
 
-
+const comparePassword = (toBeExaminedPassword, realPassword) => new Promise((res, rej) =>
+    bcrypt.compare(toBeExaminedPassword, realPassword, (err, isMatch) => err ? rej(err) : res(isMatch)))
 
 module.exports = { signup, login, getUserDetails, removeUser, getUsers, findUserAndUpdateRole, findUserAndUpdateInfo }

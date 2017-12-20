@@ -57,7 +57,7 @@ describe("Users endpoint", function () {
 				request.delete('/users/' + 53)
 				.set({ 'Authorization': `Bearer ${adminToken}` })		
 				.end((err, res) => {
-					expect(res.status).toEqual(400)
+					expect(res.status).toEqual(422)
 					done();
 				})
 			})

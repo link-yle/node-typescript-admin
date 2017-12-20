@@ -24,6 +24,10 @@ module.exports = {
         )
     },
 
+    getUser(email) {
+        return usersModel.findOne({ email }).exec()
+    },
+
     addNewUser(payload, role) {
         const newUser = new usersModel(payload)
         newUser.timeZones = []
