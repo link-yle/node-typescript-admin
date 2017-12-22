@@ -2,7 +2,7 @@
 const validateRequestBody = require('../services/validate-request-body')
 const Joi = require('Joi')
 const passwordRegex = require('../config/regexConstants').passwordRegex
-const db = require('../database/update-passwrd-by-user-id.db')
+const db = require('../data-layer/update-passwrd-by-user-id.db')
 
 module.exports = async (req, res, next) =>{
     validate(req, res)

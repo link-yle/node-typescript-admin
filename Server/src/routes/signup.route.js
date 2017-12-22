@@ -1,5 +1,5 @@
 
-const db = require('../database/add-new-user.db')
+const db = require('../data-layer/add-new-user.db')
 const ROLES = require('../config/rolesConstants')
 const { passwordRegex } = require('../config/regexConstants')
 const Joi = require('Joi')

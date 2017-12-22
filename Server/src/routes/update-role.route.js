@@ -1,7 +1,7 @@
 const ROLES = require('../config/rolesConstants')
 const apiResponseFactory = require('../services/api-response-factory')
 const validateRequestBody = require('../services/validate-request-body')
-const db = require('../database/update-role.db')
+const db = require('../data-layer/update-role.db')
 const Joi = require('Joi')
 
 module.exports = (req, res, next) => {

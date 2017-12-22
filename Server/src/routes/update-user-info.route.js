@@ -1,4 +1,4 @@
-const db = require('../database/update-user-info.db')
+const db = require('../data-layer/update-user-info.db')
 const Joi = require('Joi')
 const validateRequestBody = require('../services/validate-request-body')
 

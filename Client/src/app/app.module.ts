@@ -25,6 +25,7 @@ import { LoginComponent } from './routes/login/login.component';
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';
 import { UsersComponent } from './routes/users-list/users.component';
 import { AuthGuardService } from './shared/services/auth.guard.service';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AuthGuardService } from './shared/services/auth.guard.service';
     AppRoutingModule,
     BrowserModule,
     SharedModule,
+    PaginationModule.forRoot()
   ],
   providers: [
     AuthService,

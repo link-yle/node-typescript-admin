@@ -120,7 +120,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', manager)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
         })
@@ -131,7 +131,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '123', regular)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
@@ -141,7 +141,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '13', regular)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
@@ -151,7 +151,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '13', manager)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(manager)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
@@ -162,7 +162,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '13', manager)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(admin)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
@@ -191,7 +191,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', manager)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
         })
@@ -201,7 +201,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', manager)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(manager)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
@@ -212,7 +212,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '1253', manager)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(admin)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })
@@ -223,17 +223,17 @@ describe("Auth", function () {
             const req = new MockRequest('123', '1253', admin)
 
             let dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
-            let auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            let auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyAuthorized).toHaveBeenCalled()
 
             dbStub = { getUserRole: id => new Promise((res, rej) => res(manager)) }
-            auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyAuthorized).toHaveBeenCalledTimes(2)
 
             dbStub = { getUserRole: id => new Promise((res, rej) => res(admin)) }
-            auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyAuthorized).toHaveBeenCalledTimes(3)
         })
@@ -243,7 +243,7 @@ describe("Auth", function () {
             const res = new MockResponse()
             const req = new MockRequest('123', '123', regular)
             const dbStub = { getUserRole: id => new Promise((res, rej) => res(regular)) }
-            const auth = proxyquire('../../src/core/authorization', { '../database/db.ctrl': dbStub });
+            const auth = proxyquire('../../src/core/authorization', { '../data-layer/db.ctrl': dbStub });
             await auth.allowAdminAndManager(req, res, next)
             expect(spyNotAuthorized).toHaveBeenCalled()
         })

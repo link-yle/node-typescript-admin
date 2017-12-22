@@ -1,5 +1,5 @@
 const apiResponseFactory = require('../services/api-response-factory')
-const db = require('../database/remove-record.db')
+const db = require('../data-layer/remove-record.db')
 
 module.exports = (req, res, next) => {
     return db.removeTimeZone(req.params.id, req.params.timeZoneId)

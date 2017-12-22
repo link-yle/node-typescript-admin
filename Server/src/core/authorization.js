@@ -1,5 +1,5 @@
 const ROLES = require('../config/rolesConstants')
-const getUserRoleByIdFromDb =  require('../database/get-user-role-by-id')
+const getUserRoleByIdFromDb =  require('../data-layer/get-user-role-by-id')
     
 
 
