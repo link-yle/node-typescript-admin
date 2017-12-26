@@ -2,7 +2,6 @@
 const db = require('../data-layer/update-passwrd-by-user-id.db')
 
 module.exports = async (req, res, next) =>{
-    validate(req, res)
     try{
         await db(req.params.id, req.body.oldPassword, req.body.newPassword)
         return res.status(200).send('Password updated')

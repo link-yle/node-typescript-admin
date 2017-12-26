@@ -15,7 +15,7 @@ module.exports = app => {
         else if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
         else if (err.name === 'ResourceNotFound') {
             return res.status(204).send(err.message)
-        } else next(err)
+        } else return next(err)
 
     });
 
@@ -24,18 +24,18 @@ module.exports = app => {
             if (err instanceof mongoose.Error.CastError) {
                 return res.status(422).send('Please send proper input')
             }
-            else res.status(500).send('Internal Server Error')
+            else return res.status(500).send('Internal Server Error')
 
-        } else next(err)
+        } else return next(err)
 
     });
 
 
 
     app.use(function (req, res, next) {
-        var err = new Error('Not Found');
+        const err = new Error('Not Found');
         err.status = 404;
-        next(err);
+        return next(err);
     });
 
 
@@ -47,7 +47,7 @@ module.exports = app => {
 
         // render the error page
         res.status(err.status || 500);
-        res.render('error');
+        return res.render('error');
     });
 
 

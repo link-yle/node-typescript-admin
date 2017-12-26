@@ -2,6 +2,7 @@ const { setup } = require('../helpers/requestsSpecHelper')
 const faker = require('faker')
 let server, request
 const { adminCredentials, managerCredentials} = require('../constants/credentials')
+process.on('unhandledRejection', up => { throw up })
 
 
 describe("Users endpoint", function () {
@@ -67,6 +68,12 @@ describe("Users endpoint", function () {
 
 
 		describe("Acting as a manager", function () {
+			const newUser = {
+				name: faker.name.firstName(),
+				email: faker.internet.email(),
+				timeZones: [],
+				password: '456565654ds'
+			}
 			beforeEach((done) => {
 				request.post('/users').send(newUser).end((err, res) => {
 					id = res.body._id
@@ -84,7 +91,6 @@ describe("Users endpoint", function () {
 				request.delete('/users/' + id)
 				.set({ 'Authorization': `Bearer ${managerToken}` })				
 				.end((err, res) => {
-
 					expect(res.status).toEqual(200)
 					done();
 				})
@@ -100,7 +106,7 @@ describe("Users endpoint", function () {
 				request.delete('/users/' + 53)
 				.set({ 'Authorization': `Bearer ${managerToken}` })		
 				.end((err, res) => {
-					expect(res.status).toEqual(400)
+					expect(res.status).toEqual(422)
 					done();
 				})
 			})
