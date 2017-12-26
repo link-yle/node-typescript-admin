@@ -46,13 +46,11 @@ describe("Users endpoint", function () {
             gmtTimeDifference: 5
         }
          updateRecord(id, timeZoneId, updatedRecord).then(x=>{
-            global.log.error(x)
             done()
             
         })
         
         const u = await getUserRecordsById(id)
-        global.log.error(u)
         
             
         // expect(updated.timeZones[0].gmtTimeDifference).toBe(5)

@@ -35,8 +35,6 @@ describe("Users endpoint", function () {
         try{
             await updatePassword('wrong id', payload.password, '1234567b')
         }  catch(e) {
-            global.log.error(e)
-            
             done()
         }
     })
@@ -45,7 +43,6 @@ describe("Users endpoint", function () {
         try{
             await updatePassword(id, 'wrong', '1234567b')
         }  catch(e) {
-            global.log.error(e)
             done()
         }
     })

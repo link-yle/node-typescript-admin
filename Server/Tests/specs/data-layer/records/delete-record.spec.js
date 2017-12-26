@@ -40,13 +40,9 @@ describe("Users endpoint", function () {
     })
 
     it("should delete record ", async function (done) {      
-
-        
         await deleteRecord(id, timeZoneId)
-        global.log.error(await getUserRecordsById(id))
         done()
-        
-        
+
             
         // expect(updated.timeZones[0].gmtTimeDifference).toBe(5)
         // expect(updated.timeZones[0].name).toBe(updatedRecord.name)

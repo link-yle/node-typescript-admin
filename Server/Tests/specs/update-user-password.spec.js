@@ -48,29 +48,28 @@ describe("Users endpoint", function () {
             .send(updatePasswordPayload)
             .end((err, res) => {
                 expect(res.status).toBe(200)
-                global.log.error(res.body)
-                
-                done();
+                request.post('/users/login').send(loginPayload).end((err, res) => {
+                    expect(res.status).toBe(401)
+                    request.post('/users/login').send({email: loginPayload.email, password: updatePasswordPayload.newPassword}).end((err, res) => {
+                        expect(res.status).toBe(200)
+                        done();
+                    })
+                })
             })
         })
+
         it("should return 404 if no id is provided", function (done) {
-            request.put(`/users/info`)
+            request.put(`/users/password`)
             .set({'Authorization': `Bearer ${token}`})
-            .send(updatedInfoPayload)
+            .send(updatePasswordPayload)
             .end((err, res) => {
                 expect(res.status).toBe(404)
                 done();
             })
         })
-        it("should not allow other regular users to update", function (done) {
-            request.put(`/users/${user._id}/info`)
-            .set({'Authorization': `Bearer x${token}`})
-            .send(updatedInfoPayload)
-            .end((err, res) => {
-                expect(res.status).toBe(401)
-                done();
-            })
-        })
+
+        
+
 
     })
 })
