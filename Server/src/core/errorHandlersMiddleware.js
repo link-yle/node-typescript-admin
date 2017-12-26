@@ -18,28 +18,27 @@ module.exports = app => {
 
     });
 
-    app.use(function (err, req, res, next) {
-        if(err.name = 'CastError')  {
-            return res.status(500).send(err.stack)
-            
-            return res.status(422).send('Please send proper input')
-        } else next(err)
+    // app.use(function (err, req, res, next) {
+    //     if(err.name = 'CastError')  {
+    //         return res.status(422).send('Please send proper input')
+    //     } else next(err)
 
-    });
+    // });
 
 
 
     app.use(function (req, res, next) {
         var err = new Error('Not Found');
-        err.status = 405;
+        err.status = 404;
         next(err);
     });
 
+    
     // error handler
     app.use(function (err, req, res, next) {
         // set locals, only providing error in development
         res.locals.message = err.message;
-        res.locals.error = err;
+        res.locals.error = req.app.get('env') === 'development' ? err : {};
 
         // render the error page
         res.status(err.status || 500);
