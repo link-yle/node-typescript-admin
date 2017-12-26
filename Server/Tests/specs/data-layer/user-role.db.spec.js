@@ -16,28 +16,22 @@ describe("Users endpoint", function () {
         timeZones: [],
         password: '1234567a'
     }
-    let id 
-    beforeAll((done) => {
-        addNewUser(payload, 'regular').then(x => {
-            expect(x.name).toBe(payload.name)
-            expect(x.email).toBe(payload.email)
-            id = x._id
-            done()
-        })
+    let id
+    beforeAll(async (done) => {
+        const user = await addNewUser(payload, 'regular')
+        expect(user.name).toBe(payload.name)
+        expect(user.email).toBe(payload.email)
+        id = user._id
+        done()
     })
 
- 
 
-    it("should Update and get user role ", function (done) {
-        const newRole =  'manager'
-        updateUserRole(id, newRole ).then(x=>{
-            expect(x).toBeTruthy()
-            getUserRoleById(id).then(x=>{
-                expect(x).toBe(newRole)
-                done()
-            })
-            
-        })
+
+    it("should Update and get user role ", async function (done) {
+        const newRole = 'manager'
+        expect(await updateUserRole(id, newRole)).toBeTruthy()
+        expect(await getUserRoleById(id)).toBe(newRole)
+        done()
     })
 
 
