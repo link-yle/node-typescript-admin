@@ -36,7 +36,7 @@ function allowAdminAndManager(req, res, next) {
 function allowSelfAdminAndManager(req, res, next) {
     const role = req.decoded.role
     switch (role) {
-        case ROLES.regular: (req.decoded._id === req.params.id) ? next() : res.status(403).json('Not Authorized.');
+        case ROLES.regular: return   (req.decoded._id === req.params.id) ? next() : res.status(403).json('Not Authorized.');
         case ROLES.admin: return next();
         case ROLES.manager: return allowOnlyRegularUsersToAccessed(req, res, next)
     }
