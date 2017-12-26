@@ -14,7 +14,7 @@ const validateLoginPayload = require('./login.validate')
 const validateSignupPayload = require('./signup.validate')
 const validateUpdatePasswordPayload = require('./update-password.validate')
 const validateUpdateRolePayload = require('./update-role.validate')
-const validateUpdateInfoPayload = require('./update-user-info.route')
+const validateUpdateInfoPayload = require('./update-user-info.validate')
 const validateUpdateRecordPayload = require('./update-record.validate')
 const validateAddRecordPayload = require('./add-record.validate')
 
