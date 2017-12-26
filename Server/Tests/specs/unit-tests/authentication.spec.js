@@ -1,4 +1,4 @@
-const { getToken, verifyUser } = require('../../src/core/authentication')
+const { getToken, verifyUser } = require('../../../src/core/authentication')
 const env = Object.assign({}, process.env);
 
 

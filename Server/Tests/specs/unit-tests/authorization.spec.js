@@ -1,5 +1,5 @@
-const { allowAdminAndManager, allowAdminOnly, allowSelfAdminAndManager, allowSelfAndAdminOnly, preventRegularUsers } = require('../../src/core/authorization')
-const { admin, manager, regular } = require('../../src/config/rolesConstants')
+const { allowAdminAndManager, allowAdminOnly, allowSelfAdminAndManager, allowSelfAndAdminOnly, preventRegularUsers } = require('../../../src/core/authorization')
+const { admin, manager, regular } = require('../../../src/config/rolesConstants')
 const proxyquire = require('proxyquire')
 
 describe("Auth", function () {

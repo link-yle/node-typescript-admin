@@ -11,7 +11,7 @@ describe("Users endpoint", function () {
     afterAll(() => {
         server.close()
     })
-    describe("Add timezone", function () {
+    describe("Add record", function () {
 
         const newUser = {
             name: faker.name.firstName(),

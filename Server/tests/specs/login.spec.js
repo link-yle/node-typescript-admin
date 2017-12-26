@@ -34,7 +34,18 @@ describe("Users endpoint", function () {
 
 		it("should login", function (done) {
 			request.post('/users/login').send(loginPayload).end((err, res) => {
+				expect(err).toBeFalsy()
 				expect(res.status).toEqual(200)
+				done();
+			})
+		})
+
+		it("should not login with wrong credentials", function (done) {
+			request.post('/users/login').send({
+				email: 'randomEmail@test33.com',
+				password: '454ds65ds8ew'
+			}).end((err, res) => {
+				expect(res.status).toBe(401)
 				done();
 			})
 		})

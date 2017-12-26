@@ -53,7 +53,6 @@ describe("Users endpoint", function () {
             it("should delete successfully ", function (done) {
                 request.delete(`/users/${id}/timezones/${timeZoneId}`)
                     .set({ 'Authorization': `Bearer ${userToken}` })
-                    .send(newTimeZone)
                     .end((err, res) => {
                         expect(res.status).toEqual(200)
                         expect(res.body.timeZones.length).toEqual(0)
@@ -64,7 +63,6 @@ describe("Users endpoint", function () {
             it("should respond by 404 error when id is not provided ", function (done) {
                 request.delete(`/users/${id}/timezones/`)
                     .set({ 'Authorization': `Bearer ${userToken}` })
-                    .send(newTimeZone)
                     .end((err, res) => {
                         expect(res.status).toEqual(404)
                         done();
@@ -74,7 +72,6 @@ describe("Users endpoint", function () {
             it("should respond by 400 error when wrong id is provided ", function (done) {
                 request.delete(`/users/${id}/timezones/1`)
                     .set({ 'Authorization': `Bearer ${userToken}` })
-                    .send(newTimeZone)
                     .end((err, res) => {
                         expect(res.status).toEqual(422)
                         done();
