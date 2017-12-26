@@ -42,7 +42,7 @@ describe("Users endpoint", function () {
 
 
 
-        fit("should update", function (done) {
+        it("should update", function (done) {
             request.put(`/users/${id}/password`)
             .set({'Authorization': `Bearer ${token}`})
             .send(updatePasswordPayload)
