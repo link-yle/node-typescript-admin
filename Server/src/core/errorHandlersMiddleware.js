@@ -1,9 +1,18 @@
-module.exports = function setErrorHandlers(app) {
+module.exports = app => {
     // catch 404 and forward to error handler
 
     app.use(function (err, req, res, next) {
-        if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
-        if(err.name === 'ResourceNotFound')  {
+        if(err.isJoi){
+            err.isJoi = undefined
+            err._object = undefined
+            return res.status(422).send(err).end()
+        }
+        if(err.nF) {
+            return res.status(404).send({error: `${err.nF} is not found in our system`})
+        }
+                
+        else if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
+        else if(err.name === 'ResourceNotFound')  {
             return res.status(204).send(err.message)
         } else next(err)
 
@@ -11,6 +20,8 @@ module.exports = function setErrorHandlers(app) {
 
     app.use(function (err, req, res, next) {
         if(err.name = 'CastError')  {
+            return res.status(500).send(err.stack)
+            
             return res.status(422).send('Please send proper input')
         } else next(err)
 
@@ -20,7 +31,7 @@ module.exports = function setErrorHandlers(app) {
 
     app.use(function (req, res, next) {
         var err = new Error('Not Found');
-        err.status = 404;
+        err.status = 405;
         next(err);
     });
 

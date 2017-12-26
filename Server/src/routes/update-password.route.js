@@ -1,7 +1,4 @@
 
-const validateRequestBody = require('../services/validate-request-body')
-const Joi = require('Joi')
-const passwordRegex = require('../config/regexConstants').passwordRegex
 const db = require('../data-layer/update-passwrd-by-user-id.db')
 
 module.exports = async (req, res, next) =>{
@@ -18,10 +15,3 @@ module.exports = async (req, res, next) =>{
 
 
 
-function validate(req, res, next) {
-    req.schema = Joi.object().keys({
-        oldPassword: Joi.string().regex(passwordRegex).required(),
-        newPassword: Joi.string().regex(passwordRegex).required(),
-    })
-    validateRequestBody(req, res, next)
-}

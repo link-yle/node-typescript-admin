@@ -26,7 +26,7 @@ describe("Users endpoint", function () {
         })
     })
 
-    fit("should remove user ", async function (done) {
+    it("should remove user ", async function (done) {
         const user = await getUser(payload.email)
         expect(user).toBeTruthy()
         await removeUser(id)

@@ -10,12 +10,12 @@ const removeRecord = require('./remove-record.route')
 const updateRecord = require('./update-record.route')
 const updatePassword = require('./update-password.route')
 const updateUserRole = require('./update-role.route')
-
+const validateLoginPayload = require('./login.validate')
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
 
 router.post('/', signup)
-router.post('/login', login)
+router.post('/login', validateLoginPayload,  login)
 
 router.put('/:id/info', verifyUser,  Authorize.allowSelfAdminAndManager,   updateUserInfo)
 router.delete('/:id', verifyUser, Authorize.allowAdminAndManager, removeUser)

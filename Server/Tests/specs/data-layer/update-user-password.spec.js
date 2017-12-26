@@ -31,7 +31,7 @@ describe("Users endpoint", function () {
         done()
     })
 
-    fit("should throw error in case of wrong id ", async function (done) {
+    it("should throw error in case of wrong id ", async function (done) {
         try{
             await updatePassword('wrong id', payload.password, '1234567b')
         }  catch(e) {

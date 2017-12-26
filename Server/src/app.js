@@ -7,6 +7,7 @@ const winstonLogger = require('./core/logger')
 const cors = require('cors')
 const fallback = require('express-history-api-fallback')
 const express = require('express')
+const routes = require(`./routes/index`)
 const root = __dirname + '/public'
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors())
-app.use(`/users`, require(`./routes/index`))
+app.use('/users', routes)
 
 app.use(express.static(root))
 app.use(fallback('index.html', { root: root }))
