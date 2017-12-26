@@ -17,9 +17,8 @@ describe("Users endpoint", function () {
 			password: '456565654ds'
 		}
 
-		fit("should add user", function (done) {
+		it("should add user", function (done) {
 			request.post('/users').send(newUser).end((err, res) => {
-				global.log.error(res.body)
 				
 				// expect(res.status).toEqual(200)
 				// expect(res.body.name).toBe(newUser.name)
