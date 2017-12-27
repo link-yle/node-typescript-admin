@@ -34,6 +34,7 @@
     "minimist": "^1.2.0",
     "mongoose": "^4.11.7",
     "morgan": "~1.8.1",
+    "nodemailer": "^4.4.1",
     "proxyquire": "^1.8.0",
     "ramda": "^0.25.0",
     "socket.io": "^1.7.4",
