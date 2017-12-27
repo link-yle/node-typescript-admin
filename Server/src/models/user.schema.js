@@ -14,6 +14,7 @@ const usersSchema = new Schema({
     password: { type: String, required: true },
     role: { type: String, enum: roles_enum, required: true, default: 'regular' },
     timeZones: [timeZoneSchema],
+    recoveryCode: String,
 });
 
 module.exports = usersSchema

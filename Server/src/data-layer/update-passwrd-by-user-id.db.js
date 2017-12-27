@@ -4,7 +4,11 @@ const usersModel = require('../models/users.model')
 
 module.exports = async (_id, oldPassword, newPassword) => {
     const user = await usersModel.findOne({ _id }).catch(err => { throw err })
-    if (!user) throw Error('User not found')
+    if (!user) {
+        const e = new Error()
+        e.name = 'NoUserFound'
+        throw e
+    }
     if (oldPassword) {
         const ok = await comparePassword(oldPassword, user.password).catch(err => { throw err })
         if (!ok) throw Error('Wrong password')
