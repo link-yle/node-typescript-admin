@@ -12,9 +12,7 @@ module.exports = app => {
         }
 
         else if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
-        else if (err.name === 'ResourceNotFound') {
-            return res.status(204).send(err.message)
-        } else return next(err)
+        else return next(err)
 
     });
 
