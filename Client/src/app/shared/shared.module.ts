@@ -20,6 +20,8 @@ import { EmailInputComponent } from './components/UI/email-input/email-input.com
 import { PasswordInputComponent } from './components/UI/password-input/password-input.component';
 import { CustomInputComponent } from './components/UI/custom-input/custom-input.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -30,6 +32,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     AlertModule.forRoot(),
     HttpModule,
     RouterModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   exports: [
@@ -50,7 +54,9 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     SubmitButtonComponent,
     EmailInputComponent,
     PasswordInputComponent,
-    CustomInputComponent
+    CustomInputComponent,
+    // MatSnackBarModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     NavComponent,

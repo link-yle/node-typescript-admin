@@ -11,3 +11,12 @@ body{
     height: auto !important; /* This is a hack to make IE6 fix itself to a set height */
     height: 600px; 
 }
+
+.successAlert{
+    background: green !important
+}
+
+.errorAlert{
+    background: red !important
+}
+

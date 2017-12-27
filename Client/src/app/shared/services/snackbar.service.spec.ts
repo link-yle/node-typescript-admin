@@ -4,16 +4,16 @@ import { MdSnackBar } from '@angular/material';
 
 describe('Service: Snack bar Service', () => {
     let service: SnackBarService;
-    const mockMdSnackBar = {
-        open(message, actionText, config) {
+    let mockMdSnackBar = {
+        open(message, actionText, config){
 
         }
     }
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
-                SnackBarService,
-                { provide: MdSnackBar, useValue: mockMdSnackBar }
+               SnackBarService,
+               {provide: MdSnackBar, useValue: mockMdSnackBar}
             ]
         });
         const testbed = getTestBed();
@@ -21,57 +21,57 @@ describe('Service: Snack bar Service', () => {
     });
 
 
-
+ 
     it('should emit error snack bar when message argumnet is not provided', () => {
-        service.emitErrorSnackBar('error')
+        service.emitErrorSnackBar()
     });
     it('should emit error snack bar when message argumnet provided', () => {
-        service.emitErrorSnackBar('Error!')
+        service.emitErrorSnackBar("Error!")
     });
     it('should emit error snack bar when action text is not provided', () => {
         service.emitErrorSnackBar(null)
     });
     it('should emit error snack bar when action text is provided', () => {
-        service.emitErrorSnackBar(null, 'Ok')
+        service.emitErrorSnackBar(null, "Ok")
     });
 
     it('should emit error snack bar when config is provided', () => {
-        service.emitErrorSnackBar(null, null, { extraClasses: ['ds', 'fd'], duration: 500 })
+        service.emitErrorSnackBar(null, null, {extraClasses:['ds', 'fd'], duration:500})
     });
     it('should emit error snack bar when config is not provided', () => {
         service.emitErrorSnackBar(null, null)
     });
 
+    
 
 
 
-
-    it('should emit Success snack bar when message argumnet is not provided', () => {
+     it('should emit Success snack bar when message argumnet is not provided', () => {
         service.emitSuccessSnackBar()
     });
     it('should emit Success snack bar when message argumnet provided', () => {
-        service.emitSuccessSnackBar('Success!')
+        service.emitSuccessSnackBar("Success!")
     });
     it('should emit Success snack bar when action text is not provided', () => {
         service.emitSuccessSnackBar(null)
     });
     it('should emit Success snack bar when action text is provided', () => {
-        service.emitSuccessSnackBar(null, 'Ok')
+        service.emitSuccessSnackBar(null, "Ok")
     });
 
     it('should save location of map data points if user data is available', () => {
         service.emitSuccessSnackBar()
+         
+     });
 
-    });
-
-    it('should emit Success snack bar when config is provided', () => {
-        service.emitSuccessSnackBar(null, null, { extraClasses: ['ds', 'fd'], duration: 500 })
+     it('should emit Success snack bar when config is provided', () => {
+        service.emitSuccessSnackBar(null, null, {extraClasses:['ds', 'fd'], duration:500})
     });
     it('should emit Success snack bar when config is not provided', () => {
         service.emitSuccessSnackBar(null, null)
     });
+   
 
 
 
-
-});
+ });

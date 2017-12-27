@@ -53,7 +53,7 @@ import { ActivationComponent } from './routes/activation/activation.component';
     AppRoutingModule,
     BrowserModule,
     SharedModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
   ],
   providers: [
     AuthService,
@@ -64,8 +64,7 @@ import { ActivationComponent } from './routes/activation/activation.component';
     DataService,
     AdminClaimsService,
     AuthGuardService,
-    PublicInfoService
-
+    PublicInfoService,
   ],
   bootstrap: [AppComponent]
 })

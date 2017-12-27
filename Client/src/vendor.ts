@@ -15,4 +15,8 @@ import 'rxjs/add/observable/of'
 import 'rxjs/add/observable/throw'
 import 'joi'
 import 'ngx-bootstrap/alert';
+import { MatSnackBar, MatSnackBarConfig, MatSnackBarModule } from '@angular/material';
+import '@angular/cdk'
+import 'hammerjs';
+
 
