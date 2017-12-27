@@ -32,8 +32,11 @@ router.get('/:id', verifyUser, Authorize.allowSelfAndAdminOnly, getUserDetailsIn
 router.post('/:id/timezones', verifyUser, validateAddRecordPayload, Authorize.allowSelfAndAdminOnly, addRecord)
 router.delete('/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
 router.put('/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecordPayload,  Authorize.allowSelfAndAdminOnly, updateRecord)
+router.put('/:id/password', verifyUser, validateUpdatePasswordPayload, Authorize.allowSelfAdminAndManager, updatePassword)
 
-router.put('/:id/password', verifyUser, validateUpdatePasswordPayload, Authorize.allowSelfAndAdminOnly, updatePassword)
+
+
+// router.post()
 
 router.patch('/:id/role', verifyUser, validateUpdateRolePayload, Authorize.allowAdminOnly, updateUserRole)
 

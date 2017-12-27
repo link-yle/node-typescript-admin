@@ -39,7 +39,7 @@ describe("Users endpoint", function () {
         }
     })
 
-    it("should throw wrong password ", async function (done) {
+    it("should throw error when using wrong password ", async function (done) {
         try{
             await updatePassword(id, 'wrong', '1234567b')
         }  catch(e) {
