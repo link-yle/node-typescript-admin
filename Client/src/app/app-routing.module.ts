@@ -21,12 +21,15 @@ import { EmptyComponent } from './routes/empty/empty.component';
 import { LoginLayoutComponent } from './shared/components/layout/login-layout/login-layout.component';
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
 import { ActivationComponent } from './routes/activation/activation.component';
+import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-signup-securely/success-after-signup-securely.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
         { path: '', component: LoginComponent },
         { path: 'signup', component: SignupComponent },
         { path: 'activation', component: ActivationComponent },
+        { path: 'success', component: SuccessAfterSignupSecurelyComponent },
+
     ] },
     {
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [

@@ -27,23 +27,23 @@ const signupSecurely = require('./signup-secure')
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
 
-router.post('/', validateSignupPayload, signup)
-router.post('/secure', validateSignupPayload, signupSecurely)
-router.post('/login', validateLoginPayload, login)
+router.post('users/', validateSignupPayload, signup)
+router.post('users/secure', validateSignupPayload, signupSecurely)
+router.post('users/login', validateLoginPayload, login)
 router.get('/activation', validateVerifyActivationCodePayload, verifyActivationCode)
 
-router.get('/recovery_code/:email', validateSendMeRecoveryCodePayload, sendMeRecoveryCode)
-router.post('/recovery_code', validateUpdatePasswordByRecoveryCodePayload, updatePasswordByRecoveryCode)
+router.get('users/recovery_code/:email', validateSendMeRecoveryCodePayload, sendMeRecoveryCode)
+router.post('users/recovery_code', validateUpdatePasswordByRecoveryCodePayload, updatePasswordByRecoveryCode)
 
-router.put('/:id/info', verifyUser, validateUpdateInfoPayload, Authorize.allowSelfAdminAndManager, updateUserInfo)
-router.delete('/:id', verifyUser, Authorize.allowAdminAndManager, removeUser)
-router.get('/', verifyUser, Authorize.preventRegularUsers, getUsers)
-router.get('/:id', verifyUser, Authorize.allowSelfAndAdminOnly, getUserDetailsIncludingRecords)
+router.put('users/:id/info', verifyUser, validateUpdateInfoPayload, Authorize.allowSelfAdminAndManager, updateUserInfo)
+router.delete('users/:id', verifyUser, Authorize.allowAdminAndManager, removeUser)
+router.get('users/', verifyUser, Authorize.preventRegularUsers, getUsers)
+router.get('users/:id', verifyUser, Authorize.allowSelfAndAdminOnly, getUserDetailsIncludingRecords)
 
-router.post('/:id/timezones', verifyUser, validateAddRecordPayload, Authorize.allowSelfAndAdminOnly, addRecord)
-router.delete('/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
-router.put('/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecordPayload, Authorize.allowSelfAndAdminOnly, updateRecord)
-router.put('/:id/password', verifyUser, validateUpdatePasswordPayload, Authorize.allowSelfAdminAndManager, updatePassword)
+router.post('users/:id/timezones', verifyUser, validateAddRecordPayload, Authorize.allowSelfAndAdminOnly, addRecord)
+router.delete('users/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
+router.put('users/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecordPayload, Authorize.allowSelfAndAdminOnly, updateRecord)
+router.put('users/:id/password', verifyUser, validateUpdatePasswordPayload, Authorize.allowSelfAdminAndManager, updatePassword)
 
 
 

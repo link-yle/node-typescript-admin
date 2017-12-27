@@ -18,7 +18,7 @@ function getToken(_id, role) {
             next();
         });
     }
-    else return res.status(401).json('No token provided for admin.'); 
+    else return res.status(401).json('No token provided.'); 
 }
 
 

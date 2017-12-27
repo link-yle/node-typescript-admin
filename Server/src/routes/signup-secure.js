@@ -11,9 +11,12 @@ module.exports = async (req, res, next) => {
     user.activationCode = generateRandomCode()
     try{
         const addedUser = await addNewUser(user, ROLES.regular)
-        await mailer.sendActivationCode(user.email, user.activationCode).catch(e => next(e))
+        const link=`${req.protocol}://${req.get('host')}/activation?code=${user.activationCode}&email=${user.email}`
+        await mailer.sendActivationCode(user.email, link)
         return res.status(200).json(clearUnneededDataFromPayload(addedUser))
     } catch(e) {
+        global.log.error(e)
+        
         return next(e)
     }
     

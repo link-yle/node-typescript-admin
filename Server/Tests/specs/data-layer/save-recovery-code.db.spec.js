@@ -27,7 +27,7 @@ describe("Users endpoint", function () {
         })
     })
 
-    fit("should save recovery code ", async function (done) {
+    it("should save recovery code ", async function (done) {
         const res = await saveRecoveryCode(payload.email, generateRandomCode())
         expect(res).toBeTruthy()
         const user = await getUserByEmail(payload.email)

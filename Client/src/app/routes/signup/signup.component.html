@@ -1,3 +1,5 @@
+
+
 <form [formGroup]="form" *ngIf="form">
     <div class="form-group">
         <label for="">Name </label>
@@ -5,7 +7,7 @@
         <p [hidden]="!isIncorrectNameFormat('name')" class="text-danger"> Please Enter a that has atleast 3 letters and a maximum of 20 letters</p>
     </div>
     <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
-    <app-password-input [parentFormGroup]="form" [isValidating]="true" ></app-password-input>
+    <app-password-input [parentFormGroup]="form" [isValidating]="true"></app-password-input>
     <div class="form-group">
         <label for="">Confirm Password </label>
         <input type="password" class="form-control" placeholder="Enter Password" formControlName="confirmPassword">
@@ -15,4 +17,3 @@
     <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="signup()">Signup</button>
     <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="signupSecurely()">Signup securely</button>
 </form>
-

@@ -28,6 +28,7 @@ import { AuthGuardService } from './shared/services/auth.guard.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PublicInfoService } from './shared/services/public.info.service';
 import { ActivationComponent } from './routes/activation/activation.component';
+import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-signup-securely/success-after-signup-securely.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ActivationComponent } from './routes/activation/activation.component';
     SignupComponent,
     UsersComponent,
     EmptyComponent,
-    ActivationComponent
+    ActivationComponent,
+    SuccessAfterSignupSecurelyComponent
   ],
   imports: [
     AppRoutingModule,

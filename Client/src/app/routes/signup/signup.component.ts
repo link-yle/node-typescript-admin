@@ -57,7 +57,7 @@ export class SignupComponent implements OnInit {
             data => {
                 this.publicInfoService.setEmail(this.form.value.email)
                 this.publicInfoService.setPass(this.form.value.password)
-                this.router.navigate(['/avtivation'])
+                this.router.navigate(['/success'])
             },
             error => this.sb.emitErrorSnackBar(error)
         )

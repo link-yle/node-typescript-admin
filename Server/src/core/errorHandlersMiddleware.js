@@ -2,12 +2,16 @@ const mongoose = require('mongoose')
 module.exports = app => {
 
     app.use(function (err, req, res, next) {
+        global.log.error('yyyyyyyyyyyyyy')
+        
         if (err.isJoi) {
             err.isJoi = undefined
             err._object = undefined
             return res.status(422).send(err).end()
         }
         if (err.nF) {
+            global.log.error('pppppppppppppp')
+            
             return res.status(404).send({ error: `${err.nF} is not found in our system` })
         }
         else if (err.name === 'WrongRecoveryCode') return res.status(400).send({error: 'Wrong recovery code'})
@@ -38,13 +42,14 @@ module.exports = app => {
 
     // error handler
     app.use(function (err, req, res, next) {
+        
         // set locals, only providing error in development
         res.locals.message = err.message;
         res.locals.error = req.app.get('env') === 'development' ? err : {};
 
         // render the error page
         res.status(err.status || 500);
-        return res.render('error');
+        return res.send(err);
     });
 
 
