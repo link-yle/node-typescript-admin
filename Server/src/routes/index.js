@@ -23,10 +23,12 @@ const updatePasswordByRecoveryCode = require('./update-password-by-recovery-code
 const validateUpdatePasswordByRecoveryCodePayload = require('./update-password-by-recovery-code.validate')
 const validateVerifyActivationCodePayload = require('./verify-activation-code.validate')
 const verifyActivationCode = require('./verify-activation-code')
+const signupSecurely = require('./signup-secure')
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
 
 router.post('/', validateSignupPayload, signup)
+router.post('/secure', validateSignupPayload, signupSecurely)
 router.post('/login', validateLoginPayload, login)
 router.get('/activation', validateVerifyActivationCodePayload, verifyActivationCode)
 

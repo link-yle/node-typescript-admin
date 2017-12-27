@@ -45,7 +45,27 @@ export class DataService {
     }
 
     signup(item: User) {
-        return this.http.post(`${this.usersEndPoint}`, item, this.requestOptions)
+        return this.http.post(`${this.usersEndPoint}`, { email: item.email, password: item.password, timeZones: [], name: item.name },
+            this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(err => this.handleError(err));
+    }
+
+    signupSecurely(item: User) {
+        return this.http.post(`${this.usersEndPoint}/secure`, {
+            email: item.email,
+            password: item.password, timeZones: [], name: item.name
+        }, this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(err => this.handleError(err));
+    }
+
+    sendActivationCode(code, email) {
+        return this.http.get(`${this.usersEndPoint}?code=${code}&email=${email}`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -146,7 +166,7 @@ export class DataService {
         if (error.status === 403 || error.status === 401) {
             this.sb.emitErrorSnackBar(error)
             this.router.navigate(['login'])
-        } else if (error.status === 422 && error.isJoi && error.details.length ) {
+        } else if (error.status === 422 && error.isJoi && error.details.length) {
             error.details.forEach(err => this.sb.emitErrorSnackBar(err.message));
         }
         return Observable.throw(errMsg);

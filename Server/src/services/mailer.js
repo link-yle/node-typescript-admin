@@ -19,16 +19,16 @@ function sendEmailWithCode(recepient, code) {
 
 
 
-function sendActivationLink(recepient, link) {
+function sendActivationCode(recepient, code) {
     return transporter.sendMail({
         from: senderEmail,
         to: recepient,
-        subject: 'Activation',
-        text: `Here is your Activation: ${link}`,
-        html: `<p>Here is your Activation: ${link}</p>`
+        subject: 'Activation Code',
+        text: `Here is your Activation Code : ${code}`,
+        html: `<p>Here is your Activation Code : ${code}</p>`
     }).then(info => {
         console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info))
     }).catch(err => { throw err })
 }
 
-module.exports  = { sendEmailWithCode, sendActivationLink }
+module.exports  = { sendEmailWithCode, sendActivationCode }

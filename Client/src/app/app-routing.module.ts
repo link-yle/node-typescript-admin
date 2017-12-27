@@ -20,11 +20,13 @@ import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-o
 import { EmptyComponent } from './routes/empty/empty.component';
 import { LoginLayoutComponent } from './shared/components/layout/login-layout/login-layout.component';
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
+import { ActivationComponent } from './routes/activation/activation.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
         { path: '', component: LoginComponent },
         { path: 'signup', component: SignupComponent },
+        { path: 'activation', component: ActivationComponent },
     ] },
     {
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [

@@ -26,6 +26,8 @@ import { EditRoleComponent } from './routes/edit-role/edit-role.component';
 import { UsersComponent } from './routes/users-list/users.component';
 import { AuthGuardService } from './shared/services/auth.guard.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PublicInfoService } from './shared/services/public.info.service';
+import { ActivationComponent } from './routes/activation/activation.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     OtherUserTimeComponent,
     SignupComponent,
     UsersComponent,
-    EmptyComponent
+    EmptyComponent,
+    ActivationComponent
   ],
   imports: [
     AppRoutingModule,
@@ -60,7 +63,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     GlobalValidatorsService,
     DataService,
     AdminClaimsService,
-    AuthGuardService
+    AuthGuardService,
+    PublicInfoService
 
   ],
   bootstrap: [AppComponent]

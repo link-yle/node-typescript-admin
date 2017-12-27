@@ -5,6 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { DataService } from '../../shared/services/data.service';
 import { SnackBarService } from '../../shared/services/snackbar.service';
 import { User } from '../../shared/models/user.model';
+import { PublicInfoService } from '../../shared/services/public.info.service';
 
 @Component({
     moduleId: module.id,
@@ -19,7 +20,8 @@ export class SignupComponent implements OnInit {
         private dataService: DataService,
         private sb: SnackBarService,
         private router: Router,
-        private globalValidatorsService: GlobalValidatorsService
+        private globalValidatorsService: GlobalValidatorsService,
+        private publicInfoService: PublicInfoService
     ) {
     }
 
@@ -36,7 +38,7 @@ export class SignupComponent implements OnInit {
         })
     }
 
-    onSubmit() {
+    signup() {
         this.dataService.signup(this.form.value).subscribe(
             data => {
                 this.dataService.login({ email: this.form.value.email, password: this.form.value.password }).subscribe(
@@ -50,6 +52,17 @@ export class SignupComponent implements OnInit {
         )
     }
 
+    signupSecurely() {
+        this.dataService.signupSecurely(this.form.value).subscribe(
+            data => {
+                this.publicInfoService.setEmail(this.form.value.email)
+                this.publicInfoService.setPass(this.form.value.password)
+                this.router.navigate(['/avtivation'])
+            },
+            error => this.sb.emitErrorSnackBar(error)
+        )
+    }
+    // Your account has been successfully created please check your email
 
     isIncorrectNameFormat(control: string) {
         return this.form.get(control).hasError('incorrectNameFormat')

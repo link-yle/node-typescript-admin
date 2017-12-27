@@ -3,12 +3,19 @@ const addNewUser = require('../data-layer/add-new-user.db')
 const generateRandomCode = require('../services/generate-random-code').generateRandomCode
 const ROLES = require('../config/rolesConstants')
 const clearUnneededDataFromPayload = require('../services/clear-unneeded-data')
+const mailer = require('../services/mailer')
 
-module.exports = (req, res, next) => {
+
+module.exports = async (req, res, next) => {
     const user = req.body
     user.activationCode = generateRandomCode()
-    return addNewUser(user, ROLES.regular).then(user => {
-        return res.status(200).json(clearUnneededDataFromPayload(user))
-    }).catch(e => next(e))
+    try{
+        const addedUser = await addNewUser(user, ROLES.regular)
+        await mailer.sendActivationCode(user.email, user.activationCode).catch(e => next(e))
+        return res.status(200).json(clearUnneededDataFromPayload(addedUser))
+    } catch(e) {
+        return next(e)
+    }
+    
 }
 
