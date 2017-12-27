@@ -21,27 +21,32 @@ const validateSendMeRecoveryCodePayload = require('./send-me-recovery-code.valid
 const sendMeRecoveryCode = require('./send-me-recovery-code.route')
 const updatePasswordByRecoveryCode = require('./update-password-by-recovery-code.route')
 const validateUpdatePasswordByRecoveryCodePayload = require('./update-password-by-recovery-code.validate')
+const validateVerifyActivationCodePayload = require('./verify-activation-code.validate')
+const verifyActivationCode = require('./verify-activation-code')
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
 
 router.post('/', validateSignupPayload, signup)
-router.post('/login', validateLoginPayload,  login)
+router.post('/login', validateLoginPayload, login)
+router.get('/activation', validateVerifyActivationCodePayload, verifyActivationCode)
+
 router.get('/recovery_code/:email', validateSendMeRecoveryCodePayload, sendMeRecoveryCode)
 router.post('/recovery_code', validateUpdatePasswordByRecoveryCodePayload, updatePasswordByRecoveryCode)
 
-router.put('/:id/info', verifyUser,  validateUpdateInfoPayload, Authorize.allowSelfAdminAndManager,   updateUserInfo)
+router.put('/:id/info', verifyUser, validateUpdateInfoPayload, Authorize.allowSelfAdminAndManager, updateUserInfo)
 router.delete('/:id', verifyUser, Authorize.allowAdminAndManager, removeUser)
 router.get('/', verifyUser, Authorize.preventRegularUsers, getUsers)
 router.get('/:id', verifyUser, Authorize.allowSelfAndAdminOnly, getUserDetailsIncludingRecords)
 
 router.post('/:id/timezones', verifyUser, validateAddRecordPayload, Authorize.allowSelfAndAdminOnly, addRecord)
 router.delete('/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
-router.put('/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecordPayload,  Authorize.allowSelfAndAdminOnly, updateRecord)
+router.put('/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecordPayload, Authorize.allowSelfAndAdminOnly, updateRecord)
 router.put('/:id/password', verifyUser, validateUpdatePasswordPayload, Authorize.allowSelfAdminAndManager, updatePassword)
 
 
 
 
+// link="http://"+req.get('host')+"/verify?id="+rand;
 
 // router.post()
 
