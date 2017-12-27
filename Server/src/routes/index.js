@@ -17,12 +17,17 @@ const validateUpdateRolePayload = require('./update-role.validate')
 const validateUpdateInfoPayload = require('./update-user-info.validate')
 const validateUpdateRecordPayload = require('./update-record.validate')
 const validateAddRecordPayload = require('./add-record.validate')
-
+const validateSendMeRecoveryCodePayload = require('./send-me-recovery-code.validate')
+const sendMeRecoveryCode = require('./send-me-recovery-code.route')
+const updatePasswordByRecoveryCode = require('./update-password-by-recovery-code.route')
+const validateUpdatePasswordByRecoveryCodePayload = require('./update-password-by-recovery-code.validate')
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
 
 router.post('/', validateSignupPayload, signup)
 router.post('/login', validateLoginPayload,  login)
+router.get('/recovery_code/:email', validateSendMeRecoveryCodePayload, sendMeRecoveryCode)
+router.post('/recovery_code', validateUpdatePasswordByRecoveryCodePayload, updatePasswordByRecoveryCode)
 
 router.put('/:id/info', verifyUser,  validateUpdateInfoPayload, Authorize.allowSelfAdminAndManager,   updateUserInfo)
 router.delete('/:id', verifyUser, Authorize.allowAdminAndManager, removeUser)
@@ -33,6 +38,8 @@ router.post('/:id/timezones', verifyUser, validateAddRecordPayload, Authorize.al
 router.delete('/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
 router.put('/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecordPayload,  Authorize.allowSelfAndAdminOnly, updateRecord)
 router.put('/:id/password', verifyUser, validateUpdatePasswordPayload, Authorize.allowSelfAdminAndManager, updatePassword)
+
+
 
 
 
