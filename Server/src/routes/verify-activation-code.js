@@ -6,11 +6,8 @@ module.exports = async (req, res, next) => {
     try {
         const user = await getUserByEmail(req.query.email)
         if (!user){
-            global.log.error('ssssssssssssssssssssssssssssssssssss')
-            
             return next({ nF: 'user' })
-        } 
-        if (user.activationCode !== req.query.activationCode) {
+        } else if (user.activationCode !== req.query.activationCode) {
             return res.status(403).send({ error: 'Corrupt link' })
         } else {
             user.activationCode = undefined

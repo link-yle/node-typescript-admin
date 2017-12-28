@@ -1,8 +1,10 @@
 const Joi = require('Joi')
 
 module.exports = (req, res, next) => {
-    const codeSchema = Joi.string().length(20).required().label('code')
-    const emailSchema = Joi.string().email().required().label('email')
-    Joi.validate(req.query.code, codeSchema , (err) => next(err))
-    return Joi.validate(req.query.email, emailSchema , (err) => next(err))
+    const toValidate = {email: req.query.email, code: req.query.code}
+    const schema = Joi.object().keys({
+        email: Joi.string().email().required().label('email'),
+        code: Joi.string().length(20).required().label('code'),
+    })
+    return Joi.validate(toValidate, schema , (err) => next(err))
 }
