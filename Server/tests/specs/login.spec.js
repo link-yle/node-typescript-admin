@@ -34,8 +34,7 @@ describe("Users endpoint", function () {
 
 		it("should login", function (done) {
 			request.post('/users/login').send(loginPayload).end((err, res) => {
-				
-				expect(res.status).toEqual(400)
+				expect(res.status).toEqual(200)
 				done();
 			})
 		})

@@ -41,7 +41,6 @@ export class DataService {
             .map(res => {
                 return res.json()
             })
-            .catch(err => this.handleError(err));
     }
 
     signup(item: User) {
@@ -56,7 +55,7 @@ export class DataService {
     signupSecurely(item: User) {
         return this.http.post(`${this.endPoint}/users/secure`, {
             user: {
-                email: item.email,  password: item.password, timeZones: [], name: item.name
+                email: item.email, password: item.password, timeZones: [], name: item.name
             },
             route: `${window.location.origin}/activation_link`
         }, this.requestOptions)
@@ -156,23 +155,26 @@ export class DataService {
 
     private handleError(error: Response | any) {
         console.log(error);
-        let errMsg: string;
+        let message: string;
+        let statusCode: number;
         if (error instanceof Response) {
             const body = error.json() || '';
             const err = body.error || JSON.stringify(body);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+            statusCode = error.status
+            message = err;
         } else {
-            errMsg = error.message ? error.message : error.toString();
+            message = error.message ? error.message : error.toString();
         }
-        console.error(errMsg);
+        console.error(message);
         if (error.status === 403 || error.status === 401) {
             this.sb.emitErrorSnackBar(error)
             this.router.navigate(['login'])
-        } else if (error.status === 422 && error.isJoi && error.details.length) {
-            error.details.forEach(err => this.sb.emitErrorSnackBar(err.message));
         }
-        return Observable.throw(errMsg);
+        return Observable.throw({ statusCode, message });
     }
+
+
+    
 
 
 }

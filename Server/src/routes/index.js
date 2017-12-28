@@ -44,6 +44,7 @@ router.post('/users/:id/timezones', verifyUser, validateAddRecordPayload, Author
 router.delete('/users/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
 router.put('/users/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecordPayload, Authorize.allowSelfAndAdminOnly, updateRecord)
 router.put('/users/:id/password', verifyUser, validateUpdatePasswordPayload, Authorize.allowSelfAdminAndManager, updatePassword)
+router.patch('/users/:id/role', verifyUser, validateUpdateRolePayload, Authorize.allowAdminOnly, updateUserRole)
 
 
 
@@ -52,6 +53,5 @@ router.put('/users/:id/password', verifyUser, validateUpdatePasswordPayload, Aut
 
 // router.post()
 
-router.patch('/:id/role', verifyUser, validateUpdateRolePayload, Authorize.allowAdminOnly, updateUserRole)
 
 module.exports = router

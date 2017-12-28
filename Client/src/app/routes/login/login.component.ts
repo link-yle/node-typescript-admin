@@ -40,10 +40,16 @@ export class LoginComponent implements OnInit {
                 this.authService.saveProfile(data.user)
                 this.router.navigate(['empty'])
             },
-            error => {
-                this.sb.emitErrorSnackBar(error)
-            }
+            error => this.handleLoginError(error)
         )
+    }
+
+
+    private handleLoginError(error: Response | any) {
+        const body = error.json() || '';
+        const err = body.error || JSON.stringify(body);
+        if (error.status === 403) this.router.navigate([''])
+        else if ( error.status === 401)  this.sb.emitErrorSnackBar(err)
     }
 
 

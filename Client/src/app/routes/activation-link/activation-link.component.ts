@@ -29,14 +29,14 @@ export class ActivationLinkComponent implements OnInit {
     }
 
     activateFromBackEnd(code, email) {
+        console.log(code, email);
         this.dataService.sendActivationCode(code, email).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar('Your account has been successfully activated')
                 this.router.navigate(['/login'])
-            }
+            },
+            () => this.router.navigate(['login/corrupt_activation_link'])
         )
-        console.log(code, email);
-        // this.router.navigate(['/success/account_activated'])
     }
 
 }
