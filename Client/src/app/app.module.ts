@@ -29,6 +29,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PublicInfoService } from './shared/services/public.info.service';
 import { ActivationComponent } from './routes/activation/activation.component';
 import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-signup-securely/success-after-signup-securely.component';
+// tslint:disable-next-line:max-line-length
+import { SuccessAfterActivatingAccountComponent } from './routes/success-after-activating-account/success-after-activating-account.component';
+import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
+import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-sign
     UsersComponent,
     EmptyComponent,
     ActivationComponent,
-    SuccessAfterSignupSecurelyComponent
+    SuccessAfterSignupSecurelyComponent,
+    SuccessAfterActivatingAccountComponent,
+    ActivationLinkComponent,
+    CorruptActivationLinkComponent
   ],
   imports: [
     AppRoutingModule,

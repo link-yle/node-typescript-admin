@@ -17,15 +17,15 @@ import { Router } from '@angular/router';
 @Injectable()
 export class DataService {
     private requestOptions
-    private usersEndPoint
+    private endPoint
 
     constructor
         (private http: Http, private authService: AuthService,
         private router: Router,
         private sb: SnackBarService
         ) {
-        if (environment.production) this.usersEndPoint = '/users'
-        else this.usersEndPoint = 'http://localhost:3000/users'
+        if (environment.production) this.endPoint = '/'
+        else this.endPoint = 'http://localhost:3000'
     }
 
     private setRequestOptions() {
@@ -37,7 +37,7 @@ export class DataService {
     }
 
     login(item: UserCredentials) {
-        return this.http.post(`${this.usersEndPoint}/login`, item, this.requestOptions)
+        return this.http.post(`${this.endPoint}/users/login`, item, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -45,7 +45,7 @@ export class DataService {
     }
 
     signup(item: User) {
-        return this.http.post(`${this.usersEndPoint}`, { email: item.email, password: item.password, timeZones: [], name: item.name },
+        return this.http.post(`${this.endPoint}/users`, { email: item.email, password: item.password, timeZones: [], name: item.name },
             this.requestOptions)
             .map(res => {
                 return res.json()
@@ -54,9 +54,11 @@ export class DataService {
     }
 
     signupSecurely(item: User) {
-        return this.http.post(`${this.usersEndPoint}/secure`, {
-            email: item.email,
-            password: item.password, timeZones: [], name: item.name
+        return this.http.post(`${this.endPoint}/users/secure`, {
+            user: {
+                email: item.email,  password: item.password, timeZones: [], name: item.name
+            },
+            route: `${window.location.origin}/activation_link`
         }, this.requestOptions)
             .map(res => {
                 return res.json()
@@ -65,7 +67,7 @@ export class DataService {
     }
 
     sendActivationCode(code, email) {
-        return this.http.get(`${this.usersEndPoint}?code=${code}&email=${email}`, this.requestOptions)
+        return this.http.get(`${this.endPoint}/activation?code=${code}&email=${email}`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -75,7 +77,7 @@ export class DataService {
 
     updateUserInfo(id: string, data: UserInfo) {
         this.setRequestOptions()
-        return this.http.put(`${this.usersEndPoint}/${id}/info`, data, this.requestOptions)
+        return this.http.put(`${this.endPoint}/users/${id}/info`, data, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -85,7 +87,7 @@ export class DataService {
 
     deleteUser(id: string) {
         this.setRequestOptions()
-        return this.http.delete(`${this.usersEndPoint}/${id}`, this.requestOptions)
+        return this.http.delete(`${this.endPoint}/users/${id}`, this.requestOptions)
             .map(res => {
                 return 'OK'
             })
@@ -94,7 +96,7 @@ export class DataService {
 
     getUsers() {
         this.setRequestOptions()
-        return this.http.get(`${this.usersEndPoint}/`, this.requestOptions)
+        return this.http.get(`${this.endPoint}/users`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -104,7 +106,7 @@ export class DataService {
 
     getUserDetails(userId: string) {
         this.setRequestOptions()
-        return this.http.get(`${this.usersEndPoint}/${userId}`, this.requestOptions)
+        return this.http.get(`${this.endPoint}/users/${userId}`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -115,7 +117,7 @@ export class DataService {
 
     updateTimeZone(userId: string, timeZoneId: string, data: Timezone) {
         this.setRequestOptions()
-        return this.http.put(`${this.usersEndPoint}/${userId}/timezones/${timeZoneId}`, data, this.requestOptions)
+        return this.http.put(`${this.endPoint}/users/${userId}/timezones/${timeZoneId}`, data, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -124,7 +126,7 @@ export class DataService {
 
     addTimeZone(userId: string, data: Timezone) {
         this.setRequestOptions()
-        return this.http.post(`${this.usersEndPoint}/${userId}/timezones`, data, this.requestOptions)
+        return this.http.post(`${this.endPoint}/usres/${userId}/timezones`, data, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -133,7 +135,7 @@ export class DataService {
 
     deleteTimeZone(userId: string, timeZoneId: string) {
         this.setRequestOptions()
-        return this.http.delete(`${this.usersEndPoint}/${userId}/timezones/${timeZoneId}`, this.requestOptions)
+        return this.http.delete(`${this.endPoint}/users/${userId}/timezones/${timeZoneId}`, this.requestOptions)
             .map(res => {
                 return 'OK'
             })
@@ -144,7 +146,7 @@ export class DataService {
 
     assignRole(id: string, data: { role: string }) {
         this.setRequestOptions()
-        return this.http.patch(`${this.usersEndPoint}/${id}/role`, data, this.requestOptions)
+        return this.http.patch(`${this.endPoint}/users/${id}/role`, data, this.requestOptions)
             .map(res => {
                 return res.json()
             })

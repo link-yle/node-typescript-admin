@@ -22,6 +22,10 @@ import { LoginLayoutComponent } from './shared/components/layout/login-layout/lo
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
 import { ActivationComponent } from './routes/activation/activation.component';
 import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-signup-securely/success-after-signup-securely.component';
+// tslint:disable-next-line:max-line-length
+import { SuccessAfterActivatingAccountComponent } from './routes/success-after-activating-account/success-after-activating-account.component';
+import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
+import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -29,10 +33,12 @@ const paths: Routes = [
         { path: 'signup', component: SignupComponent },
         { path: 'activation', component: ActivationComponent },
         { path: 'success', component: SuccessAfterSignupSecurelyComponent },
-
+        { path: 'activation_link', component: ActivationLinkComponent },
+        { path: 'corrupt_activation_link', component: CorruptActivationLinkComponent },
     ] },
     {
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [
+            { path: 'success/account_activated', component: SuccessAfterActivatingAccountComponent, },
             { path: 'empty', component: EmptyComponent, },
             { path: 'my-profile', component: EditMyInfoComponent, },
             { path: 'my-time', component: MyTimeComponent, },

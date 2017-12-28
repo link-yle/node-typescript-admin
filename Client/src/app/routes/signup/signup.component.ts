@@ -1,5 +1,5 @@
 import { GlobalValidatorsService } from '../../shared/services/global-validators.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../../shared/services/data.service';
@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
         private sb: SnackBarService,
         private router: Router,
         private globalValidatorsService: GlobalValidatorsService,
-        private publicInfoService: PublicInfoService
+        private publicInfoService: PublicInfoService,
     ) {
     }
 
