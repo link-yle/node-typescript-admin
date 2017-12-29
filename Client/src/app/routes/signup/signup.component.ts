@@ -11,11 +11,10 @@ import { PublicInfoService } from '../../shared/services/public.info.service';
     moduleId: module.id,
     selector: 'app-signup',
     templateUrl: 'signup.component.html',
-    styleUrls: ['signup.component.scss']
 })
 export class SignupComponent implements OnInit {
     form: FormGroup
-
+    loading: boolean
     constructor(private fb: FormBuilder,
         private dataService: DataService,
         private sb: SnackBarService,
@@ -42,7 +41,9 @@ export class SignupComponent implements OnInit {
         this.dataService.signup(this.form.value).subscribe(
             data => {
                 this.dataService.login({ email: this.form.value.email, password: this.form.value.password }).subscribe(
-                    data => this.router.navigate(['/']),
+                    data => {
+                        this.router.navigate(['/login/signup/success'])
+                    },
                     error => {
                         this.sb.emitErrorSnackBar(error)
                     }
@@ -53,13 +54,17 @@ export class SignupComponent implements OnInit {
     }
 
     signupSecurely() {
+        this.loading= true;
         this.dataService.signupSecurely(this.form.value).subscribe(
             data => {
                 this.publicInfoService.setEmail(this.form.value.email)
                 this.publicInfoService.setPass(this.form.value.password)
-                this.router.navigate(['/success'])
+                this.router.navigate(['/login/signup/secure_success'])
             },
-            error => this.sb.emitErrorSnackBar(error)
+            error => {
+                this.sb.emitErrorSnackBar(error)
+                this.loading = false
+            }
         )
     }
     // Your account has been successfully created please check your email

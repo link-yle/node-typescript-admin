@@ -33,6 +33,7 @@ module.exports = app => {
     app.use(function (req, res, next) {
         const err = new Error('Not Found');
         err.status = 404;
+        err.message = 'No route was found'
         return next(err);
     });
 
@@ -44,9 +45,9 @@ module.exports = app => {
         res.locals.message = err.message;
         res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-        // render the error page
         res.status(err.status || 500);
-        return res.send(err);
+        
+        return res.json({error: err.message});
     });
 
 

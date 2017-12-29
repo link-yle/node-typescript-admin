@@ -161,23 +161,6 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-
-    // search(terms: Observable<string>) {
-    //     return terms.debounceTime(400)
-    //       .distinctUntilChanged()
-    //       .switchMap(term => this.searchEntries(term));
-    //   }
-    
-    //   searchEntries(term) {
-    //     return this.http
-    //         .get(`${this.endPoint}/users/${id}/role`)
-    //         .map(res => res.json());
-    //   }
-
-
-
-
-
     private handleError(error: Response | any) {
         console.log(error);
         let message: string;

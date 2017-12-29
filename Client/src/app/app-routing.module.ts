@@ -27,12 +27,16 @@ import { SuccessAfterActivatingAccountComponent } from './routes/success-after-a
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
+import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
+import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
         { path: '', component: LoginComponent },
         { path: 'forgotten_password', component: ForgottenPasswordComponent },
         { path: 'signup', component: SignupComponent },
+        { path: 'signup/success', component: NormalSignupSuccessComponent },
+        { path: 'signup/secure_success', component: SecureSignupSuccessComponent },
         { path: 'activation', component: ActivationComponent },
         { path: 'success', component: SuccessAfterSignupSecurelyComponent },
         { path: 'activation_link', component: ActivationLinkComponent },

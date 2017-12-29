@@ -1,3 +1,6 @@
+
+<h1>Login</h1>
+<br>
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
     <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
     <app-password-input [parentFormGroup]="form" ></app-password-input>
@@ -7,3 +10,4 @@
 <hr>
 
 <span>Do not have an account?</span> <button class="btn btn-primary" routerLink="/login/signup">Sign Up</button>
+
