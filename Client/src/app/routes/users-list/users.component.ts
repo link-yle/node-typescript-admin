@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs/Rx';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminClaimsService } from '../../shared/services/admin-claims.service';
 import { SelectedUserService } from '../../shared/services/selectedUser.service';
 import { User } from '../../shared/models/user.model';
@@ -12,9 +12,10 @@ import { AuthService } from '../../shared/services/auth.service';
     selector: 'app-users',
     templateUrl: 'users.component.html',
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
     users: User[] = []
     totalItems: number
+    searchTerm: string
     keyUp$ = new Subject<string>()
     constructor(
         private adminClaimsService: AdminClaimsService,
@@ -26,20 +27,15 @@ export class UsersComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.fetchUsers()
-        const sub = this.keyUp$.debounceTime(400).distinctUntilChanged().switchMap(searchTerm => this.dataService.getUsers(searchTerm))
-            .subscribe(data => {
-                this.users = data.users
-                this.totalItems = data.count
-            },
-            error => this.sb.emitErrorSnackBar(error)
-            )
+        this.fetchUsers({})
+        const searchSubscription =
+            this.keyUp$.debounceTime(400).distinctUntilChanged().subscribe(searchTerm => this.fetchUsers({ searchTerm }))
     }
 
 
 
-    private fetchUsers() {
-        const initialSub = this.dataService.getUsers().first().subscribe(
+    private fetchUsers({ searchTerm = '', skip = 0 }) {
+        const initialSub = this.dataService.getUsers({searchTerm, skip}).first().subscribe(
             data => {
                 this.users = data.users
                 this.totalItems = data.count
@@ -59,7 +55,7 @@ export class UsersComponent implements OnInit {
 
     onDeleteClick(selectedUser) {
         this.dataService.deleteUser(selectedUser._id).subscribe(
-            data => this.fetchUsers(),
+            data => this.fetchUsers({ searchTerm: this.searchTerm }),
             error => this.sb.emitErrorSnackBar(error)
         )
     }
@@ -72,5 +68,14 @@ export class UsersComponent implements OnInit {
     onTimingsClick(item) {
         this.selectedUserService.set(item)
         this.router.navigate(['/users', item._id, 'time'])
+    }
+
+    ngOnDestroy() {
+
+    }
+
+    pageChanged({ page, itemsPerPage }) {
+        this.fetchUsers({ searchTerm: this.searchTerm, skip: (page - 1) * 10 })
+
     }
 }

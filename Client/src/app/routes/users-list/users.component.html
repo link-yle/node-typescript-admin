@@ -7,7 +7,7 @@
     <div class="panel-body">
 
         <div class="form-group col-md-4">
-            <input type="text" class="form-control" placeholder="Filter by name" (keyup)="keyUp$.next($event.target.value)">
+            <input type="text" class="form-control" placeholder="Filter by name" [(ngModel)]="searchTerm" (ngModelChange)="keyUp$.next($event)">
         </div>
 
         <table class="table table-hover">
@@ -53,5 +53,5 @@
 </div>
 
 <div class="col-md-12">
-    <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+    <pagination [totalItems]="totalItems" (pageChanged)="pageChanged($event)"></pagination>
 </div>

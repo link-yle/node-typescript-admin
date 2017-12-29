@@ -93,9 +93,10 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    getUsers(searchTerm= '') {
+    getUsers({skip = 0, searchTerm= ''}) {
+        console.log(skip, searchTerm);
         this.setRequestOptions()
-        return this.http.get(`${this.endPoint}/users?filter=${searchTerm}`, this.requestOptions)
+        return this.http.get(`${this.endPoint}/users?skip=${skip}&filter=${searchTerm}`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
