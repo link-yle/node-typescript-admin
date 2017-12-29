@@ -7,6 +7,7 @@ import { User } from '../../shared/models/user.model';
 import { DataService } from '../../shared/services/data.service';
 import { SnackBarService } from '../../shared/services/snackbar.service';
 import { AuthService } from '../../shared/services/auth.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'app-users',
@@ -16,7 +17,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     users: User[] = []
     totalItems: number
     searchTerm: string
+    currentPage: number
     keyUp$ = new Subject<string>()
+    searchSubscription: Subscription
     constructor(
         private adminClaimsService: AdminClaimsService,
         private router: Router,
@@ -28,14 +31,17 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.fetchUsers({})
-        const searchSubscription =
-            this.keyUp$.debounceTime(400).distinctUntilChanged().subscribe(searchTerm => this.fetchUsers({ searchTerm }))
+        this.searchSubscription =
+            this.keyUp$.debounceTime(400).distinctUntilChanged().subscribe(() => {
+                if (this.currentPage === 1) this.fetchUsers({})
+                else this.currentPage = 1
+            })
     }
 
 
 
-    private fetchUsers({ searchTerm = '', skip = 0 }) {
-        const initialSub = this.dataService.getUsers({searchTerm, skip}).first().subscribe(
+    public fetchUsers({ page = 1 }) {
+        const initialSub = this.dataService.getUsers({ searchTerm: this.searchTerm, skip: (page - 1) * 10 }).first().subscribe(
             data => {
                 this.users = data.users
                 this.totalItems = data.count
@@ -55,7 +61,7 @@ export class UsersComponent implements OnInit, OnDestroy {
 
     onDeleteClick(selectedUser) {
         this.dataService.deleteUser(selectedUser._id).subscribe(
-            data => this.fetchUsers({ searchTerm: this.searchTerm }),
+            data => this.fetchUsers({ page: this.currentPage }),
             error => this.sb.emitErrorSnackBar(error)
         )
     }
@@ -71,11 +77,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-
+        this.searchSubscription.unsubscribe()
     }
 
-    pageChanged({ page, itemsPerPage }) {
-        this.fetchUsers({ searchTerm: this.searchTerm, skip: (page - 1) * 10 })
 
-    }
+
+
 }

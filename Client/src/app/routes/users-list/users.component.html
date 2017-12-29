@@ -53,5 +53,5 @@
 </div>
 
 <div class="col-md-12">
-    <pagination [totalItems]="totalItems" (pageChanged)="pageChanged($event)"></pagination>
+    <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="fetchUsers($event)"></pagination>
 </div>
