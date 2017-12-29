@@ -17,12 +17,13 @@ const validateUpdateRolePayload = require('./update-role.validate')
 const validateUpdateInfoPayload = require('./update-user-info.validate')
 const validateUpdateRecordPayload = require('./update-record.validate')
 const validateAddRecordPayload = require('./add-record.validate')
-const validateSendMeRecoveryCodePayload = require('./send-me-recovery-code.validate')
-const sendMeRecoveryCode = require('./send-me-recovery-code.route')
+const validateSendMeRecoveryLinkPayload = require('./send-me-recovery-code.validate')
+const sendMeRecoveryLink = require('./send-me-recovery-code.route')
 const updatePasswordByRecoveryCode = require('./update-password-by-recovery-code.route')
 const validateUpdatePasswordByRecoveryCodePayload = require('./update-password-by-recovery-code.validate')
 const validateVerifyActivationCodePayload = require('./verify-activation-code.validate')
-const verifyActivationCode = require('./verify-activation-code')
+const verifyActivationCode = require('./verify-activation-code.route')
+const verifyRecoveryCode = require('./verify-recovery-code.route')
 const signupSecurely = require('./signup-secure')
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
@@ -30,9 +31,12 @@ const Authorize = require('../core/authorization')
 router.post('/users/', validateSignupPayload, signup)
 router.post('/users/secure', validateSignupPayload, signupSecurely)
 router.post('/users/login', validateLoginPayload, login)
+router.post('/password_recovery_requests', validateSendMeRecoveryLinkPayload, sendMeRecoveryLink)
+router.get('/password_recovery_requests', validateVerifyActivationCodePayload, verifyRecoveryCode)
+
+
 router.get('/activation', validateVerifyActivationCodePayload, verifyActivationCode)
 
-router.get('/users/recovery_code/:email', validateSendMeRecoveryCodePayload, sendMeRecoveryCode)
 router.post('/users/recovery_code', validateUpdatePasswordByRecoveryCodePayload, updatePasswordByRecoveryCode)
 
 router.put('/users/:id/info', verifyUser, validateUpdateInfoPayload, Authorize.allowSelfAdminAndManager, updateUserInfo)
@@ -47,11 +51,6 @@ router.put('/users/:id/password', verifyUser, validateUpdatePasswordPayload, Aut
 router.patch('/users/:id/role', verifyUser, validateUpdateRolePayload, Authorize.allowAdminOnly, updateUserRole)
 
 
-
-
-// link="http://"+req.get('host')+"/verify?id="+rand;
-
-// router.post()
 
 
 module.exports = router

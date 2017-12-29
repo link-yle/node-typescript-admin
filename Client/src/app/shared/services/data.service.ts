@@ -126,7 +126,7 @@ export class DataService {
 
     addTimeZone(userId: string, data: Timezone) {
         this.setRequestOptions()
-        return this.http.post(`${this.endPoint}/usres/${userId}/timezones`, data, this.requestOptions)
+        return this.http.post(`${this.endPoint}/users/${userId}/timezones`, data, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -147,6 +147,14 @@ export class DataService {
     assignRole(id: string, data: { role: string }) {
         this.setRequestOptions()
         return this.http.patch(`${this.endPoint}/users/${id}/role`, data, this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(err => this.handleError(err));
+    }
+
+    forgottenPassword(email, route) {
+        return this.http.post(`${this.endPoint}/password_recovery_requests`, {email, route}, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -187,7 +195,7 @@ export class DataService {
             this.sb.emitErrorSnackBar(error)
             this.router.navigate(['login'])
         }
-        return Observable.throw({ statusCode, message });
+        return Observable.throw(message);
     }
 
 

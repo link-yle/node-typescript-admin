@@ -33,6 +33,7 @@ import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-sign
 import { SuccessAfterActivatingAccountComponent } from './routes/success-after-activating-account/success-after-activating-account.component';
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
+import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link
     SuccessAfterSignupSecurelyComponent,
     SuccessAfterActivatingAccountComponent,
     ActivationLinkComponent,
-    CorruptActivationLinkComponent
+    CorruptActivationLinkComponent,
+    ForgottenPasswordComponent
   ],
   imports: [
     AppRoutingModule,

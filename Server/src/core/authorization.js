@@ -12,7 +12,7 @@ function preventRegularUsers(req, res, next) {
 function allowOnlyRegularUsersToAccessed(req, res, next) {
     return getUserRoleByIdFromDb(req.params.id)
         .then(toBeAccessedRole => {
-            if (!toBeAccessedRole) return next({ nF: 'user' })
+            if (!toBeAccessedRole) return next({ nF: 'User' })
             if (toBeAccessedRole === ROLES.regular) {
                 return next()
             } else {
