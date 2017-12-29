@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AdminClaimsService } from '../../shared/services/admin-claims.service';
@@ -10,10 +11,11 @@ import { AuthService } from '../../shared/services/auth.service';
 @Component({
     selector: 'app-users',
     templateUrl: 'users.component.html',
-    styleUrls: ['users.component.scss']
 })
 export class UsersComponent implements OnInit {
     users: User[] = []
+    totalItems: number
+    keyUp$ = new Subject<string>()
     constructor(
         private adminClaimsService: AdminClaimsService,
         private router: Router,
@@ -25,14 +27,27 @@ export class UsersComponent implements OnInit {
 
     ngOnInit() {
         this.fetchUsers()
+        const sub = this.keyUp$.debounceTime(400).distinctUntilChanged().switchMap(searchTerm => this.dataService.getUsers(searchTerm))
+            .subscribe(data => {
+                this.users = data.users
+                this.totalItems = data.count
+            },
+            error => this.sb.emitErrorSnackBar(error)
+            )
     }
 
+
+
     private fetchUsers() {
-        this.dataService.getUsers().subscribe(
-            data => this.users = data,
+        const initialSub = this.dataService.getUsers().first().subscribe(
+            data => {
+                this.users = data.users
+                this.totalItems = data.count
+            },
             error => this.sb.emitErrorSnackBar(error)
         )
     }
+
     isAdmin() {
         return this.authService.getProfile().role === 'admin'
     }

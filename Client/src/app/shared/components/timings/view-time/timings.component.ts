@@ -48,7 +48,7 @@ export class TimingsComponent implements OnInit {
         this.editClicked.emit(item)
     }
 
-    onAddClicked() {
+    onAddClick() {
         this.addClicked.emit()
     }
 

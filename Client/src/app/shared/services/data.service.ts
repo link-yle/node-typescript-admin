@@ -93,9 +93,9 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    getUsers() {
+    getUsers(searchTerm= '') {
         this.setRequestOptions()
-        return this.http.get(`${this.endPoint}/users`, this.requestOptions)
+        return this.http.get(`${this.endPoint}/users?filter=${searchTerm}`, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -151,6 +151,22 @@ export class DataService {
             })
             .catch(err => this.handleError(err));
     }
+
+
+    // search(terms: Observable<string>) {
+    //     return terms.debounceTime(400)
+    //       .distinctUntilChanged()
+    //       .switchMap(term => this.searchEntries(term));
+    //   }
+    
+    //   searchEntries(term) {
+    //     return this.http
+    //         .get(`${this.endPoint}/users/${id}/role`)
+    //         .map(res => res.json());
+    //   }
+
+
+
 
 
     private handleError(error: Response | any) {

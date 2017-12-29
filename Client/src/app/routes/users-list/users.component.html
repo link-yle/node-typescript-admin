@@ -1,28 +1,57 @@
-<app-paneled-table title="Users">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Email</th>
-            <th class="text-center">Update User Info</th>
-            <th *ngIf="isAdmin()" class="text-center">Timings</th>
-            <th class="text-center">Delete</th>
-            <th *ngIf="isAdmin()" class="text-center">Change Role</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of users">
-            <td>{{item.name}}</td>
-            <td>{{item.role}}</td>
-            <td>{{item.email}}</td>
-            <td class="text-center" (click)="onUpdateClick(item)"><i class="fa fa-edit  text-default"> </i></td>
-            <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)"><i class="fa fa-clock-o text-warning"> </i></td>
-            <td class="text-center" (click)="onDeleteClick(item)"><i class="fa fa-trash text-danger"> </i></td>
-            <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)"><i class="fa fa-user-o text-warning"> </i></td>
-        </tr>
-    </tbody>
-    <div class="col-xs-12 col-12">
-        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
-    </div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Users
 
-</app-paneled-table>
+        </h3>
+    </div>
+    <div class="panel-body">
+
+        <div class="form-group col-md-4">
+            <input type="text" class="form-control" placeholder="Filter by name" (keyup)="keyUp$.next($event.target.value)">
+        </div>
+
+        <table class="table table-hover">
+
+
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Email</th>
+                    <th class="text-center">Update User Info</th>
+                    <th class="text-center">Activate</th>
+                    <th *ngIf="isAdmin()" class="text-center">Timings</th>
+                    <th class="text-center">Delete</th>
+                    <th *ngIf="isAdmin()" class="text-center">Change Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of users">
+                    <td>{{item.name}}</td>
+                    <td>{{item.role}}</td>
+                    <td>{{item.email}}</td>
+                    <td class="text-center" (click)="onUpdateClick(item)">
+                        <i class="fa fa-edit  text-default"> </i>
+                    </td>
+                    <td class="text-center" (click)="onActivateClick(item)">
+                        <i class="fa fa-edit  text-default"> </i>
+                    </td>
+                    <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)">
+                        <i class="fa fa-clock-o text-warning"> </i>
+                    </td>
+                    <td class="text-center" (click)="onDeleteClick(item)">
+                        <i class="fa fa-trash text-danger"> </i>
+                    </td>
+                    <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)">
+                        <i class="fa fa-user-o text-warning"> </i>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+</div>
