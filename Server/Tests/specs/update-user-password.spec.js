@@ -66,7 +66,7 @@ describe("Users endpoint", function () {
                     newPassword: '1234567b'
                 })
                 .end((err, res) => {
-                    expect(res.status).toBe(403)
+                    expect(res.status).toBe(400)
                     done()
                 })
         })
