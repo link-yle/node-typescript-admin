@@ -40,7 +40,7 @@ export class ActivationComponent implements OnInit {
     }
 
     public submitCode() {
-        this.dataService.sendActivationCode(this.form.value.code, this.form.value.email)
+        this.dataService.activateFromBackEnd(this.form.value.code, this.form.value.email)
         .pipe(switchMap(  () => this.dataService.login({ email: this.form.value.email, password: this.publicInfoService.getPass() })))
         .catch((e) => Observable.throw(e))
             .subscribe(

@@ -1,13 +1,21 @@
+<div class="container" *ngIf="isRegisteredButNotActive">
+    <div class="jumbotron">
+        <h1>Oh Oh</h1>
+        <p>Your account is registered but it is not active yet. Please check your email for activation code. If you did not
+            find the email in our inbox or spam folder, send an email to admin@test.com for support
+        </p>
+    </div>
+</div>
 
 <h1>Login</h1>
 <br>
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
     <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
-    <app-password-input [parentFormGroup]="form" ></app-password-input>
+    <app-password-input [parentFormGroup]="form"></app-password-input>
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
-    <button class="btn btn-primary" routerLink="/login/forgotten_password">Forgotten password?</button> 
+    <button class="btn btn-primary" routerLink="/login/forgotten_password">Forgotten password?</button>
 </form>
 <hr>
 
-<span>Do not have an account?</span> <button class="btn btn-primary" routerLink="/login/signup">Sign Up</button>
-
+<span>Do not have an account?</span>
+<button class="btn btn-primary" routerLink="/login/signup">Sign Up</button>

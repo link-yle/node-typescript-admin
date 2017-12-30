@@ -12,6 +12,7 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
     form: FormGroup
+    isRegisteredButNotActive
 
     constructor(private fb: FormBuilder,
         private dataService: DataService,
@@ -44,12 +45,11 @@ export class LoginComponent implements OnInit {
         )
     }
 
-
     private handleLoginError(error: Response | any) {
         const body = error.json() || '';
         const err = body.error || JSON.stringify(body);
-        if (error.status === 403) this.router.navigate([''])
-        else if ( error.status === 401)  this.sb.emitErrorSnackBar(err)
+        if (error.status === 403) this.isRegisteredButNotActive = true;
+        else this.sb.emitErrorSnackBar(err)
     }
 
 

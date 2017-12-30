@@ -13,11 +13,11 @@ body{
 }
 
 .successAlert{
-    background: green !important
+    background: $brand-success !important
 }
 
 .errorAlert{
-    background: red !important
+    background: $brand-danger !important
 }
 
 .loader {
@@ -37,7 +37,13 @@ body{
 
 }
 
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+
+.mat-simple-snackbar-action{
+    color: white
 }
