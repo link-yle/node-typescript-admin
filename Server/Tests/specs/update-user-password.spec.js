@@ -42,33 +42,46 @@ describe("Users endpoint", function () {
 
 
 
-        it("should update", function (done) {
+        it("should update password and be able to login afterwards", function (done) {
             request.put(`/users/${id}/password`)
-            .set({'Authorization': `Bearer ${token}`})
-            .send(updatePasswordPayload)
-            .end((err, res) => {
-                expect(res.status).toBe(200)
-                request.post('/users/login').send(loginPayload).end((err, res) => {
-                    expect(res.status).toBe(401)
-                    request.post('/users/login').send({email: loginPayload.email, password: updatePasswordPayload.newPassword}).end((err, res) => {
-                        expect(res.status).toBe(200)
-                        done();
+                .set({ 'Authorization': `Bearer ${token}` })
+                .send(updatePasswordPayload)
+                .end((err, res) => {
+                    expect(res.status).toBe(200)
+                    request.post('/users/login').send(loginPayload).end((err, res) => {
+                        expect(res.status).toBe(401)
+                        request.post('/users/login').send({ email: loginPayload.email, password: updatePasswordPayload.newPassword }).end((err, res) => {
+                            expect(res.status).toBe(200)
+                            done();
+                        })
                     })
                 })
-            })
+        })
+
+        it("should throw error in case old password provided is wrong", function (done) {
+            request.put(`/users/${id}/password`)
+                .set({ 'Authorization': `Bearer ${token}` })
+                .send({
+                    oldPassword: '1234567g',
+                    newPassword: '1234567b'
+                })
+                .end((err, res) => {
+                    expect(res.status).toBe(403)
+                    done()
+                })
         })
 
         it("should return 404 if no id is provided", function (done) {
             request.put(`/users/password`)
-            .set({'Authorization': `Bearer ${token}`})
-            .send(updatePasswordPayload)
-            .end((err, res) => {
-                expect(res.status).toBe(404)
-                done();
-            })
+                .set({ 'Authorization': `Bearer ${token}` })
+                .send(updatePasswordPayload)
+                .end((err, res) => {
+                    expect(res.status).toBe(404)
+                    done();
+                })
         })
 
-        
+
 
 
     })

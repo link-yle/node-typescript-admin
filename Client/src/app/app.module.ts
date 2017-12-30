@@ -32,6 +32,7 @@ import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-su
 import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
 import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
+import { ChangePasswordFormComponent } from 'app/routes/change-password-form/change-password-form.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-pass
     ForgottenPasswordFormComponent,
     ForgottenPasswordFormSuccessComponent,
     NormalSignupSuccessComponent,
-    SecureSignupSuccessComponent
+    SecureSignupSuccessComponent,
+    ChangePasswordFormComponent
   ],
   imports: [
     AppRoutingModule,

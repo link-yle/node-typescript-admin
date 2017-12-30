@@ -1,15 +1,20 @@
 
-const db = require('../../data-layer/update-passwrd-by-user-id.db')
+const getUserPasswordFromDb = require('../../data-layer/get-user-old-password-by-id.db')
+const comparePassword = require('../../services/compare-password').comparePassword
 
-module.exports = async (req, res, next) =>{
-    try{
-        await db(req.params.id, req.body.oldPassword, req.body.newPassword)
-        return res.status(200).send('Password updated')
-    } catch (e){
-        return next(e)
-    }    
-    
+module.exports = async (req, res, next) => {
+    const user = await getUserPasswordFromDb(req.params.id)
+    if (!user) return next({ nF: 'User' })
+    comparePassword(req.body.oldPassword, user.password).then(async ok => {
+        if (!ok) return res.status(403).json({ error: 'Old Password provided is wrong' })
+        user.password = req.body.newPassword
+        await user.save().catch(e => next(e))
+        return res.json({ success: 'Your password has changed successfully' })
+    })
+
 }
+
+
 
 
 

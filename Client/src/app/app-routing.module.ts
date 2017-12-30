@@ -26,6 +26,7 @@ import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-su
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
 import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
+import { ChangePasswordFormComponent } from 'app/routes/change-password-form/change-password-form.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -45,6 +46,7 @@ const paths: Routes = [
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [
             { path: 'empty', component: EmptyComponent, },
             { path: 'my-profile', component: EditMyInfoComponent, },
+            { path: 'my-profile/password', component: ChangePasswordFormComponent },
             { path: 'my-time', component: MyTimeComponent, },
             { path: 'my-time/add', component: AddMyTimeComponent, },
             { path: 'my-time/edit', component: EditMyTimeComponent },

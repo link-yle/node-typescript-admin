@@ -73,6 +73,14 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
+    // activateFromBackEnd(code, email) {
+    //     return this.http.get(`${this.endPoint}/activation?code=${code}&email=${email}`, this.requestOptions)
+    //         .map(res => {
+    //             return res.json()
+    //         })
+    //         .catch(err => this.handleError(err));
+    // }
+
 
     updateUserInfo(id: string, data: UserInfo) {
         this.setRequestOptions()
@@ -93,7 +101,7 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    getUsers({skip = 0, searchTerm= ''}) {
+    getUsers({ skip = 0, searchTerm = '' }) {
         console.log(skip, searchTerm);
         this.setRequestOptions()
         return this.http.get(`${this.endPoint}/users?skip=${skip}&filter=${searchTerm}`, this.requestOptions)
@@ -154,12 +162,24 @@ export class DataService {
     }
 
     forgottenPassword(email, route) {
-        return this.http.post(`${this.endPoint}/password_recovery_requests`, {email, route}, this.requestOptions)
+        return this.http.post(`${this.endPoint}/password_recovery_requests`, { email, route }, this.requestOptions)
             .map(res => {
                 return res.json()
             })
             .catch(err => this.handleError(err));
     }
+
+    changePasswordUsingOldPassword(id: string, { oldPassword, newPassword }: { oldPassword: string, newPassword: string }) {
+        this.setRequestOptions()
+        return this.http.put(`${this.endPoint}/users/${id}/password`, { oldPassword, newPassword }, this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(err => this.handleError(err));
+    }
+
+
+
 
     private handleError(error: Response | any) {
         console.log(error);
@@ -182,7 +202,7 @@ export class DataService {
     }
 
 
-    
+
 
 
 }
