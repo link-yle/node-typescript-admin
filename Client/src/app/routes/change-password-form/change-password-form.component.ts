@@ -3,7 +3,6 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { DataService } from '../../shared/services/data.service';
 import { SnackBarService } from '../../shared/services/snackbar.service';
-import { AuthService } from 'app/shared/services/auth.service';
 
 @Component({
     selector: 'change-password-form',
@@ -17,7 +16,6 @@ export class ChangePasswordFormComponent {
         private dataService: DataService,
         private sb: SnackBarService,
         private globalValidatorsService: GlobalValidatorsService,
-        private authService: AuthService
     ) {
     }
 
@@ -35,9 +33,10 @@ export class ChangePasswordFormComponent {
 
 
     changepassword() {
-        this.dataService.changePasswordUsingOldPassword(this.authService.getProfile()._id, this.form.value).subscribe(
+        this.dataService.changePasswordUsingOldPassword(this.form.value).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar('Your password has been updated successfully')
+                this.buildForm()
             },
             error => this.sb.emitErrorSnackBar(error)
         )

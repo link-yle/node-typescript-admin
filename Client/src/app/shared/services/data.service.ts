@@ -169,9 +169,9 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    changePasswordUsingOldPassword(id: string, { oldPassword, newPassword }: { oldPassword: string, newPassword: string }) {
+    changePasswordUsingOldPassword( {oldPassword, newPassword }: { oldPassword: string, newPassword: string }) {
         this.setRequestOptions()
-        return this.http.put(`${this.endPoint}/users/${id}/password`, { oldPassword, newPassword }, this.requestOptions)
+        return this.http.put(`${this.endPoint}/password`, { oldPassword, newPassword }, this.requestOptions)
             .map(res => {
                 return res.json()
             })

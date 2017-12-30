@@ -19,10 +19,10 @@ const getUsers = require('./user/get-users.route')
 
 const signup = require('./security/signup.route')
 const login = require('./security/login.route')
-const updatePassword = require('./security/update-password.route')
+const updateMyPassword = require('./security/update-my-password.route')
 const validateLogin = require('./security/login.validate')
 const validateSignup = require('./security/signup.validate')
-const validateUpdatePassword = require('./security/update-password.validate')
+const validateUpdateMyPassword = require('./security/update-my-password.validate')
 const validateSendMeRecoveryLink = require('./security/send-me-recovery-code.validate')
 const sendMeRecoveryLink = require('./security/send-me-recovery-code.route')
 const updatePasswordByRecoveryCode = require('./security/update-password-by-recovery-code.route')
@@ -60,7 +60,7 @@ router.get('/users/:id', verifyUser, Authorize.allowSelfAndAdminOnly, getUserDet
 router.post('/users/:id/timezones', verifyUser, validateAddRecord, Authorize.allowSelfAndAdminOnly, addRecord)
 router.delete('/users/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
 router.put('/users/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecord, Authorize.allowSelfAndAdminOnly, updateRecord)
-router.put('/users/:id/password', verifyUser, validateUpdatePassword, Authorize.allowSelfAdminAndManager, updatePassword)
+router.put('/password', verifyUser, validateUpdateMyPassword, updateMyPassword)
 router.patch('/users/:id/role', verifyUser, validateUpdateRole, Authorize.allowAdminOnly, updateUserRole)
 
 
