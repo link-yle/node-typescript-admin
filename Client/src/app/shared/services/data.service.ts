@@ -65,7 +65,7 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    sendActivationCode(code, email) {
+    activateFromBackEnd(code, email) {
         return this.http.get(`${this.endPoint}/activation?code=${code}&email=${email}`, this.requestOptions)
             .map(res => {
                 return res.json()

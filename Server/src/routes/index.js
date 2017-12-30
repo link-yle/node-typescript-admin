@@ -1,42 +1,52 @@
 const router = require('express').Router()
-const updateUserInfo = require('./update-user-info.route')
-const removeUser = require('./remove-user.route')
-const getUsers = require('./get-users.route')
-const getUserDetailsIncludingRecords = require('./get-user-records.route')
-const signup = require('./signup.route')
-const login = require('./login.route')
-const addRecord = require('./add-record.route')
-const removeRecord = require('./remove-record.route')
-const updateRecord = require('./update-record.route')
-const updatePassword = require('./update-password.route')
-const updateUserRole = require('./update-role.route')
-const validateLoginPayload = require('./login.validate')
-const validateSignupPayload = require('./signup.validate')
-const validateUpdatePasswordPayload = require('./update-password.validate')
-const validateUpdateRolePayload = require('./update-role.validate')
-const validateUpdateInfoPayload = require('./update-user-info.validate')
-const validateUpdateRecordPayload = require('./update-record.validate')
-const validateAddRecordPayload = require('./add-record.validate')
-const validateSendMeRecoveryLinkPayload = require('./send-me-recovery-code.validate')
-const sendMeRecoveryLink = require('./send-me-recovery-code.route')
-const updatePasswordByRecoveryCode = require('./update-password-by-recovery-code.route')
-const validateUpdatePasswordByRecoveryCodePayload = require('./update-password-by-recovery-code.validate')
-const validateVerifyActivationCodePayload = require('./verify-activation-code.validate')
-const verifyActivationCode = require('./verify-activation-code.route')
-const verifyRecoveryCode = require('./verify-recovery-code.route')
-const signupSecurely = require('./signup-secure.route')
-const validateSignupSecurelyPayload = require('./signup-secure.validate')
+
+
+const addRecord = require('./records/add-record.route')
+const removeRecord = require('./records/remove-record.route')
+const updateRecord = require('./records/update-record.route')
+const validateUpdateRecordPayload = require('./records/update-record.validate')
+const validateAddRecordPayload = require('./records/add-record.validate')
+const getUserDetailsIncludingRecords = require('./records/get-user-records.route')
+
+
+const updateUserInfo = require('./user/update-user-info.route')
+const removeUser = require('./user/remove-user.route')
+const validateUpdateRolePayload = require('./user/update-role.validate')
+const validateUpdateInfoPayload = require('./user/update-user-info.validate')
+const updateUserRole = require('./user/update-role.route')
+const getUsers = require('./user/get-users.route')
+
+
+const signup = require('./security/signup.route')
+const login = require('./security/login.route')
+const updatePassword = require('./security/update-password.route')
+const validateLoginPayload = require('./security/login.validate')
+const validateSignupPayload = require('./security/signup.validate')
+const validateUpdatePasswordPayload = require('./security/update-password.validate')
+const validateSendMeRecoveryLinkPayload = require('./security/send-me-recovery-code.validate')
+const sendMeRecoveryLink = require('./security/send-me-recovery-code.route')
+const updatePasswordByRecoveryCode = require('./security/update-password-by-recovery-code.route')
+const validateUpdatePasswordByRecoveryCodePayload = require('./security/update-password-by-recovery-code.validate')
+const validateVerifyActivationCodePayload = require('./security/verify-activation-code.validate')
+const verifyActivationCode = require('./security/verify-activation-code.route')
+const verifyRecoveryCode = require('./security/verify-recovery-code.route')
+const signupSecurely = require('./security/signup-secure.route')
+const validateSignupSecurelyPayload = require('./security/signup-secure.validate')
+
+
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
 
 router.post('/users/', validateSignupPayload, signup)
 router.post('/users/secure', validateSignupSecurelyPayload, signupSecurely)
+router.get('/activation', validateVerifyActivationCodePayload, verifyActivationCode)
+
+
 router.post('/users/login', validateLoginPayload, login)
 router.post('/password_recovery_requests', validateSendMeRecoveryLinkPayload, sendMeRecoveryLink)
 router.get('/password_recovery_requests', validateVerifyActivationCodePayload, verifyRecoveryCode)
 
 
-router.get('/activation', validateVerifyActivationCodePayload, verifyActivationCode)
 
 router.post('/users/recovery_code', validateUpdatePasswordByRecoveryCodePayload, updatePasswordByRecoveryCode)
 

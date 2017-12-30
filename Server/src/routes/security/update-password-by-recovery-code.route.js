@@ -1,4 +1,4 @@
-const getUserByEmail = require('../data-layer/get-user-by-email')
+const getUserByEmail = require('../../data-layer/get-user-by-email')
 
 module.exports = async (req, res, next) => {
     const user = await getUserByEmail(req.body.email).catch(err => { throw err })

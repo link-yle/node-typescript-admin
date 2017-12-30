@@ -1,5 +1,5 @@
 
-const getUserByEmail = require('../data-layer/get-user-by-email')
+const getUserByEmail = require('../../data-layer/get-user-by-email')
 
 module.exports = async (req, res, next) => {
 
@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
         const user = await getUserByEmail(req.query.email)
         if (!user){
             return next({ nF: 'User' })
-        } else if (user.activationCode !== req.query.activationCode) {
+        } else if (user.activationCode !== req.query.code) {
             return res.status(403).send({ error: 'Corrupt link' })
         } else {
             user.activationCode = undefined

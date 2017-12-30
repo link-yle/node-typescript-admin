@@ -1,4 +1,4 @@
-const removeRecord = require('../data-layer/remove-record.db')
+const removeRecord = require('../../data-layer/remove-record.db')
 
 module.exports = (req, res, next) => {
     return removeRecord(req.params.id, req.params.timeZoneId)

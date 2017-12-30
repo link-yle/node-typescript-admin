@@ -1,7 +1,7 @@
 
-const addNewUser = require('../data-layer/add-new-user.db')
-const ROLES = require('../config/rolesConstants')
-const clearUnneededDataFromPayload = require('../services/clear-unneeded-data')
+const addNewUser = require('../../data-layer/add-new-user.db')
+const ROLES = require('../../config/rolesConstants')
+const clearUnneededDataFromPayload = require('../../services/clear-unneeded-data')
 
 
 module.exports = (req, res, next) => {

@@ -1,5 +1,5 @@
-const ROLES = require('../config/rolesConstants')
-const db = require('../data-layer/get-users.db')
+const ROLES = require('../../config/rolesConstants')
+const db = require('../../data-layer/get-users.db')
 
 module.exports = (req, res, next) => {
     let promise

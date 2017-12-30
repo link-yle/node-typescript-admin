@@ -1,5 +1,5 @@
 
-const db = require('../data-layer/update-passwrd-by-user-id.db')
+const db = require('../../data-layer/update-passwrd-by-user-id.db')
 
 module.exports = async (req, res, next) =>{
     try{

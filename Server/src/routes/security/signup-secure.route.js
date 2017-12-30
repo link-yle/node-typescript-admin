@@ -1,9 +1,9 @@
 
-const addNewUser = require('../data-layer/add-new-user.db')
-const generateRandomCode = require('../services/generate-random-code').generateRandomCode
-const ROLES = require('../config/rolesConstants')
-const clearUnneededDataFromPayload = require('../services/clear-unneeded-data')
-const mailer = require('../services/mailer')
+const addNewUser = require('../../data-layer/add-new-user.db')
+const generateRandomCode = require('../../services/generate-random-code').generateRandomCode
+const ROLES = require('../../config/rolesConstants')
+const clearUnneededDataFromPayload = require('../../services/clear-unneeded-data')
+const mailer = require('../../services/mailer')
 
 
 module.exports = async (req, res, next) => {

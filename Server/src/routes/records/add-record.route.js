@@ -1,4 +1,4 @@
-const addRecord = require('../data-layer/add-record.db')
+const addRecord = require('../../data-layer/add-record.db')
 
 
 module.exports = (req, res, next) => {

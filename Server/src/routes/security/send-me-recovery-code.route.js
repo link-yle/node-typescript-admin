@@ -1,6 +1,6 @@
-const saveRecoveryCodeToDb = require('../data-layer/save-recovery-code.db')
-const generateRandomCode = require('../services/generate-random-code').generateRandomCode
-const mailer = require('../services/mailer')
+const saveRecoveryCodeToDb = require('../../data-layer/save-recovery-code.db')
+const generateRandomCode = require('../../services/generate-random-code').generateRandomCode
+const mailer = require('../../services/mailer')
 
 module.exports = async (req, res, next) => {
     const code = generateRandomCode()

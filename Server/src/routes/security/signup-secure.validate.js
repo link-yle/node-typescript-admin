@@ -1,5 +1,5 @@
 const Joi = require('Joi')
-const passwordRegex = require('../config/regexConstants').passwordRegex
+const passwordRegex = require('../../config/regexConstants').passwordRegex
 
 module.exports = (req, res, next) => {
     const schema = Joi.object().keys({

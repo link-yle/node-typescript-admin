@@ -30,7 +30,7 @@ export class ActivationLinkComponent implements OnInit {
 
     activateFromBackEnd(code, email) {
         console.log(code, email);
-        this.dataService.sendActivationCode(code, email).subscribe(
+        this.dataService.activateFromBackEnd(code, email).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar('Your account has been successfully activated')
                 this.router.navigate(['login/activation_link/success'])

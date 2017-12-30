@@ -1,7 +1,7 @@
-const { getToken } = require('../core/authentication')
-const comparePassword = require('../services/compare-password').comparePassword
-const getUserByEmail = require('../data-layer/get-user-by-email')
-const clearUnneededDataFromPayload = require('../services/clear-unneeded-data')
+const { getToken } = require('../../core/authentication')
+const comparePassword = require('../../services/compare-password').comparePassword
+const getUserByEmail = require('../../data-layer/get-user-by-email')
+const clearUnneededDataFromPayload = require('../../services/clear-unneeded-data')
 
 module.exports = (req, res, next) => {
     let loginErr = new Error('Email or/and password are wrong')
