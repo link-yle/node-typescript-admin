@@ -7,9 +7,9 @@ import { forgottenPasswordLink } from 'app/shared/config/auth-links';
 
 @Component({
     selector: 'app-forgotten-password',
-    templateUrl: 'forgotten-password.component.html',
+    templateUrl: 'forgotten-password-form.component.html',
 })
-export class ForgottenPasswordComponent implements OnInit {
+export class ForgottenPasswordFormComponent implements OnInit {
     form: FormGroup
     isRecoveryLinkSent: boolean
     loading: boolean
