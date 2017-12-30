@@ -178,8 +178,17 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
+    activateUserAdministratively(id: string) {
+        this.setRequestOptions()
+        return this.http.patch(`${this.endPoint}/activation/administration/${id}`, {},this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(err => this.handleError(err));
+    }
 
 
+    
 
     private handleError(error: Response | any) {
         console.log(error);

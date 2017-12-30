@@ -33,8 +33,11 @@
                     <td class="text-center" (click)="onUpdateClick(item)">
                         <i class="fa fa-edit  text-default"> </i>
                     </td>
-                    <td class="text-center" (click)="onActivateClick(item)">
+                    <td class="text-center" (click)="onActivateClick(item)" *ngIf="!item.active">
                         <i class="fa fa-edit  text-default"> </i>
+                    </td>
+                    <td class="text-center"  *ngIf="item.active">
+                        <i class="fa fa fa-check  text-default"> </i>
                     </td>
                     <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)">
                         <i class="fa fa-clock-o text-warning"> </i>

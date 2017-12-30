@@ -4,7 +4,7 @@ const ROLES = require('../config/rolesConstants')
 module.exports = {
     getAllUsers({ limit, skip, filter }) {
         const query = filter ? { name: { $regex: RegExp(`.*${filter}.*`) } } : {}
-        return usersModel.find(query).limit(limit).skip(skip).select('_id name email role').lean().exec()
+        return usersModel.find(query).limit(limit).skip(skip).select('_id name email role active').lean().exec()
     },
 
     getAllUsersCount(filter) {
@@ -14,7 +14,7 @@ module.exports = {
 
     getRegularUsers({ limit, skip, filter }) {
         const query = filter ? { role: ROLES.regular, name: { $regex: RegExp(`.*${filter}.*`) } } : { role: ROLES.regular}
-        return usersModel.find(query).limit(limit).skip(skip).select('_id name email').lean().exec()
+        return usersModel.find(query).limit(limit).skip(skip).select('_id name email active').lean().exec()
     },
 
     getRegularUsersCount(filter) {
