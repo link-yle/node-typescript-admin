@@ -31,22 +31,22 @@
                     <td>{{item.role}}</td>
                     <td>{{item.email}}</td>
                     <td class="text-center" (click)="onUpdateClick(item)">
-                        <i class="fa fa-edit  text-default"> </i>
+                        <a href="javascript:void(0);"> <i class="fa fa-edit  text-default"> </i> </a>
                     </td>
                     <td class="text-center" (click)="onActivateClick(item)" *ngIf="!item.active">
-                        <i class="fa fa-edit  text-default"> </i>
+                        <a href="javascript:void(0);"> <i class="fa fa-edit  text-default"> </i> </a>
                     </td>
                     <td class="text-center"  *ngIf="item.active">
-                        <i class="fa fa fa-check  text-default"> </i>
+                        <a> <i class="fa fa fa-check  text-default"> </i> </a>
                     </td>
                     <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)">
-                        <i class="fa fa-clock-o text-warning"> </i>
+                        <a href="javascript:void(0);"> <i class="fa fa-clock-o text-warning"> </i> </a>
                     </td>
                     <td class="text-center" (click)="onDeleteClick(item)">
-                        <i class="fa fa-trash text-danger"> </i>
+                        <a href="javascript:void(0);"> <i class="fa fa-trash text-danger"> </i> </a>
                     </td>
                     <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)">
-                        <i class="fa fa-user-o text-warning"> </i>
+                        <a href="javascript:void(0);"> <i class="fa fa-user-o text-warning"> </i> </a>
                     </td>
                 </tr>
             </tbody>
