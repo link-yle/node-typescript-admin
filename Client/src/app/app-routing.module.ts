@@ -27,6 +27,7 @@ import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-su
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { SuccessAfterActivatingAccountComponent } from 'app/routes/activation-link/success-after-activating-account/success-after-activating-account.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
+import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -39,6 +40,7 @@ const paths: Routes = [
         { path: 'activation_link/corrupt', component: CorruptActivationLinkComponent },
 
         { path: 'forgotten_password_form', component: ForgottenPasswordFormComponent },
+        { path: 'forgotten_password_form/success', component: ForgottenPasswordFormSuccessComponent },
         // { path: 'forgotten_password_process', component: ForgottenPasswordFormComponent },
         
 

@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { DataService } from '../../shared/services/data.service';
 import { forgottenPasswordLink } from 'app/shared/config/auth-links';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-forgotten-password',
@@ -11,14 +12,14 @@ import { forgottenPasswordLink } from 'app/shared/config/auth-links';
 })
 export class ForgottenPasswordFormComponent implements OnInit {
     form: FormGroup
-    isRecoveryLinkSent: boolean
     loading: boolean
 
     constructor(
         private fb: FormBuilder,
         private globalValidatorsService: GlobalValidatorsService,
         private dataService: DataService,
-        private sb: SnackBarService
+        private sb: SnackBarService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -29,8 +30,7 @@ export class ForgottenPasswordFormComponent implements OnInit {
         this.loading = true
         this.dataService.forgottenPassword(formValue.email, forgottenPasswordLink).subscribe(
             data => {
-                this.isRecoveryLinkSent = true
-                this.loading = false
+                this.router.navigate(['/login/forgotten_password_form/success'])  
             }, 
             error => {
                 this.sb.emitErrorSnackBar(error)
