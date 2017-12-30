@@ -20,7 +20,6 @@ import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-o
 import { EmptyComponent } from './routes/empty/empty.component';
 import { LoginLayoutComponent } from './shared/components/layout/login-layout/login-layout.component';
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
-import { ActivationComponent } from './routes/activation/activation.component';
 // tslint:disable-next-line:max-line-length
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
@@ -39,7 +38,6 @@ const paths: Routes = [
         { path: 'activation_link/success', component: SuccessAfterActivatingAccountComponent },
         { path: 'activation_link/corrupt', component: CorruptActivationLinkComponent },
 
-        { path: 'activation', component: ActivationComponent },
         { path: 'forgotten_password', component: ForgottenPasswordComponent },
 
     ] },

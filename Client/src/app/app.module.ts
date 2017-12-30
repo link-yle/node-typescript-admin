@@ -27,8 +27,6 @@ import { UsersComponent } from './routes/users-list/users.component';
 import { AuthGuardService } from './shared/services/auth.guard.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PublicInfoService } from './shared/services/public.info.service';
-import { ActivationComponent } from './routes/activation/activation.component';
-// tslint:disable-next-line:max-line-length
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
@@ -54,7 +52,6 @@ import { SuccessAfterActivatingAccountComponent } from 'app/routes/activation-li
     SignupComponent,
     UsersComponent,
     EmptyComponent,
-    ActivationComponent,
     SuccessAfterActivatingAccountComponent,
     ActivationLinkComponent,
     CorruptActivationLinkComponent,
