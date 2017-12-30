@@ -1,3 +1,20 @@
 
 
-Loading
+
+
+<div class="loader" *ngIf="loading"> </div>
+
+<div class="container" *ngIf="isSuccess">
+    <div class="jumbotron">
+        <h1>Success</h1>
+        <p>Your account has been activated successfully. <a routerLink="/"> Click here to login </a></p>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="isCorrupt">
+    <div class="jumbotron">
+        <h1>Error</h1>
+        <p>This activation link is corrupt </p>
+    </div>
+</div>

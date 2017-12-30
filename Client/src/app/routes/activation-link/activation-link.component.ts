@@ -10,11 +10,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ActivationLinkComponent implements OnInit {
 
     loading = true
-
+    isSuccess: boolean
+    isCorrupt: boolean
     constructor(
         private dataService: DataService,
         private route: ActivatedRoute,
-        private router: Router,
         private sb: SnackBarService,
     ) {
 
@@ -23,7 +23,7 @@ export class ActivationLinkComponent implements OnInit {
         this.route.queryParams.subscribe((params => {
             const code = params['code']
             const email = params['email']
-            if (!email || !code) this.router.navigate(['login/activation_link/corrupt'])
+            if (!email || !code) this.isCorrupt = true
             else this.activateFromBackEnd(code, email)
         }))
     }
@@ -32,8 +32,8 @@ export class ActivationLinkComponent implements OnInit {
         console.log(code, email);
         this.dataService.activateFromBackEnd(code, email).subscribe(
             data => {
-                this.sb.emitSuccessSnackBar('Your account has been successfully activated')
-                this.router.navigate(['login/activation_link/success'])
+                this.loading = false
+                this.isSuccess = true;
             },
             () => this.sb.emitErrorSnackBar('An error occurred. Please try again later')
         )

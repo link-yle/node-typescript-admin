@@ -28,10 +28,8 @@ import { AuthGuardService } from './shared/services/auth.guard.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PublicInfoService } from './shared/services/public.info.service';
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
-import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
-import { SuccessAfterActivatingAccountComponent } from 'app/routes/activation-link/success-after-activating-account/success-after-activating-account.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
 import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
 
@@ -53,9 +51,7 @@ import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-pass
     SignupComponent,
     UsersComponent,
     EmptyComponent,
-    SuccessAfterActivatingAccountComponent,
     ActivationLinkComponent,
-    CorruptActivationLinkComponent,
     ForgottenPasswordFormComponent,
     ForgottenPasswordFormSuccessComponent,
     NormalSignupSuccessComponent,

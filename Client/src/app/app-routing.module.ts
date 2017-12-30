@@ -22,10 +22,8 @@ import { LoginLayoutComponent } from './shared/components/layout/login-layout/lo
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
 // tslint:disable-next-line:max-line-length
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
-import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
-import { SuccessAfterActivatingAccountComponent } from 'app/routes/activation-link/success-after-activating-account/success-after-activating-account.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
 import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
 
@@ -36,8 +34,6 @@ const paths: Routes = [
         { path: 'signup/success', component: NormalSignupSuccessComponent },
         { path: 'signup/secure_success', component: SecureSignupSuccessComponent },
         { path: 'activation_link', component: ActivationLinkComponent },
-        { path: 'activation_link/success', component: SuccessAfterActivatingAccountComponent },
-        { path: 'activation_link/corrupt', component: CorruptActivationLinkComponent },
 
         { path: 'forgotten_password_form', component: ForgottenPasswordFormComponent },
         { path: 'forgotten_password_form/success', component: ForgottenPasswordFormSuccessComponent },
