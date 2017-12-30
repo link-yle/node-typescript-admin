@@ -21,7 +21,8 @@ import { CustomInputComponent } from './components/UI/custom-input/custom-input.
 import { AlertModule } from 'ngx-bootstrap/alert';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
 @NgModule({
   imports: [
@@ -32,6 +33,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpModule,
     RouterModule,
     MatSnackBarModule,
+    NgProgressModule.forRoot(),
+    NgProgressHttpModule, 
     BrowserAnimationsModule
   ],
   providers: [],
@@ -54,7 +57,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PasswordInputComponent,
     CustomInputComponent,
     // MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgProgressModule
+    
   ],
   declarations: [
     NavComponent,
@@ -69,7 +74,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SubmitButtonComponent,
     EmailInputComponent,
     PasswordInputComponent,
-    CustomInputComponent
+    CustomInputComponent,
+    
 
   ],
 })

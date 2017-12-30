@@ -15,7 +15,6 @@ import { signUpSecurelyActivationLink } from 'app/shared/config/auth-links';
 })
 export class SignupComponent implements OnInit {
     form: FormGroup
-    loading: boolean
     constructor(private fb: FormBuilder,
         private dataService: DataService,
         private sb: SnackBarService,
@@ -46,7 +45,6 @@ export class SignupComponent implements OnInit {
     }
 
     signupSecurely() {
-        this.loading= true;
         this.dataService.signupSecurely(this.form.value, signUpSecurelyActivationLink).subscribe(
             data => {
                 this.publicInfoService.setEmail(this.form.value.email)
@@ -55,7 +53,6 @@ export class SignupComponent implements OnInit {
             },
             error => {
                 this.sb.emitErrorSnackBar(error)
-                this.loading = false
             }
         )
     }

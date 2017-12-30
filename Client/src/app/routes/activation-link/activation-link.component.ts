@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ActivationLinkComponent implements OnInit {
 
-    loading = true
     isSuccess: boolean
     isCorrupt: boolean
     constructor(
@@ -32,7 +31,6 @@ export class ActivationLinkComponent implements OnInit {
         console.log(code, email);
         this.dataService.activateFromBackEnd(code, email).subscribe(
             data => {
-                this.loading = false
                 this.isSuccess = true;
             },
             () => this.sb.emitErrorSnackBar('An error occurred. Please try again later')

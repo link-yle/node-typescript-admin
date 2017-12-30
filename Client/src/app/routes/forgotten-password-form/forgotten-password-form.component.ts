@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class ForgottenPasswordFormComponent implements OnInit {
     form: FormGroup
-    loading: boolean
 
     constructor(
         private fb: FormBuilder,
@@ -27,14 +26,12 @@ export class ForgottenPasswordFormComponent implements OnInit {
     }
 
     onSubmit(formValue) {
-        this.loading = true
         this.dataService.forgottenPassword(formValue.email, forgottenPasswordLink).subscribe(
             data => {
                 this.router.navigate(['/login/forgotten_password_form/success'])  
             }, 
             error => {
                 this.sb.emitErrorSnackBar(error)
-                this.loading = false
             },
         )
     }
