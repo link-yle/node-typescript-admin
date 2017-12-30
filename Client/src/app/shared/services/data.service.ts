@@ -52,12 +52,12 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    signupSecurely(item: User) {
+    signupSecurely(item: User, route) {
         return this.http.post(`${this.endPoint}/users/secure`, {
             user: {
                 email: item.email, password: item.password, timeZones: [], name: item.name
             },
-            route: `${window.location.origin}/activation_link`
+            route: `${window.location.origin}/login/activation_link`
         }, this.requestOptions)
             .map(res => {
                 return res.json()

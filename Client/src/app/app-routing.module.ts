@@ -21,30 +21,30 @@ import { EmptyComponent } from './routes/empty/empty.component';
 import { LoginLayoutComponent } from './shared/components/layout/login-layout/login-layout.component';
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
 import { ActivationComponent } from './routes/activation/activation.component';
-import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-signup-securely/success-after-signup-securely.component';
 // tslint:disable-next-line:max-line-length
-import { SuccessAfterActivatingAccountComponent } from './routes/success-after-activating-account/success-after-activating-account.component';
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
+import { SuccessAfterActivatingAccountComponent } from 'app/routes/activation-link/success-after-activating-account/success-after-activating-account.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
         { path: '', component: LoginComponent },
-        { path: 'forgotten_password', component: ForgottenPasswordComponent },
         { path: 'signup', component: SignupComponent },
         { path: 'signup/success', component: NormalSignupSuccessComponent },
         { path: 'signup/secure_success', component: SecureSignupSuccessComponent },
-        { path: 'activation', component: ActivationComponent },
-        { path: 'success', component: SuccessAfterSignupSecurelyComponent },
         { path: 'activation_link', component: ActivationLinkComponent },
-        { path: 'corrupt_activation_link', component: CorruptActivationLinkComponent },
+        { path: 'activation_link/success', component: SuccessAfterActivatingAccountComponent },
+        { path: 'activation_link/corrupt', component: CorruptActivationLinkComponent },
+
+        { path: 'activation', component: ActivationComponent },
+        { path: 'forgotten_password', component: ForgottenPasswordComponent },
+
     ] },
     {
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [
-            { path: 'success/account_activated', component: SuccessAfterActivatingAccountComponent, },
             { path: 'empty', component: EmptyComponent, },
             { path: 'my-profile', component: EditMyInfoComponent, },
             { path: 'my-time', component: MyTimeComponent, },

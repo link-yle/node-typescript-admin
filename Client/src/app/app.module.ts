@@ -28,14 +28,13 @@ import { AuthGuardService } from './shared/services/auth.guard.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PublicInfoService } from './shared/services/public.info.service';
 import { ActivationComponent } from './routes/activation/activation.component';
-import { SuccessAfterSignupSecurelyComponent } from './routes/success-after-signup-securely/success-after-signup-securely.component';
 // tslint:disable-next-line:max-line-length
-import { SuccessAfterActivatingAccountComponent } from './routes/success-after-activating-account/success-after-activating-account.component';
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { CorruptActivationLinkComponent } from './routes/corrupt-activation-link/corrupt-activation-link.component';
 import { ForgottenPasswordComponent } from './routes/forgotten-password/forgotten-password.component';
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
+import { SuccessAfterActivatingAccountComponent } from 'app/routes/activation-link/success-after-activating-account/success-after-activating-account.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +55,6 @@ import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-su
     UsersComponent,
     EmptyComponent,
     ActivationComponent,
-    SuccessAfterSignupSecurelyComponent,
     SuccessAfterActivatingAccountComponent,
     ActivationLinkComponent,
     CorruptActivationLinkComponent,

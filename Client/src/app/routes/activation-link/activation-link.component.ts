@@ -23,7 +23,7 @@ export class ActivationLinkComponent implements OnInit {
         this.route.queryParams.subscribe((params => {
             const code = params['code']
             const email = params['email']
-            if (!email || !code) this.router.navigate(['login/corrupt_activation_link'])
+            if (!email || !code) this.router.navigate(['login/activation_link/corrupt'])
             else this.activateFromBackEnd(code, email)
         }))
     }
@@ -33,9 +33,9 @@ export class ActivationLinkComponent implements OnInit {
         this.dataService.sendActivationCode(code, email).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar('Your account has been successfully activated')
-                this.router.navigate(['/login'])
+                this.router.navigate(['login/activation_link/success'])
             },
-            () => this.router.navigate(['login/corrupt_activation_link'])
+            () => this.sb.emitErrorSnackBar('An error occurred. Please try again later')
         )
     }
 
