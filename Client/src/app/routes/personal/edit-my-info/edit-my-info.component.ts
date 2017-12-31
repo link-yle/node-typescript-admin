@@ -4,7 +4,6 @@ import { User } from '../../../shared/models/user.model';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-    selector: 'app-edit-my-info',
     templateUrl: 'edit-my-info.component.html',
 })
 export class EditMyInfoComponent implements OnInit {

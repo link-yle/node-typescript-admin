@@ -9,8 +9,6 @@ import { PublicInfoService } from '../../shared/services/public.info.service';
 import { signUpSecurelyActivationLink } from 'app/shared/config/auth-links';
 
 @Component({
-    moduleId: module.id,
-    selector: 'app-signup',
     templateUrl: 'signup.component.html',
 })
 export class SignupComponent implements OnInit {

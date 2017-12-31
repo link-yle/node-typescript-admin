@@ -7,7 +7,6 @@ import { User } from 'app/shared/models/user.model';
 import { SnackBarService } from 'app/shared/services/snackbar.service';
 
 @Component({
-    selector: 'app-my-time',
     templateUrl: 'my-time.component.html',
 })
 export class MyTimeComponent {

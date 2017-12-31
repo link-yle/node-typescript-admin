@@ -6,7 +6,6 @@ import { SnackBarService } from '../../shared/services/snackbar.service';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-new-password',
     templateUrl: 'new-password.component.html',
 })
 export class NewPasswordComponent implements OnInit {

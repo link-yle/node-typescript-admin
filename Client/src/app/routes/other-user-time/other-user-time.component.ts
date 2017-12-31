@@ -8,7 +8,6 @@ import { SnackBarService } from 'app/shared/services/snackbar.service';
 import { DataService } from 'app/shared/services/data.service';
 
 @Component({
-    selector: 'app-other-user-time',
     templateUrl: 'other-user-time.component.html',
 })
 export class OtherUserTimeComponent implements OnInit {

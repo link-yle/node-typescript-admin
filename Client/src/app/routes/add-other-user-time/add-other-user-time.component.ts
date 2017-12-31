@@ -7,7 +7,6 @@ import { User } from 'app/shared/models/user.model';
 import { DataService } from 'app/shared/services/data.service';
 
 @Component({
-    selector: 'app-add-other-user-time',
     templateUrl: 'add-other-user-time.component.html',
 })
 export class AddOtherUserTimeComponent implements OnInit {

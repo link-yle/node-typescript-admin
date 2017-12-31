@@ -8,7 +8,6 @@ import { User } from 'app/shared/models/user.model';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'change-my-password',
     templateUrl: 'change-other-user-password.component.html',
 })
 export class ChangeOtherUserPasswordComponent {

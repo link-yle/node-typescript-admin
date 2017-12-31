@@ -5,7 +5,6 @@ import { DataService } from '../../shared/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    selector: 'forgotten-password-process',
     templateUrl: 'forgotten-password-process.component.html',
 })
 export class ForgottenPasswordProcessComponent implements OnInit {

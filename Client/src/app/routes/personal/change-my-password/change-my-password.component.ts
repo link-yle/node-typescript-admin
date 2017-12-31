@@ -5,7 +5,6 @@ import { DataService } from '../../../shared/services/data.service';
 import { SnackBarService } from '../../../shared/services/snackbar.service';
 
 @Component({
-    selector: 'change-my-password',
     templateUrl: 'change-my-password.component.html',
 })
 export class ChangeMyPasswordComponent {

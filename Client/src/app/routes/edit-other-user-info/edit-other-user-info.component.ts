@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-    selector: 'app-edit-other-user-info',
     templateUrl: 'edit-other-user-info.component.html',
 })
 export class EditOtherUserInfoComponent implements OnInit {

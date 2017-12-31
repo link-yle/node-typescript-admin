@@ -6,7 +6,6 @@ import { SnackBarService } from 'app/shared/services/snackbar.service';
 import { Timezone } from 'app/shared/models/timezone.model';
 
 @Component({
-    selector: 'app-add-my-time',
     templateUrl: 'add-my-time.component.html',
 })
 export class AddMyTimeComponent {

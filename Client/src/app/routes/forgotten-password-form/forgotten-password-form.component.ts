@@ -7,7 +7,6 @@ import { forgottenPasswordLink } from 'app/shared/config/auth-links';
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'app-forgotten-password',
     templateUrl: 'forgotten-password-form.component.html',
 })
 export class ForgottenPasswordFormComponent implements OnInit {

@@ -6,7 +6,6 @@ import { SelectedUserService } from '../../shared/services/selectedUser.service'
 import { User } from 'app/shared/models/user.model';
 
 @Component({
-    selector: 'app-edit-role',
     templateUrl: 'edit-role.component.html',
 })
 export class EditRoleComponent implements OnInit {

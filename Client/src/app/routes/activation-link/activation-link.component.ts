@@ -4,7 +4,6 @@ import { DataService } from '../../shared/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-    selector: 'app-activation-link',
     templateUrl: 'activation-link.component.html',
 })
 export class ActivationLinkComponent implements OnInit {

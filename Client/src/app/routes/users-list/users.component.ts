@@ -10,7 +10,6 @@ import { AuthService } from '../../shared/services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-    selector: 'app-users',
     templateUrl: 'users.component.html',
 })
 export class UsersComponent implements OnInit, OnDestroy {

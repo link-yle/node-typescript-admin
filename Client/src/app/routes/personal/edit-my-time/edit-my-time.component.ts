@@ -7,7 +7,6 @@ import { Timezone } from 'app/shared/models/timezone.model';
 import { TimingsService } from 'app/shared/services/timings.service';
 
 @Component({
-    selector: 'app-edit-my-time',
     templateUrl: 'edit-my-time.component.html',
 })
 export class EditMyTimeComponent  {

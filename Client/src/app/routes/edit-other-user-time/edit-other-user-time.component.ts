@@ -9,7 +9,6 @@ import { SnackBarService } from 'app/shared/services/snackbar.service';
 import { TimingsService } from 'app/shared/services/timings.service';
 
 @Component({
-    selector: 'app-edit-other-user-time',
     templateUrl: 'edit-other-user-time.component.html',
 })
 export class EditOtherUserTimeComponent implements OnInit {

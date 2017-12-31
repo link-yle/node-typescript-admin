@@ -7,7 +7,6 @@ import { SnackBarService } from '../../shared/services/snackbar.service';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
-    selector: 'app-login',
     templateUrl: 'login.component.html',
 })
 export class LoginComponent implements OnInit {
