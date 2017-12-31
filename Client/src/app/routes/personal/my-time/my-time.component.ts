@@ -1,8 +1,8 @@
-import { TimingsService } from '../../shared/services/timings.service';
+import { TimingsService } from '../../../shared/services/timings.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../shared/services/auth.service';
+import { AuthService } from '../../../shared/services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Timezone } from '../../shared/models/timezone.model';
+import { Timezone } from '../../../shared/models/timezone.model';
 
 @Component({
     selector: 'app-my-time',

@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
-import { DataService } from '../../shared/services/data.service';
-import { SnackBarService } from '../../shared/services/snackbar.service';
+import { DataService } from '../../../shared/services/data.service';
+import { SnackBarService } from '../../../shared/services/snackbar.service';
 
 @Component({
-    selector: 'change-password-form',
-    templateUrl: 'change-password-form.component.html',
+    selector: 'change-my-password',
+    templateUrl: 'change-my-password.component.html',
 })
-export class ChangePasswordFormComponent {
+export class ChangeMyPasswordComponent {
     form: FormGroup
 
     constructor(

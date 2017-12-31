@@ -1,20 +1,16 @@
 import {
     AuthenticatedNavbarComponent,
 } from './shared/components/layout/authenticated-navbar/authenticated-navbar.component';
-import { EditMyTimeComponent } from './routes/edit-my-time/edit-my-time.component';
 import { AuthGuardService } from './shared/services/auth.guard.service';
 import { SignupComponent } from './routes/signup/signup.component';
-import { EditMyInfoComponent } from './routes/edit-my-info/edit-my-info.component';
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AdminClaimsService } from './shared/services/admin-claims.service';
 import { LoginComponent } from './routes/login/login.component';
-import { MyTimeComponent } from './routes/my-time/my-time.component';
 import { UsersComponent } from './routes/users-list/users.component';
 import { OtherUserTimeComponent } from './routes/other-user-time/other-user-time.component';
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';
 import { AddOtherUserTimeComponent } from './routes/add-other-user-time/add-other-user-time.component';
-import { AddMyTimeComponent } from './routes/add-my-time/add-my-time.component';
 import { EditUserComponent } from './shared/components/users/edit-user/edit-user.component';
 import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-other-user-info.component';
 import { EmptyComponent } from './routes/empty/empty.component';
@@ -26,7 +22,11 @@ import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-su
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
 import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
-import { ChangePasswordFormComponent } from 'app/routes/change-password-form/change-password-form.component';
+import { ChangeMyPasswordComponent } from 'app/routes/personal/change-my-password/change-my-password.component';
+import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
+import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
+import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
+import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -46,12 +46,13 @@ const paths: Routes = [
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [
             { path: 'empty', component: EmptyComponent, },
             { path: 'my-profile', component: EditMyInfoComponent, },
-            { path: 'my-profile/password', component: ChangePasswordFormComponent },
+            { path: 'my-profile/password', component: ChangeMyPasswordComponent },
             { path: 'my-time', component: MyTimeComponent, },
             { path: 'my-time/add', component: AddMyTimeComponent, },
             { path: 'my-time/edit', component: EditMyTimeComponent },
             { path: 'users', component: UsersComponent, },
             { path: 'users/:id', component: EditOtherUserInfoComponent },
+            { path: 'users/:id/password', component: EditRoleComponent },
             { path: 'users/:id/role', component: EditRoleComponent, canActivate: [AdminClaimsService] },
             { path: 'users/:id/time', component: OtherUserTimeComponent, canActivate: [AdminClaimsService], },
             { path: 'users/:id/time/add', component: AddOtherUserTimeComponent },

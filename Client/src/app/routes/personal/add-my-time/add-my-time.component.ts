@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
-    selector: 'app-edit-my-time',
-    templateUrl: 'edit-my-time.component.html',
+    selector: 'app-add-my-time',
+    templateUrl: 'add-my-time.component.html',
 })
-export class EditMyTimeComponent implements OnInit {
+export class AddMyTimeComponent implements OnInit {
     profileId: string
     constructor(
         private authService: AuthService,
@@ -17,7 +17,7 @@ export class EditMyTimeComponent implements OnInit {
         this.profileId = this.authService.getProfile()._id
     }
 
-    onEdited() {
+    onAdded() {
         this.router.navigate(['/my-time'])
     }
 
