@@ -8,13 +8,13 @@ import { Observable } from 'rxjs/Observable';
     templateUrl: 'edit-my-info.component.html',
 })
 export class EditMyInfoComponent implements OnInit {
-    public user$: Observable<User>
+    public user
     public title: string
     constructor(private authService: AuthService) { }
 
     ngOnInit() {
         this.title = `Update my Info `
-        this.user$ = Observable.of(this.authService.getProfile())
+        this.user = this.authService.getProfile()
     }
 
     onEdited(data: User) {

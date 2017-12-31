@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectedUserService } from '../../shared/services/selectedUser.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-edit-other-user-time',
@@ -10,11 +11,14 @@ export class EditOtherUserTimeComponent implements OnInit {
     profileId: string
     constructor(
         private selectedUserService: SelectedUserService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
-        this.profileId = this.selectedUserService.get()._id
+        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe(
+            user => this.profileId = user._id
+        )
     }
 
     onEdited() {

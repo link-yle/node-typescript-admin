@@ -1,8 +1,10 @@
 <div class="col-md-6">
-    <div class="form-group">
-        <label for="role">{{userName}}'s  Role</label>
+    <h3>Update User's Role</h3>
+    <br>
+    <div class="form-group" *ngIf="user">
+        <label for="role">{{user?.name}}'s  Role</label>
 
-        <select class="form-control" name="role" [(ngModel)]="userRole">
+        <select class="form-control" name="role" [(ngModel)]="user.role ">
             <!-- <option disabled  value="" >Subcategory</option> -->
             <option value="regular">Regular</option>
             <option value="manager">Manager</option>

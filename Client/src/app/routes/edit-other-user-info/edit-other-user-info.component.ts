@@ -11,9 +11,7 @@ import { Observable } from 'rxjs/Observable';
     templateUrl: 'edit-other-user-info.component.html',
 })
 export class EditOtherUserInfoComponent implements OnInit {
-    public user$: Observable<User>
-    private userId: string
-    public title: string
+    public user: User
     constructor(
         private selectedUserService: SelectedUserService,
         private router: Router,
@@ -23,14 +21,11 @@ export class EditOtherUserInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user$ = this.selectedUserService.getUserWithProbableDataFetch(this.route.params).do(data => {
-            this.title = `Update ${data.name}'s  Info `
-            this.userId = data._id
-        })
+        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe(data =>  this.user = data )
     }
 
     navigateToChangeUserPassword() {
-        this.router.navigate(['users', this.userId, 'password'])
+        this.router.navigate(['users', this.user._id, 'password'])
     }
 
 }

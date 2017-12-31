@@ -14,10 +14,8 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-    @Input() user$: Observable<User>
-    @Input() title: string
+    @Input() user: User
     @Output() edited = new EventEmitter()
-    private userId: string
     public form: FormGroup
     constructor(
         private dataService: DataService,
@@ -27,24 +25,19 @@ export class EditUserComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.user$.subscribe(data=>{
-            this.userId = data._id
-            this.buildForm(data)
-        })
-   
-
+        this.buildForm()
     }
 
-    private buildForm(user) {
+    private buildForm() {
         this.form = this.fb.group({
-            name: [user.name, Validators.compose([Validators.required, this.globalValidatorsService.nameFormat])],
-            email: [user.email, Validators.compose([Validators.required, this.globalValidatorsService.mailFormat])],
+            name: [this.user.name, Validators.compose([Validators.required, this.globalValidatorsService.nameFormat])],
+            email: [this.user.email, Validators.compose([Validators.required, this.globalValidatorsService.mailFormat])],
         })
     }
 
     onSubmit() {
         const payload = { name: this.form.value.name, email: this.form.value.email }
-        this.dataService.updateUserInfo(this.userId, payload).subscribe(
+        this.dataService.updateUserInfo(this.user._id, payload).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar()
                 this.edited.emit(data)

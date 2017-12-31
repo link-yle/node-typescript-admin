@@ -1,7 +1,13 @@
-<app-edit-user [title]="title" [user$]="user$"></app-edit-user>
+
+<div *ngIf="user">
+
+<h3 >Update {{user.name}} Info</h3>
+
+<app-edit-user  [user]="user"></app-edit-user>
 
 <br>
 <br>
 <button class="btn btn-primary"  (click)="navigateToChangeUserPassword()">Change user's password</button>
 
 
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SelectedUserService } from '../../shared/services/selectedUser.service';
 
 @Component({
@@ -10,11 +10,14 @@ export class AddOtherUserTimeComponent implements OnInit {
     profileId: string
     constructor(
         private selectedUserService: SelectedUserService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute
     ) { }
 
     ngOnInit() {
-        this.profileId = this.selectedUserService.get()._id
+        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe(
+            user => this.profileId = user._id
+        )
     }
 
     onAdded() {

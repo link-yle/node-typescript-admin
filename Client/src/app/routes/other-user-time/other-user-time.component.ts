@@ -3,6 +3,7 @@ import { SelectedUserService } from '../../shared/services/selectedUser.service'
 import { Router } from '@angular/router';
 import { TimingsService } from '../../shared/services/timings.service';
 import { Timezone } from '../../shared/models/timezone.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-other-user-time',
@@ -14,20 +15,24 @@ export class OtherUserTimeComponent implements OnInit {
     constructor(
         private selectedUserService: SelectedUserService,
         private router: Router,
+        private route: ActivatedRoute,
         private timingsService: TimingsService
     ) {
-        if (!this.selectedUserService.get()) this.router.navigate(['users'])
      }
 
     ngOnInit() {
-        const user = this.selectedUserService.get()
-        this.profileId = user._id
-        this.title = `${user.name} Timings`
+        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe(
+            data => {
+                this.profileId = data._id
+                this.title = `${data.name} Timings`
+            }
+        )
     }
 
     onAddClicked() {
         this.router.navigate(['users', this.profileId, 'time', 'add'])
     }
+    
     onEditClicked(item: Timezone) {
         this.timingsService.saveSelectedTiming(item)
         this.router.navigate(['users', this.profileId, 'time', 'edit'])
