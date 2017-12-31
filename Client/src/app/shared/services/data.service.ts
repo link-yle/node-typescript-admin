@@ -178,6 +178,16 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
+    
+    changeOtherUserPassword( id: string, newPassword: string ) {
+        this.setRequestOptions()
+        return this.http.put(`${this.endPoint}/users/${id}/password`, { newPassword }, this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(err => this.handleError(err));
+    }
+
     activateUserAdministratively(id: string) {
         this.setRequestOptions()
         return this.http.patch(`${this.endPoint}/activation/administration/${id}`, {},this.requestOptions)
@@ -188,6 +198,7 @@ export class DataService {
     }
 
 
+    
     
 
     private handleError(error: Response | any) {

@@ -27,6 +27,7 @@ import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-in
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
 import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
+import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -52,7 +53,7 @@ const paths: Routes = [
             { path: 'my-time/edit', component: EditMyTimeComponent },
             { path: 'users', component: UsersComponent, },
             { path: 'users/:id', component: EditOtherUserInfoComponent },
-            { path: 'users/:id/password', component: EditRoleComponent },
+            { path: 'users/:id/password', component: ChangeOtherUserPasswordComponent },
             { path: 'users/:id/role', component: EditRoleComponent, canActivate: [AdminClaimsService] },
             { path: 'users/:id/time', component: OtherUserTimeComponent, canActivate: [AdminClaimsService], },
             { path: 'users/:id/time/add', component: AddOtherUserTimeComponent },

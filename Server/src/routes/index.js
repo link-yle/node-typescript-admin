@@ -33,6 +33,9 @@ const verifyRecoveryCode = require('./security/verify-recovery-code.route')
 const signupSecurely = require('./security/signup-secure.route')
 const validateSignupSecurely = require('./security/signup-secure.validate')
 const activateUserAdministratively = require('./security/activate-user-administratively.route')
+const changeOtherUserPassword = require('./security/change-other-user-password.route')
+const validatechangeOtherUserPassword = require('./security/change-other-user-password.validate')
+
 
 const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
@@ -43,10 +46,11 @@ router.get('/activation', validateVerifyActivationCode, verifyActivationCode)
 
 router.patch('/activation/administration/:id', verifyUser, Authorize.allowAdminAndManager, activateUserAdministratively)
 
-
 router.post('/users/login', validateLogin, login)
 router.post('/password_recovery_requests', validateSendMeRecoveryLink, sendMeRecoveryLink)
 router.get('/password_recovery_requests', validateVerifyActivationCode, verifyRecoveryCode)
+router.put('/password', verifyUser, validateUpdateMyPassword, updateMyPassword)
+router.put('/users/:id/password', verifyUser, validatechangeOtherUserPassword, Authorize.allowAdminAndManager,  changeOtherUserPassword)
 
 
 
@@ -60,7 +64,7 @@ router.get('/users/:id', verifyUser, Authorize.allowSelfAndAdminOnly, getUserDet
 router.post('/users/:id/timezones', verifyUser, validateAddRecord, Authorize.allowSelfAndAdminOnly, addRecord)
 router.delete('/users/:id/timezones/:timeZoneId', verifyUser, Authorize.allowSelfAndAdminOnly, removeRecord)
 router.put('/users/:id/timezones/:timeZoneId', verifyUser, validateUpdateRecord, Authorize.allowSelfAndAdminOnly, updateRecord)
-router.put('/password', verifyUser, validateUpdateMyPassword, updateMyPassword)
+
 router.patch('/users/:id/role', verifyUser, validateUpdateRole, Authorize.allowAdminOnly, updateUserRole)
 
 
