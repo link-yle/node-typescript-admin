@@ -6,6 +6,7 @@ import { SelectedUserService } from '../../../services/selectedUser.service';
 import { User } from '../../../models/user.model';
 import { SnackBarService } from '../../../services/snackbar.service';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-edit-user',
@@ -13,9 +14,10 @@ import { GlobalValidatorsService } from 'app/shared/services/global-validators.s
     styleUrls: ['edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-    @Input() user: User
+    @Input() user$: Observable<User>
     @Input() title: string
     @Output() edited = new EventEmitter()
+    private userId: string
     public form: FormGroup
     constructor(
         private dataService: DataService,
@@ -25,22 +27,24 @@ export class EditUserComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        // setTimeout(() => {
-            this.buildForm()
-        // }, 100)
+        this.user$.subscribe(data=>{
+            this.userId = data._id
+            this.buildForm(data)
+        })
+   
 
     }
 
-    private buildForm() {
+    private buildForm(user) {
         this.form = this.fb.group({
-            name: [this.user.name, Validators.compose([Validators.required, this.globalValidatorsService.nameFormat])],
-            email: [this.user.email, Validators.compose([Validators.required, this.globalValidatorsService.mailFormat])],
+            name: [user.name, Validators.compose([Validators.required, this.globalValidatorsService.nameFormat])],
+            email: [user.email, Validators.compose([Validators.required, this.globalValidatorsService.mailFormat])],
         })
     }
 
     onSubmit() {
         const payload = { name: this.form.value.name, email: this.form.value.email }
-        this.dataService.updateUserInfo(this.user._id, payload).subscribe(
+        this.dataService.updateUserInfo(this.userId, payload).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar()
                 this.edited.emit(payload)
@@ -52,7 +56,6 @@ export class EditUserComponent implements OnInit {
     }
 
     isIncorrectMailFormat(control: string) {
-       
         return this.form.get(control).hasError('incorrectMailFormat')
     }
 
