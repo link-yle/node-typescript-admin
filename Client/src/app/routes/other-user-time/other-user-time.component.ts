@@ -23,7 +23,7 @@ export class OtherUserTimeComponent implements OnInit {
      }
 
     ngOnInit() {
-        this.route.params.flatMap(data => this.dataService.getUserDetails(data.id)).subscribe(
+        this.route.params.first().flatMap(data => this.dataService.getUserDetails(data.id).first()).subscribe(
             data =>  this.user = data,
             error => this.sb.emitErrorSnackBar(error)
         )

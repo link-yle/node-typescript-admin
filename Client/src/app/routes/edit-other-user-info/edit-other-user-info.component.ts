@@ -21,7 +21,7 @@ export class EditOtherUserInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe(data =>  this.user = data )
+        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).first().subscribe(data =>  this.user = data )
     }
 
     navigateToChangeUserPassword() {

@@ -20,7 +20,7 @@ export class EditRoleComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe( user => this.user = user)
+        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).first().subscribe( user => this.user = user)
     }
 
     onAssignClick() {
