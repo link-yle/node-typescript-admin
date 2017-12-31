@@ -8,7 +8,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ForgottenPasswordProcessComponent implements OnInit {
 
-    isSuccess: boolean
     code: string
     email: string
 
@@ -31,7 +30,7 @@ export class ForgottenPasswordProcessComponent implements OnInit {
     private recoverFromBackEnd(obj: {recoveryCode: string, email: string, newPassword: string}) {
         this.dataService.changeMyPasswordUsingRecoveryCode(obj).subscribe(
             data => {
-                this.isSuccess = true;
+                this.router.navigate(['/login/forgotten_password_process/success'])
             },
             () => this.sb.emitErrorSnackBar('An error occurred. Please try again later')
         )

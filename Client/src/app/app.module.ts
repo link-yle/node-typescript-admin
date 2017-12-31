@@ -37,6 +37,7 @@ import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-p
 import { NewPasswordFormComponent } from 'app/shared/components/new-password-form/new-password-form.component';
 import { ForgottenPasswordProcessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-process.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
+import { ForgottenPasswordRecoverySuccessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-recovery-success/forgotten-password-recovery-success.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.compo
     ChangeOtherUserPasswordComponent,
     NewPasswordFormComponent,
     ForgottenPasswordProcessComponent,
-    CorruptLinkComponent
+    CorruptLinkComponent,
+    ForgottenPasswordRecoverySuccessComponent
   ],
   imports: [
     AppRoutingModule,

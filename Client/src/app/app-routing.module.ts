@@ -30,6 +30,7 @@ import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-ti
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
 import { ForgottenPasswordProcessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-process.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
+import { ForgottenPasswordRecoverySuccessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-recovery-success/forgotten-password-recovery-success.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -42,6 +43,7 @@ const paths: Routes = [
         { path: 'forgotten_password_form', component: ForgottenPasswordFormComponent },
         { path: 'forgotten_password_form/success', component: ForgottenPasswordFormSuccessComponent },
         { path: 'forgotten_password_process', component: ForgottenPasswordProcessComponent },
+        { path: 'forgotten_password_process/success', component: ForgottenPasswordRecoverySuccessComponent },
         { path: 'corrupt', component: CorruptLinkComponent },
         
         
