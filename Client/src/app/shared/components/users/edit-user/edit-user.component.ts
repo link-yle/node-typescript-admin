@@ -47,7 +47,7 @@ export class EditUserComponent implements OnInit {
         this.dataService.updateUserInfo(this.userId, payload).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar()
-                this.edited.emit(payload)
+                this.edited.emit(data)
             },
             error => {
                 this.sb.emitErrorSnackBar(error)

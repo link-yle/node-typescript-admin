@@ -17,10 +17,8 @@ export class EditMyInfoComponent implements OnInit {
         this.user$ = Observable.of(this.authService.getProfile())
     }
 
-    onEdited(e) {
-        console.log(e);
-        
-        // this.authService.saveProfile(e)
+    onEdited(data: User) {
+        this.authService.saveProfile(data)
     }
 
 }
