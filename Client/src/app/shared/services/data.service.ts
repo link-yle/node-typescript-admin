@@ -188,6 +188,15 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
+    changeMyPasswordUsingRecoveryCode( {recoveryCode, email, newPassword} : {recoveryCode: string, email: string, newPassword: string} ) {
+        this.setRequestOptions()
+        return this.http.post(`${this.endPoint}/users/recovery_code`, { recoveryCode, email, newPassword }, this.requestOptions)
+            .map(res => {
+                return res.json()
+            })
+            .catch(err => this.handleError(err));
+    }
+
     activateUserAdministratively(id: string) {
         this.setRequestOptions()
         return this.http.patch(`${this.endPoint}/activation/administration/${id}`, {},this.requestOptions)

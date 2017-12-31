@@ -28,6 +28,8 @@ import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
 import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
+import { ForgottenPasswordProcessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-process.component';
+import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -39,7 +41,9 @@ const paths: Routes = [
 
         { path: 'forgotten_password_form', component: ForgottenPasswordFormComponent },
         { path: 'forgotten_password_form/success', component: ForgottenPasswordFormSuccessComponent },
-        // { path: 'forgotten_password_process', component: ForgottenPasswordFormComponent },
+        { path: 'forgotten_password_process', component: ForgottenPasswordProcessComponent },
+        { path: 'corrupt', component: CorruptLinkComponent },
+        
         
 
     ] },

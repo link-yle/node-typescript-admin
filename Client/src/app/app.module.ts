@@ -34,6 +34,9 @@ import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-in
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { ChangeMyPasswordComponent } from 'app/routes/personal/change-my-password/change-my-password.component';
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
+import { NewPasswordFormComponent } from 'app/shared/components/new-password-form/new-password-form.component';
+import { ForgottenPasswordProcessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-process.component';
+import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-p
     NormalSignupSuccessComponent,
     SecureSignupSuccessComponent,
     ChangeMyPasswordComponent,
-    ChangeOtherUserPasswordComponent
+    ChangeOtherUserPasswordComponent,
+    NewPasswordFormComponent,
+    ForgottenPasswordProcessComponent,
+    CorruptLinkComponent
   ],
   imports: [
     AppRoutingModule,

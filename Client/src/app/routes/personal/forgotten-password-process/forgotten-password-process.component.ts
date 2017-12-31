@@ -1,7 +1,6 @@
-
-import { SnackBarService } from '../../shared/services/snackbar.service';
+import { SnackBarService } from '../../../shared/services/snackbar.service';
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../shared/services/data.service';
+import { DataService } from '../../../shared/services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -10,31 +9,36 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ForgottenPasswordProcessComponent implements OnInit {
 
     isSuccess: boolean
-    isCorrupt: boolean
+    code: string
+    email: string
+
     constructor(
         private dataService: DataService,
         private route: ActivatedRoute,
+        private router: Router,
         private sb: SnackBarService,
     ) {
 
     }
     ngOnInit() {
         this.route.queryParams.subscribe((params => {
-            const code = params['code']
-            const email = params['email']
-            if (!email || !code) this.isCorrupt = true
-            else this.activateFromBackEnd(code, email)
+            this.code = params['code']
+            this.email = params['email']
+            if (!this.email || !this.code) this.router.navigate(['/login/corrupt'])
         }))
     }
 
-    activateFromBackEnd(code, email) {
-        console.log(code, email);
-        this.dataService.activateFromBackEnd(code, email).subscribe(
+    private recoverFromBackEnd(obj: {recoveryCode: string, email: string, newPassword: string}) {
+        this.dataService.changeMyPasswordUsingRecoveryCode(obj).subscribe(
             data => {
                 this.isSuccess = true;
             },
             () => this.sb.emitErrorSnackBar('An error occurred. Please try again later')
         )
+    }
+
+    changePassword(e) {
+        this.recoverFromBackEnd({ recoveryCode: this.code, email: this.email, newPassword: e.newPassword})
     }
 
 }
