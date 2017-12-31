@@ -1,8 +1,6 @@
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from '../../../services/data.service';
-import { SelectedUserService } from '../../../services/selectedUser.service';
 import { User } from '../../../models/user.model';
 import { SnackBarService } from '../../../services/snackbar.service';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
@@ -11,7 +9,6 @@ import { Observable } from 'rxjs/Observable';
 @Component({
     selector: 'app-edit-user',
     templateUrl: 'edit-user.component.html',
-    styleUrls: ['edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
     @Input() user: User

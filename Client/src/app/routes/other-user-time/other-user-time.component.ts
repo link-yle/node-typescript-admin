@@ -1,40 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectedUserService } from '../../shared/services/selectedUser.service';
 import { Router } from '@angular/router';
-import { TimingsService } from '../../shared/services/timings.service';
 import { Timezone } from '../../shared/models/timezone.model';
 import { ActivatedRoute } from '@angular/router';
+import { User } from 'app/shared/models/user.model';
+import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { DataService } from 'app/shared/services/data.service';
 
 @Component({
     selector: 'app-other-user-time',
     templateUrl: 'other-user-time.component.html',
 })
 export class OtherUserTimeComponent implements OnInit {
-    public profileId: string
-    public title: string
+    public user: User
     constructor(
         private selectedUserService: SelectedUserService,
         private router: Router,
         private route: ActivatedRoute,
-        private timingsService: TimingsService
+        private sb: SnackBarService,
+        private dataService: DataService,
     ) {
      }
 
     ngOnInit() {
-        this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe(
-            data => {
-                this.profileId = data._id
-                this.title = `${data.name} Timings`
-            }
+        this.route.params.flatMap(data => this.dataService.getUserDetails(data.id)).subscribe(
+            data =>  this.user = data,
+            error => this.sb.emitErrorSnackBar(error)
         )
     }
 
+    onDeleteClicked(item) {
+        this.dataService.deleteTimeZone(this.user._id, item._id).subscribe(
+            data => this.user.timeZones = this.user.timeZones.filter(t => t._id !==item._id),
+            error => this.sb.emitErrorSnackBar(error)
+        )
+    }
+    
+
     onAddClicked() {
-        this.router.navigate(['users', this.profileId, 'time', 'add'])
+        this.router.navigate(['users', this.user._id, 'time', 'add'])
     }
     
     onEditClicked(item: Timezone) {
-        this.timingsService.saveSelectedTiming(item)
-        this.router.navigate(['users', this.profileId, 'time', 'edit'])
+        this.router.navigate(['users', this.user._id, 'time', 'edit'])
     }
+
+    title() {
+        return this.user.name + ' Timings'
+    }
+    
 }

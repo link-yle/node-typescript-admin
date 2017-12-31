@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     isAdmin() {
-        return this.authService.getProfile().role === 'admin'
+        return this.authService.getRole() === 'admin'
     }
 
     onChangeRoleClick(item) {

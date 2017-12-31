@@ -10,22 +10,35 @@ export class AuthService {
         window.localStorage.setItem('id_token', token)
     }
 
-    public saveProfile(user) {
+    public saveProfile(user: User) {
+        window.localStorage.setItem(`role`, user.role)
+        window.localStorage.setItem(`id`, user._id)
         window.localStorage.setItem(`profile`, JSON.stringify(user))
+    }
+
+    public getProfile() : User {
+        return JSON.parse(window.localStorage.getItem('profile'))
     }
 
     public getToken() {
         return window.localStorage.getItem('id_token')
     }
 
-    public getProfile(): User {
-        const profile = window.localStorage.getItem('profile')
-        return JSON.parse(profile)
+
+    public getRole(): string {
+        return window.localStorage.getItem('role')
+    }
+
+
+    public getId(): string {
+        return window.localStorage.getItem('id')
     }
 
     public logout() {
         window.localStorage.removeItem('id_token')
         window.localStorage.removeItem('profile')
+        window.localStorage.removeItem('role')
+        window.localStorage.removeItem('id')
     }
 
     public isAuthenticated(): boolean {
@@ -36,9 +49,8 @@ export class AuthService {
     }
 
     public isAtleastManager() {
-        const user = this.getProfile()
-        if (!user) return false
-        else if (user.role === 'admin' || user.role === 'manager') return true
+        const role = this.getRole()
+        if (role === 'admin' || role === 'manager') return true
         else return false
     }
 

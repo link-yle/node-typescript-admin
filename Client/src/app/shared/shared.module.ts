@@ -1,7 +1,5 @@
 import { AuthenticatedNavbarComponent } from './components/layout/authenticated-navbar/authenticated-navbar.component';
 import { TimeZoneFormComponent } from './components/timings/write-time/shared/timezone-form/timezone-form.component';
-import { EditimeComponent } from './components/timings/write-time/edit-time/edit-time.component';
-import { AddTimeComponent } from './components/timings/write-time/add-time/add-time.component';
 import { RouterModule } from '@angular/router';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
@@ -48,8 +46,6 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
     ReactiveFormsModule,
     RouterModule,
     TimingsComponent,
-    AddTimeComponent,
-    EditimeComponent,
     TimeZoneFormComponent,
     EditUserComponent,
     SubmitButtonComponent,
@@ -65,8 +61,6 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
     NavComponent,
     FooterComponent,
     TimingsComponent,
-    AddTimeComponent,
-    EditimeComponent,
     TimeZoneFormComponent,
     EditUserComponent,
     LoginLayoutComponent,

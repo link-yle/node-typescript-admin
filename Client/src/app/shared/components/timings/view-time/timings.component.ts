@@ -1,50 +1,31 @@
 import { Timezone } from '../../../models/timezone.model';
-import { DataService } from '../../../services/data.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { SnackBarService } from '../../../services/snackbar.service';
-import { AuthService } from '../../../services/auth.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { TimingsService } from 'app/shared/services/timings.service';
 
 @Component({
     selector: 'app-timings',
     templateUrl: 'timings.component.html',
-    styleUrls: ['timings.component.scss']
 })
 
-export class TimingsComponent implements OnInit {
-    timeZones = []
-    @Input() profileId: string
+export class TimingsComponent {
+    @Input() timeZones: Timezone[]
     @Input() title: string
     @Output() addClicked = new EventEmitter()
     @Output() editClicked = new EventEmitter()
+    @Output() deleteClicked = new EventEmitter()
+  
     constructor(
-        private dataService: DataService,
-        private sb: SnackBarService,
-        private router: Router,
-        private authService: AuthService
+        private timingsService: TimingsService,
     ) { }
 
-    ngOnInit() {
-        // setTimeout(() => {
-            this.getData()
-        // }, 1)
-    }
 
-    private getData() {
-        this.dataService.getUserDetails(this.profileId).subscribe(
-            data => this.timeZones = data.timeZones,
-            error => this.sb.emitErrorSnackBar(error)
-        )
-    }
 
     onDeleteClick(item) {
-        this.dataService.deleteTimeZone(this.profileId, item._id).subscribe(
-            data => this.getData(),
-            error => this.sb.emitErrorSnackBar(error)
-        )
+        this.deleteClicked.emit(item)
     }
 
     onEditTimeClick(item: Timezone) {
+        this.timingsService.saveSelectedTiming(item)
         this.editClicked.emit(item)
     }
 

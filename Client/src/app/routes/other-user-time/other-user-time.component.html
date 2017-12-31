@@ -1,1 +1,5 @@
-<app-timings [title]="title" [profileId]="profileId" (addClicked)="onAddClicked()" (editClicked)="onEditClicked($event)"></app-timings>
+<app-timings *ngIf="user" [timeZones]="user.timeZones" 
+[title]="title()" (addClicked)="onAddClicked()" 
+(editClicked)="onEditClicked($event)"
+(deleteClicked)= "onDeleteClicked($event)"
+></app-timings>
