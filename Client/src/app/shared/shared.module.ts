@@ -1,5 +1,4 @@
 import { AuthenticatedNavbarComponent } from './components/layout/authenticated-navbar/authenticated-navbar.component';
-import { TimeZoneFormComponent } from './components/timings/write-time/shared/timezone-form/timezone-form.component';
 import { RouterModule } from '@angular/router';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { NgModule } from '@angular/core';
@@ -21,6 +20,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-form/timezone-form.component';
 
 @NgModule({
   imports: [

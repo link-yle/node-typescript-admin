@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Timezone } from '../../../../../models/timezone.model';
+import { Timezone } from '../../../models/timezone.model';
 
 @Component({
     selector: 'app-timezone-form',

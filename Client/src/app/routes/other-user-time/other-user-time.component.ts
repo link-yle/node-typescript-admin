@@ -46,7 +46,7 @@ export class OtherUserTimeComponent implements OnInit {
     }
 
     title() {
-        return this.user.name + ' Timings'
+        return `${this.user.name}'s Timings`
     }
     
 }

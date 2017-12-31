@@ -27,15 +27,16 @@ export class EditOtherUserTimeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if(!this.selectedUserService.get()) this.router.navigate(['/users/'])
+        this.user = this.selectedUserService.get()
+        if(!this.user) this.router.navigate(['/users/'])
         this.timeZone = this.timingsService.getSelectedTiming()
     }
 
     onSubmitted(x: Timezone) {
-        this.dataService.updateTimeZone(this.selectedUserService.get()._id, this.timingsService.getSelectedTiming()._id, x).subscribe(
+        this.dataService.updateTimeZone(this.user._id, this.timingsService.getSelectedTiming()._id, x).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar()
-                this.router.navigate(['/users/', this.selectedUserService.get()._id, 'time'])
+                this.router.navigate(['/users/', this.user._id, 'time'])
             },
             error => this.sb.emitErrorSnackBar(error)
         )
