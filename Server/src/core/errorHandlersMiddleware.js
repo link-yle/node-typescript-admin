@@ -11,7 +11,6 @@ module.exports = app => {
         else if (err.nF) {
             return res.status(404).send({ error: `${err.nF} is not found in our system` })
         }
-        else if (err.name === 'WrongRecoveryCode') return res.status(400).send({error: 'Wrong recovery code'})
         else if (err.name === 'NoUserFound') return res.status(404).send({ error: `User is not found in our system` })
         else if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
         else return next(err)
