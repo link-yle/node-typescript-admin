@@ -13,13 +13,13 @@ describe('Time', () => {
 
     describe('Timing', () => {
         beforeEach(() => {
-            Layout.myTimingsTab.click()
+            Layout.myTimingsTab().click()
         })
         it('should add', () => {
-            CommonPage.plusIcon.click()
+            CommonPage.plusIcon().click()
             TimeFormPage.submitForm('NN', 'CN', 5)
             browser.sleep(500)
-            const t = CommonPage.lastRowCloumns.first().getText()
+            const t = CommonPage.lastRowCloumns().first().getText()
             expect(t).toBe('NN')
         })
 
@@ -29,17 +29,17 @@ describe('Time', () => {
             TimeFormPage.clearForm()
             TimeFormPage.submitForm(randomName, 'CF', 3)
             browser.sleep(50)
-            Layout.myTimingsTab.click()
+            Layout.myTimingsTab().click()
             browser.sleep(500)
-            const afterEditText = CommonPage.lastRowCloumns.first().getText()
+            const afterEditText = CommonPage.lastRowCloumns().first().getText()
             expect(afterEditText).toBe(randomName)
         })
 
         it('should delete', () => {
-            const beforeDeleteText = CommonPage.lastRowCloumns.first().getText()
+            const beforeDeleteText = CommonPage.lastRowCloumns().first().getText()
             TimingsPage.deleteLastElement()
             browser.sleep(200)
-            const afterDeleteText = CommonPage.lastRowCloumns.first().getText()
+            const afterDeleteText = CommonPage.lastRowCloumns().first().getText()
             expect(beforeDeleteText).not.toBe(afterDeleteText)
         })
     })
