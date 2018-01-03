@@ -1,4 +1,4 @@
-const Joi = require('Joi')
+const Joi = require('joi')
 const passwordRegex = require('../../config/regexConstants').passwordRegex
 
 module.exports = (req, res, next) => {

@@ -1,4 +1,4 @@
-const Joi = require('Joi')
+const Joi = require('joi')
 
 module.exports = (req, res, next) => {
     const toValidate = {email: req.query.email, code: req.query.code}

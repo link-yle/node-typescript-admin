@@ -1,4 +1,4 @@
-const Joi = require('Joi')
+const Joi = require('joi')
 const ROLES = require('../../config/rolesConstants')
 
 module.exports =  (req, res, next) => {
