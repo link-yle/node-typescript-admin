@@ -7,7 +7,7 @@
     "e2e": "node ./src/bin/www -t",
     "coverage": "nodemon --exec istanbul cover node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
     "test": "nodemon --exec jasmine JASMINE_CONFIG_PATH=jasmine.json",
-    "dev": "nodemon ./src/bin/www",
+    "dev": "nodemon ./src/bin/www"
   },
   "engines": {
     "node": "8.9.1"
