@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev-start": "node ./src/bin/www",
+    "start": "node ./src/bin/www",
     "e2e": "node ./src/bin/www -t",
     "coverage": "nodemon --exec istanbul cover node_modules/jasmine/bin/jasmine.js JASMINE_CONFIG_PATH=jasmine.json",
     "test": "nodemon --exec jasmine JASMINE_CONFIG_PATH=jasmine.json",
     "dev": "nodemon ./src/bin/www",
-    "start": "nf start"
   },
   "engines": {
     "node": "8.9.1"
@@ -25,7 +24,6 @@
     "dotenv": "^4.0.0",
     "express": "~4.15.2",
     "express-history-api-fallback": "^2.2.1",
-    "foreman": "2.0.0",
     "jade": "^1.11.0",
     "joi": "^13.0.2",
     "jsonwebtoken": "^8.1.0",
