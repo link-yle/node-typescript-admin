@@ -9,5 +9,10 @@ NODE_ENV_ENVIRONMENT to be 'production'
 Security:
 Currently the database name, username, and password are hard-coded but ideally secure data should be saved as environment variables.
 
+
+Heroku:
 To push only backend to heroku
 git subtree push --prefix Server heroku master
+
+To get logs 
+heroku logs -t --app app-name
