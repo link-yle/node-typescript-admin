@@ -1,4 +1,7 @@
 import {
+    ChangeMyPasswordUsingOldPasswordComponent,
+} from './routes/personal/edit-my-info/change-my-password-using-old-password/change-my-password-using-old-password.component';
+import {
     AuthenticatedNavbarComponent,
 } from './shared/components/layout/authenticated-navbar/authenticated-navbar.component';
 import { AuthGuardService } from './shared/services/auth.guard.service';
@@ -22,7 +25,6 @@ import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-su
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
 import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
-import { ChangeMyPasswordComponent } from './routes/personal/edit-my-info/change-my-password/change-my-password.component';
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
@@ -53,7 +55,7 @@ const paths: Routes = [
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [
             { path: 'empty', component: EmptyComponent, },
             { path: 'my-profile', component: EditMyInfoComponent, },
-            { path: 'my-profile/password', component: ChangeMyPasswordComponent },
+            { path: 'my-profile/password', component: ChangeMyPasswordUsingOldPasswordComponent },
             { path: 'my-time', component: MyTimeComponent, },
             { path: 'my-time/add', component: AddMyTimeComponent, },
             { path: 'my-time/edit', component: EditMyTimeComponent },

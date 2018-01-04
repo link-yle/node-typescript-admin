@@ -1,4 +1,6 @@
-import { ChangeMyPasswordComponent } from './routes/personal/edit-my-info/change-my-password/change-my-password.component';
+import {
+    ChangeMyPasswordUsingOldPasswordComponent,
+} from './routes/personal/edit-my-info/change-my-password-using-old-password/change-my-password-using-old-password.component';
 import { EmptyComponent } from './routes/empty/empty.component';
 import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './routes/signup/signup.component';
@@ -62,7 +64,7 @@ import { ForgottenPasswordRecoverySuccessComponent } from 'app/routes/personal/f
     ForgottenPasswordFormSuccessComponent,
     NormalSignupSuccessComponent,
     SecureSignupSuccessComponent,
-    ChangeMyPasswordComponent,
+    ChangeMyPasswordUsingOldPasswordComponent,
     ChangeOtherUserPasswordComponent,
     NewPasswordFormComponent,
     ForgottenPasswordProcessComponent,

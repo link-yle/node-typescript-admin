@@ -5,9 +5,9 @@ import { DataService } from '../../../../shared/services/data.service';
 import { SnackBarService } from '../../../../shared/services/snackbar.service';
 
 @Component({
-    templateUrl: 'change-my-password.component.html',
+    templateUrl: 'change-my-password-using-old-password.component.html',
 })
-export class ChangeMyPasswordComponent {
+export class ChangeMyPasswordUsingOldPasswordComponent {
     form: FormGroup
 
     constructor(
