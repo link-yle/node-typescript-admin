@@ -7,8 +7,7 @@ module.exports = async (req, res, next) => {
     try {
         const user = await saveRecoveryCodeToDb(req.body.email, code)
         if(!user) return next({nF: 'User'})
-        const link = `${req.body.route}?code=${code}&email=${req.body.email}`
-        await mailer.sendEmailWithCode(req.body.email, link)
+        await mailer.sendEmailWithCode(req.body.email, code)
         return res.send({ success: 'An email has probably been sent with your recovery code (if it already exists)' })
     } catch (e) {
         return next(e)

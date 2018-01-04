@@ -9,9 +9,9 @@ function sendEmailWithCode(recepient, code) {
     return transporter.sendMail({
         from: senderEmail,
         to: recepient,
-        subject: 'Password Reset Code',
-        text: `Here is your password reset code: ${code}`,
-        html: `<p>Here is your password reset code: ${code}</p>`
+        subject: 'Password Recovery Code',
+        text: `Here is your password recovery code: ${code}`,
+        html: `<p>Here is your password recovery code: ${code}</p>`
     }).then(info => {
         console.log('Preview URL: ' + nodemailer.getTestMessageUrl(info))
     }).catch(err => { throw err })
