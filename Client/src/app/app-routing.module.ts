@@ -1,4 +1,13 @@
 import {
+    PasswordRecoveredSuccessfullyComponent,
+} from './routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/password-recovered-successfully/password-recovered-successfully.component';
+import {
+    NewPasswordAndRecoveryCodeSubmissionComponent,
+} from './routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/new-password-and-recovery-code-submission.component';
+import {
+    RecoverPasswordByEmailComponent,
+} from './routes/personal/recover-password-by-email/recover-password-by-email.component.';
+import {
     ChangeMyPasswordUsingOldPasswordComponent,
 } from './routes/personal/edit-my-info/change-my-password-using-old-password/change-my-password-using-old-password.component';
 import {
@@ -23,16 +32,12 @@ import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-o
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
-import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
-import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
 import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
-import { ForgottenPasswordProcessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-process.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
-import { ForgottenPasswordRecoverySuccessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-recovery-success/forgotten-password-recovery-success.component';
 
 const paths: Routes = [
     { path: 'login', component: LoginLayoutComponent, children: [
@@ -42,10 +47,13 @@ const paths: Routes = [
         { path: 'signup/secure_success', component: SecureSignupSuccessComponent },
         { path: 'activation_link', component: ActivationLinkComponent },
 
-        { path: 'forgotten_password_form', component: ForgottenPasswordFormComponent },
-        { path: 'forgotten_password_form/success', component: ForgottenPasswordFormSuccessComponent },
-        { path: 'forgotten_password_process', component: ForgottenPasswordProcessComponent },
-        { path: 'forgotten_password_process/success', component: ForgottenPasswordRecoverySuccessComponent },
+        { path: 'recover_password_by_email', component: RecoverPasswordByEmailComponent },
+        { path: 'recover_password_by_email/submit_new_password', component: NewPasswordAndRecoveryCodeSubmissionComponent },
+        { path: 'recover_password_by_email/submit_new_password/password_recovered_successfully', component: PasswordRecoveredSuccessfullyComponent },
+        
+        
+
+
         { path: 'corrupt', component: CorruptLinkComponent },
         
         

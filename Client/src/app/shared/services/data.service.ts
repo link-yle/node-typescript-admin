@@ -161,8 +161,8 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    forgottenPassword(email, route) {
-        return this.http.post(`${this.endPoint}/password_recovery_requests`, { email, route }, this.requestOptions)
+    forgottenPassword(email) {
+        return this.http.post(`${this.endPoint}/password_recovery_requests`, { email }, this.requestOptions)
             .map(res => {
                 return res.json()
             })

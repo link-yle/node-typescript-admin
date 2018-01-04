@@ -1,15 +1,15 @@
-import { SnackBarService } from '../../shared/services/snackbar.service';
+import { PublicInfoService } from '../../../shared/services/public.info.service';
+import { SnackBarService } from '../../../shared/services/snackbar.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
-import { DataService } from '../../shared/services/data.service';
-import { forgottenPasswordLink } from 'app/shared/config/auth-links';
+import { DataService } from '../../../shared/services/data.service';
 import { Router } from '@angular/router';
 
 @Component({
-    templateUrl: 'forgotten-password-form.component.html',
+    templateUrl: 'recover-password-by-email.component.html',
 })
-export class ForgottenPasswordFormComponent implements OnInit {
+export class RecoverPasswordByEmailComponent implements OnInit {
     form: FormGroup
 
     constructor(
@@ -17,7 +17,8 @@ export class ForgottenPasswordFormComponent implements OnInit {
         private globalValidatorsService: GlobalValidatorsService,
         private dataService: DataService,
         private sb: SnackBarService,
-        private router: Router
+        private router: Router,
+        private publicInfoService: PublicInfoService
     ) { }
 
     ngOnInit() {
@@ -25,9 +26,10 @@ export class ForgottenPasswordFormComponent implements OnInit {
     }
 
     onSubmit(formValue) {
-        this.dataService.forgottenPassword(formValue.email, forgottenPasswordLink).subscribe(
+        this.dataService.forgottenPassword(formValue.email).subscribe(
             data => {
-                this.router.navigate(['/login/forgotten_password_form/success'])  
+                this.publicInfoService.setEmail(formValue.email)
+                this.router.navigate(['/login/recover_password_by_email/submit_new_password'])  
             }, 
             error => {
                 this.sb.emitErrorSnackBar(error)

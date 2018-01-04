@@ -24,7 +24,7 @@ export class GlobalValidatorsService {
 
     activationCodeFormat(control) {
         if ( control.value !== '' && Joi.validate(control.value, Joi.string().length(20)).error ) {
-            return { 'inCorrectCodeFormat': true }
+            return { 'incorrectCodeFormat': true }
         } else return null;
     }
 

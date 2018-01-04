@@ -1,4 +1,7 @@
 import {
+    NewPasswordAndRecoveryCodeSubmissionComponent,
+} from './routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/new-password-and-recovery-code-submission.component';
+import {
     ChangeMyPasswordUsingOldPasswordComponent,
 } from './routes/personal/edit-my-info/change-my-password-using-old-password/change-my-password-using-old-password.component';
 import { EmptyComponent } from './routes/empty/empty.component';
@@ -29,17 +32,16 @@ import { PublicInfoService } from './shared/services/public.info.service';
 import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
-import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
-import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
 import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
 import { NewPasswordFormComponent } from 'app/shared/components/new-password-form/new-password-form.component';
-import { ForgottenPasswordProcessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-process.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
-import { ForgottenPasswordRecoverySuccessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-recovery-success/forgotten-password-recovery-success.component';
+import { RecoverPasswordByEmailComponent } from 'app/routes/personal/recover-password-by-email/recover-password-by-email.component.';
+import { PasswordRecoveredSuccessfullyComponent } from 'app/routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/password-recovered-successfully/password-recovered-successfully.component';
+
 
 @NgModule({
   declarations: [
@@ -60,16 +62,16 @@ import { ForgottenPasswordRecoverySuccessComponent } from 'app/routes/personal/f
     UsersComponent,
     EmptyComponent,
     ActivationLinkComponent,
-    ForgottenPasswordFormComponent,
-    ForgottenPasswordFormSuccessComponent,
     NormalSignupSuccessComponent,
     SecureSignupSuccessComponent,
     ChangeMyPasswordUsingOldPasswordComponent,
     ChangeOtherUserPasswordComponent,
     NewPasswordFormComponent,
-    ForgottenPasswordProcessComponent,
     CorruptLinkComponent,
-    ForgottenPasswordRecoverySuccessComponent
+    RecoverPasswordByEmailComponent,
+    NewPasswordAndRecoveryCodeSubmissionComponent,
+    PasswordRecoveredSuccessfullyComponent
+
   ],
   imports: [
     AppRoutingModule,
