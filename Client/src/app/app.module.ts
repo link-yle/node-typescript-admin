@@ -1,3 +1,4 @@
+import { ChangeMyPasswordComponent } from './routes/personal/edit-my-info/change-my-password/change-my-password.component';
 import { EmptyComponent } from './routes/empty/empty.component';
 import { SharedModule } from './shared/shared.module';
 import { SignupComponent } from './routes/signup/signup.component';
@@ -32,7 +33,6 @@ import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.
 import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
-import { ChangeMyPasswordComponent } from 'app/routes/personal/change-my-password/change-my-password.component';
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
 import { NewPasswordFormComponent } from 'app/shared/components/new-password-form/new-password-form.component';
 import { ForgottenPasswordProcessComponent } from 'app/routes/personal/forgotten-password-process/forgotten-password-process.component';

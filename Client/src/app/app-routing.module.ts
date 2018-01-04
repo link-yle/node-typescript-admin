@@ -22,7 +22,7 @@ import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-su
 import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { ForgottenPasswordFormComponent } from 'app/routes/forgotten-password-form/forgotten-password-form.component';
 import { ForgottenPasswordFormSuccessComponent } from 'app/routes/forgotten-password-form/forgotten-password-form-success/forgotten-password-form-success.component';
-import { ChangeMyPasswordComponent } from 'app/routes/personal/change-my-password/change-my-password.component';
+import { ChangeMyPasswordComponent } from './routes/personal/edit-my-info/change-my-password/change-my-password.component';
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
