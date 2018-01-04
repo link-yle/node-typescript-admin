@@ -1,3 +1,4 @@
+import { LoginComponent } from './routes/personal/login/login.component';
 import {
     PasswordRecoveredSuccessfullyComponent,
 } from './routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/password-recovered-successfully/password-recovered-successfully.component';
@@ -18,7 +19,6 @@ import { SignupComponent } from './routes/signup/signup.component';
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AdminClaimsService } from './shared/services/admin-claims.service';
-import { LoginComponent } from './routes/login/login.component';
 import { UsersComponent } from './routes/users-list/users.component';
 import { OtherUserTimeComponent } from './routes/other-user-time/other-user-time.component';
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';

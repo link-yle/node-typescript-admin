@@ -1,3 +1,4 @@
+import { LoginComponent } from './routes/personal/login/login.component';
 import {
     NewPasswordAndRecoveryCodeSubmissionComponent,
 } from './routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/new-password-and-recovery-code-submission.component';
@@ -23,7 +24,6 @@ import { AdminClaimsService } from './shared/services/admin-claims.service';
 import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-other-user-info.component';
 import { AddOtherUserTimeComponent } from './routes/add-other-user-time/add-other-user-time.component';
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
-import { LoginComponent } from './routes/login/login.component';
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';
 import { UsersComponent } from './routes/users-list/users.component';
 import { AuthGuardService } from './shared/services/auth.guard.service';
