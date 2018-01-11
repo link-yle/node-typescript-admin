@@ -7,12 +7,11 @@ const mailer = require('../../services/mailer')
 
 
 module.exports = async (req, res, next) => {
-    const user = req.body.user
+    const user = req.body
     user.activationCode = generateRandomCode()
     try{
         const addedUser = await addNewUser(user, ROLES.regular)
-        const link=`${req.body.route}?code=${user.activationCode}&email=${user.email}`
-        await mailer.sendActivationCode(user.email, link)
+        await mailer.sendActivationCode(user.email, user.activationCode)
         return res.status(200).json(clearUnneededDataFromPayload(addedUser))
     } catch(e) {
         global.log.error(e)
