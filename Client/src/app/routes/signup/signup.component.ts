@@ -6,7 +6,6 @@ import { DataService } from '../../shared/services/data.service';
 import { SnackBarService } from '../../shared/services/snackbar.service';
 import { User } from '../../shared/models/user.model';
 import { PublicInfoService } from '../../shared/services/public.info.service';
-import { signUpSecurelyActivationLink } from 'app/shared/config/auth-links';
 
 @Component({
     templateUrl: 'signup.component.html',
@@ -43,11 +42,11 @@ export class SignupComponent implements OnInit {
     }
 
     signupSecurely() {
-        this.dataService.signupSecurely(this.form.value, signUpSecurelyActivationLink).subscribe(
+        this.dataService.signupSecurely(this.form.value).subscribe(
             data => {
                 this.publicInfoService.setEmail(this.form.value.email)
                 this.publicInfoService.setPass(this.form.value.password)
-                this.router.navigate(['/login/signup/secure_success'])
+                this.router.navigate(['/login/signup/activate'])
             },
             error => {
                 this.sb.emitErrorSnackBar(error)

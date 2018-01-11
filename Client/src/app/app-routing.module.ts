@@ -1,3 +1,5 @@
+import { SignupSuccessComponent } from './routes/signup/signup-success/signup-success.component';
+import { ActivateAfterSignupComponent } from './routes/signup/activate-after-signup/activate-after-signup.component';
 import { LoginComponent } from './routes/personal/login/login.component';
 import {
     PasswordRecoveredSuccessfullyComponent,
@@ -28,10 +30,6 @@ import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-o
 import { EmptyComponent } from './routes/empty/empty.component';
 import { LoginLayoutComponent } from './shared/components/layout/login-layout/login-layout.component';
 import { EditOtherUserTimeComponent } from './routes/edit-other-user-time/edit-other-user-time.component';
-// tslint:disable-next-line:max-line-length
-import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
-import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
-import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
@@ -40,25 +38,27 @@ import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-p
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 
 const paths: Routes = [
-    { path: 'login', component: LoginLayoutComponent, children: [
-        { path: '', component: LoginComponent },
-        { path: 'signup', component: SignupComponent },
-        { path: 'signup/success', component: NormalSignupSuccessComponent },
-        { path: 'signup/secure_success', component: SecureSignupSuccessComponent },
-        { path: 'activation_link', component: ActivationLinkComponent },
-
-        { path: 'recover_password_by_email', component: RecoverPasswordByEmailComponent },
-        { path: 'recover_password_by_email/submit_new_password', component: NewPasswordAndRecoveryCodeSubmissionComponent },
-        { path: 'recover_password_by_email/submit_new_password/password_recovered_successfully', component: PasswordRecoveredSuccessfullyComponent },
-        
-        
+    {
+        path: 'login', component: LoginLayoutComponent, children: [
+            { path: '', component: LoginComponent },
+            { path: 'signup', component: SignupComponent },
+            { path: 'signup/activate', component: ActivateAfterSignupComponent },
+            { path: 'signup/success', component: SignupSuccessComponent },
 
 
-        { path: 'corrupt', component: CorruptLinkComponent },
-        
-        
+            { path: 'recover_password_by_email', component: RecoverPasswordByEmailComponent },
+            { path: 'recover_password_by_email/submit_new_password', component: NewPasswordAndRecoveryCodeSubmissionComponent },
+            { path: 'recover_password_by_email/submit_new_password/password_recovered_successfully', component: PasswordRecoveredSuccessfullyComponent },
 
-    ] },
+
+
+
+            { path: 'corrupt', component: CorruptLinkComponent },
+
+
+
+        ]
+    },
     {
         path: '', component: AuthenticatedNavbarComponent, canActivate: [AuthGuardService], children: [
             { path: 'empty', component: EmptyComponent, },

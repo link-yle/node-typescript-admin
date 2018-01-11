@@ -1,3 +1,4 @@
+import { SignupSuccessComponent } from './routes/signup/signup-success/signup-success.component';
 import { LoginComponent } from './routes/personal/login/login.component';
 import {
     NewPasswordAndRecoveryCodeSubmissionComponent,
@@ -29,9 +30,6 @@ import { UsersComponent } from './routes/users-list/users.component';
 import { AuthGuardService } from './shared/services/auth.guard.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PublicInfoService } from './shared/services/public.info.service';
-import { ActivationLinkComponent } from './routes/activation-link/activation-link.component';
-import { NormalSignupSuccessComponent } from 'app/routes/signup/normal-signup-success/normal-signup-success.component';
-import { SecureSignupSuccessComponent } from 'app/routes/signup/secure-signup-success/secure-signup-success.component';
 import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
 import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
@@ -41,6 +39,7 @@ import { NewPasswordFormComponent } from 'app/shared/components/new-password-for
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 import { RecoverPasswordByEmailComponent } from 'app/routes/personal/recover-password-by-email/recover-password-by-email.component.';
 import { PasswordRecoveredSuccessfullyComponent } from 'app/routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/password-recovered-successfully/password-recovered-successfully.component';
+import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-signup/activate-after-signup.component';
 
 
 @NgModule({
@@ -61,9 +60,8 @@ import { PasswordRecoveredSuccessfullyComponent } from 'app/routes/personal/reco
     SignupComponent,
     UsersComponent,
     EmptyComponent,
-    ActivationLinkComponent,
-    NormalSignupSuccessComponent,
-    SecureSignupSuccessComponent,
+    SignupSuccessComponent,
+    ActivateAfterSignupComponent,
     ChangeMyPasswordUsingOldPasswordComponent,
     ChangeOtherUserPasswordComponent,
     NewPasswordFormComponent,

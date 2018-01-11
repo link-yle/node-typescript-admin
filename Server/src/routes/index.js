@@ -31,7 +31,6 @@ const validateVerifyActivationCode = require('./security/verify-activation-code.
 const verifyActivationCode = require('./security/verify-activation-code.route')
 const verifyRecoveryCode = require('./security/verify-recovery-code.route')
 const signupSecurely = require('./security/signup-secure.route')
-const validateSignupSecurely = require('./security/signup-secure.validate')
 const activateUserAdministratively = require('./security/activate-user-administratively.route')
 const changeOtherUserPassword = require('./security/change-other-user-password.route')
 const validatechangeOtherUserPassword = require('./security/change-other-user-password.validate')
@@ -41,8 +40,8 @@ const { verifyUser } = require('../core/authentication')
 const Authorize = require('../core/authorization')
 
 router.post('/users/', validateSignup, signup)
-router.post('/users/secure', validateSignupSecurely, signupSecurely)
-router.get('/activation', validateVerifyActivationCode, verifyActivationCode)
+router.post('/users/secure', validateSignup, signupSecurely)
+router.post('/activation', validateVerifyActivationCode, verifyActivationCode)
 
 router.patch('/activation/administration/:id', verifyUser, Authorize.allowAdminAndManager, activateUserAdministratively)
 

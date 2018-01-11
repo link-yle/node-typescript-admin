@@ -1,7 +1,7 @@
 <form [formGroup]="form" *ngIf="form">
     <div class="form-group">
         <label for="">Name </label>
-        <input type="text" class="form-control" placeholder="Enter your name" formControlName="name">
+        <input type="text" class="form-control" placeholder="Enter your name" formControlName="name" id="name">
         <p [hidden]="!isIncorrectNameFormat('name')" class="text-danger"> Please Enter a that has atleast 3 letters and a maximum of 20 letters</p>
     </div>
     <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>

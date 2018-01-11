@@ -4,10 +4,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { SnackBarService } from './snackbar.service';
-import 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Timezone } from '../models/timezone.model';
@@ -52,13 +48,8 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    signupSecurely(item: User, route) {
-        return this.http.post(`${this.endPoint}/users/secure`, {
-            user: {
-                email: item.email, password: item.password, timeZones: [], name: item.name
-            },
-            route: `${window.location.origin}/login/activation_link`
-        }, this.requestOptions)
+    signupSecurely(item: User) {
+        return this.http.post(`${this.endPoint}/users/secure`, { email: item.email, password: item.password, timeZones: [], name: item.name }, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -66,20 +57,12 @@ export class DataService {
     }
 
     activateFromBackEnd(code, email) {
-        return this.http.get(`${this.endPoint}/activation?code=${code}&email=${email}`, this.requestOptions)
+        return this.http.post(`${this.endPoint}/activation`, {code, email}, this.requestOptions)
             .map(res => {
                 return res.json()
             })
             .catch(err => this.handleError(err));
     }
-
-    // activateFromBackEnd(code, email) {
-    //     return this.http.get(`${this.endPoint}/activation?code=${code}&email=${email}`, this.requestOptions)
-    //         .map(res => {
-    //             return res.json()
-    //         })
-    //         .catch(err => this.handleError(err));
-    // }
 
 
     updateUserInfo(id: string, data: UserInfo) {
@@ -169,7 +152,7 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    changePasswordUsingOldPassword( {oldPassword, newPassword }: { oldPassword: string, newPassword: string }) {
+    changePasswordUsingOldPassword({ oldPassword, newPassword }: { oldPassword: string, newPassword: string }) {
         this.setRequestOptions()
         return this.http.put(`${this.endPoint}/password`, { oldPassword, newPassword }, this.requestOptions)
             .map(res => {
@@ -178,8 +161,8 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    
-    changeOtherUserPassword( id: string, newPassword: string ) {
+
+    changeOtherUserPassword(id: string, newPassword: string) {
         this.setRequestOptions()
         return this.http.put(`${this.endPoint}/users/${id}/password`, { newPassword }, this.requestOptions)
             .map(res => {
@@ -188,7 +171,7 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-    changeMyPasswordUsingRecoveryCode( {recoveryCode, email, newPassword} : {recoveryCode: string, email: string, newPassword: string} ) {
+    changeMyPasswordUsingRecoveryCode({ recoveryCode, email, newPassword }: { recoveryCode: string, email: string, newPassword: string }) {
         this.setRequestOptions()
         return this.http.post(`${this.endPoint}/users/recovery_code`, { recoveryCode, email, newPassword }, this.requestOptions)
             .map(res => {
@@ -199,7 +182,7 @@ export class DataService {
 
     activateUserAdministratively(id: string) {
         this.setRequestOptions()
-        return this.http.patch(`${this.endPoint}/activation/administration/${id}`, {},this.requestOptions)
+        return this.http.patch(`${this.endPoint}/activation/administration/${id}`, {}, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -207,8 +190,8 @@ export class DataService {
     }
 
 
-    
-    
+
+
 
     private handleError(error: Response | any) {
         console.log(error);

@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Success</h1>
+        <p>You have registerd successfully. Please check your email for an activation code </p>
+    </div>
+</div>
+
+
+<form [formGroup]="form" *ngIf="form">
+
+    <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
+
+    <div class="form-group">
+        <label for="">Activation Code </label>
+        <input type="text" class="form-control" placeholder="Enter recovery code" formControlName="activationCode">
+        <p [hidden]="!form.get('activationCode').hasError('incorrectCodeFormat')" class="text-danger"> Please enter a valid recovery code </p>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="submit(form.value)">Activate</button>
+</form>
