@@ -6,7 +6,6 @@ import '@angular/common';
 import '@angular/http';
 import '@angular/router';
 import '@angular/forms'
-import '@angular/material'
 import 'rxjs/Observable'
 import 'rxjs/Subject'
 import 'rxjs/add/operator/map'
