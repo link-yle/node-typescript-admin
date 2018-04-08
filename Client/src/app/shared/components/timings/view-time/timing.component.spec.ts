@@ -1,13 +1,12 @@
-import { AuthService } from '../shared/services/auth.service';
-import { TimingsModule } from './timings.module';
-import { SnackBarService } from '../shared/services/snackbar.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
-import { DataService } from '../shared/services/data.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { TimingsComponent } from './timings.component';
+import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { DataService } from 'app/shared/services/data.service';
+import { AuthService } from 'app/shared/services/auth.service';
 
 describe('Timings Component', () => {
     let comp: TimingsComponent;
@@ -68,7 +67,7 @@ describe('Timings Component', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule, TimingsModule],
+            imports: [RouterTestingModule],
             declarations: [],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
@@ -91,7 +90,7 @@ describe('Timings Component', () => {
         describe('Scenario: Success', () => {
             beforeEach(() => {
                 dataService.getUserDetails = () => Observable.of(fakeTimeZones)
-                comp.ngOnInit()
+                // comp.ngOnInit()
             })
             it('should successfully post', () => {
                 expect(comp).toBeTruthy()
@@ -102,7 +101,7 @@ describe('Timings Component', () => {
         describe('Scenario: Error', () => {
             beforeEach(() => {
                 dataService.getUserDetails = () => Observable.throw('Error')
-                comp.ngOnInit()
+                // comp.ngOnInit()
             })
             it('should respond to error', () => {
                 expect(comp).toBeTruthy()

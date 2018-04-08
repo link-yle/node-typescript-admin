@@ -89,7 +89,7 @@ describe('Service: DataService', () => {
             body: fakeUsers,
             status: 200
         });
-        service.getUsers().subscribe((payload) => {
+        service.getUsers({}).subscribe((payload) => {
             expect(payload).toBeTruthy();
             expect(payload.length).toBeTruthy()
             done()
@@ -98,7 +98,7 @@ describe('Service: DataService', () => {
 
     it('should respond to error while getting donor', (done) => {
         setupConnectionsWithError(backend);
-        service.getUsers().subscribe((payload) => {},
+        service.getUsers({}).subscribe((payload) => {},
             error => {
                 expect(error).toBeTruthy()
                 done()

@@ -13,7 +13,7 @@ export class TimingsComponent {
     @Output() addClicked = new EventEmitter()
     @Output() editClicked = new EventEmitter()
     @Output() deleteClicked = new EventEmitter()
-  
+
     constructor(
         private timingsService: TimingsService,
     ) { }

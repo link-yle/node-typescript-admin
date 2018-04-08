@@ -29,6 +29,8 @@
     "@angular/router": "^5.0.0",
     "@ngx-progressbar/core": "^3.0.2",
     "@ngx-progressbar/http": "^3.0.2",
+    "@pact-foundation/karma-pact": "^2.1.5",
+    "@pact-foundation/pact": "^5.9.0",
     "@types/faker": "^4.1.2",
     "@types/joi": "^13.0.1",
     "angular2-jwt": "^0.2.3",

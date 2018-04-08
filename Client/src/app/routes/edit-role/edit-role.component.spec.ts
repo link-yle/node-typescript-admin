@@ -61,7 +61,7 @@ describe('Home Component', () => {
             beforeEach(() => {
                 comp.ngOnInit()
                 dataService.assignRole = (data) => Observable.of('Ok')
-                comp.userRole = 'regular'
+                comp.user.role = 'regular'
                 comp.onAssignClick()
             })
             it('should successfully post', () => {
@@ -74,7 +74,7 @@ describe('Home Component', () => {
             beforeEach(() => {
                 comp.ngOnInit()
                 dataService.signup = (data) => Observable.throw('Error')
-                comp.userRole = 'regular'
+                comp.user.role = 'regular'
                 comp.onAssignClick()
             })
             it('should respond to error', () => {

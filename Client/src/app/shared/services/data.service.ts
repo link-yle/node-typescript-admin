@@ -10,6 +10,9 @@ import { Timezone } from '../models/timezone.model';
 import { UserCredentials } from '../models/userCredentials';
 import { UserInfo } from '../models/userInfo.model';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/catch'
+
 @Injectable()
 export class DataService {
     private requestOptions
@@ -49,7 +52,8 @@ export class DataService {
     }
 
     signupSecurely(item: User) {
-        return this.http.post(`${this.endPoint}/users/secure`, { email: item.email, password: item.password, timeZones: [], name: item.name }, this.requestOptions)
+        return this.http.post(`${this.endPoint}/users/secure`,
+            { email: item.email, password: item.password, timeZones: [], name: item.name }, this.requestOptions)
             .map(res => {
                 return res.json()
             })
@@ -57,7 +61,7 @@ export class DataService {
     }
 
     activateFromBackEnd(code, email) {
-        return this.http.post(`${this.endPoint}/activation`, {code, email}, this.requestOptions)
+        return this.http.post(`${this.endPoint}/activation`, { code, email }, this.requestOptions)
             .map(res => {
                 return res.json()
             })

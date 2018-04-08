@@ -1,4 +1,3 @@
-import { AuthService } from '../services/auth.service';
 import { DebugElement, OnInit } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -6,9 +5,10 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../services/data.service';
 import { NavComponent } from './nav.component';
-import { SharedModule } from '../shared.module';
+import { DataService } from 'app/shared/services/data.service';
+import { SharedModule } from 'app/shared/shared.module';
+import { AuthService } from 'app/shared/services/auth.service';
 
 
 describe('Nav Component', () => {

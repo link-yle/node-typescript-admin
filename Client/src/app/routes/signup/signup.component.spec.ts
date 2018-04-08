@@ -1,7 +1,5 @@
 import { SignupModule } from './signup.module';
 import { SignupComponent } from './signup.component';
-import { SnackBarService } from '../shared/services/snackbar.service';
-import { SharedModule } from '../shared/shared.module';
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -9,9 +7,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../shared/services/data.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
+import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { DataService } from 'app/shared/services/data.service';
+import { SharedModule } from 'app/shared/shared.module';
 describe('Signup Component', () => {
 
     let comp: SignupComponent;
@@ -69,7 +69,7 @@ describe('Signup Component', () => {
             describe('Scenario: Success', () => {
                 beforeEach(() => {
                     dataService.signup = (data) => Observable.of(user)
-                    comp.onSubmit(user)
+                    comp.signup()
                 })
                 it('should successfully post', () => {
                     expect(comp).toBeTruthy()
@@ -80,7 +80,7 @@ describe('Signup Component', () => {
             describe('Scenario: Error', () => {
                 beforeEach(() => {
                     dataService.signup = (data) => Observable.throw('Error')
-                    comp.onSubmit(user)
+                    comp.signup()
                 })
                 it('should respond to error', () => {
                     expect(comp).toBeTruthy()

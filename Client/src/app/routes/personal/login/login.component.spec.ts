@@ -1,12 +1,11 @@
-import { HomeModule } from './home.module';
-import { SnackBarService } from '../shared/services/snackbar.service';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
-import { DataService } from '../shared/services/data.service';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
-import { LoginComponent } from './home.component';
+import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { LoginComponent } from 'app/routes/personal/login/login.component';
+import { DataService } from 'app/shared/services/data.service';
 
 describe('Home Component', () => {
     let comp: LoginComponent;
@@ -34,7 +33,7 @@ describe('Home Component', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule, HomeModule],
+            imports: [RouterTestingModule],
             declarations: [],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
