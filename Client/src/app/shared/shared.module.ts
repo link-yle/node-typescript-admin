@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-form/timezone-form.component';
-import { AppInputsModule } from 'app/shared/components/UI/inputs.module';
+import { AppInputsModule } from 'app/shared/components/ui-inputs/inputs.module';
 
 @NgModule({
   imports: [
