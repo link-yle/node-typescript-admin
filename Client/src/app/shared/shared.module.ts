@@ -11,15 +11,13 @@ import { NavComponent } from './components/layout/nav/nav.component';
 import { TimingsComponent } from './components/timings/view-time/timings.component';
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
-import { SubmitButtonComponent } from './components/UI/submit-button/submit-button.component';
-import { PasswordInputlayoutComponent } from './components/UI/password-input-layout/password-input-layout.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-form/timezone-form.component';
-import { EmailInputLayoutComponent } from 'app/shared/components/UI/email-input-layout/email-input-layout.component';
+import { AppInputsModule } from 'app/shared/components/UI/inputs.module';
 
 @NgModule({
   imports: [
@@ -33,6 +31,7 @@ import { EmailInputLayoutComponent } from 'app/shared/components/UI/email-input-
     NgProgressModule.forRoot(),
     NgProgressHttpModule,
     BrowserAnimationsModule,
+    AppInputsModule
   ],
   providers: [],
   exports: [
@@ -47,12 +46,10 @@ import { EmailInputLayoutComponent } from 'app/shared/components/UI/email-input-
     TimingsComponent,
     TimeZoneFormComponent,
     EditUserComponent,
-    SubmitButtonComponent,
-    EmailInputLayoutComponent,
-    PasswordInputlayoutComponent,
     // MatSnackBarModule,
     BrowserAnimationsModule,
-    NgProgressModule
+    NgProgressModule,
+    AppInputsModule
 
   ],
   declarations: [
@@ -63,9 +60,6 @@ import { EmailInputLayoutComponent } from 'app/shared/components/UI/email-input-
     EditUserComponent,
     LoginLayoutComponent,
     AuthenticatedNavbarComponent,
-    SubmitButtonComponent,
-    EmailInputLayoutComponent,
-    PasswordInputlayoutComponent,
 
   ],
 })

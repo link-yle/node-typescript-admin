@@ -1,13 +1,12 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="form">
-    <div class="form-group">
-        <label for="">Name </label>
+
+    <app-name-input-layout [isValid]="!(form.get('name').dirty && form.get('name').invalid)">
         <input type="text" class="form-control" id="" placeholder="Enter your first name" formControlName="name">
-        <p [hidden]="!isIncorrectNameFormat('name')" class="text-danger"> Please Enter a that has atleast 3 letters and a maximum of 20 letters</p>
-    </div>
-    <div class="form-group">
-        <label for="">Email </label>
+    </app-name-input-layout>
+
+    <app-email-input-layout [isValid]="!(form.get('email').dirty && form.get('email').invalid)">
         <input type="email" name="email" class="form-control" formControlName="email">
-        <p class="text-danger" [hidden]="!(form.get('email').dirty && form.get('email').invalid)"> Please Enter a valid email </p>
-    </div>
+    </app-email-input-layout>
+
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
 </form>
