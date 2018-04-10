@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../shared/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
-import { DataService } from 'app/shared/services/data.service';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { DataService } from 'app/core/services/data.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
 import { Timezone } from 'app/shared/models/timezone.model';
-import { TimingsService } from 'app/shared/services/timings.service';
+import { TimingsService } from 'app/core/services/timings.service';
 
 @Component({
     templateUrl: 'edit-my-time.component.html',

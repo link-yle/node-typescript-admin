@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { DataService } from 'app/shared/services/data.service';
+import { DataService } from 'app/core/services/data.service';
 import 'rxjs/add/operator/first'
 import 'rxjs/add/operator/switchMap'
 import 'rxjs/add/operator/do'
+import { User } from 'app/shared/models/user.model';
 
 @Injectable()
 export class SelectedUserService {

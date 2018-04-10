@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { SnackBarService } from './services/snackbar.service';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { NavComponent } from './components/layout/nav/nav.component';
 import { TimingsComponent } from './components/timings/view-time/timings.component';

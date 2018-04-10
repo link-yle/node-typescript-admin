@@ -1,9 +1,9 @@
 import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataService } from '../../../shared/services/data.service';
-import { SnackBarService } from '../../../shared/services/snackbar.service';
-import { AuthService } from '../../../shared/services/auth.service';
+import { DataService } from '../../../core/services/data.service';
+import { SnackBarService } from '../../../core/services/snackbar.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { passwordPattern } from 'app/shared/config/constants';
 
 @Component({

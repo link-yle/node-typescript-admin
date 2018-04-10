@@ -3,9 +3,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
 import { LoginComponent } from 'app/routes/personal/login/login.component';
-import { DataService } from 'app/shared/services/data.service';
+import { DataService } from 'app/core/services/data.service';
 
 describe('Home Component', () => {
     let comp: LoginComponent;

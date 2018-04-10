@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../shared/services/auth.service';
-import { DataService } from 'app/shared/services/data.service';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { AuthService } from '../../../core/services/auth.service';
+import { DataService } from 'app/core/services/data.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
 import { Timezone } from 'app/shared/models/timezone.model';
 
 @Component({

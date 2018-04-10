@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SelectedUserService } from '../../shared/services/selectedUser.service';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { SelectedUserService } from '../../core/services/selectedUser.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
 import { Timezone } from 'app/shared/models/timezone.model';
 import { User } from 'app/shared/models/user.model';
-import { DataService } from 'app/shared/services/data.service';
+import { DataService } from 'app/core/services/data.service';
 
 @Component({
     templateUrl: 'add-other-user-time.component.html',

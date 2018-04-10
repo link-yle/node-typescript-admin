@@ -9,8 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
-import { DataService } from 'app/shared/services/data.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
+import { DataService } from 'app/core/services/data.service';
 import { SharedModule } from 'app/shared/shared.module';
 describe('Signup Component', () => {
 

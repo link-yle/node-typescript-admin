@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Timezone } from '../../../shared/models/timezone.model';
-import { AuthService } from 'app/shared/services/auth.service';
-import { DataService } from 'app/shared/services/data.service';
+import { AuthService } from 'app/core/services/auth.service';
+import { DataService } from 'app/core/services/data.service';
 import { User } from 'app/shared/models/user.model';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
 import { OnInit } from '@angular/core';
 
 @Component({

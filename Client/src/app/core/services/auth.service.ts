@@ -1,7 +1,7 @@
 import { CanActivate } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
 import { JwtHelper } from 'angular2-jwt';
+import { User } from 'app/shared/models/user.model';
 
 @Injectable()
 export class AuthService {

@@ -1,8 +1,8 @@
-import { DataService } from '../../shared/services/data.service';
+import { DataService } from '../../core/services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SnackBarService } from '../../shared/services/snackbar.service';
-import { SelectedUserService } from '../../shared/services/selectedUser.service';
+import { SnackBarService } from '../../core/services/snackbar.service';
+import { SelectedUserService } from '../../core/services/selectedUser.service';
 import { User } from 'app/shared/models/user.model';
 
 @Component({

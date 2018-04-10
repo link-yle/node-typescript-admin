@@ -3,10 +3,10 @@
 
 
 // import { MockBackend } from '@angular/http/testing';
-// import { DataService } from 'app/shared/services/data.service';
+// import { DataService } from 'app/core/services/data.service';
 // import { TestBed, getTestBed } from '@angular/core/testing';
 // import { BaseRequestOptions, Http, XHRBackend } from '@angular/http';
-// import { AuthService } from 'app/shared/services/auth.service';
+// import { AuthService } from 'app/core/services/auth.service';
 
 // const LOG_LEVEL = process.env.LOG_LEVEL || 'WARN'
 

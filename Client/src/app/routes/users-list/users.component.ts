@@ -1,12 +1,12 @@
 import { Subject } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AdminClaimsService } from '../../shared/services/admin-claims.service';
-import { SelectedUserService } from '../../shared/services/selectedUser.service';
+import { AdminClaimsService } from '../../core/services/admin-claims.service';
+import { SelectedUserService } from '../../core/services/selectedUser.service';
 import { User } from '../../shared/models/user.model';
-import { DataService } from '../../shared/services/data.service';
-import { SnackBarService } from '../../shared/services/snackbar.service';
-import { AuthService } from '../../shared/services/auth.service';
+import { DataService } from '../../core/services/data.service';
+import { SnackBarService } from '../../core/services/snackbar.service';
+import { AuthService } from '../../core/services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({

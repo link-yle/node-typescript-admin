@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectedUserService } from '../../shared/services/selectedUser.service';
+import { SelectedUserService } from '../../core/services/selectedUser.service';
 import { Router } from '@angular/router';
 import { Timezone } from '../../shared/models/timezone.model';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'app/shared/models/user.model';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
-import { DataService } from 'app/shared/services/data.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
+import { DataService } from 'app/core/services/data.service';
 
 @Component({
     templateUrl: 'other-user-time.component.html',

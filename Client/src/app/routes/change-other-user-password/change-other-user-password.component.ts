@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from '../../shared/services/data.service';
-import { SnackBarService } from '../../shared/services/snackbar.service';
-import { SelectedUserService } from 'app/shared/services/selectedUser.service';
+import { DataService } from '../../core/services/data.service';
+import { SnackBarService } from '../../core/services/snackbar.service';
+import { SelectedUserService } from 'app/core/services/selectedUser.service';
 import { User } from 'app/shared/models/user.model';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';

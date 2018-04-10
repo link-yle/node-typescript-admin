@@ -4,11 +4,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
-import { SnackBarService } from '../../shared/services/snackbar.service';
+import { SnackBarService } from '../../core/services/snackbar.service';
 import { EditRoleComponent } from './edit-role.component';
-import { DataService } from '../../shared/services/data.service';
+import { DataService } from '../../core/services/data.service';
 import { CommonModule } from '@angular/common';
-import { SelectedUserService } from '../../shared/services/selectedUser.service';
+import { SelectedUserService } from '../../core/services/selectedUser.service';
 
 describe('EditRoleComponent', () => {
     let comp: EditRoleComponent;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { DataService } from '../../../../shared/services/data.service';
-import { SnackBarService } from '../../../../shared/services/snackbar.service';
+import { DataService } from '../../../../core/services/data.service';
+import { SnackBarService } from '../../../../core/services/snackbar.service';
 import { passwordPattern } from 'app/shared/config/constants';
 
 @Component({

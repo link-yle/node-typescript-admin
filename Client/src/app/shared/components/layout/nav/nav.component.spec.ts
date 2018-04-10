@@ -6,9 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute } from '@angular/router';
 import { NavComponent } from './nav.component';
-import { DataService } from 'app/shared/services/data.service';
+import { DataService } from 'app/core/services/data.service';
 import { SharedModule } from 'app/shared/shared.module';
-import { AuthService } from 'app/shared/services/auth.service';
+import { AuthService } from 'app/core/services/auth.service';
 
 
 describe('Nav Component', () => {

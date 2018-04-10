@@ -1,8 +1,8 @@
-import { PublicInfoService } from '../../../shared/services/public.info.service';
-import { SnackBarService } from '../../../shared/services/snackbar.service';
+import { PublicInfoService } from '../../../core/services/public.info.service';
+import { SnackBarService } from '../../../core/services/snackbar.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { DataService } from '../../../shared/services/data.service';
+import { DataService } from '../../../core/services/data.service';
 import { Router } from '@angular/router';
 
 @Component({

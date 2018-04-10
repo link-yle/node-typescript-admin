@@ -1,4 +1,3 @@
-import { User } from '../models/user.model';
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
@@ -6,12 +5,13 @@ import { Headers, RequestOptions } from '@angular/http';
 import { SnackBarService } from './snackbar.service';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
-import { Timezone } from '../models/timezone.model';
-import { UserCredentials } from '../models/userCredentials';
-import { UserInfo } from '../models/userInfo.model';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
+import { UserCredentials } from 'app/shared/models/userCredentials';
+import { User } from 'app/shared/models/user.model';
+import { UserInfo } from 'app/shared/models/userInfo.model';
+import { Timezone } from 'app/shared/models/timezone.model';
 
 @Injectable()
 export class DataService {
@@ -68,7 +68,6 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-
     updateUserInfo(id: string, data: UserInfo) {
         this.setRequestOptions()
         return this.http.put(`${this.endPoint}/users/${id}/info`, data, this.requestOptions)
@@ -108,8 +107,6 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-
-
     updateTimeZone(userId: string, timeZoneId: string, data: Timezone) {
         this.setRequestOptions()
         return this.http.put(`${this.endPoint}/users/${userId}/timezones/${timeZoneId}`, data, this.requestOptions)
@@ -137,8 +134,6 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-
-
     assignRole(id: string, data: { role: string }) {
         this.setRequestOptions()
         return this.http.patch(`${this.endPoint}/users/${id}/role`, data, this.requestOptions)
@@ -164,7 +159,6 @@ export class DataService {
             })
             .catch(err => this.handleError(err));
     }
-
 
     changeOtherUserPassword(id: string, newPassword: string) {
         this.setRequestOptions()
@@ -193,10 +187,6 @@ export class DataService {
             .catch(err => this.handleError(err));
     }
 
-
-
-
-
     private handleError(error: Response | any) {
         console.log(error);
         let message: string;
@@ -216,10 +206,6 @@ export class DataService {
         }
         return Observable.throw(message);
     }
-
-
-
-
 
 }
 

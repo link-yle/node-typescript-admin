@@ -1,10 +1,10 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DataService } from '../../shared/services/data.service';
-import { SnackBarService } from '../../shared/services/snackbar.service';
+import { DataService } from '../../core/services/data.service';
+import { SnackBarService } from '../../core/services/snackbar.service';
 import { User } from '../../shared/models/user.model';
-import { PublicInfoService } from '../../shared/services/public.info.service';
+import { PublicInfoService } from '../../core/services/public.info.service';
 import { passwordPattern } from 'app/shared/config/constants';
 
 @Component({

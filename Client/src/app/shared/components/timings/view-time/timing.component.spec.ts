@@ -4,9 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { TimingsComponent } from './timings.component';
-import { SnackBarService } from 'app/shared/services/snackbar.service';
-import { DataService } from 'app/shared/services/data.service';
-import { AuthService } from 'app/shared/services/auth.service';
+import { SnackBarService } from 'app/core/services/snackbar.service';
+import { DataService } from 'app/core/services/data.service';
+import { AuthService } from 'app/core/services/auth.service';
 
 describe('Timings Component', () => {
     let comp: TimingsComponent;

@@ -16,11 +16,11 @@ import {
 import {
     AuthenticatedNavbarComponent,
 } from './shared/components/layout/authenticated-navbar/authenticated-navbar.component';
-import { AuthGuardService } from './shared/services/auth.guard.service';
+import { AuthGuardService } from './core/services/auth.guard.service';
 import { SignupComponent } from './routes/signup/signup.component';
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { AdminClaimsService } from './shared/services/admin-claims.service';
+import { AdminClaimsService } from './core/services/admin-claims.service';
 import { UsersComponent } from './routes/users-list/users.component';
 import { OtherUserTimeComponent } from './routes/other-user-time/other-user-time.component';
 import { EditRoleComponent } from './routes/edit-role/edit-role.component';

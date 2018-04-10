@@ -1,6 +1,6 @@
 import { Timezone } from '../../../models/timezone.model';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { TimingsService } from 'app/shared/services/timings.service';
+import { TimingsService } from 'app/core/services/timings.service';
 
 @Component({
     selector: 'app-timings',
