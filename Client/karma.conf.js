@@ -1,6 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/0.13/config/configuration-file.html
-const path = require('path')
+// const path = require('path')
 
 module.exports = function (config) {
   config.set({
@@ -14,6 +14,7 @@ module.exports = function (config) {
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
       require('@angular/cli/plugins/karma'),
+      require('karma-scss-preprocessor'),
       // require('@pact-foundation/karma-pact')
     ],
     client:{
@@ -33,6 +34,17 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
+    files: [
+      // { pattern: './src/test.ts', watched: false },
+      { pattern: './src/styles/main.scss', watched: true,  included: true, served: true }
+    ],
+    preprocessors: {
+      // './src/test.ts': ['@angular/cli'],
+      './src/styles/main.scss': ['scss']
+    },
+
+
+
     // pact: [{
     //   port: 1234,
     //   consumer: 'KarmaJasmineConsumer',
