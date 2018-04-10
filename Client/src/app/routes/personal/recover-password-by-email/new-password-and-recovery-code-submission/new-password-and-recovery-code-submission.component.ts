@@ -1,10 +1,10 @@
 import { PublicInfoService } from '../../../../shared/services/public.info.service';
-import { GlobalValidatorsService } from '../../../../shared/services/global-validators.service';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { SnackBarService } from '../../../../shared/services/snackbar.service';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../shared/services/data.service';
 import { Router } from '@angular/router';
+import { passwordPattern } from 'app/shared/config/constants';
 @Component({
     templateUrl: 'new-password-and-recovery-code-submission.component.html',
 })
@@ -15,7 +15,6 @@ export class NewPasswordAndRecoveryCodeSubmissionComponent implements OnInit {
         private dataService: DataService,
         private router: Router,
         private sb: SnackBarService,
-        private globalValidatorsService: GlobalValidatorsService,
         private fb: FormBuilder,
         private publicInfoService: PublicInfoService
     ) {  }
@@ -29,7 +28,7 @@ export class NewPasswordAndRecoveryCodeSubmissionComponent implements OnInit {
         this.form = this.fb.group({
             email: [this.publicInfoService.getEmail() || '', Validators.compose([Validators.required, Validators.email])],
             recoveryCode: ['', Validators.compose([Validators.required, Validators.minLength(20), Validators.maxLength(20)])],
-            newPassword: ['', Validators.compose([Validators.required, this.globalValidatorsService.passwordFormat])],
+            newPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
             confirmNewPassword: ['', Validators.required],
         })
     }

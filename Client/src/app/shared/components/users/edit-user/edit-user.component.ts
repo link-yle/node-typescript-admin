@@ -3,7 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DataService } from '../../../services/data.service';
 import { User } from '../../../models/user.model';
 import { SnackBarService } from '../../../services/snackbar.service';
-import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -18,7 +17,6 @@ export class EditUserComponent implements OnInit {
         private dataService: DataService,
         private fb: FormBuilder,
         private sb: SnackBarService,
-        private globalValidatorsService: GlobalValidatorsService
     ) { }
 
     ngOnInit() {

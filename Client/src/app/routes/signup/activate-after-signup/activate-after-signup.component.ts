@@ -2,7 +2,6 @@ import { SnackBarService } from '../../../shared/services/snackbar.service';
 import { DataService } from '../../../shared/services/data.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PublicInfoService } from '../../../shared/services/public.info.service';
-import { GlobalValidatorsService } from '../../../shared/services/global-validators.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,7 +16,6 @@ export class ActivateAfterSignupComponent implements OnInit {
         private fb: FormBuilder,
         private dataService: DataService,
         private sb: SnackBarService,
-        private globalValidatorsService: GlobalValidatorsService,
         private publicInfoService: PublicInfoService,
         private router: Router
     ) {

@@ -2,7 +2,6 @@ import { PublicInfoService } from '../../../shared/services/public.info.service'
 import { SnackBarService } from '../../../shared/services/snackbar.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { DataService } from '../../../shared/services/data.service';
 import { Router } from '@angular/router';
 
@@ -14,7 +13,6 @@ export class RecoverPasswordByEmailComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private globalValidatorsService: GlobalValidatorsService,
         private dataService: DataService,
         private sb: SnackBarService,
         private router: Router,

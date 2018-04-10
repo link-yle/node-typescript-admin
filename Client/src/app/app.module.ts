@@ -20,7 +20,6 @@ import { AuthService } from './shared/services/auth.service';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { SnackBarService } from './shared/services/snackbar.service';
 import { SelectedUserService } from './shared/services/selectedUser.service';
-import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { DataService } from './shared/services/data.service';
 import { AdminClaimsService } from './shared/services/admin-claims.service';
 import { EditOtherUserInfoComponent } from './routes/edit-other-user-info/edit-other-user-info.component';
@@ -84,7 +83,6 @@ import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-s
     SnackBarService,
     TimingsService,
     SelectedUserService,
-    GlobalValidatorsService,
     DataService,
     AdminClaimsService,
     AuthGuardService,

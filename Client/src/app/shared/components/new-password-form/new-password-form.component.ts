@@ -1,8 +1,8 @@
 import { Component, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { EventEmitter } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { passwordPattern } from 'app/shared/config/constants';
 
 @Component({
     selector: 'app-new-password-form',
@@ -15,7 +15,6 @@ export class NewPasswordFormComponent implements OnInit {
 
     constructor(
         private fb: FormBuilder,
-        private globalValidatorsService: GlobalValidatorsService,
     ) {  }
 
     ngOnInit() {
@@ -24,7 +23,7 @@ export class NewPasswordFormComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            newPassword: ['', Validators.compose([Validators.required, this.globalValidatorsService.passwordFormat])],
+            newPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
             confirmNewPassword: ['', Validators.required],
         })
     }
