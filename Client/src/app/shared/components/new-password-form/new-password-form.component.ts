@@ -8,7 +8,7 @@ import { OnInit } from '@angular/core';
     selector: 'app-new-password-form',
     templateUrl: 'new-password-form.component.html',
 })
-export class NewPasswordFormComponent implements OnInit{
+export class NewPasswordFormComponent implements OnInit {
 
     @Output() formSubmitted = new EventEmitter
     form: FormGroup

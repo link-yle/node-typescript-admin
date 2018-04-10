@@ -10,7 +10,7 @@ import { OnInit } from '@angular/core';
 @Component({
     templateUrl: 'my-time.component.html',
 })
-export class MyTimeComponent implements OnInit{
+export class MyTimeComponent implements OnInit {
 
     user: User
     constructor(

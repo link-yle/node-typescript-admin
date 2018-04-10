@@ -48,7 +48,8 @@ const paths: Routes = [
 
             { path: 'recover_password_by_email', component: RecoverPasswordByEmailComponent },
             { path: 'recover_password_by_email/submit_new_password', component: NewPasswordAndRecoveryCodeSubmissionComponent },
-            { path: 'recover_password_by_email/submit_new_password/password_recovered_successfully', component: PasswordRecoveredSuccessfullyComponent },
+            { path: 'recover_password_by_email/submit_new_password/password_recovered_successfully',
+             component: PasswordRecoveredSuccessfullyComponent },
 
 
 

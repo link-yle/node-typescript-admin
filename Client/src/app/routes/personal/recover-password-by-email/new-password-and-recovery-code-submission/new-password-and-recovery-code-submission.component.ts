@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../shared/services/data.service';
 import { Router } from '@angular/router';
 @Component({
-    selector: 'new-password-and-recovery-code-submission',
     templateUrl: 'new-password-and-recovery-code-submission.component.html',
 })
 export class NewPasswordAndRecoveryCodeSubmissionComponent implements OnInit {
