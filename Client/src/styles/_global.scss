@@ -13,11 +13,11 @@ body{
 }
 
 .successAlert{
-    background: $brand-success !important
+    background: map-get($theme-colors,"success");
 }
 
 .errorAlert{
-    background: $brand-danger !important
+    background: map-get($theme-colors,"danger")
 }
 
 
