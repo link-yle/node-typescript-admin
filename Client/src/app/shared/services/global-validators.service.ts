@@ -16,16 +16,6 @@ export class GlobalValidatorsService {
         } else return null;
     }
 
-    activationCodeFormat(control) {
-        if (control.value !== '' && !this.hasLenghtOf20(control.value)) {
-            return { 'incorrectCodeFormat': true }
-        } else return null;
-    }
-
-    private hasLenghtOf20(str) {
-        return str.length === 20;
-    }
-
 
 }
 

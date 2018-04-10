@@ -29,7 +29,7 @@ export class NewPasswordAndRecoveryCodeSubmissionComponent implements OnInit {
     private buildForm() {
         this.form = this.fb.group({
             email: [this.publicInfoService.getEmail() || '', Validators.compose([Validators.required, Validators.email])],
-            recoveryCode: ['', Validators.compose([Validators.required, this.globalValidatorsService.activationCodeFormat])],
+            recoveryCode: ['', Validators.compose([Validators.required, Validators.minLength(20), Validators.maxLength(20)])],
             newPassword: ['', Validators.compose([Validators.required, this.globalValidatorsService.passwordFormat])],
             confirmNewPassword: ['', Validators.required],
         })
@@ -51,9 +51,6 @@ export class NewPasswordAndRecoveryCodeSubmissionComponent implements OnInit {
         return this.form.get(control).hasError('incorrectPasswordFormat')
     }
 
-    isIncorrectActivationCodeFormat(control: string) {
-        return this.form.get(control).hasError('incorrectCodeFormat')
-    }
 
 
     unSimilarPassword(controlStr: string) {
