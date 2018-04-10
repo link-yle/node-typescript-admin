@@ -2,6 +2,7 @@ import { SignupSuccessComponent } from './routes/signup/signup-success/signup-su
 import { LoginComponent } from './routes/personal/login/login.component';
 import {
     NewPasswordAndRecoveryCodeSubmissionComponent,
+// tslint:disable-next-line:max-line-length
 } from './routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/new-password-and-recovery-code-submission.component';
 import {
     ChangeMyPasswordUsingOldPasswordComponent,
@@ -38,6 +39,7 @@ import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-p
 import { NewPasswordFormComponent } from 'app/shared/components/new-password-form/new-password-form.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 import { RecoverPasswordByEmailComponent } from 'app/routes/personal/recover-password-by-email/recover-password-by-email.component.';
+// tslint:disable-next-line:max-line-length
 import { PasswordRecoveredSuccessfullyComponent } from 'app/routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/password-recovered-successfully/password-recovered-successfully.component';
 import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-signup/activate-after-signup.component';
 
@@ -68,7 +70,7 @@ import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-s
     CorruptLinkComponent,
     RecoverPasswordByEmailComponent,
     NewPasswordAndRecoveryCodeSubmissionComponent,
-    PasswordRecoveredSuccessfullyComponent
+    PasswordRecoveredSuccessfullyComponent,
 
   ],
   imports: [

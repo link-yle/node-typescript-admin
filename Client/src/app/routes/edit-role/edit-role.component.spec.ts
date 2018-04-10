@@ -10,7 +10,7 @@ import { DataService } from '../../shared/services/data.service';
 import { CommonModule } from '@angular/common';
 import { SelectedUserService } from '../../shared/services/selectedUser.service';
 
-describe('Home Component', () => {
+describe('EditRoleComponent', () => {
     let comp: EditRoleComponent;
     let fixture: ComponentFixture<EditRoleComponent>;
     let sb: SnackBarService
@@ -23,8 +23,8 @@ describe('Home Component', () => {
         }
     }
     const SelectedDataServiceStub = {
-        get() {
-            return { _id: '123' }
+        getUserWithProbableDataFetch() {
+            return Observable.of({ _id: '123' })
         }
     }
     let dataService: DataService
@@ -40,7 +40,7 @@ describe('Home Component', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule, CommonModule, FormsModule],
-            declarations: [],
+            declarations: [EditRoleComponent],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
                 { provide: SnackBarService, useValue: SnackBarServiceStub },
@@ -64,7 +64,7 @@ describe('Home Component', () => {
                 comp.user.role = 'regular'
                 comp.onAssignClick()
             })
-            it('should successfully post', () => {
+            fit('should successfully post', () => {
                 expect(comp).toBeTruthy()
             })
         })

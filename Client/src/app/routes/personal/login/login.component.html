@@ -8,7 +8,12 @@
 <h1>Login</h1>
 <br>
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
-    <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
+
+
+    <app-email-input-layout [isValid]="!(form.get('email').dirty && form.get('email').invalid)">
+        <input type="email" name="email" class="form-control" formControlName="email">
+    </app-email-input-layout>
+
     <app-password-input [parentFormGroup]="form"></app-password-input>
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
     <button class="btn btn-primary" routerLink="/login/recover_password_by_email">Forgotten password?</button>

@@ -12,15 +12,15 @@ import { TimingsComponent } from './components/timings/view-time/timings.compone
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { SubmitButtonComponent } from './components/UI/submit-button/submit-button.component';
-import { EmailInputComponent } from './components/UI/email-input/email-input.component';
 import { PasswordInputComponent } from './components/UI/password-input/password-input.component';
 import { CustomInputComponent } from './components/UI/custom-input/custom-input.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-form/timezone-form.component';
+import { EmailInputLayoutComponent } from 'app/shared/components/UI/email-input-layout/email-input-layout.component';
 
 @NgModule({
   imports: [
@@ -32,8 +32,8 @@ import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-fo
     RouterModule,
     MatSnackBarModule,
     NgProgressModule.forRoot(),
-    NgProgressHttpModule, 
-    BrowserAnimationsModule
+    NgProgressHttpModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   exports: [
@@ -49,13 +49,13 @@ import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-fo
     TimeZoneFormComponent,
     EditUserComponent,
     SubmitButtonComponent,
-    EmailInputComponent,
+    EmailInputLayoutComponent,
     PasswordInputComponent,
     CustomInputComponent,
     // MatSnackBarModule,
     BrowserAnimationsModule,
     NgProgressModule
-    
+
   ],
   declarations: [
     NavComponent,
@@ -66,10 +66,10 @@ import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-fo
     LoginLayoutComponent,
     AuthenticatedNavbarComponent,
     SubmitButtonComponent,
-    EmailInputComponent,
+    EmailInputLayoutComponent,
     PasswordInputComponent,
     CustomInputComponent,
-    
+
 
   ],
 })
