@@ -1,5 +1,5 @@
 <div class="form-group">
     <label for="">Name</label>
     <ng-content></ng-content>
-    <p class="text-danger" [hidden]="isValid"> Please Enter a that has atleast 3 letters and a maximum of 20 letters </p>
+    <p class="text-danger" [hidden]="isValid"> {{nameErrorMessage}} </p>
 </div>

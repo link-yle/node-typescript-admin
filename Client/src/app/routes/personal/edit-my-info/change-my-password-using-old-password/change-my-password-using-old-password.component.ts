@@ -40,11 +40,6 @@ export class ChangeMyPasswordUsingOldPasswordComponent implements OnInit {
         )
     }
 
-    isIncorrectPasswordFormat(control: string) {
-        return this.form.get(control).hasError('incorrectPasswordFormat')
-    }
-
-
     unSimilarPassword(controlStr: string) {
         const formControl = this.form.get(controlStr);
         return this.form.get('newPassword').value !== formControl.value && !formControl.pristine

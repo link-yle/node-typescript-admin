@@ -33,11 +33,6 @@ export class NewPasswordFormComponent implements OnInit {
         this.buildForm()
     }
 
-    isIncorrectPasswordFormat(control: string) {
-        return this.form.get(control).hasError('incorrectPasswordFormat')
-    }
-
-
     unSimilarPassword(controlStr: string) {
         const formControl = this.form.get(controlStr);
         return this.form.get('newPassword').value !== formControl.value && !formControl.pristine

@@ -52,11 +52,6 @@ export class SignupComponent implements OnInit {
             }
         )
     }
-    // Your account has been successfully created please check your email
-
-    isIncorrectNameFormat(control: string) {
-        return this.form.get(control).hasError('incorrectNameFormat')
-    }
 
     unSimilarPassword(controlStr: string) {
         const formControl = this.form.get(controlStr);

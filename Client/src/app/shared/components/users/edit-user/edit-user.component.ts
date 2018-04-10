@@ -43,12 +43,4 @@ export class EditUserComponent implements OnInit {
         )
     }
 
-    isIncorrectPasswordFormat(control: string) {
-        return this.form.get(control).hasError('incorrectPasswordFormat')
-    }
-
-    isIncorrectNameFormat(control: string) {
-        return this.form.get(control).hasError('incorrectNameFormat')
-    }
-
 }
