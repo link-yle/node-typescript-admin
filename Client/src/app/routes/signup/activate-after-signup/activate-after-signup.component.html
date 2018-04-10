@@ -6,7 +6,9 @@
 
 <form [formGroup]="form" *ngIf="form">
 
-    <app-email-input [parentFormGroup]="form" [isValidating]="true"></app-email-input>
+    <app-email-input-layout [isValid]="!(form.get('email').dirty && form.get('email').invalid)">
+        <input type="email" name="email" class="form-control" formControlName="email">
+    </app-email-input-layout>
 
     <div class="form-group">
         <label for="">Activation Code </label>
