@@ -30,16 +30,16 @@ export class OtherUserTimeComponent implements OnInit {
 
     onDeleteClicked(item) {
         this.dataService.deleteTimeZone(this.user._id, item._id).subscribe(
-            data => this.user.timeZones = this.user.timeZones.filter(t => t._id !==item._id),
+            data => this.user.timeZones = this.user.timeZones.filter(t => t._id !== item._id),
             error => this.sb.emitErrorSnackBar(error)
         )
     }
-    
+
 
     onAddClicked() {
         this.router.navigate(['users', this.user._id, 'time', 'add'])
     }
-    
+
     onEditClicked(item: Timezone) {
         this.router.navigate(['users', this.user._id, 'time', 'edit'])
     }
@@ -47,5 +47,5 @@ export class OtherUserTimeComponent implements OnInit {
     title() {
         return `${this.user.name}'s Timings`
     }
-    
+
 }

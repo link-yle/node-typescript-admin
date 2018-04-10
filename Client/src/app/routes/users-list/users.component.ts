@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     onActivateClick(item) {
         this.dataService.activateUserAdministratively(item._id).subscribe(
             data => item.active = true,
-            error=> this.sb.emitErrorSnackBar(error)
+            error => this.sb.emitErrorSnackBar(error)
         )
     }
 

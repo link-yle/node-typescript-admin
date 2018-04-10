@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
     templateUrl: 'activate-after-signup.component.html',
 })
-export class ActivateAfterSignupComponent implements OnInit{
+export class ActivateAfterSignupComponent implements OnInit {
 
     form: FormGroup
     constructor(

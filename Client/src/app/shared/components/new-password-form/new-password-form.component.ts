@@ -2,12 +2,13 @@ import { Component, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { EventEmitter } from '@angular/core';
+import { OnInit } from '@angular/core';
 
 @Component({
-    selector: 'new-password-form',
+    selector: 'app-new-password-form',
     templateUrl: 'new-password-form.component.html',
 })
-export class NewPasswordFormComponent {
+export class NewPasswordFormComponent implements OnInit{
 
     @Output() formSubmitted = new EventEmitter
     form: FormGroup

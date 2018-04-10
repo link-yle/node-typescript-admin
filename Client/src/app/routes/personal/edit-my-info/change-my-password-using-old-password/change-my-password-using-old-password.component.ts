@@ -3,11 +3,12 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { GlobalValidatorsService } from 'app/shared/services/global-validators.service';
 import { DataService } from '../../../../shared/services/data.service';
 import { SnackBarService } from '../../../../shared/services/snackbar.service';
+import { passwordPattern } from 'app/shared/config/constants';
 
 @Component({
     templateUrl: 'change-my-password-using-old-password.component.html',
 })
-export class ChangeMyPasswordUsingOldPasswordComponent {
+export class ChangeMyPasswordUsingOldPasswordComponent implements OnInit {
     form: FormGroup
 
     constructor(
@@ -24,8 +25,8 @@ export class ChangeMyPasswordUsingOldPasswordComponent {
 
     private buildForm() {
         this.form = this.fb.group({
-            oldPassword: ['', Validators.compose([Validators.required, this.globalValidatorsService.passwordFormat])],
-            newPassword: ['', Validators.compose([Validators.required, this.globalValidatorsService.passwordFormat])],
+            oldPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
+            newPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
             confirmNewPassword: ['', Validators.required],
         })
     }

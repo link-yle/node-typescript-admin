@@ -15,9 +15,9 @@ export class AddMyTimeComponent {
         private router: Router,
         private dataService: DataService,
         private sb: SnackBarService,
-    ) { 
+    ) {
         console.log('ad me time');
-        
+
     }
 
     onSubmitted(x: Timezone) {

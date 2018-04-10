@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
     templateUrl: 'change-other-user-password.component.html',
 })
-export class ChangeOtherUserPasswordComponent {
+export class ChangeOtherUserPasswordComponent implements OnInit {
     user: User
 
     constructor(
@@ -27,10 +27,10 @@ export class ChangeOtherUserPasswordComponent {
             data => this.user = data,
             error =>  this.router.navigate(['users'])
         )
-        
+
     }
 
-    
+
     changePassword(formValue) {
         this.dataService.changeOtherUserPassword(this.user._id, formValue.newPassword).subscribe(
             data => {
@@ -40,6 +40,6 @@ export class ChangeOtherUserPasswordComponent {
         )
     }
 
-  
+
 
 }

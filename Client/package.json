@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "ng lint --fix",
     "e2e": "ng e2e --serve=false -wu=false",
     "update-wd": "webdriver-manager update",
     "e-d": "ng e2e --serve=false -wu=false -ee"

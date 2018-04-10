@@ -27,7 +27,7 @@ export class EditOtherUserTimeComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.selectedUserService.get()
-        if(!this.user) this.router.navigate(['/users/'])
+        if (!this.user) this.router.navigate(['/users/'])
         this.timeZone = this.timingsService.getSelectedTiming()
     }
 

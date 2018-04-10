@@ -9,7 +9,7 @@ import { TimingsService } from 'app/shared/services/timings.service';
 @Component({
     templateUrl: 'edit-my-time.component.html',
 })
-export class EditMyTimeComponent  {
+export class EditMyTimeComponent implements OnInit {
     timeZone
 
     constructor(
@@ -20,12 +20,12 @@ export class EditMyTimeComponent  {
         private timingsService: TimingsService
     ) { }
 
-    ngOnInit(){
-        if(!this.timingsService.getSelectedTiming()) this.router.navigate(['/my-time'])
+    ngOnInit() {
+        if (!this.timingsService.getSelectedTiming()) this.router.navigate(['/my-time'])
         this.timeZone = this.timingsService.getSelectedTiming()
     }
 
-    onSubmitted(x: {name: string, city: string, gmtTimeDifference: number}) {
+    onSubmitted(x: { name: string, city: string, gmtTimeDifference: number }) {
         this.dataService.updateTimeZone(this.authService.getId(), this.timeZone._id, x).first().subscribe(
             data => {
                 this.sb.emitSuccessSnackBar()

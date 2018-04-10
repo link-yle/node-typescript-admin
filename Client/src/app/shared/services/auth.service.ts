@@ -16,7 +16,7 @@ export class AuthService {
         window.localStorage.setItem(`profile`, JSON.stringify(user))
     }
 
-    public getProfile() : User {
+    public getProfile(): User {
         return JSON.parse(window.localStorage.getItem('profile'))
     }
 
