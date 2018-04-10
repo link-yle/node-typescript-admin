@@ -29,8 +29,8 @@ export class RecoverPasswordByEmailComponent implements OnInit {
         this.dataService.forgottenPassword(formValue.email).subscribe(
             data => {
                 this.publicInfoService.setEmail(formValue.email)
-                this.router.navigate(['/login/recover_password_by_email/submit_new_password'])  
-            }, 
+                this.router.navigate(['/login/recover_password_by_email/submit_new_password'])
+            },
             error => {
                 this.sb.emitErrorSnackBar(error)
             },
@@ -39,7 +39,7 @@ export class RecoverPasswordByEmailComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            email: ['', Validators.compose([this.globalValidatorsService.mailFormat, Validators.required])],
+            email: ['', Validators.compose([Validators.email, Validators.required])],
         })
     }
 

@@ -4,12 +4,6 @@ import { GlobalValidatorsService } from 'app/shared/services/global-validators.s
 describe('Global Validators', () => {
     const service = new GlobalValidatorsService()
     const control = { value: 'ahmed' }
-    it('should check mail validity', () => {
-        expect(service.mailFormat({ value: 'ahmed' })).not.toBe(null)
-        expect(service.mailFormat({ value: 'ahmed@gmail' })).toBe(null)
-    })
-
-
     it('should check password validity', () => {
         expect(service.passwordFormat({ value: '12345' })).not.toBe(null)
         expect(service.passwordFormat({ value: '12345r' })).toBe(null)

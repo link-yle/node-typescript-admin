@@ -3,12 +3,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 
 export class GlobalValidatorsService {
-    mailFormat(control) {
-        if (control.value !== '') {
-            return { 'incorrectMailFormat': true }
-        } else return null;
-    }
-
     passwordFormat(control) {
         const REGEX = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/);
         if (control.value !== '' && !REGEX.test(control.value)) {

@@ -30,7 +30,7 @@ export class ActivateAfterSignupComponent implements OnInit{
     private buildForm() {
         this.form = this.fb.group({
             email: [this.publicInfoService.getEmail() || '',
-            Validators.compose([Validators.required, this.globalValidatorsService.mailFormat])],
+            Validators.compose([Validators.required, Validators.email])],
             activationCode: ['', Validators.compose([Validators.required, this.globalValidatorsService.activationCodeFormat])],
         })
     }
