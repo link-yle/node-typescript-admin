@@ -64,7 +64,7 @@ describe('EditRoleComponent', () => {
                 comp.user.role = 'regular'
                 comp.onAssignClick()
             })
-            fit('should successfully post', () => {
+            it('should successfully post', () => {
                 expect(comp).toBeTruthy()
             })
         })

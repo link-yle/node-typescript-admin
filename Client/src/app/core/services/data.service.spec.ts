@@ -5,7 +5,7 @@ import { getResponse, setupConnections, setupConnectionsWithError } from '../../
 import { Response, ResponseOptions, ResponseType, Request } from '@angular/http';
 import { MockConnection } from '@angular/http/testing';
 import { DataService } from './data.service';
-import { setupConnectionsWithNoMessageError } from '../spec-helpers/helper';
+
 import { AuthService } from './auth.service';
 export const fakeUsers = [
     {
