@@ -5,10 +5,13 @@
         <p [hidden]="!isIncorrectNameFormat('name')" class="text-danger"> Please Enter a that has atleast 3 letters and a maximum of 20 letters</p>
     </div>
     <app-email-input-layout [isValid]="!(form.get('email').dirty && form.get('email').invalid)">
-            <input type="email" name="email" class="form-control" formControlName="email">
-        </app-email-input-layout>
+        <input type="email" name="email" class="form-control" formControlName="email">
+    </app-email-input-layout>
 
-    <app-password-input [parentFormGroup]="form" [isValidating]="true"></app-password-input>
+    <app-password-input-layout [isValid]="!(form.get('password').dirty && form.get('password').invalid)">
+        <input type="password" name="password" class="form-control" formControlName="password">
+    </app-password-input-layout>
+
     <div class="form-group">
         <label for="">Confirm Password </label>
         <input type="password" class="form-control" placeholder="Enter Password" formControlName="confirmPassword">

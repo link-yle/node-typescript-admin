@@ -14,7 +14,10 @@
         <input type="email" name="email" class="form-control" formControlName="email">
     </app-email-input-layout>
 
-    <app-password-input [parentFormGroup]="form"></app-password-input>
+    <app-password-input-layout [isValid]="!(form.get('password').dirty && form.get('password').invalid)">
+        <input type="password" name="password" class="form-control" formControlName="password">
+    </app-password-input-layout>
+
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
     <button class="btn btn-primary" routerLink="/login/recover_password_by_email">Forgotten password?</button>
 </form>

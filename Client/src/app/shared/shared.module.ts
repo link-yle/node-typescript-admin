@@ -12,8 +12,7 @@ import { TimingsComponent } from './components/timings/view-time/timings.compone
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { SubmitButtonComponent } from './components/UI/submit-button/submit-button.component';
-import { PasswordInputComponent } from './components/UI/password-input/password-input.component';
-import { CustomInputComponent } from './components/UI/custom-input/custom-input.component';
+import { PasswordInputlayoutComponent } from './components/UI/password-input-layout/password-input-layout.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -50,8 +49,7 @@ import { EmailInputLayoutComponent } from 'app/shared/components/UI/email-input-
     EditUserComponent,
     SubmitButtonComponent,
     EmailInputLayoutComponent,
-    PasswordInputComponent,
-    CustomInputComponent,
+    PasswordInputlayoutComponent,
     // MatSnackBarModule,
     BrowserAnimationsModule,
     NgProgressModule
@@ -67,9 +65,7 @@ import { EmailInputLayoutComponent } from 'app/shared/components/UI/email-input-
     AuthenticatedNavbarComponent,
     SubmitButtonComponent,
     EmailInputLayoutComponent,
-    PasswordInputComponent,
-    CustomInputComponent,
-
+    PasswordInputlayoutComponent,
 
   ],
 })
