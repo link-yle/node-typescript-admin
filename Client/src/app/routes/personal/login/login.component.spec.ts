@@ -10,7 +10,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { AuthService } from 'app/core/services/auth.service';
 import { By } from '@angular/platform-browser';
 
-describe('Home Component', () => {
+fdescribe('Home Component', () => {
     let comp: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
     let sb: SnackBarService
@@ -56,36 +56,63 @@ describe('Home Component', () => {
         fixture.detectChanges();
     });
 
-    fit('should build successfully', () => {
+    it('should build successfully', () => {
         expect(comp).toBeTruthy()
-        console.log(fixture.debugElement.query(By.css('button[type="submit"]Y')).properties.disabled) 
     })
 
     describe('Form Validation', () => {
-        describe('resetting', () => {
-            beforeEach(() => {
-
-            })
-
             describe('form initially', () => {
                 it('should be invalid', () => {
                     expect(comp.form.invalid).toBe(true)
                 })
                 it('submit button should be disabled', () => {
                     expect(fixture.nativeElement.querySelector('button[type="submit"][disabled]')).toBeTruthy()
-                    
-                    
+                })
+                it('error messages should be hidden', () => {
+                    expect(fixture.nativeElement.querySelectorAll('p.text-danger[hidden]').length).toBe(2)
+                })
+            })
+
+            describe('valid email and password', () => {
+                beforeEach(() => {
+                    const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
+                    const emailInputElement = emailInput.nativeElement
+                    emailInputElement.value = 'aadsdjhkds@sa.com'
+                    emailInputElement.dispatchEvent(new Event('input'));
+                    const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                    const passwordInputElement = passwordInput.nativeElement
+                    passwordInputElement.value = 'ada456346sd'
+                    passwordInputElement.dispatchEvent(new Event('input'));
+                    fixture.detectChanges();
+                })
+                it('form should be valid', () => {
+                    expect(comp.form.invalid).toBe(false)
+                })
+                it('submit button should be enabled', () => {
+                    expect(fixture.nativeElement.querySelector('button[type="submit"][disabled]')).toBeFalsy()
                 })
             })
 
             describe('form with unvalid email', () => {
                 beforeEach(() => {
-                    comp.form.controls['email'].setValue('aadsdjhkds.com');
-                    comp.form.controls['password'].setValue('ada456346sd');
+                    const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
+                    const emailInputElement = emailInput.nativeElement
+                    emailInputElement.value = 'aadsdjhkdscom'
+                    emailInputElement.dispatchEvent(new Event('input'));
+                    const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                    const passwordInputElement = passwordInput.nativeElement
+                    passwordInputElement.value = 'ada456346sd'
+                    passwordInputElement.dispatchEvent(new Event('input'));
                     fixture.detectChanges();
                 })
                 it('form should be invalid', () => {
                     expect(comp.form.invalid).toBe(true)
+                })
+                it('error message should appear', () => {
+                    fixture.detectChanges()
+                    const y = fixture.debugElement.queryAll(By.css('p.text-danger'));
+                    expect(y[0].nativeElement.innerHTML).toContain('Please Enter')
+                    expect(y[0].properties.hidden).toBeFalsy();
                 })
                 it('submit button should be disabled', () => {
                     expect(fixture.nativeElement.querySelector('button[type="submit"][disabled]')).toBeTruthy()
@@ -94,15 +121,24 @@ describe('Home Component', () => {
 
             describe('form with unvalid password', () => {
                 beforeEach(() => {
-                    comp.form.controls['email'].setValue('aadsdjhkds@ds.com');
-                    comp.form.controls['password'].setValue('adasd');
+                    const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
+                    const emailInputElement = emailInput.nativeElement
+                    emailInputElement.value = 'aadsdjhkds@sa.com'
+                    emailInputElement.dispatchEvent(new Event('input'));
+                    const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                    const passwordInputElement = passwordInput.nativeElement
+                    passwordInputElement.value = 'add'
+                    passwordInputElement.dispatchEvent(new Event('input'));
                     fixture.detectChanges();
                 })
                 it('form should be invalid', () => {
                     expect(comp.form.invalid).toBe(true)
                 })
                 it('error message should appear', () => {
-                    expect(fixture.nativeElement.querySelector('p.text-danger[hidden="false"]')).toBeTruthy()
+                    fixture.detectChanges()
+                    const y = fixture.debugElement.queryAll(By.css('p.text-danger'));
+                    expect(y[1].nativeElement.innerHTML).toContain('Please Enter')
+                    expect(y[1].properties.hidden).toBeFalsy();
                 })
                 it('submit button should be disabled', () => {
                     expect(fixture.nativeElement.querySelector('button[type="submit"][disabled]')).toBeTruthy()
@@ -140,7 +176,6 @@ describe('Home Component', () => {
             //         expect(comp).toBeTruthy()
             //     })
             // })
-        })
 
     })
 

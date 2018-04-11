@@ -7,6 +7,7 @@ import { passwordErrorMessage } from 'app/shared/config/constants';
     templateUrl: 'password-input-layout.component.html',
 })
 export class PasswordInputlayoutComponent {
-    @Input() isValid: Boolean
+    public errorMessage = passwordErrorMessage;
+    @Input() isNotValid: Boolean
     @Input() label = 'Password'
 }

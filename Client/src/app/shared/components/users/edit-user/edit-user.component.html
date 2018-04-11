@@ -1,10 +1,10 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="form" *ngIf="form">
 
-    <app-name-input-layout [isValid]="!(form.get('name').dirty && form.get('name').invalid)">
+    <app-name-input-layout [isNotValid]="!(form.get('name').dirty && form.get('name').invalid)">
         <input type="text" class="form-control" id="" placeholder="Enter your first name" formControlName="name">
     </app-name-input-layout>
 
-    <app-email-input-layout [isValid]="!(form.get('email').dirty && form.get('email').invalid)">
+    <app-email-input-layout [isNotValid]="!(form.get('email').dirty && form.get('email').invalid)">
         <input type="email" name="email" class="form-control" formControlName="email">
     </app-email-input-layout>
 

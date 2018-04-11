@@ -1,5 +1,5 @@
 <div class="form-group">
     <label for="">Email </label>
     <ng-content></ng-content>
-    <p class="text-danger" [hidden]="isValid"> Please Enter a valid email </p>
+    <p class="text-danger" [hidden]="!isNotValid"> {{errorMessage}} </p>
 </div>

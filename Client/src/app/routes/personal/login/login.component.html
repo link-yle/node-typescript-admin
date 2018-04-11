@@ -8,16 +8,18 @@
 <h1>Login</h1>
 <br>
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
-    <app-email-input-layout [isValid]="!(form.get('email').dirty && form.get('email').invalid)">
+    <app-email-input-layout [isNotValid]="form.get('email').dirty && form.get('email').invalid">
         <input type="email" name="email" class="form-control" formControlName="email">
     </app-email-input-layout>
-    <app-password-input-layout [isValid]="!(form.get('password').dirty && form.get('password').invalid)">
+    <app-password-input-layout [isNotValid]="form.get('password').dirty && form.get('password').invalid">
         <input type="password" name="password" class="form-control" formControlName="password">
     </app-password-input-layout>
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
     <button class="btn btn-primary" routerLink="/login/recover_password_by_email">Forgotten password?</button>
 </form>
 <hr>
+
+<div *ngIf="form.get('password').dirty && form.get('password').invalid">Heeeeeee</div>
 
 <span>Do not have an account?</span>
 <button class="btn btn-primary" routerLink="/login/signup">Sign Up</button>

@@ -5,5 +5,5 @@ import { Component, Input } from '@angular/core';
     templateUrl: 'name-input-layout.component.html',
 })
 export class NameInputLayoutComponent {
-    @Input() isValid: Boolean
+    @Input() isNotValid: Boolean
 }
