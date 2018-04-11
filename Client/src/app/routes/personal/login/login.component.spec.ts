@@ -15,7 +15,7 @@ import { EmptyComponent } from 'app/routes/empty/empty.component';
 import { Location } from '@angular/common';
 import { mock } from 'ts-mockito';
 
-fdescribe('Login Component', () => {
+describe('Login Component', () => {
     let comp: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
     let sb: SnackBarService

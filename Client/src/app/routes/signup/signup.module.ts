@@ -5,12 +5,14 @@ import { NgModule } from '@angular/core';
 // This Module's Components
 import { SignupComponent } from './signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        CommonModule
+        CommonModule,
+        SharedModule
     ],
     declarations: [
         SignupComponent,

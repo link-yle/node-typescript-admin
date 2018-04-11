@@ -26,13 +26,19 @@ export class SignupComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            name: ['', Validators.compose([Validators.required, Validators.max(20), Validators.min(3)])],
+            name: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(3)])],
             email: ['', Validators.compose([Validators.required, Validators.email])],
-            password: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
-            confirmPassword: ['', Validators.required],
+            passwords: this.fb.group({
+                password: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
+                confirmPassword: ['', Validators.required],
+            }, { validator: this.areEqual })
+
         })
     }
 
+    private areEqual(group) {
+        return group.get('password').value === group.get('confirmPassword').value ? null : { areEqual: true }
+    }
     signup() {
         this.dataService.signup(this.form.value).subscribe(
             data => this.router.navigate(['/login/signup/success']),

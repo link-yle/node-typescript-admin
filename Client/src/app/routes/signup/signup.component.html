@@ -1,6 +1,6 @@
 <form [formGroup]="form" *ngIf="form">
-    
-    <app-name-input-layout [isNotValid]="!(form.get('name').dirty && form.get('name').invalid)">
+
+    <app-name-input-layout [isNotValid]="form.get('name').dirty && form.get('name').invalid">
         <input type="text" name="name" class="form-control" formControlName="name">
     </app-name-input-layout>
 
@@ -8,16 +8,17 @@
         <input type="email" name="email" class="form-control" formControlName="email">
     </app-email-input-layout>
 
-    <app-password-input-layout [isNotValid]="form.get('password').dirty && form.get('password').invalid">
-        <input type="password" name="password" class="form-control" formControlName="password">
-    </app-password-input-layout>
+    <div formGroupName="passwords">
+        <app-password-input-layout [isNotValid]="form.get('passwords').get('password').dirty && form.get('passwords').get('password').invalid">
+            <input type="password" name="oldPassword" placeholder="Enter Password" class="form-control" formControlName="password">
+        </app-password-input-layout>
 
-    <div class="form-group">
-        <label for="">Confirm Password </label>
-        <input type="password" class="form-control" placeholder="Enter Password" formControlName="confirmPassword">
-        <p [hidden]="!unSimilarPassword('confirmPassword')" class="text-danger"> Please enter a similar password </p>
+        <div class="form-group">
+            <label for="">Confirm Password </label>
+            <input type="password" name="newPassword" class="form-control" placeholder="Enter Password" formControlName="confirmPassword">
+            <p [hidden]="!form.get('passwords').getError('areEqual')" class="text-danger">Please Enter a similar password </p>
+        </div>
     </div>
-
     <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="signup()">Signup</button>
     <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="signupSecurely()">Signup securely</button>
 </form>
