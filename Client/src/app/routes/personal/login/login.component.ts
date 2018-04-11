@@ -44,10 +44,13 @@ export class LoginComponent implements OnInit {
     }
 
     private handleLoginError(error: Response | any) {
-        const body = error.json() || '';
-        const err = body.error || JSON.stringify(body);
-        if (error.status === 403) this.isRegisteredButNotActive = true;
-        else this.sb.emitErrorSnackBar(err)
+        const body = error.json()
+        if (error.status === 403)  {
+            return this.isRegisteredButNotActive = true;
+        } else {
+            const err = body.error || JSON.stringify(body);
+            this.sb.emitErrorSnackBar();
+        }
     }
 
 

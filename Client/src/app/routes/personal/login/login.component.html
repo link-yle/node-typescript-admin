@@ -15,11 +15,9 @@
         <input type="password" name="password" class="form-control" formControlName="password">
     </app-password-input-layout>
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
-    <button class="btn btn-primary" routerLink="/login/recover_password_by_email">Forgotten password?</button>
 </form>
 <hr>
-
-<div *ngIf="form.get('password').dirty && form.get('password').invalid">Heeeeeee</div>
-
+<button class="btn btn-primary"  id="forget-password-button" routerLink="/login/recover_password_by_email">Forgotten password?</button>
+<br>
 <span>Do not have an account?</span>
-<button class="btn btn-primary" routerLink="/login/signup">Sign Up</button>
+<button class="btn btn-primary" id="signup-button" routerLink="/login/signup">Sign Up</button>

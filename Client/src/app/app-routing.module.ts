@@ -37,7 +37,7 @@ import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-ti
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 
-const paths: Routes = [
+export const paths: Routes = [
     {
         path: 'login', component: LoginLayoutComponent, children: [
             { path: '', component: LoginComponent },
