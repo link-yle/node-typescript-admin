@@ -114,7 +114,7 @@ describe('EditUser Component', () => {
                 nameElement.dispatchEvent(new Event('input'));
             })
 
-            fdescribe('EditUser', () => {
+            describe('EditUser', () => {
                 describe('Scenario: Success', () => {
                     let spy;
                     beforeEach(() => {
