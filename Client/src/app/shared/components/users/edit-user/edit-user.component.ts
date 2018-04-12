@@ -25,7 +25,7 @@ export class EditUserComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            name: [this.user.name, Validators.compose([Validators.required, Validators.max(20), Validators.min(3)])],
+            name: [this.user.name, Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(3)])],
             email: [this.user.email, Validators.compose([Validators.required, Validators.email])],
         })
     }

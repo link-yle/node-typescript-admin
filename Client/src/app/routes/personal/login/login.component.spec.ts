@@ -91,7 +91,10 @@ describe('Login Component', () => {
         }));
     })
 
-    describe('Form Validation', () => {
+    describe('Initial Html', () => {
+        it('jumbotron should not appear', () => {
+            expect(fixture.debugElement.query(By.css('jumbotron'))).toBeFalsy();
+        })
         describe('form initially', () => {
             it('should be invalid', () => {
                 expect(comp.form.invalid).toBe(true)
@@ -103,7 +106,9 @@ describe('Login Component', () => {
                 expect(fixture.nativeElement.querySelectorAll('p.text-danger[hidden]').length).toBe(2)
             })
         })
+    })
 
+    describe('Form Validation', () => {
         describe('valid email and password', () => {
             beforeEach(() => {
                 const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
@@ -178,13 +183,6 @@ describe('Login Component', () => {
 
 
     })
-
-    describe('Initial Html', () => {
-        it('jumbotron should not appear', () => {
-            expect(fixture.debugElement.query(By.css('jumbotron'))).toBeFalsy();
-        })
-    })
-
 
 
     describe('Submitting Form', () => {

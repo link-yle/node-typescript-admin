@@ -14,13 +14,16 @@ import { DataService } from 'app/core/services/data.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { NameInputLayoutComponent } from 'app/shared/components/ui-inputs/name-input-layout/name-input-layout.component';
 import { PublicInfoService } from 'app/core/services/public.info.service';
+import { SignupSuccessComponent } from 'app/routes/signup/signup-success/signup-success.component';
+import { Location } from '@angular/common';
+import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-signup/activate-after-signup.component';
 
-fdescribe('Signup Component', () => {
+describe('Signup Component', () => {
 
     let comp: SignupComponent;
     let fixture: ComponentFixture<SignupComponent>;
     let sb: SnackBarService
-
+    let location: Location
     const user = {
         name: 'Ahmed',
         password: '454565',
@@ -48,18 +51,26 @@ fdescribe('Signup Component', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule, SharedModule],
-            declarations: [SignupComponent],
+            imports: [RouterTestingModule, SharedModule,
+                RouterTestingModule.withRoutes([
+                    { path: 'login/signup/success', component: SignupSuccessComponent },
+                    { path: 'login/signup/activate', component: ActivateAfterSignupComponent }
+                ]),
+            ],
+            declarations: [SignupComponent, SignupSuccessComponent, ActivateAfterSignupComponent],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
                 { provide: SnackBarService, useValue: SnackBarServiceStub },
-                { provide: PublicInfoService, useValue: {} }
+                PublicInfoService,
+                // { provide: PublicInfoService, useValue: { setEmail() { }, setPass() { } } },
+                Location
             ],
         });
         fixture = TestBed.createComponent(SignupComponent);
         comp = fixture.componentInstance;
 
         dataService = fixture.debugElement.injector.get(DataService);
+        location = fixture.debugElement.injector.get(Location);
         sb = fixture.debugElement.injector.get(SnackBarService);
         fixture.detectChanges();
     });
@@ -253,28 +264,76 @@ fdescribe('Signup Component', () => {
     })
 
     describe('Submitting Form', () => {
-        describe('Scenario: posting new', () => {
-            beforeEach(() => {
+        beforeEach(() => {
+            const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
+            const emailInputElement = emailInput.nativeElement
+            emailInputElement.value = 'aadsdjhk@daom.com'
+            emailInputElement.dispatchEvent(new Event('input'));
+            const passwordInput = fixture.debugElement.query(By.css('input[name="oldPassword"]'));
+            const passwordInputElement = passwordInput.nativeElement
+            passwordInputElement.value = '22323435fgt3'
+            passwordInputElement.dispatchEvent(new Event('input'));
+            const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
+            const confirmPasswordInputElement = confirmPasswordInput.nativeElement
+            confirmPasswordInputElement.value = '22323435fgt3'
+            confirmPasswordInputElement.dispatchEvent(new Event('input'));
+            const name = fixture.debugElement.query(By.css('input[name="name"]'));
+            const nameElement = name.nativeElement
+            nameElement.value = 'YYYY'
+            nameElement.dispatchEvent(new Event('input'));
+        })
 
-            })
+        describe('Normal Signup', () => {
             describe('Scenario: Success', () => {
-                beforeEach(() => {
+                it('should successfully post and navigate to signup success page', fakeAsync(() => {
                     dataService.signup = (data) => Observable.of(user)
-                    comp.signup()
-                })
-                it('should successfully post', () => {
-                    expect(comp).toBeTruthy()
-                })
+                    fixture.detectChanges();
+                    fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
+                    tick()
+                    expect(location.path()).toBe('/login/signup/success')
+                }))
             })
-
 
             describe('Scenario: Error', () => {
                 beforeEach(() => {
-                    dataService.signup = (data) => Observable.throw('Error')
-                    comp.signup()
+                    const err = {
+                        status: 400,
+                        json() { return { error: 'thats an error' } }
+                    }
+                    dataService.signup = (data) => Observable.throw(err)
+                    fixture.detectChanges();
                 })
-                it('should respond to error', () => {
-                    expect(comp).toBeTruthy()
+                it('snackbar should appear', () => {
+                    const spy = spyOn(sb, 'emitErrorSnackBar')
+                    fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
+                    fixture.detectChanges();
+                    expect(spy).toHaveBeenCalled();
+                })
+            })
+        })
+
+        describe('Secure Signup', () => {
+            describe('Scenario: Success', () => {
+                it('should successfully post and navigate to signup success page', fakeAsync(() => {
+                    dataService.signupSecurely = (data) => Observable.of(user)
+                    fixture.detectChanges();
+                    fixture.debugElement.query(By.css('#secure-signup-button')).nativeElement.click()
+                    tick()
+                    expect(location.path()).toBe('/login/signup/activate')
+                }))
+            })
+
+            describe('Scenario: Error', () => {
+                beforeEach(() => {
+                    const err = { status: 400, json() { return { error: 'thats an error' } } }
+                    dataService.signupSecurely = (data) => Observable.throw(err)
+                    fixture.detectChanges();
+                })
+                it('snackbar should appear', () => {
+                    const spy = spyOn(sb, 'emitErrorSnackBar')
+                    fixture.debugElement.query(By.css('#secure-signup-button')).nativeElement.click()
+                    fixture.detectChanges();
+                    expect(spy).toHaveBeenCalled();
                 })
             })
         })
