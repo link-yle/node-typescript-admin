@@ -2,16 +2,15 @@
     
     <div class="form-group">
         <label for="">Name </label>
-        <input type="text" class="form-control" id="" placeholder="Enter time zone name" formControlName="name">
+        <input name="name" type="text" class="form-control" id="" placeholder="Enter time zone name" formControlName="name">
     </div>
     <div class="form-group">
         <label for="">City Name </label>
-        <input type="email" class="form-control" id="" placeholder="Enter City Name " formControlName="city">
+        <input name="city" type="text" class="form-control" id="" placeholder="Enter City Name " formControlName="city">
     </div>
     <div class="form-group">
         <label for="">GMT Time difference </label>
-        <input type="number" class="form-control" id="" min="-12" max="14" placeholder="Enter Gmt Time Difference" formControlName="gmtTimeDifference">
+        <input name="gmtTimeDifference" type="number" class="form-control" id="" min="-12" max="14" placeholder="Enter Gmt Time Difference" formControlName="gmtTimeDifference">
     </div>
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
 </form>
-

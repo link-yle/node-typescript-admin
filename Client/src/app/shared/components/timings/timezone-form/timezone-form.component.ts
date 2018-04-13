@@ -26,9 +26,9 @@ export class TimeZoneFormComponent implements OnInit {
 
     private buildForm() {
         this.form = this.fb.group({
-            name: [this.timeZone ? this.timeZone.name : '', Validators.required],
-            city: [this.timeZone ? this.timeZone.city : '', Validators.required],
-            gmtTimeDifference: [this.timeZone ? this.timeZone.gmtTimeDifference : 0, Validators.required],
+            name: [this.timeZone ? this.timeZone.name : '', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(3)])],
+            city: [this.timeZone ? this.timeZone.city : '', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(3)])],
+            gmtTimeDifference: [this.timeZone ? this.timeZone.gmtTimeDifference : 0, Validators.compose([Validators.required, Validators.max(14), Validators.min(-12)])],
         })
     }
 
