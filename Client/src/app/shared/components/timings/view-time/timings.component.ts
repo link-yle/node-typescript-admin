@@ -18,8 +18,6 @@ export class TimingsComponent {
         private timingsService: TimingsService,
     ) { }
 
-
-
     onDeleteClick(item) {
         this.deleteClicked.emit(item)
     }
@@ -34,9 +32,11 @@ export class TimingsComponent {
     }
 
     getTime(gmtTimeDifference) {
-        const t = new Date()
-        t.setHours(t.getHours() + gmtTimeDifference)
-        return `${t.getHours()}: ${t.getMinutes()}`
+        const  t = new Date()
+        const hours = t.setHours(t.getUTCHours() + gmtTimeDifference)
+        const minutes = t.setMinutes(t.getUTCMinutes())
+        t.setSeconds(0)
+        return t.toLocaleTimeString().slice(0, -3)
     }
 
 }
