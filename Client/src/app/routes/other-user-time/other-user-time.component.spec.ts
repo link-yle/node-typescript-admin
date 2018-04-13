@@ -6,17 +6,16 @@ import 'rxjs/add/observable/throw';
 import { SnackBarService } from 'app/core/services/snackbar.service';
 import { DataService } from 'app/core/services/data.service';
 import { SharedModule } from 'app/shared/shared.module';
-import { AuthService } from 'app/core/services/auth.service';
-import { EmptyComponent } from 'app/routes/empty/empty.component';
 import { Location } from '@angular/common';
-import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
-import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-time.component';
-import { AddMyTimeComponent } from 'app/routes/personal/add-my-time/add-my-time.component';
 import { TimingsService } from 'app/core/services/timings.service';
+import { OtherUserTimeComponent } from 'app/routes/other-user-time/other-user-time.component';
+import { EditOtherUserTimeComponent } from 'app/routes/edit-other-user-time/edit-other-user-time.component';
+import { AddOtherUserTimeComponent } from 'app/routes/add-other-user-time/add-other-user-time.component';
+import { SelectedUserService } from 'app/core/services/selectedUser.service';
 
-describe('MyTime Component', () => {
-    let comp: MyTimeComponent;
-    let fixture: ComponentFixture<MyTimeComponent>;
+fdescribe('OtherUserTime Component', () => {
+    let comp: OtherUserTimeComponent;
+    let fixture: ComponentFixture<OtherUserTimeComponent>;
     let location: Location
     let dataService: DataService
 
@@ -42,21 +41,21 @@ describe('MyTime Component', () => {
         TestBed.configureTestingModule({
             imports: [
                 RouterTestingModule.withRoutes([
-                    { path: 'my-time/edit', component: EditMyTimeComponent },
-                    { path: 'my-time/add', component: AddMyTimeComponent },
+                    { path: 'users/:id/time/edit', component: EditOtherUserTimeComponent },
+                    { path: 'users/:id/time/add', component: AddOtherUserTimeComponent },
                 ]),
                 SharedModule
             ],
-            declarations: [MyTimeComponent, AddMyTimeComponent, EditMyTimeComponent],
+            declarations: [OtherUserTimeComponent, AddOtherUserTimeComponent, EditOtherUserTimeComponent],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
+                SelectedUserService,
                 SnackBarService,
-                AuthService,
                 TimingsService,
                 Location
             ],
         });
-        fixture = TestBed.createComponent(MyTimeComponent);
+        fixture = TestBed.createComponent(OtherUserTimeComponent);
         comp = fixture.componentInstance;
         dataService = fixture.debugElement.injector.get(DataService);
         location = fixture.debugElement.injector.get(Location);
@@ -118,7 +117,7 @@ describe('MyTime Component', () => {
                 fixture.nativeElement.querySelector('.fa-plus').click();
                 tick();
                 fixture.detectChanges();
-                expect(location.path()).toBe('/my-time/add');
+                expect(location.path()).toBe('/users/uID/time/add');
             }));
         })
         describe('click on plus edit button', () => {
@@ -126,7 +125,7 @@ describe('MyTime Component', () => {
                 fixture.nativeElement.querySelector('.fa-edit').click();
                 tick();
                 fixture.detectChanges();
-                expect(location.path()).toBe('/my-time/edit');
+                expect(location.path()).toBe('/users/uID/time/edit');
             }));
         })
     })

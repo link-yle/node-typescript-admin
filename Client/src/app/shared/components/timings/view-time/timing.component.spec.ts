@@ -10,7 +10,7 @@ import { AuthService } from 'app/core/services/auth.service';
 import { TimingsService } from 'app/core/services/timings.service';
 import { SharedModule } from 'app/shared/shared.module';
 
-fdescribe('Timings Component', () => {
+describe('Timings Component', () => {
     let comp: TimingsComponent;
     let fixture: ComponentFixture<TimingsComponent>;
     let sb: SnackBarService
