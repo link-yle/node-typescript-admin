@@ -13,7 +13,7 @@ import { EditOtherUserTimeComponent } from 'app/routes/edit-other-user-time/edit
 import { AddOtherUserTimeComponent } from 'app/routes/add-other-user-time/add-other-user-time.component';
 import { SelectedUserService } from 'app/core/services/selectedUser.service';
 
-fdescribe('OtherUserTime Component', () => {
+describe('OtherUserTime Component', () => {
     let comp: OtherUserTimeComponent;
     let fixture: ComponentFixture<OtherUserTimeComponent>;
     let location: Location
