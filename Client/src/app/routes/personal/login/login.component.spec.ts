@@ -32,14 +32,6 @@ describe('Login Component', () => {
 
     const dataServiceStub = {}
     let dataService: DataService
-    const SnackBarServiceStub = {
-        emitSuccessSnackBar(message) {
-
-        },
-        emitErrorSnackBar(message) {
-
-        }
-    }
 
     const authServiceStub = {
         saveToken(token) { },
@@ -59,7 +51,7 @@ describe('Login Component', () => {
             declarations: [LoginComponent, SignupComponent, RecoverPasswordByEmailComponent, EmptyComponent],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
-                { provide: SnackBarService, useValue: SnackBarServiceStub },
+                SnackBarService,
                 { provide: AuthService, useValue: authServiceStub },
                 Location
             ],

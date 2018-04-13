@@ -7,8 +7,10 @@ import { TimingsComponent } from './timings.component';
 import { SnackBarService } from 'app/core/services/snackbar.service';
 import { DataService } from 'app/core/services/data.service';
 import { AuthService } from 'app/core/services/auth.service';
+import { TimingsService } from 'app/core/services/timings.service';
+import { SharedModule } from 'app/shared/shared.module';
 
-describe('Timings Component', () => {
+fdescribe('Timings Component', () => {
     let comp: TimingsComponent;
     let fixture: ComponentFixture<TimingsComponent>;
     let sb: SnackBarService
@@ -39,7 +41,7 @@ describe('Timings Component', () => {
         getTimeZones() {
             return Observable.of(fakeTimeZones)
         },
-        getUserDetails () {
+        getUserDetails() {
             return Observable.of(fakeUserDetails)
         }
 
@@ -56,23 +58,16 @@ describe('Timings Component', () => {
 
 
     let dataService: DataService
-    const SnackBarServiceStub = {
-        emitSuccessSnackBar(message) {
-
-        },
-        emitErrorSnackBar(message) {
-
-        }
-    }
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule],
+            imports: [RouterTestingModule, SharedModule],
             declarations: [],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
-                { provide: SnackBarService, useValue: SnackBarServiceStub },
-                { provide: AuthService, useValue: authServiceStub },
+                SnackBarService,
+                AuthService,
+                TimingsService
             ],
         });
         fixture = TestBed.createComponent(TimingsComponent);
@@ -83,57 +78,13 @@ describe('Timings Component', () => {
     });
 
 
-    describe('Scenario: Get Timings', () => {
-        beforeEach(() => {
 
-        })
-        describe('Scenario: Success', () => {
-            beforeEach(() => {
-                dataService.getUserDetails = () => Observable.of(fakeTimeZones)
-                // comp.ngOnInit()
-            })
-            it('should successfully post', () => {
-                expect(comp).toBeTruthy()
-            })
+
+    describe('get time', () => {
+        it('should get time appropriately undependant from local time', () => {
+            expect(comp.getTime(2)).toContain(':');
         })
 
-
-        describe('Scenario: Error', () => {
-            beforeEach(() => {
-                dataService.getUserDetails = () => Observable.throw('Error')
-                // comp.ngOnInit()
-            })
-            it('should respond to error', () => {
-                expect(comp).toBeTruthy()
-            })
-        })
-    })
-
-
-    describe('Scenario: delete timing', () => {
-        beforeEach(() => {
-
-        })
-        describe('Scenario: Success', () => {
-            beforeEach(() => {
-                dataService.deleteTimeZone = (id) => Observable.of('Ok')
-                comp.onDeleteClick(fakeTimeZones[0].id)
-            })
-            it('should successfully post', () => {
-                expect(comp).toBeTruthy()
-            })
-        })
-
-
-        describe('Scenario: Error', () => {
-            beforeEach(() => {
-                dataService.deleteTimeZone = (id) => Observable.throw('Error')
-                comp.onDeleteClick(fakeTimeZones[0].id)
-            })
-            it('should respond to error', () => {
-                expect(comp).toBeTruthy()
-            })
-        })
     })
 
 
