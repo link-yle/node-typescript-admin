@@ -13,7 +13,6 @@ import { EditUserComponent } from 'app/shared/components/users/edit-user/edit-us
 import { ChangeMyPasswordUsingOldPasswordComponent } from 'app/routes/personal/edit-my-info/change-my-password-using-old-password/change-my-password-using-old-password.component';
 import { EditOtherUserInfoComponent } from 'app/routes/edit-other-user-info/edit-other-user-info.component';
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
-import { NewPasswordFormComponent } from 'app/shared/components/new-password-form/new-password-form.component';
 import { SelectedUserService } from 'app/core/services/selectedUser.service';
 
 describe('EditOtherUserInfo Component', () => {
@@ -29,7 +28,7 @@ describe('EditOtherUserInfo Component', () => {
                     { path: 'users/:id/password', component: ChangeOtherUserPasswordComponent }
                 ]),
             ],
-            declarations: [EditOtherUserInfoComponent, ChangeOtherUserPasswordComponent, NewPasswordFormComponent],
+            declarations: [EditOtherUserInfoComponent, ChangeOtherUserPasswordComponent],
             providers: [
                 { provide: SelectedUserService, useValue: { getUserWithProbableDataFetch(a) { return Observable.of({ _id: 'rr', name: 'aaaa', email: 'aadr@rsde.com' })} } },
                 { provide: DataService, useValue: {} },

@@ -27,7 +27,6 @@ import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-ti
 import { EditMyInfoComponent } from 'app/routes/personal/edit-my-info/edit-my-info.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
-import { NewPasswordFormComponent } from 'app/shared/components/new-password-form/new-password-form.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 import { RecoverPasswordByEmailComponent } from 'app/routes/personal/recover-password-by-email/recover-password-by-email.component.';
 // tslint:disable-next-line:max-line-length
@@ -58,7 +57,6 @@ import { CoreModule } from 'app/core/core.module';
     ActivateAfterSignupComponent,
     ChangeMyPasswordUsingOldPasswordComponent,
     ChangeOtherUserPasswordComponent,
-    NewPasswordFormComponent,
     CorruptLinkComponent,
     RecoverPasswordByEmailComponent,
     NewPasswordAndRecoveryCodeSubmissionComponent,
