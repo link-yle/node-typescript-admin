@@ -13,7 +13,6 @@ import { SignupComponent } from 'app/routes/signup/signup.component';
 import { RecoverPasswordByEmailComponent } from 'app/routes/personal/recover-password-by-email/recover-password-by-email.component.';
 import { EmptyComponent } from 'app/routes/empty/empty.component';
 import { Location } from '@angular/common';
-import { mock } from 'ts-mockito';
 
 describe('Login Component', () => {
     let comp: LoginComponent;
