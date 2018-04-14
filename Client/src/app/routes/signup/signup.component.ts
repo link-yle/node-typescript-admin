@@ -39,6 +39,7 @@ export class SignupComponent implements OnInit {
     private areEqual(group) {
         return group.get('password').value === group.get('confirmPassword').value ? null : { areEqual: true }
     }
+
     signup() {
         this.dataService.signup(this.form.value).subscribe(
             data => this.router.navigate(['/login/signup/success']),

@@ -35,22 +35,24 @@ export class ChangeOtherUserPasswordComponent implements OnInit {
     private buildForm() {
         this.form = this.fb.group({
             newPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
-            confirmNewPassword: ['', Validators.required],
-        })
+            confirmPassword: ['', Validators.required],
+        }, { validator: this.areEqual })
     }
 
-    unSimilarPassword(controlStr: string) {
-        const formControl = this.form.get(controlStr);
-        return this.form.get('newPassword').value !== formControl.value && !formControl.pristine
+    private areEqual(group) {
+        return group.get('newPassword').value === group.get('confirmPassword').value ? null : { areEqual: true }
     }
 
     changePassword() {
-        this.buildForm()
         this.dataService.changeOtherUserPassword(this.user._id, this.form.value.newPassword).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar(`${this.user.name}'s password has been updated successfully`)
+                this.buildForm()
             },
-            error => this.sb.emitErrorSnackBar(error)
+            error => {
+                this.sb.emitErrorSnackBar(error)
+                this.buildForm()
+            }
         )
     }
 
