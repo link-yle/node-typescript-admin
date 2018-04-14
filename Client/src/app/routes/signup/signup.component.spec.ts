@@ -62,7 +62,6 @@ fdescribe('Signup Component', () => {
                 { provide: DataService, useValue: dataServiceStub },
                 { provide: SnackBarService, useValue: SnackBarServiceStub },
                 PublicInfoService,
-                // { provide: PublicInfoService, useValue: { setEmail() { }, setPass() { } } },
                 Location
             ],
         });
@@ -102,11 +101,11 @@ fdescribe('Signup Component', () => {
                 const emailInputElement = emailInput.nativeElement
                 emailInputElement.value = 'aadsdjhkds@sa.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="oldPassword"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = 'ada456346sd'
                 passwordInputElement.dispatchEvent(new Event('input'));
-                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
+                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = 'ada456346sd'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
@@ -131,11 +130,11 @@ fdescribe('Signup Component', () => {
                 const emailInputElement = emailInput.nativeElement
                 emailInputElement.value = 'aadsdjh@kdaom.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="oldPassword"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = 'ada456346sd'
                 passwordInputElement.dispatchEvent(new Event('input'));
-                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
+                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = 'ada456346sd'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
@@ -165,11 +164,11 @@ fdescribe('Signup Component', () => {
                 const emailInputElement = emailInput.nativeElement
                 emailInputElement.value = 'aadsdjhkdaom'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="oldPassword"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = 'ada456346sd'
                 passwordInputElement.dispatchEvent(new Event('input'));
-                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
+                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = 'ada456346sd'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
@@ -200,11 +199,11 @@ fdescribe('Signup Component', () => {
                 const emailInputElement = emailInput.nativeElement
                 emailInputElement.value = 'aadsdjhk@daom.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="oldPassword"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = '23'
                 passwordInputElement.dispatchEvent(new Event('input'));
-                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
+                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = '23'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
@@ -234,11 +233,11 @@ fdescribe('Signup Component', () => {
                 const emailInputElement = emailInput.nativeElement
                 emailInputElement.value = 'aadsdjhk@daom.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="oldPassword"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = '22323435fgt3'
                 passwordInputElement.dispatchEvent(new Event('input'));
-                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
+                const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = '22323435fgt34'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
@@ -269,11 +268,11 @@ fdescribe('Signup Component', () => {
             const emailInputElement = emailInput.nativeElement
             emailInputElement.value = 'aadsdjhk@daom.com'
             emailInputElement.dispatchEvent(new Event('input'));
-            const passwordInput = fixture.debugElement.query(By.css('input[name="oldPassword"]'));
+            const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
             const passwordInputElement = passwordInput.nativeElement
             passwordInputElement.value = '22323435fgt3'
             passwordInputElement.dispatchEvent(new Event('input'));
-            const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
+            const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
             const confirmPasswordInputElement = confirmPasswordInput.nativeElement
             confirmPasswordInputElement.value = '22323435fgt3'
             confirmPasswordInputElement.dispatchEvent(new Event('input'));

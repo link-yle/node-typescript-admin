@@ -28,12 +28,9 @@ export class SignupComponent implements OnInit {
         this.form = this.fb.group({
             name: ['', Validators.compose([Validators.required, Validators.maxLength(20), Validators.minLength(3)])],
             email: ['', Validators.compose([Validators.required, Validators.email])],
-            passwords: this.fb.group({
-                password: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
-                confirmPassword: ['', Validators.required],
-            }, { validator: this.areEqual })
-
-        })
+            password: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
+            confirmPassword: ['', Validators.required],
+        }, { validator: this.areEqual })
     }
 
     private areEqual(group) {
@@ -58,10 +55,5 @@ export class SignupComponent implements OnInit {
                 this.sb.emitErrorSnackBar(error)
             }
         )
-    }
-
-    unSimilarPassword(controlStr: string) {
-        const formControl = this.form.get(controlStr);
-        return this.form.get('password').value !== formControl.value && !formControl.pristine
     }
 }

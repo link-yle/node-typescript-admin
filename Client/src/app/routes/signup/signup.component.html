@@ -8,17 +8,14 @@
         <input type="email" name="email" class="form-control" formControlName="email">
     </app-email-input-layout>
 
-    <div formGroupName="passwords">
-        <app-password-input-layout [isNotValid]="form.get('passwords').get('password').dirty && form.get('passwords').get('password').invalid">
-            <input type="password" name="oldPassword" placeholder="Enter Password" class="form-control" formControlName="password">
-        </app-password-input-layout>
+    <app-password-input-layout [isNotValid]="form.get('password').dirty && form.get('password').invalid">
+        <input type="password" name="password" placeholder="Enter Password" class="form-control" formControlName="password">
+    </app-password-input-layout>
 
-        <div class="form-group">
-            <label for="">Confirm Password </label>
-            <input type="password" name="newPassword" class="form-control" placeholder="Enter Password" formControlName="confirmPassword">
-            <p [hidden]="!form.get('passwords').getError('areEqual')" class="text-danger">Please Enter a similar password </p>
-        </div>
-    </div>
+    <app-confirm-password-input-layout [isNotValid]="form.getError('areEqual')">
+        <input type="password" name="confirmPassword" class="form-control" placeholder="Enter Password" formControlName="confirmPassword">
+    </app-confirm-password-input-layout>
+
     <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="signup()">Signup</button>
     <button class="btn btn-primary" id="secure-signup-button" [disabled]="!form.valid" type="submit" (click)="signupSecurely()">Signup securely</button>
 </form>

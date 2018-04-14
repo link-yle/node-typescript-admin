@@ -5,6 +5,7 @@ import { NameInputLayoutComponent } from 'app/shared/components/ui-inputs/name-i
 import { SubmitButtonComponent } from 'app/shared/components/ui-inputs/submit-button/submit-button.component';
 import { PasswordInputlayoutComponent } from 'app/shared/components/ui-inputs/password-input-layout/password-input-layout.component';
 import { DefaultInputLayoutComponent } from 'app/shared/components/ui-inputs/default-input-layout/default-input-layout.component';
+import { ConfirmPasswordInputLayoutComponent } from 'app/shared/components/ui-inputs/confirm-password-input-layout/confirm-password-input-layout.component';
 
 @NgModule({
   imports: [
@@ -15,14 +16,16 @@ import { DefaultInputLayoutComponent } from 'app/shared/components/ui-inputs/def
     EmailInputLayoutComponent,
     NameInputLayoutComponent,
     PasswordInputlayoutComponent,
-    DefaultInputLayoutComponent
+    DefaultInputLayoutComponent,
+    ConfirmPasswordInputLayoutComponent
   ],
   declarations: [
     SubmitButtonComponent,
     EmailInputLayoutComponent,
     PasswordInputlayoutComponent,
     NameInputLayoutComponent,
-    DefaultInputLayoutComponent
+    DefaultInputLayoutComponent,
+    ConfirmPasswordInputLayoutComponent
   ],
 })
 export class AppInputsModule { }
