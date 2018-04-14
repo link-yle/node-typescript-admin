@@ -29,14 +29,15 @@ export class NewPasswordAndRecoveryCodeSubmissionComponent implements OnInit {
             email: [this.publicInfoService.getEmail() || '', Validators.compose([Validators.required, Validators.email])],
             recoveryCode: ['', Validators.compose([Validators.required, Validators.minLength(20), Validators.maxLength(20)])],
             newPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
-            confirmNewPassword: ['', Validators.required],
-        })
+            confirmPassword: ['', Validators.required],
+        }, { validator: this.areEqual })
     }
 
-
+    private areEqual(group) {
+        return group.get('newPassword').value === group.get('confirmPassword').value ? null : { areEqual: true }
+    }
 
     changePassword({recoveryCode, newPassword, email}) {
-
         this.dataService.changeMyPasswordUsingRecoveryCode({recoveryCode, newPassword, email}).subscribe(
             data => {
                 this.router.navigate(['/login/recover_password_by_email/submit_new_password/password_recovered_successfully'])
@@ -45,16 +46,6 @@ export class NewPasswordAndRecoveryCodeSubmissionComponent implements OnInit {
         )
     }
 
-    isIncorrectPasswordFormat(control: string) {
-        return this.form.get(control).hasError('incorrectPasswordFormat')
-    }
-
-
-
-    unSimilarPassword(controlStr: string) {
-        const formControl = this.form.get(controlStr);
-        return this.form.get('newPassword').value !== formControl.value && !formControl.pristine
-    }
 
 }
 

@@ -135,7 +135,7 @@ describe('RecoverPassworByEmail Component', () => {
 
         describe('Scenario: Error', () => {
             it('should handle Error', () => {
-                dataService.forgottenPassword = (email) => Observable.of('Ok')
+                dataService.forgottenPassword = (email) => Observable.throw('Ok')
                 fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
                 expect(comp).toBeTruthy()
             })

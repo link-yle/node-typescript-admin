@@ -1,107 +1,76 @@
-import { SignupModule } from './signup.module';
-import { SignupComponent } from './signup.component';
-import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { SnackBarService } from 'app/core/services/snackbar.service';
 import { DataService } from 'app/core/services/data.service';
 import { SharedModule } from 'app/shared/shared.module';
-import { NameInputLayoutComponent } from 'app/shared/components/ui-inputs/name-input-layout/name-input-layout.component';
 import { PublicInfoService } from 'app/core/services/public.info.service';
-import { SignupSuccessComponent } from 'app/routes/signup/signup-success/signup-success.component';
 import { Location } from '@angular/common';
-import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-signup/activate-after-signup.component';
+// tslint:disable-next-line:max-line-length
+import { NewPasswordAndRecoveryCodeSubmissionComponent } from 'app/routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/new-password-and-recovery-code-submission.component';
 
-describe('Signup Component', () => {
-
-    let comp: SignupComponent;
-    let fixture: ComponentFixture<SignupComponent>;
-    let sb: SnackBarService
-    let location: Location
-    const user = {
-        name: 'Ahmed',
-        password: '454565',
-        email: 'sads@ewew.com'
-
-    }
-
-    const dataServiceStub = {
-        signUp(data) {
-            return Observable.of(data)
-        },
-        login(data) {
-            return Observable.of(data)
-        }
-    }
+fdescribe('NewPasswordAndRecoveryCodeSubmission Component', () => {
+    let comp: NewPasswordAndRecoveryCodeSubmissionComponent;
+    let fixture: ComponentFixture<NewPasswordAndRecoveryCodeSubmissionComponent>;
     let dataService: DataService
-    const SnackBarServiceStub = {
-        emitSuccessSnackBar(message) {
-
-        },
-        emitErrorSnackBar(message) {
-
-        }
-    }
-
+    let location: Location
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule, SharedModule,
+            imports: [
+                SharedModule,
                 RouterTestingModule.withRoutes([
-                    { path: 'login/signup/success', component: SignupSuccessComponent },
-                    { path: 'login/signup/activate', component: ActivateAfterSignupComponent }
+                    {
+                        path: 'login/recover_password_by_email/submit_new_password/password_recovered_successfully',
+                        component: NewPasswordAndRecoveryCodeSubmissionComponent
+                    },
                 ]),
             ],
-            declarations: [SignupComponent, SignupSuccessComponent, ActivateAfterSignupComponent],
+            declarations: [NewPasswordAndRecoveryCodeSubmissionComponent, NewPasswordAndRecoveryCodeSubmissionComponent],
             providers: [
-                { provide: DataService, useValue: dataServiceStub },
-                { provide: SnackBarService, useValue: SnackBarServiceStub },
+                { provide: DataService, useValue: {} },
+                SnackBarService,
                 PublicInfoService,
                 Location
             ],
-        });
-        fixture = TestBed.createComponent(SignupComponent);
-        comp = fixture.componentInstance;
-
-        dataService = fixture.debugElement.injector.get(DataService);
-        location = fixture.debugElement.injector.get(Location);
-        sb = fixture.debugElement.injector.get(SnackBarService);
-        fixture.detectChanges();
-    });
+        })
+        fixture = TestBed.createComponent(NewPasswordAndRecoveryCodeSubmissionComponent)
+        comp = fixture.componentInstance
+        dataService = fixture.debugElement.injector.get(DataService)
+        location = fixture.debugElement.injector.get(Location)
+        fixture.detectChanges()
+    })
 
     it('should build successfully', () => {
         expect(comp).toBeTruthy()
     })
 
-    describe('Initial markup', () => {
-        describe('Form Validation', () => {
-            describe('form initially', () => {
-                it('should be invalid', () => {
-                    expect(comp.form.invalid).toBe(true)
-                })
-                it('submit button should be disabled', () => {
-                    expect(fixture.nativeElement.querySelector('button[type="submit"][disabled]')).toBeTruthy()
-                })
-                it('error messages should be hidden', () => {
-                    expect(fixture.nativeElement.querySelectorAll('p.text-danger[hidden]').length).toBe(4)
-                })
-            })
+    describe('Route initially', () => {
+        it('form should exist', () => {
+            expect(fixture.debugElement.query(By.css('button[type="submit"]'))).toBeTruthy()
+        })
+        it('should be invalid', () => {
+            expect(comp.form.invalid).toBe(true)
+        })
+        it('submit button should be disabled', () => {
+            expect(fixture.nativeElement.querySelector('button[type="submit"][disabled]')).toBeTruthy()
+        })
+        it('error messages should be hidden', () => {
+            expect(fixture.nativeElement.querySelectorAll('p.text-danger[hidden]').length).toBe(4)
         })
     })
 
+
     describe('Form Validation', () => {
-        describe('valid email, password, confirm passsword, and name', () => {
+        describe('valid email, recovery code, password, and confirm passsword', () => {
             beforeEach(() => {
                 const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
                 const emailInputElement = emailInput.nativeElement
                 emailInputElement.value = 'aadsdjhkds@sa.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = 'ada456346sd'
                 passwordInputElement.dispatchEvent(new Event('input'));
@@ -109,10 +78,10 @@ describe('Signup Component', () => {
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = 'ada456346sd'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
-                const name = fixture.debugElement.query(By.css('input[name="name"]'));
-                const nameElement = name.nativeElement
-                nameElement.value = 'YYYY'
-                nameElement.dispatchEvent(new Event('input'));
+                const recoveryCode = fixture.debugElement.query(By.css('input[name="recoveryCode"]'));
+                const recoveryCodeElement = recoveryCode.nativeElement
+                recoveryCodeElement.value = '11111111111111111111'
+                recoveryCodeElement.dispatchEvent(new Event('input'));
                 fixture.detectChanges();
             })
             it('form should be valid', () => {
@@ -124,13 +93,13 @@ describe('Signup Component', () => {
             })
         })
 
-        describe('invalid name', () => {
+        describe('invalid email', () => {
             beforeEach(() => {
                 const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
                 const emailInputElement = emailInput.nativeElement
-                emailInputElement.value = 'aadsdjh@kdaom.com'
+                emailInputElement.value = 'aadsdjhkdscom'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = 'ada456346sd'
                 passwordInputElement.dispatchEvent(new Event('input'));
@@ -138,10 +107,10 @@ describe('Signup Component', () => {
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = 'ada456346sd'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
-                const name = fixture.debugElement.query(By.css('input[name="name"]'));
-                const nameElement = name.nativeElement
-                nameElement.value = 'YY'
-                nameElement.dispatchEvent(new Event('input'));
+                const recoveryCode = fixture.debugElement.query(By.css('input[name="recoveryCode"]'));
+                const recoveryCodeElement = recoveryCode.nativeElement
+                recoveryCodeElement.value = '11111111111111111111'
+                recoveryCodeElement.dispatchEvent(new Event('input'));
                 fixture.detectChanges();
             })
             it('form should be invalid', () => {
@@ -158,13 +127,13 @@ describe('Signup Component', () => {
             })
         })
 
-        describe('invalid email', () => {
+        describe('invalid recoveryCode', () => {
             beforeEach(() => {
                 const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
                 const emailInputElement = emailInput.nativeElement
-                emailInputElement.value = 'aadsdjhkdaom'
+                emailInputElement.value = 'aadsdjhkds@sa.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
                 const passwordInputElement = passwordInput.nativeElement
                 passwordInputElement.value = 'ada456346sd'
                 passwordInputElement.dispatchEvent(new Event('input'));
@@ -172,10 +141,10 @@ describe('Signup Component', () => {
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
                 confirmPasswordInputElement.value = 'ada456346sd'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
-                const name = fixture.debugElement.query(By.css('input[name="name"]'));
-                const nameElement = name.nativeElement
-                nameElement.value = 'YYYY'
-                nameElement.dispatchEvent(new Event('input'));
+                const recoveryCode = fixture.debugElement.query(By.css('input[name="recoveryCode"]'));
+                const recoveryCodeElement = recoveryCode.nativeElement
+                recoveryCodeElement.value = '11111111111'
+                recoveryCodeElement.dispatchEvent(new Event('input'));
                 fixture.detectChanges();
             })
             it('form should be invalid', () => {
@@ -197,20 +166,20 @@ describe('Signup Component', () => {
             beforeEach(() => {
                 const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
                 const emailInputElement = emailInput.nativeElement
-                emailInputElement.value = 'aadsdjhk@daom.com'
+                emailInputElement.value = 'aadsdjhkds@sa.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
                 const passwordInputElement = passwordInput.nativeElement
-                passwordInputElement.value = '23'
+                passwordInputElement.value = '123'
                 passwordInputElement.dispatchEvent(new Event('input'));
                 const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
-                confirmPasswordInputElement.value = '23'
+                confirmPasswordInputElement.value = '123'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
-                const name = fixture.debugElement.query(By.css('input[name="name"]'));
-                const nameElement = name.nativeElement
-                nameElement.value = 'YYYY'
-                nameElement.dispatchEvent(new Event('input'));
+                const recoveryCode = fixture.debugElement.query(By.css('input[name="recoveryCode"]'));
+                const recoveryCodeElement = recoveryCode.nativeElement
+                recoveryCodeElement.value = '11111111111111111111'
+                recoveryCodeElement.dispatchEvent(new Event('input'));
                 fixture.detectChanges();
             })
             it('form should be invalid', () => {
@@ -231,20 +200,20 @@ describe('Signup Component', () => {
             beforeEach(() => {
                 const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
                 const emailInputElement = emailInput.nativeElement
-                emailInputElement.value = 'aadsdjhk@daom.com'
+                emailInputElement.value = 'aadsdjhkds@sa.com'
                 emailInputElement.dispatchEvent(new Event('input'));
-                const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+                const passwordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
                 const passwordInputElement = passwordInput.nativeElement
-                passwordInputElement.value = '22323435fgt3'
+                passwordInputElement.value = 'ada456346sd'
                 passwordInputElement.dispatchEvent(new Event('input'));
                 const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
                 const confirmPasswordInputElement = confirmPasswordInput.nativeElement
-                confirmPasswordInputElement.value = '22323435fgt34'
+                confirmPasswordInputElement.value = 'ada456346sd55555555554'
                 confirmPasswordInputElement.dispatchEvent(new Event('input'));
-                const name = fixture.debugElement.query(By.css('input[name="name"]'));
-                const nameElement = name.nativeElement
-                nameElement.value = 'YYYY'
-                nameElement.dispatchEvent(new Event('input'));
+                const recoveryCode = fixture.debugElement.query(By.css('input[name="recoveryCode"]'));
+                const recoveryCodeElement = recoveryCode.nativeElement
+                recoveryCodeElement.value = '11111111111111111111'
+                recoveryCodeElement.dispatchEvent(new Event('input'));
                 fixture.detectChanges();
             })
             it('form should be invalid', () => {
@@ -261,83 +230,50 @@ describe('Signup Component', () => {
             })
         })
     })
-
     describe('Submitting Form', () => {
         beforeEach(() => {
             const emailInput = fixture.debugElement.query(By.css('input[name="email"]'));
             const emailInputElement = emailInput.nativeElement
-            emailInputElement.value = 'aadsdjhk@daom.com'
+            emailInputElement.value = 'aadsdjhkds@sa.com'
             emailInputElement.dispatchEvent(new Event('input'));
-            const passwordInput = fixture.debugElement.query(By.css('input[name="password"]'));
+            const passwordInput = fixture.debugElement.query(By.css('input[name="newPassword"]'));
             const passwordInputElement = passwordInput.nativeElement
-            passwordInputElement.value = '22323435fgt3'
+            passwordInputElement.value = 'ada456346sd'
             passwordInputElement.dispatchEvent(new Event('input'));
             const confirmPasswordInput = fixture.debugElement.query(By.css('input[name="confirmPassword"]'));
             const confirmPasswordInputElement = confirmPasswordInput.nativeElement
-            confirmPasswordInputElement.value = '22323435fgt3'
+            confirmPasswordInputElement.value = 'ada456346sd'
             confirmPasswordInputElement.dispatchEvent(new Event('input'));
-            const name = fixture.debugElement.query(By.css('input[name="name"]'));
-            const nameElement = name.nativeElement
-            nameElement.value = 'YYYY'
-            nameElement.dispatchEvent(new Event('input'));
+            const recoveryCode = fixture.debugElement.query(By.css('input[name="recoveryCode"]'));
+            const recoveryCodeElement = recoveryCode.nativeElement
+            recoveryCodeElement.value = '11111111111111111111'
+            recoveryCodeElement.dispatchEvent(new Event('input'));
+            fixture.detectChanges();
         })
 
-        describe('Normal Signup', () => {
-            describe('Scenario: Success', () => {
-                it('should successfully post and navigate to signup success page', fakeAsync(() => {
-                    dataService.signup = (data) => Observable.of(user)
-                    fixture.detectChanges();
-                    fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
-                    tick()
-                    expect(location.path()).toBe('/login/signup/success')
-                }))
+        describe('Scenario: Success', () => {
+            beforeEach(() => {
+                dataService.changeMyPasswordUsingRecoveryCode = ({recoveryCode, newPassword, email}) => Observable.of('Ok')
             })
-
-            describe('Scenario: Error', () => {
-                beforeEach(() => {
-                    const err = {
-                        status: 400,
-                        json() { return { error: 'thats an error' } }
-                    }
-                    dataService.signup = (data) => Observable.throw(err)
-                    fixture.detectChanges();
-                })
-                it('snackbar should appear', () => {
-                    const spy = spyOn(sb, 'emitErrorSnackBar')
-                    fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
-                    fixture.detectChanges();
-                    expect(spy).toHaveBeenCalled();
-                })
+            it('should call api function with the correct parameters', () => {
+                const spy = spyOn(dataService, 'changeMyPasswordUsingRecoveryCode').and.callThrough()
+                fixture.detectChanges();
+                fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
+                expect(spy).toHaveBeenCalledWith(Object({recoveryCode: '11111111111111111111', newPassword: 'ada456346sd', email: 'aadsdjhkds@sa.com'}))
             })
+            it('should navigate to password submission route', fakeAsync(() => {
+                fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
+                tick(400)
+                expect(location.path()).toBe('/login/recover_password_by_email/submit_new_password/password_recovered_successfully')
+            }))
         })
 
-        describe('Secure Signup', () => {
-            describe('Scenario: Success', () => {
-                it('should successfully post and navigate to signup success page', fakeAsync(() => {
-                    dataService.signupSecurely = (data) => Observable.of(user)
-                    fixture.detectChanges();
-                    fixture.debugElement.query(By.css('#secure-signup-button')).nativeElement.click()
-                    tick()
-                    expect(location.path()).toBe('/login/signup/activate')
-                }))
-            })
-
-            describe('Scenario: Error', () => {
-                beforeEach(() => {
-                    const err = { status: 400, json() { return { error: 'thats an error' } } }
-                    dataService.signupSecurely = (data) => Observable.throw(err)
-                    fixture.detectChanges();
-                })
-                it('snackbar should appear', () => {
-                    const spy = spyOn(sb, 'emitErrorSnackBar')
-                    fixture.debugElement.query(By.css('#secure-signup-button')).nativeElement.click()
-                    fixture.detectChanges();
-                    expect(spy).toHaveBeenCalled();
-                })
+        describe('Scenario: Error', () => {
+            it('should handle Error', () => {
+                dataService.changeMyPasswordUsingRecoveryCode = ({recoveryCode, newPassword, email}) => Observable.throw('EE')
+                fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
+                expect(comp).toBeTruthy()
             })
         })
-
     })
-
-
 })
