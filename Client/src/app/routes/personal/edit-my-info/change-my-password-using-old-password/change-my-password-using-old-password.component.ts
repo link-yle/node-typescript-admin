@@ -25,13 +25,16 @@ export class ChangeMyPasswordUsingOldPasswordComponent implements OnInit {
         this.form = this.fb.group({
             oldPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
             newPassword: ['', Validators.compose([Validators.required, Validators.pattern(passwordPattern)])],
-            confirmNewPassword: ['', Validators.required],
-        })
+            confirmPassword: ['', Validators.required],
+        }, { validator: this.areEqual })
     }
 
+    private areEqual(group) {
+        return group.get('newPassword').value === group.get('confirmPassword').value ? null : { areEqual: true }
+    }
 
     changepassword() {
-        this.dataService.changePasswordUsingOldPassword(this.form.value).subscribe(
+        this.dataService.changePasswordUsingOldPassword({oldPassword: this.form.value.oldPassword, newPassword: this.form.value.newPassword}).subscribe(
             data => {
                 this.sb.emitSuccessSnackBar('Your password has been updated successfully')
                 this.buildForm()
