@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
@@ -9,13 +8,13 @@ import { DataService } from 'app/core/services/data.service';
 import { SharedModule } from 'app/shared/shared.module';
 import { ChangeMyPasswordUsingOldPasswordComponent } from 'app/routes/personal/edit-my-info/change-my-password-using-old-password/change-my-password-using-old-password.component';
 
-fdescribe('ChangeMyPasswordUsingOldPassword Component', () => {
+describe('ChangeMyPasswordUsingOldPassword Component', () => {
     let comp: ChangeMyPasswordUsingOldPasswordComponent;
     let fixture: ComponentFixture<ChangeMyPasswordUsingOldPasswordComponent>;
     let dataService: DataService
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule, SharedModule],
+            imports: [SharedModule],
             declarations: [ChangeMyPasswordUsingOldPasswordComponent],
             providers: [
                 { provide: DataService, useValue: {} },
@@ -154,19 +153,19 @@ fdescribe('ChangeMyPasswordUsingOldPassword Component', () => {
 
         describe('Scenario: Success', () => {
             beforeEach(() => {
-                dataService.changePasswordUsingOldPassword = ({oldPassword, newPassword}) => Observable.of('Ok')
+                dataService.changePasswordUsingOldPassword = ({ oldPassword, newPassword }) => Observable.of('Ok')
             })
             it('should call api function with the correct parameters', () => {
                 const spy = spyOn(dataService, 'changePasswordUsingOldPassword').and.callThrough()
                 fixture.detectChanges();
                 fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
-                expect(spy).toHaveBeenCalledWith(Object({oldPassword: '1234589457fh', newPassword: 'ada456346sd'}))
+                expect(spy).toHaveBeenCalledWith(Object({ oldPassword: '1234589457fh', newPassword: 'ada456346sd' }))
             })
         })
 
         describe('Scenario: Error', () => {
             it('should handle Error', () => {
-                dataService.changePasswordUsingOldPassword = ({oldPassword, newPassword}) => Observable.of('Ok')
+                dataService.changePasswordUsingOldPassword = ({ oldPassword, newPassword }) => Observable.of('Ok')
                 fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
                 expect(comp).toBeTruthy()
             })
