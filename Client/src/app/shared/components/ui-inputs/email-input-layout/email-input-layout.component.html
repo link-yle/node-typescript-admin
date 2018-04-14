@@ -1,5 +1,3 @@
-<div class="form-group">
-    <label for="">Email </label>
+<app-default-input-layout [isNotValid]="isNotValid" [errorMessage]="errorMessage" label="Email">
     <ng-content></ng-content>
-    <p class="text-danger" [hidden]="!isNotValid"> {{errorMessage}} </p>
-</div>
+</app-default-input-layout>

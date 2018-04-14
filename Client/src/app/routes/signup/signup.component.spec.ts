@@ -18,7 +18,7 @@ import { SignupSuccessComponent } from 'app/routes/signup/signup-success/signup-
 import { Location } from '@angular/common';
 import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-signup/activate-after-signup.component';
 
-describe('Signup Component', () => {
+fdescribe('Signup Component', () => {
 
     let comp: SignupComponent;
     let fixture: ComponentFixture<SignupComponent>;
