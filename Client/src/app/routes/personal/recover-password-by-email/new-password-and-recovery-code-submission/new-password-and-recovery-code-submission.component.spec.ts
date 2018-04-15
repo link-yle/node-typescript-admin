@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 // tslint:disable-next-line:max-line-length
 import { NewPasswordAndRecoveryCodeSubmissionComponent } from 'app/routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/new-password-and-recovery-code-submission.component';
 
-fdescribe('NewPasswordAndRecoveryCodeSubmission Component', () => {
+describe('NewPasswordAndRecoveryCodeSubmission Component', () => {
     let comp: NewPasswordAndRecoveryCodeSubmissionComponent;
     let fixture: ComponentFixture<NewPasswordAndRecoveryCodeSubmissionComponent>;
     let dataService: DataService

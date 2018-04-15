@@ -21,8 +21,11 @@ export class EditMyTimeComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        if (!this.timingsService.getSelectedTiming()) this.router.navigate(['/my-time'])
-        this.timeZone = this.timingsService.getSelectedTiming()
+        if (!this.timingsService.getSelectedTiming()) {
+            this.router.navigate(['/my-time'])
+        } else {
+            this.timeZone = this.timingsService.getSelectedTiming()
+        }
     }
 
     onSubmitted(x: { name: string, city: string, gmtTimeDifference: number }) {
