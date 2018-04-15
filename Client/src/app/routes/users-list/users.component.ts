@@ -37,10 +37,8 @@ export class UsersComponent implements OnInit, OnDestroy {
             })
     }
 
-
-
     public fetchUsers({ page = 1 }) {
-        const initialSub = this.dataService.getUsers({ searchTerm: this.searchTerm, skip: (page - 1) * 10 }).first().subscribe(
+        this.dataService.getUsers({ searchTerm: this.searchTerm, skip: (page - 1) * 10 }).first().subscribe(
             data => {
                 this.users = data.users
                 this.totalItems = data.count
@@ -78,7 +76,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
         this.searchSubscription.unsubscribe()
     }
-
 
     onActivateClick(item) {
         this.dataService.activateUserAdministratively(item._id).subscribe(
