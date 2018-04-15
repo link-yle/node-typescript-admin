@@ -3,3 +3,4 @@ export const passwordErrorMessage = 'Please Enter a password of minimum 6 charac
 export const nameErrorMessage = 'Please Enter a that has atleast 3 letters and a maximum of 20 letters'
 export const emailErrorMessage = 'Please Enter a valid email'
 export const unsimillarPasswordErrorMessage = 'Please Enter a simillar password'
+export const codeErrorMessage = 'Please Enter a valid code'

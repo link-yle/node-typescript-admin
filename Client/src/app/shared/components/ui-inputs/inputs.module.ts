@@ -6,6 +6,7 @@ import { SubmitButtonComponent } from 'app/shared/components/ui-inputs/submit-bu
 import { PasswordInputlayoutComponent } from 'app/shared/components/ui-inputs/password-input-layout/password-input-layout.component';
 import { DefaultInputLayoutComponent } from 'app/shared/components/ui-inputs/default-input-layout/default-input-layout.component';
 import { ConfirmPasswordInputLayoutComponent } from 'app/shared/components/ui-inputs/confirm-password-input-layout/confirm-password-input-layout.component';
+import { CodeInputLayoutComponent } from 'app/shared/components/ui-inputs/code-input-layout/code-input-layout.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { ConfirmPasswordInputLayoutComponent } from 'app/shared/components/ui-in
     NameInputLayoutComponent,
     PasswordInputlayoutComponent,
     DefaultInputLayoutComponent,
-    ConfirmPasswordInputLayoutComponent
+    ConfirmPasswordInputLayoutComponent,
+    CodeInputLayoutComponent
   ],
   declarations: [
     SubmitButtonComponent,
@@ -25,7 +27,8 @@ import { ConfirmPasswordInputLayoutComponent } from 'app/shared/components/ui-in
     PasswordInputlayoutComponent,
     NameInputLayoutComponent,
     DefaultInputLayoutComponent,
-    ConfirmPasswordInputLayoutComponent
+    ConfirmPasswordInputLayoutComponent,
+    CodeInputLayoutComponent
   ],
 })
 export class AppInputsModule { }
