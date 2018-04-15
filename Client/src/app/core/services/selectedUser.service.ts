@@ -23,9 +23,12 @@ export class SelectedUserService {
         return this.selectedUser
     }
 
-    public getUserWithProbableDataFetch(params: Observable<any>) {
-        if (this.selectedUser) return Observable.of(this.selectedUser)
-        else return params.first().switchMap(data => this.dataService.getUserDetails(data.id).first().do(user => this.selectedUser = user))
+    public getUserWithProbableDataFetch(params: Observable<any>): Observable<User> {
+        if (this.selectedUser) {
+            return Observable.of(this.selectedUser)
+        } else {
+            return params.first().switchMap(data => this.dataService.getUserDetails(data.id).first().do(user => this.selectedUser = user))
+        }
     }
 
 

@@ -1,2 +1,2 @@
-<h3 *ngIf="timeZone">Update {{timeZone.name}} Timezone for {{user.name}}</h3>
+<h3 *ngIf="timeZone && user">Update {{timeZone.name}} Timezone for {{user.name}}</h3>
 <app-timezone-form [timeZone]="timeZone" (submitted)="onSubmitted($event)"></app-timezone-form>

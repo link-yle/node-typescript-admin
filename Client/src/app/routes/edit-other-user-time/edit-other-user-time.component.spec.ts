@@ -11,17 +11,18 @@ import { Location } from '@angular/common';
 import { AuthService } from 'app/core/services/auth.service';
 import { EditUserComponent } from 'app/shared/components/users/edit-user/edit-user.component';
 import { MyTimeComponent } from 'app/routes/personal/my-time/my-time.component';
-import { AddOtherUserTimeComponent } from 'app/routes/add-other-user-time/add-other-user-time.component';
 import { UsersComponent } from 'app/routes/users-list/users.component';
 import { SelectedUserService } from 'app/core/services/selectedUser.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination/pagination.module';
 import { OtherUserTimeComponent } from 'app/routes/other-user-time/other-user-time.component';
 import { mock } from 'ts-mockito';
 import { User } from 'app/shared/models/user.model';
+import { TimingsService } from 'app/core/services/timings.service';
+import { EditOtherUserTimeComponent } from 'app/routes/edit-other-user-time/edit-other-user-time.component';
 
-describe('AddOtherUserTime Component', () => {
-    let comp: AddOtherUserTimeComponent;
-    let fixture: ComponentFixture<AddOtherUserTimeComponent>;
+describe('EditOtherUserTime Component', () => {
+    let comp: EditOtherUserTimeComponent;
+    let fixture: ComponentFixture<EditOtherUserTimeComponent>;
     let location: Location
     let dataService: DataService
     let selectedUserService: SelectedUserService
@@ -33,14 +34,15 @@ describe('AddOtherUserTime Component', () => {
                     { path: 'users', component: UsersComponent }
                 ]),
             ],
-            declarations: [AddOtherUserTimeComponent, UsersComponent, OtherUserTimeComponent],
+            declarations: [EditOtherUserTimeComponent, UsersComponent, OtherUserTimeComponent],
             providers: [
                 { provide: SelectedUserService, useValue: {} },
                 { provide: DataService, useValue: {} },
+                { provide: TimingsService, useValue: { getSelectedTiming() { return {_id: 'ww'} } } },
                 SnackBarService,
             ],
         });
-        fixture = TestBed.createComponent(AddOtherUserTimeComponent);
+        fixture = TestBed.createComponent(EditOtherUserTimeComponent);
         comp = fixture.componentInstance;
         location = fixture.debugElement.injector.get(Location);
         dataService = fixture.debugElement.injector.get(DataService)
@@ -87,12 +89,12 @@ describe('AddOtherUserTime Component', () => {
             })
             describe('Success Scenario', () => {
                 beforeEach(() => {
-                    dataService.addTimeZone = (id, payload) => Observable.of('ok')
+                    dataService.updateTimeZone = (id, payload) => Observable.of('ok')
                 })
                 describe('api call', () => {
                     let spy
                     beforeEach(() => {
-                        spy = spyOn(dataService, 'addTimeZone').and.callThrough()
+                        spy = spyOn(dataService, 'updateTimeZone').and.callThrough()
                     })
                     it('should successfully post', () => {
                         fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
@@ -100,7 +102,7 @@ describe('AddOtherUserTime Component', () => {
                     })
                     it('should call with right arguments', () => {
                         fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
-                        expect(spy).toHaveBeenCalledWith('rr', Object({ name: 'nnnn', city: 'cccc', gmtTimeDifference: 3 }));
+                        expect(spy).toHaveBeenCalledWith('rr', 'ww' , Object({ name: 'nnnn', city: 'cccc', gmtTimeDifference: 3 }));
                     })
                 })
 
@@ -113,7 +115,7 @@ describe('AddOtherUserTime Component', () => {
             })
             describe('Error Scenario', () => {
                 beforeEach(() => {
-                    dataService.addTimeZone = (id, payload) => Observable.throw('Error')
+                    dataService.updateTimeZone = (id, payload) => Observable.throw('Error')
                     fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
                 })
                 it('should handle error', () => {

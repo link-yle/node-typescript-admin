@@ -21,8 +21,8 @@ export class AddOtherUserTimeComponent implements OnInit {
 
     ngOnInit() {
         this.selectedUserService.getUserWithProbableDataFetch(this.route.params).subscribe(
-            user => this.user = user
-        )
+            user => user ?  this.user = user : this.router.navigate(['/users/'])
+        );
     }
 
 
