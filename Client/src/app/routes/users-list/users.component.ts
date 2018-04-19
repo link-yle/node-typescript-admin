@@ -28,16 +28,24 @@ export class UsersComponent implements OnInit, OnDestroy {
         private authService: AuthService
     ) { }
 
+
     ngOnInit() {
-        this.fetchUsers({})
+        this.fetchUsers({ page: 1 })
         this.searchSubscription =
             this.keyUp$.debounceTime(400).distinctUntilChanged().subscribe(() => {
-                if (this.currentPage === 1) this.fetchUsers({})
-                else this.currentPage = 1
+                this.fetchConsideringPaging()
             })
     }
 
-    public fetchUsers({ page = 1 }) {
+    public fetchConsideringPaging() {
+        if (this.currentPage === 1) {
+            this.fetchUsers({ page: 1 })
+        }  else {
+            this.currentPage = 1
+        }
+    }
+
+    public fetchUsers({ page }) {
         this.dataService.getUsers({ searchTerm: this.searchTerm, skip: (page - 1) * 10 }).first().subscribe(
             data => {
                 this.users = data.users
