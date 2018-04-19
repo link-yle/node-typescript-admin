@@ -40,14 +40,6 @@ describe('Signup Component', () => {
         }
     }
     let dataService: DataService
-    const SnackBarServiceStub = {
-        emitSuccessSnackBar(message) {
-
-        },
-        emitErrorSnackBar(message) {
-
-        }
-    }
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -60,7 +52,7 @@ describe('Signup Component', () => {
             declarations: [SignupComponent, SignupSuccessComponent, ActivateAfterSignupComponent],
             providers: [
                 { provide: DataService, useValue: dataServiceStub },
-                { provide: SnackBarService, useValue: SnackBarServiceStub },
+                SnackBarService,
                 PublicInfoService,
                 Location
             ],
@@ -311,15 +303,25 @@ describe('Signup Component', () => {
             })
         })
 
-        describe('Secure Signup', () => {
+        fdescribe('Secure Signup', () => {
             describe('Scenario: Success', () => {
-                it('should successfully post and navigate to signup success page', fakeAsync(() => {
+                beforeEach(() => {
                     dataService.signupSecurely = (data) => Observable.of(user)
+                })
+                it('should successfully post and navigate to signup success page', fakeAsync(() => {
                     fixture.detectChanges();
                     fixture.debugElement.query(By.css('#secure-signup-button')).nativeElement.click()
                     tick()
                     expect(location.path()).toBe('/login/signup/activate')
                 }))
+                it('should call the right arguments', () => {
+                    fixture.detectChanges();
+                    const spy = spyOn(dataService, 'signupSecurely').and.callThrough()
+                    fixture.debugElement.query(By.css('#secure-signup-button')).nativeElement.click()
+                    fixture.detectChanges()
+                    expect(spy).toHaveBeenCalledWith( Object({ name: 'YYYY', email: 'aadsdjhk@daom.com', password: '22323435fgt3', confirmPassword: '22323435fgt3' }))
+                })
+
             })
 
             describe('Scenario: Error', () => {
