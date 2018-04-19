@@ -6,15 +6,13 @@
 
 <form [formGroup]="form" *ngIf="form">
 
-    <app-email-input-layout [isNotValid]="!(form.get('email').dirty && form.get('email').invalid)">
+    <app-email-input-layout [isNotValid]="form.get('email').dirty && form.get('email').invalid">
         <input type="email" name="email" class="form-control" formControlName="email">
     </app-email-input-layout>
 
-    <div class="form-group">
-        <label for="">Activation Code </label>
-        <input type="text" class="form-control" placeholder="Enter recovery code" formControlName="activationCode">
-        <p [hidden]="!form.get('activationCode').hasError('incorrectCodeFormat')" class="text-danger"> Please enter a valid recovery code </p>
-    </div>
+    <app-code-input-layout [isNotValid]="form.get('activationCode').dirty && form.get('activationCode').invalid">
+        <input type="text" label="Activation Code" name="activationCode" placeholder="Enter recovery code" class="form-control" formControlName="activationCode">
+    </app-code-input-layout>
 
     <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="submit(form.value)">Activate</button>
 </form>

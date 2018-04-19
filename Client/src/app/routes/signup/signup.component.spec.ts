@@ -303,7 +303,7 @@ describe('Signup Component', () => {
             })
         })
 
-        fdescribe('Secure Signup', () => {
+        describe('Secure Signup', () => {
             describe('Scenario: Success', () => {
                 beforeEach(() => {
                     dataService.signupSecurely = (data) => Observable.of(user)

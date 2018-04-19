@@ -17,7 +17,7 @@ import { AuthService } from 'app/core/services/auth.service';
 import { SelectedUserService } from 'app/core/services/selectedUser.service';
 import { SnackBarService } from 'app/core/services/snackbar.service';
 
-fdescribe('Users Component', () => {
+describe('Users Component', () => {
     let comp: UsersComponent;
     let fixture: ComponentFixture<UsersComponent>;
     let dataService: DataService
