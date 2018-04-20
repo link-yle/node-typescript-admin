@@ -47,7 +47,7 @@ describe('ActivateAfterSignupComponent Component', () => {
         fixture.detectChanges();
     });
 
-    fit('should build successfully', () => {
+    it('should build successfully', () => {
         expect(comp).toBeTruthy()
     })
 

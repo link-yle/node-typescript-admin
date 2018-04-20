@@ -43,7 +43,7 @@ describe('Signup Component', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule, SharedModule,
+            imports: [SharedModule,
                 RouterTestingModule.withRoutes([
                     { path: 'login/signup/success', component: SignupSuccessComponent },
                     { path: 'login/signup/activate', component: ActivateAfterSignupComponent }
