@@ -10,6 +10,10 @@ import { TimingsService } from './services/timings.service';
 import { DataService } from './services/data.service';
 import { AdminClaimsService } from './services/admin-claims.service';
 import { throwIfAlreadyLoaded } from './module-import-guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EnvironmentApiInterceptor } from 'app/core/http-interceptors/environment-api-url-interceptor';
+import { UnAuthorizedRequestsInterceptor } from 'app/core/http-interceptors/unauthorized-requests-interceptor';
+import { AuthInterceptor } from 'app/core/http-interceptors/authentication-interceptor';
 
 @NgModule({
     imports: [
@@ -26,6 +30,9 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
         AdminClaimsService,
         AuthGuardService,
         PublicInfoService,
+        { provide: HTTP_INTERCEPTORS, useClass: EnvironmentApiInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: UnAuthorizedRequestsInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     ],
 
 })
