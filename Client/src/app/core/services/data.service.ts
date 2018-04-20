@@ -1,210 +1,85 @@
 import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
-import { SnackBarService } from './snackbar.service';
-import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/catch'
 import { UserCredentials } from 'app/shared/models/userCredentials';
 import { User } from 'app/shared/models/user.model';
 import { UserInfo } from 'app/shared/models/userInfo.model';
 import { Timezone } from 'app/shared/models/timezone.model';
+import { HttpClient, HttpParams, HttpResponse, HttpRequest, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
 export class DataService {
-    private requestOptions
-    private endPoint
+    constructor(
+        private http: HttpClient,
+    ) {  }
 
-    constructor
-        (private http: Http, private authService: AuthService,
-        private router: Router,
-        private sb: SnackBarService
-        ) {
-        if (environment.production) this.endPoint = '/'
-        else this.endPoint = 'http://localhost:3000'
-    }
-
-    private setRequestOptions() {
-        const requestHeaders = new Headers({
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${this.authService.getToken()}`
-        });
-        this.requestOptions = new RequestOptions({ headers: requestHeaders });
-    }
-
-    login(item: UserCredentials) {
-        return this.http.post(`${this.endPoint}/users/login`, item, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
+    login(item: UserCredentials): Observable<any> {
+        return this.http.post('users/login', item, )
     }
 
     signup(item: User) {
-        return this.http.post(`${this.endPoint}/users`, { email: item.email, password: item.password, timeZones: [], name: item.name },
-            this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        return this.http.post('users', { email: item.email, password: item.password, timeZones: [], name: item.name }  )
     }
 
     signupSecurely(item: User) {
-        return this.http.post(`${this.endPoint}/users/secure`,
-            { email: item.email, password: item.password, timeZones: [], name: item.name }, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        return this.http.post('users/secure',  { email: item.email, password: item.password, timeZones: [], name: item.name }, )
     }
 
-    activateFromBackEnd(code, email) {
-        return this.http.post(`${this.endPoint}/activation`, { code, email }, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+    activateFromBackEnd(code: string, email: string) {
+        return this.http.post('activation', { code, email } )
     }
 
     updateUserInfo(id: string, data: UserInfo) {
-        this.setRequestOptions()
-        return this.http.put(`${this.endPoint}/users/${id}/info`, data, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        return this.http.put(`users/${id}/info`, data, )
     }
 
-
     deleteUser(id: string) {
-        this.setRequestOptions()
-        return this.http.delete(`${this.endPoint}/users/${id}`, this.requestOptions)
-            .map(res => {
-                return 'OK'
-            })
-            .catch(err => this.handleError(err));
+        return this.http.delete(`users/${id}`)
     }
 
     getUsers({ skip = 0, searchTerm = '' }) {
-        console.log(skip, searchTerm);
-        this.setRequestOptions()
-        return this.http.get(`${this.endPoint}/users?skip=${skip}&filter=${searchTerm}`, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        const params = new HttpParams().set('skip', skip.toString()).set('filter', searchTerm);
+        return this.http.get('users', {params})
     }
 
-
-    getUserDetails(userId: string) {
-        this.setRequestOptions()
-        return this.http.get(`${this.endPoint}/users/${userId}`, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+    getUserDetails(userId: string): Observable<User> {
+        return this.http.get<User>(`users/${userId}`)
     }
 
     updateTimeZone(userId: string, timeZoneId: string, data: Timezone) {
-        this.setRequestOptions()
-        return this.http.put(`${this.endPoint}/users/${userId}/timezones/${timeZoneId}`, data, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        return this.http.put(`users/${userId}/timezones/${timeZoneId}`, data )
     }
 
     addTimeZone(userId: string, data: Timezone) {
-        this.setRequestOptions()
-        return this.http.post(`${this.endPoint}/users/${userId}/timezones`, data, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        return this.http.post(`users/${userId}/timezones`, data )
     }
 
     deleteTimeZone(userId: string, timeZoneId: string) {
-        this.setRequestOptions()
-        return this.http.delete(`${this.endPoint}/users/${userId}/timezones/${timeZoneId}`, this.requestOptions)
-            .map(res => {
-                return 'OK'
-            })
-            .catch(err => this.handleError(err));
+        return this.http.delete(`users/${userId}/timezones/${timeZoneId}` )
     }
 
-    assignRole(id: string, data: { role: string }) {
-        this.setRequestOptions()
-        return this.http.patch(`${this.endPoint}/users/${id}/role`, data, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+    assignRole(id: string, data: { role: string }): Observable<any> {
+        return this.http.patch(`users/${id}/role`, data )
     }
 
-    forgottenPassword(email) {
-        return this.http.post(`${this.endPoint}/password_recovery_requests`, { email }, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+    forgottenPassword(email: string): Observable<any> {
+        return this.http.post('password_recovery_requests', { email } )
     }
 
-    changePasswordUsingOldPassword({ oldPassword, newPassword }: { oldPassword: string, newPassword: string }) {
-        this.setRequestOptions()
-        return this.http.put(`${this.endPoint}/password`, { oldPassword, newPassword }, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+    changePasswordUsingOldPassword({ oldPassword, newPassword }: { oldPassword: string, newPassword: string }): Observable<any> {
+        return this.http.put('password', { oldPassword, newPassword }, )
     }
 
     changeOtherUserPassword(id: string, newPassword: string) {
-        this.setRequestOptions()
-        return this.http.put(`${this.endPoint}/users/${id}/password`, { newPassword }, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        return this.http.put(`users/${id}/password`, { newPassword }, )
     }
 
     changeMyPasswordUsingRecoveryCode({ recoveryCode, email, newPassword }: { recoveryCode: string, email: string, newPassword: string }) {
-        this.setRequestOptions()
-        return this.http.post(`${this.endPoint}/users/recovery_code`, { recoveryCode, email, newPassword }, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
+        return this.http.post('users/recovery_code', { recoveryCode, email, newPassword }, )
     }
 
     activateUserAdministratively(id: string) {
-        this.setRequestOptions()
-        return this.http.patch(`${this.endPoint}/activation/administration/${id}`, {}, this.requestOptions)
-            .map(res => {
-                return res.json()
-            })
-            .catch(err => this.handleError(err));
-    }
-
-    private handleError(error: Response | any) {
-        console.log(error);
-        let message: string;
-        let statusCode: number;
-        if (error instanceof Response) {
-            const body = error.json() || '';
-            const err = body.error || JSON.stringify(body);
-            statusCode = error.status
-            message = err;
-        } else {
-            message = error.message ? error.message : error.toString();
-        }
-        console.error(message);
-        if (error.status === 403 || error.status === 401) {
-            this.sb.emitErrorSnackBar(error)
-            this.router.navigate(['login'])
-        }
-        return Observable.throw(message);
+        return this.http.patch(`activation/administration/${id}`, {}, )
     }
 
 }
