@@ -9,8 +9,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EnvironmentApiInterceptor } from 'app/core/http-interceptors/environment-api-url-interceptor';
 import { UnAuthorizedRequestsInterceptor } from 'app/core/http-interceptors/unauthorized-requests-interceptor';
 import { AuthInterceptor } from 'app/core/http-interceptors/authentication-interceptor';
+import { TestRequest } from '@angular/common/http/testing/src/request';
 
-fdescribe('ApiService: DataService', () => {
+describe('ApiService: DataService', () => {
     let httpMock: HttpTestingController;
     let service: DataService;
 
@@ -134,7 +135,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Add timezone', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.addTimeZone('s', { name: 'a', city: 'q', gmtTimeDifference: 9 }).subscribe()
@@ -153,7 +154,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Delete timezone', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.addTimeZone('s', { name: 'a', city: 'q', gmtTimeDifference: 9 }).subscribe()
@@ -173,7 +174,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Assign user role', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.assignRole('s', { role: 'regular'}).subscribe()
@@ -193,7 +194,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Assign user role', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.assignRole('s', { role: 'regular'}).subscribe()
@@ -213,7 +214,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Forgotten password', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.forgottenPassword('saa@').subscribe()
@@ -232,7 +233,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Forgotten password', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.changePasswordUsingOldPassword({oldPassword: 'a', newPassword: 'w'}).subscribe()
@@ -252,7 +253,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Change other user password', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.changeOtherUserPassword( 'a', 'w').subscribe()
@@ -272,7 +273,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('Change password using recovery code', () => {
         let dummy;
-        let req;
+        let req: TestRequest;
         beforeEach(() => {
             dummy = 'ok';
             service.changeMyPasswordUsingRecoveryCode( {recoveryCode: 'aaa', newPassword: 'qqq', email: 'aaa@e'}).subscribe()
@@ -291,7 +292,7 @@ fdescribe('ApiService: DataService', () => {
 
     describe('activate user administratively', () => {
         let dummy;
-        let req;
+        let req: TestRequest
         beforeEach(() => {
             dummy = 'ok';
             service.activateUserAdministratively( 'a').subscribe()
@@ -307,16 +308,4 @@ fdescribe('ApiService: DataService', () => {
             expect(req.request.body).toEqual(Object({}))
         });
     });
-
-
-    // describe('signup', () => {
-    //     it('should have appropriate url ', () => {
-    //         const dummy = 'ok';
-    //         service.signup({ name: 's', email: 'a', password: 'a' }).subscribe((data) => {
-    //             expect(data).toBe(dummy);
-    //         });
-    //         const req = httpMock.expectOne({ method: 'POST', url: 'http://localhost:3000/users' });
-    //         req.flush(dummy);
-    //     });
-    // });
 });
