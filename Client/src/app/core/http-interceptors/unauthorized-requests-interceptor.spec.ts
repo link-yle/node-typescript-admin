@@ -3,7 +3,6 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpErrorResponse } from '@angular/commo
 import { RouterTestingModule } from '@angular/router/testing';
 import { SnackBarService } from 'app/core/services/snackbar.service';
 import { UnAuthorizedRequestsInterceptor } from 'app/core/http-interceptors/unauthorized-requests-interceptor';
-import { mock } from 'ts-mockito';
 import { HttpRequest, HttpHandler } from '@angular/common/http';
 import { SharedModule } from 'app/shared/shared.module';
 import { Observable } from 'rxjs/Observable';
@@ -25,12 +24,12 @@ describe('UnAuthorizedRequestsInterceptor', () => {
         sb = injector.get(SnackBarService);
     });
 
-    describe('intercept HTTP requests', () => {
+    fdescribe('intercept HTTP requests', () => {
         let req: HttpRequest<any>;
         let next: HttpHandler;
         beforeEach(() => {
-            req = mock(HttpRequest)
-            next = mock(HttpHandler)
+            req = <HttpRequest<string>>{}
+            next = <HttpHandler>{}
         })
         describe('error is not an instance of HttpErrorResponse', () => {
             let spy: jasmine.Spy;

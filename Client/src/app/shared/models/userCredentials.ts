@@ -1,4 +1,4 @@
-export class UserCredentials {
+export interface UserCredentials {
     email: string
     password: string
 }

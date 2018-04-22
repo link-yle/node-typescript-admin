@@ -16,7 +16,6 @@ import { UsersComponent } from 'app/routes/users-list/users.component';
 import { SelectedUserService } from 'app/core/services/selectedUser.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination/pagination.module';
 import { OtherUserTimeComponent } from 'app/routes/other-user-time/other-user-time.component';
-import { mock } from 'ts-mockito';
 import { User } from 'app/shared/models/user.model';
 
 describe('AddOtherUserTime Component', () => {
@@ -64,8 +63,7 @@ describe('AddOtherUserTime Component', () => {
 
     describe('user available', () => {
         beforeEach(() => {
-            const u = mock(User)
-            u._id = 'rr'
+            const u = <User> {  _id : 'rr' }
             selectedUserService.getUserWithProbableDataFetch = () => Observable.of(u)
             fixture.detectChanges()
         })
@@ -87,7 +85,7 @@ describe('AddOtherUserTime Component', () => {
             })
             describe('Success Scenario', () => {
                 beforeEach(() => {
-                    const user = mock(User)
+                    const user = <User>{}
                     dataService.addTimeZone = (id, payload) => Observable.of(user)
                 })
                 describe('api call', () => {

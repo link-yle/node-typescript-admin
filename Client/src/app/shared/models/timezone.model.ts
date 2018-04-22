@@ -1,4 +1,4 @@
-export class Timezone {
+export interface Timezone {
     name: string
     city: string
     gmtTimeDifference: number

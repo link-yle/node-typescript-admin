@@ -1,4 +1,4 @@
-export class UserInfo {
+export interface UserInfo {
     name: string
     email: string
 }

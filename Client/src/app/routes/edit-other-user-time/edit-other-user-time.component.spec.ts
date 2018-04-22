@@ -15,7 +15,6 @@ import { UsersComponent } from 'app/routes/users-list/users.component';
 import { SelectedUserService } from 'app/core/services/selectedUser.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination/pagination.module';
 import { OtherUserTimeComponent } from 'app/routes/other-user-time/other-user-time.component';
-import { mock } from 'ts-mockito';
 import { User } from 'app/shared/models/user.model';
 import { TimingsService } from 'app/core/services/timings.service';
 import { EditOtherUserTimeComponent } from 'app/routes/edit-other-user-time/edit-other-user-time.component';
@@ -66,8 +65,7 @@ describe('EditOtherUserTime Component', () => {
 
     describe('user available', () => {
         beforeEach(() => {
-            const u = mock(User)
-            u._id = 'rr'
+            const u = <User> {  _id : 'rr' }
             selectedUserService.getUserWithProbableDataFetch = () => Observable.of(u)
             fixture.detectChanges()
         })

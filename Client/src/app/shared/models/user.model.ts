@@ -1,6 +1,6 @@
 import { Timezone } from 'app/shared/models/timezone.model';
 
-export class User {
+export interface User {
     name: string
     email: string
     password?: string
