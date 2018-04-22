@@ -13,14 +13,16 @@ import { SignupComponent } from 'app/routes/signup/signup.component';
 import { RecoverPasswordByEmailComponent } from 'app/routes/personal/recover-password-by-email/recover-password-by-email.component';
 import { EmptyComponent } from 'app/routes/empty/empty.component';
 import { Location } from '@angular/common';
+import { User } from 'app/shared/models/user.model';
 
 describe('Login Component', () => {
     let comp: LoginComponent;
     let fixture: ComponentFixture<LoginComponent>;
     let sb: SnackBarService
     let location: Location
-    const user = {
-        name: 'Ahmed'
+    const user: User = {
+        name: 'Ahmed',
+        email: 'd',
     }
 
     class MockError extends Response implements Error {
@@ -189,7 +191,7 @@ describe('Login Component', () => {
         })
         describe('Scenario: Success', () => {
             it('should successfully post and navigate to home page', fakeAsync(() => {
-                dataService.login = (data) => Observable.of(user)
+                dataService.login = (data) => Observable.of({user, token: 'd'})
                 fixture.detectChanges();
                 fixture.debugElement.query(By.css('button[type="submit"]')).nativeElement.click()
                 tick()

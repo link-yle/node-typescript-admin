@@ -87,7 +87,8 @@ describe('AddOtherUserTime Component', () => {
             })
             describe('Success Scenario', () => {
                 beforeEach(() => {
-                    dataService.addTimeZone = (id, payload) => Observable.of('ok')
+                    const user = mock(User)
+                    dataService.addTimeZone = (id, payload) => Observable.of(user)
                 })
                 describe('api call', () => {
                     let spy

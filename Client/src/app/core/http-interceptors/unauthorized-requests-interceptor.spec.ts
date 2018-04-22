@@ -38,24 +38,24 @@ fdescribe('UnAuthorizedRequestsInterceptor', () => {
                 spy = spyOn(sb, 'emitErrorSnackBar')
             })
             describe('error is a string', () => {
-                it('should emit snackbar message  ', (done) => {
+                it('should not emit snackbar message  ', (done) => {
                     next.handle = (x) => Observable.throw('E')
                     service.intercept(req, next).subscribe(
                         data => { },
                         err => {
-                            expect(spy).toHaveBeenCalledWith('E')
+                            expect(spy).not.toHaveBeenCalled()
                             done()
                         }
                     )
                 });
             })
             describe('error is a an object with message prop', () => {
-                it('should emit snackbar message  ', (done) => {
+                it('should not emit snackbar message  ', (done) => {
                     next.handle = (x) => Observable.throw({ message: 'aa' })
                     service.intercept(req, next).subscribe(
                         data => { },
                         err => {
-                            expect(spy).toHaveBeenCalledWith('aa')
+                            expect(spy).not.toHaveBeenCalled()
                             done()
                         }
                     )
@@ -75,7 +75,7 @@ fdescribe('UnAuthorizedRequestsInterceptor', () => {
                         next.handle = (x) => Observable.throw(err)
                         service.intercept(req, next).subscribe(
                             data => {
-                                expect(spy).toHaveBeenCalledWith('aa')
+                                expect(spy).toHaveBeenCalled()
                                 done()
                             },
                         )
@@ -88,7 +88,7 @@ fdescribe('UnAuthorizedRequestsInterceptor', () => {
                         next.handle = (x) => Observable.throw(err)
                         service.intercept(req, next).subscribe(
                             data => {
-                                expect(spy).toHaveBeenCalledWith('aa')
+                                expect(spy).toHaveBeenCalled()
                                 done()
                             },
                         )

@@ -124,7 +124,7 @@ describe('Users Component', () => {
                 beforeEach(() => {
                     fixture.detectChanges()
                     dataService.deleteUser = (id) => Observable.of('ok')
-                    dataService.getUsers = () => Observable.of({ users: [] })
+                    dataService.getUsers = () => Observable.of({ users: [], count: 90 })
                     fixture.nativeElement.querySelectorAll('.fa-trash')[0].click()
                     fixture.detectChanges()
                 })
@@ -137,7 +137,7 @@ describe('Users Component', () => {
                 beforeEach(() => {
                     fixture.detectChanges()
                     dataService.deleteUser = (id) => Observable.throw('E')
-                    dataService.getUsers = () => Observable.of({ users: [] })
+                    dataService.getUsers = () => Observable.of({ users: [], count: 90 })
                     fixture.nativeElement.querySelectorAll('.fa-trash')[0].click()
                     fixture.detectChanges()
                 })
