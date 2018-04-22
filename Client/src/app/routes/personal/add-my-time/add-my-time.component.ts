@@ -20,7 +20,6 @@ export class AddMyTimeComponent {
     onSubmitted(x: Timezone) {
         this.dataService.addTimeZone(this.authService.getId(), x).subscribe(
             data => {
-                this.authService.saveProfile(data)
                 this.sb.emitSuccessSnackBar()
                 this.router.navigate(['/my-time'])
             },
