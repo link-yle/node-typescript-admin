@@ -1,5 +1,5 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, APP_BASE_HREF } from '@angular/common';
 
 import { SnackBarService } from './services/snackbar.service';
 import { SelectedUserService } from './services/selectedUser.service';
@@ -33,6 +33,7 @@ import { AuthInterceptor } from 'app/core/http-interceptors/authentication-inter
         { provide: HTTP_INTERCEPTORS, useClass: EnvironmentApiInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: UnAuthorizedRequestsInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: APP_BASE_HREF, useValue: '/' }
     ],
 
 })

@@ -82,7 +82,9 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.searchSubscription.unsubscribe()
+        if (this.searchSubscription) {
+            this.searchSubscription.unsubscribe()
+        }
     }
 
     onActivateClick(item) {

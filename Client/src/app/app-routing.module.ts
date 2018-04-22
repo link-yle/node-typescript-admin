@@ -9,7 +9,7 @@ import {
 } from './routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/new-password-and-recovery-code-submission.component';
 import {
     RecoverPasswordByEmailComponent,
-} from './routes/personal/recover-password-by-email/recover-password-by-email.component.';
+} from './routes/personal/recover-password-by-email/recover-password-by-email.component';
 import {
     ChangeMyPasswordUsingOldPasswordComponent,
 } from './routes/personal/edit-my-info/change-my-password-using-old-password/change-my-password-using-old-password.component';
@@ -37,7 +37,7 @@ import { EditMyTimeComponent } from 'app/routes/personal/edit-my-time/edit-my-ti
 import { ChangeOtherUserPasswordComponent } from 'app/routes/change-other-user-password/change-other-user-password.component';
 import { CorruptLinkComponent } from 'app/routes/corrupt-link/corrupt-link.component';
 
-export const paths: Routes = [
+export const routes: Routes = [
     {
         path: 'login', component: LoginLayoutComponent, children: [
             { path: '', component: LoginComponent },
@@ -85,7 +85,7 @@ export const paths: Routes = [
 
 
 @NgModule({
-    imports: [RouterModule.forRoot(paths)],
+    imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

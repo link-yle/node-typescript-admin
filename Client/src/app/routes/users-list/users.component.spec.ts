@@ -1,21 +1,13 @@
 import { ComponentFixture, TestBed, fakeAsync, tick, async } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
 import { DataService } from 'app/core/services/data.service';
-import { SharedModule } from 'app/shared/shared.module';
 import { Location } from '@angular/common';
-import { UsersComponent } from 'app/routes/users-list/users.component';
-import { OtherUserTimeComponent } from 'app/routes/other-user-time/other-user-time.component';
-import { EditOtherUserInfoComponent } from 'app/routes/edit-other-user-info/edit-other-user-info.component';
-import { EditRoleComponent } from 'app/routes/edit-role/edit-role.component';
-import { PaginationModule } from 'ngx-bootstrap/pagination/pagination.module';
-import { AdminClaimsService } from 'app/core/services/admin-claims.service';
 import { AuthService } from 'app/core/services/auth.service';
-import { SelectedUserService } from 'app/core/services/selectedUser.service';
-import { SnackBarService } from 'app/core/services/snackbar.service';
+import { Router } from '@angular/router';
+import { AppModule } from 'app/app.module';
+import { UsersComponent } from 'app/routes/users-list/users.component';
 
 describe('Users Component', () => {
     let comp: UsersComponent;
@@ -23,24 +15,16 @@ describe('Users Component', () => {
     let dataService: DataService
     let location: Location
     let authService: AuthService
+    let router: Router;
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
-                SharedModule, PaginationModule.forRoot(),
-                RouterTestingModule.withRoutes([
-                    { path: 'users/:id/time', component: OtherUserTimeComponent },
-                    { path: 'users/:id/role', component: EditRoleComponent },
-                    { path: 'users/:id', component: EditOtherUserInfoComponent },
-                ]),
+                // RouterTestingModule.withRoutes(routes),
+                AppModule,
             ],
-            declarations: [UsersComponent, OtherUserTimeComponent, EditOtherUserInfoComponent, EditRoleComponent],
             providers: [
                 { provide: DataService, useValue: {} },
                 Location,
-                AdminClaimsService,
-                { provide: AuthService, useValue: { getRole() { } } },
-                SelectedUserService,
-                SnackBarService
             ],
         })
         fixture = TestBed.createComponent(UsersComponent)
@@ -48,6 +32,9 @@ describe('Users Component', () => {
         dataService = fixture.debugElement.injector.get(DataService)
         location = fixture.debugElement.injector.get(Location)
         authService = fixture.debugElement.injector.get(AuthService)
+        authService.isAuthenticated = () => true
+        router = TestBed.get(Router);
+        // router.initialNavigation();
     })
 
     describe('Users not retrieved successfully', () => {
@@ -71,6 +58,45 @@ describe('Users Component', () => {
             expect(spy).toHaveBeenCalledWith(Object({ searchTerm: undefined, skip: 0 }))
         })
 
+        describe('Admin authorizations', () => {
+            describe('is admin', () => {
+                beforeEach(() => {
+                    authService.getRole = () => 'admin'
+                    fixture.detectChanges()
+                })
+                it('should navigate to "update-user-info" route', fakeAsync(() => {
+                    router.navigate(['users/11'])
+                    tick(100)
+                    expect(location.path()).toBe('/users/11')
+                }))
+                it('should navigate to "update-user-role" route', fakeAsync(() => {
+                    router.navigate(['users/11/role'])
+                    tick()
+                    expect(location.path()).toBe('/users/11/role')
+                }))
+
+            })
+
+            describe('is manager', () => {
+                beforeEach(() => {
+                    authService.getRole = () => 'manager'
+                    fixture.detectChanges()
+                })
+                it('should be able to navigate to "update-user-info" route', fakeAsync(() => {
+                    router.navigate(['users/11'])
+                    tick()
+                    expect(location.path()).toBe('/users/11')
+                }))
+                it('should not be able to navigate to "update-user-role" route', fakeAsync(() => {
+                    router.navigate(['users/11/role'])
+                    tick()
+                    expect(location.path()).not.toBe('/users/11/role')
+                }))
+
+            })
+
+        })
+
         describe('table', () => {
             beforeEach(() => {
                 fixture.detectChanges()
@@ -88,6 +114,7 @@ describe('Users Component', () => {
 
         describe('Navigation', () => {
             it('should navigate to "update-user-info" route', fakeAsync(() => {
+                authService.getRole = () => 'admin'
                 fixture.detectChanges()
                 fixture.nativeElement.querySelectorAll('.fa-edit')[0].click()
                 tick(100)

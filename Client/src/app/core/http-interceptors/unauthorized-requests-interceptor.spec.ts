@@ -11,7 +11,7 @@ import { LoginComponent } from 'app/routes/personal/login/login.component';
 
 let service: UnAuthorizedRequestsInterceptor;
 let sb: SnackBarService;
-fdescribe('UnAuthorizedRequestsInterceptor', () => {
+describe('UnAuthorizedRequestsInterceptor', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule.withRoutes([
