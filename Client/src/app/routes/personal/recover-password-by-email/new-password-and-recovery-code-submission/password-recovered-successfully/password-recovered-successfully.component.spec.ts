@@ -7,7 +7,7 @@ import { AppModule } from 'app/app.module';
 // tslint:disable-next-line:max-line-length
 import { PasswordRecoveredSuccessfullyComponent } from 'app/routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/password-recovered-successfully/password-recovered-successfully.component';
 
-fdescribe('passwordRecoveredSuccessfully Component', () => {
+describe('passwordRecoveredSuccessfully Component', () => {
     let comp: PasswordRecoveredSuccessfullyComponent;
     let fixture: ComponentFixture<PasswordRecoveredSuccessfullyComponent>;
     let location: Location

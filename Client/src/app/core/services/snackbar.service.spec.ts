@@ -1,20 +1,16 @@
 import { SnackBarService } from './snackbar.service';
 import { async, getTestBed, TestBed } from '@angular/core/testing';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SharedModule } from 'app/shared/shared.module';
 
 describe('Service: Snack bar Service', () => {
     let service: SnackBarService;
-    const mockMdSnackBar = {
-        open(message, actionText, config) {
-
-        }
-    }
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
                 SnackBarService,
-                { provide: MatSnackBarModule, useValue: mockMdSnackBar }
-            ]
+            ],
+            imports: [SharedModule]
         });
         const testbed = getTestBed();
         service = testbed.get(SnackBarService);

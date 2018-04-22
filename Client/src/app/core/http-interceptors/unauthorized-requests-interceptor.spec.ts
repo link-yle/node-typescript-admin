@@ -24,7 +24,7 @@ describe('UnAuthorizedRequestsInterceptor', () => {
         sb = injector.get(SnackBarService);
     });
 
-    fdescribe('intercept HTTP requests', () => {
+    describe('intercept HTTP requests', () => {
         let req: HttpRequest<any>;
         let next: HttpHandler;
         beforeEach(() => {
