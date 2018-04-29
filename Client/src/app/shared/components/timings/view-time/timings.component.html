@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"> {{title}}
-            <a title="Add New TimeZone" (click)="onAddClick()" class="text-info pull-right fa fa-plus"></a>
+            <a title="Add New Timezone" (click)="onAddClick()" class="text-info pull-right fa fa-plus"></a>
         </h3>
     </div>
     <div class="panel-body">
@@ -23,10 +23,10 @@
                     <td>{{getTime(item.gmtTimeDifference)}}</td>
                     <td>{{item.gmtTimeDifference}}</td>
                     <td class="text-center" (click)="onEditTimeClick(item)">
-                        <i class="fa fa-edit  text-default"> </i>
+                        <i href="javascript:void(0);" class="fa fa-edit text-warning"> </i>
                     </td>
                     <td class="text-center" (click)="onDeleteClick(item)">
-                        <i class="fa fa-trash text-danger"> </i>
+                        <i href="javascript:void(0);" class="fa fa-trash text-danger"> </i>
                     </td>
                 </tr>
             </tbody>

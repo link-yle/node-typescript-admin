@@ -1,15 +1,25 @@
 <app-nav>
-    <ul class="nav navbar-nav">
-        <li routerLinkActive="active" routerLink='/my-time'><a href="javascript:void(0);">My timings</a></li>
-        <li routerLinkActive="active" routerLink='/my-profile'><a href="javascript:void(0);">My profile</a></li>
-        <li *ngIf="isAtleastManager()" routerLinkActive="active" routerLink='/users'><a href="javascript:void(0);">Users</a></li>
-        <li (click)="logout()"><a href="javascript:void(0);">Logout</a></li>
-    </ul>
-
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a routerLinkActive="active" routerLink='/my-time' class="nav-link" href="javascript:void(0);">My timings</a>
+          </li>
+          <li class="nav-item">
+            <a routerLinkActive="active" routerLink='/my-profile' class="nav-link" href="javascript:void(0);">My profile</a>
+          </li>
+          <li *ngIf="isAtleastManager()" class="nav-item">
+              <a routerLinkActive="active" routerLink='/users' class="nav-link" href="javascript:void(0);">Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="logout()" href="javascript:void(0);">Logout</a>
+            </li>
+        </ul>
+      </div>
 </app-nav>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-11">
             <router-outlet></router-outlet>
         </div>
     </div>

@@ -1,13 +1,14 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Users
-
-        </h3>
+        <h3 class="panel-title">Users </h3>
     </div>
     <div class="panel-body">
-
-        <div class="form-group col-md-4">
-            <input type="text" id="search_field" class="form-control" placeholder="Filter by name" [(ngModel)]="searchTerm" (ngModelChange)="keyUp$.next($event)">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="text" id="search_field" class="form-control" placeholder="Filter by name" [(ngModel)]="searchTerm" (ngModelChange)="keyUp$.next($event)">
+                </div>
+            </div>
         </div>
 
         <table class="table table-hover">
@@ -31,22 +32,34 @@
                     <td>{{item.role}}</td>
                     <td>{{item.email}}</td>
                     <td class="text-center" (click)="onUpdateClick(item)">
-                        <a href="javascript:void(0);"> <i class="fa fa-edit  text-default"> </i> </a>
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-edit  text-default"> </i>
+                        </a>
                     </td>
                     <td class="text-center" (click)="onActivateClick(item)" *ngIf="!item.active">
-                        <a href="javascript:void(0);"> <i class="fa fa-edit  text-default"> </i> </a>
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-check-square  text-default"> </i>
+                        </a>
                     </td>
-                    <td class="text-center"  *ngIf="item.active">
-                        <a> <i class="fa fa fa-check  text-default"> </i> </a>
+                    <td class="text-center" *ngIf="item.active">
+                        <a>
+                            <i class="fa fa fa-check  text-default"> </i>
+                        </a>
                     </td>
                     <td *ngIf="isAdmin()" class="text-center" (click)="onTimingsClick(item)">
-                        <a href="javascript:void(0);"> <i class="fa fa-clock-o text-warning"> </i> </a>
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-clock-o text-warning"> </i>
+                        </a>
                     </td>
                     <td class="text-center" (click)="onDeleteClick(item)">
-                        <a href="javascript:void(0);"> <i class="fa fa-trash text-danger"> </i> </a>
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-trash text-danger"> </i>
+                        </a>
                     </td>
                     <td *ngIf="isAdmin()" class="text-center" (click)="onChangeRoleClick(item)">
-                        <a href="javascript:void(0);"> <i class="fa fa-user-o text-warning"> </i> </a>
+                        <a href="javascript:void(0);">
+                            <i class="fa fa-user-o text-warning"> </i>
+                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -56,5 +69,5 @@
 </div>
 
 <div class="col-md-12">
-    <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="fetchUsers($event)"></pagination>
+    <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="fetchUsers($event)" [maxSize]="10"></pagination>
 </div>
