@@ -33,6 +33,7 @@ import { RecoverPasswordByEmailComponent } from 'app/routes/personal/recover-pas
 import { PasswordRecoveredSuccessfullyComponent } from 'app/routes/personal/recover-password-by-email/new-password-and-recovery-code-submission/password-recovered-successfully/password-recovered-successfully.component';
 import { ActivateAfterSignupComponent } from 'app/routes/signup/activate-after-signup/activate-after-signup.component';
 import { CoreModule } from 'app/core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -61,14 +62,14 @@ import { CoreModule } from 'app/core/core.module';
     RecoverPasswordByEmailComponent,
     NewPasswordAndRecoveryCodeSubmissionComponent,
     PasswordRecoveredSuccessfullyComponent,
-
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     SharedModule,
     PaginationModule.forRoot(),
-    CoreModule
+    CoreModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })

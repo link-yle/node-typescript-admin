@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
         if (!user){
             return next({ nF: 'User' })
         } else if (user.recoveryCode !== req.body.code) {
-            return res.status(403).send({ error: 'Corrupt link' })
+            return res.status(403).send({msg: 'Corrupt link' })
         } else {
             user.recoveryCode = undefined
             user.active = true

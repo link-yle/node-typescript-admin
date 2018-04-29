@@ -15,23 +15,28 @@ export class UnAuthorizedRequestsInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).catch((res: HttpErrorResponse) => {
-            const message = this.getMessage(res)
+            const apiErrorMessage = res.error.msg
             if (res.status === 401 || res.status === 403) {
-                this.sb.emitErrorSnackBar(message);
+                console.log(res)
+                this.sb.emitErrorSnackBar(apiErrorMessage);
                 this.router.navigate(['login'])
                 return Observable.of(null);
             } else {
-                return Observable.throw(message);
+                if (apiErrorMessage) {
+                    return Observable.throw(apiErrorMessage);
+                } else {
+                    return Observable.throw(res.message)
+                }
             }
         });
     }
 
-    private getMessage(res: HttpErrorResponse) {
-        if (res.error instanceof Error) {
-            return res.error.message ? res.error.message : res.error.toString()
-        } else {
-            return res.message ? res.message : res.toString();
-        }
-    }
+    // private getMessage(res: HttpErrorResponse) {
+    //     if (res.error instanceof Error) {
+    //         return res.error.message ? res.error.message : res.error.toString()
+    //     } else {
+    //         return res.message ? res.message : res.toString();
+    //     }
+    // }
 
 }

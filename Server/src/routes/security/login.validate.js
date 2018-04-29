@@ -7,5 +7,5 @@ module.exports = (req, res, next) => {
         password: Joi.string().regex(passwordRegex).required().label('password'),
         email: Joi.string().email().required().label('email')
     })
-    return Joi.validate(req.body, schema, err => err ? res.status(401).json({ error: loginErr.message }) : next())
+    return Joi.validate(req.body, schema, err => err ? res.status(401).json({msg: loginErr.message }) : next())
 }

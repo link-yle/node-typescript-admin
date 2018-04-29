@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
         if (!user){
             return next({ nF: 'User' })
         } else if (user.activationCode !== req.body.code) {
-            return res.status(403).send({ error: 'Wrong activation code' })
+            return res.status(403).send({msg: 'Wrong activation code' })
         } else {
             user.activationCode = undefined
             user.active = true

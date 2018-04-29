@@ -5,7 +5,7 @@ import { UserCredentials } from 'app/shared/models/userCredentials';
 import { User } from 'app/shared/models/user.model';
 import { UserInfo } from 'app/shared/models/userInfo.model';
 import { Timezone } from 'app/shared/models/timezone.model';
-import { HttpClient, HttpParams, HttpResponse, HttpRequest, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class DataService {

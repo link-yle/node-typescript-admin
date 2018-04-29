@@ -9,9 +9,9 @@ module.exports = app => {
             return res.status(422).send(err)
         }
         else if (err.nF) {
-            return res.status(404).send({ error: `${err.nF} is not found in our system` })
+            return res.status(404).send({msg: `${err.nF} is not found in our system` })
         }
-        else if (err.name === 'NoUserFound') return res.status(404).send({ error: `User is not found in our system` })
+        else if (err.name === 'NoUserFound') return res.status(404).send({msg: `User is not found in our system` })
         else if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
         else return next(err)
     });
@@ -46,7 +46,7 @@ module.exports = app => {
 
         res.status(err.status || 500);
         
-        return res.json({error: err.message});
+        return res.json({msg: err.message});
     });
 
 
