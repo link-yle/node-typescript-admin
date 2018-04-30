@@ -1,5 +1,5 @@
 <div class="form-group">
     <label for="">{{label}} </label>
     <ng-content></ng-content>
-    <p class="text-danger" [hidden]="!isNotValid"> {{errorMessage}} </p>
+    <p test-id="errorMessage" class="text-danger" [hidden]="!isNotValid"> {{errorMessage}} </p>
 </div>

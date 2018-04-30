@@ -4,3 +4,4 @@ export const nameErrorMessage = 'Please Enter a that has atleast 3 letters and a
 export const emailErrorMessage = 'Please Enter a valid email'
 export const unsimillarPasswordErrorMessage = 'Please Enter a simillar password'
 export const codeErrorMessage = 'Please Enter a valid code'
+export const roles = ['manager', 'admin', 'regular']

@@ -1,24 +1,19 @@
 const usersModel = require('../models/users.model')
-const ROLES = require('../config/rolesConstants')
 
-module.exports = {
-    getAllUsers({ limit, skip, filter }) {
-        const query = filter ? { name: { $regex: RegExp(`.*${filter}.*`) } } : {}
-        return usersModel.find(query).limit(limit).skip(skip).select('_id name email role active').lean().exec()
-    },
+module.exports =
+    class getUserQuery {
+        constructor(limit, skip, roleFilter, searchFilter) {
+            this.limit = limit
+            this.skip = skip
+            this.query = {}
+            if (searchFilter) this.query.name = { $regex: RegExp(`.*${searchFilter}.*`) }
+            if (roleFilter) this.query.role = roleFilter
+        }
+        getUsers() {
+            return usersModel.find(this.query).limit(this.limit).skip(this.skip).select('_id name email role active').lean().exec()
+        }
+        getUsersCount() {
+            return usersModel.find(this.query).count().lean().exec()
+        }
 
-    getAllUsersCount(filter) {
-        const query = filter ? { name: { $regex: RegExp(`.*${filter}.*`) } } : {}
-        return usersModel.find(query).count().lean().exec()
-    },
-
-    getRegularUsers({ limit, skip, filter }) {
-        const query = filter ? { role: ROLES.regular, name: { $regex: RegExp(`.*${filter}.*`) } } : { role: ROLES.regular}
-        return usersModel.find(query).limit(limit).skip(skip).select('_id name email active').lean().exec()
-    },
-
-    getRegularUsersCount(filter) {
-        const query = filter ? { role: ROLES.regular, name: { $regex: RegExp(`.*${filter}.*`) } } : { role: ROLES.regular}
-        return usersModel.find(query).count().lean().exec()
-    },
-}
+    }

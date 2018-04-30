@@ -8,6 +8,7 @@ import { DataService } from '../../core/services/data.service';
 import { SnackBarService } from '../../core/services/snackbar.service';
 import { AuthService } from '../../core/services/auth.service';
 import { Subscription } from 'rxjs/Subscription';
+import { roles } from 'app/shared/config/constants';
 
 @Component({
     templateUrl: 'users.component.html',
@@ -16,9 +17,11 @@ export class UsersComponent implements OnInit, OnDestroy {
     users: User[] = []
     totalItems: number
     searchTerm: string
+    roleFilter: string;
     currentPage: number
     keyUp$ = new Subject<string>()
     searchSubscription: Subscription
+    roles =  roles
     constructor(
         private adminClaimsService: AdminClaimsService,
         private router: Router,
@@ -40,13 +43,13 @@ export class UsersComponent implements OnInit, OnDestroy {
     public fetchConsideringPaging() {
         if (this.currentPage === 1) {
             this.fetchUsers({ page: 1 })
-        }  else {
+        } else {
             this.currentPage = 1
         }
     }
 
     public fetchUsers({ page }) {
-        this.dataService.getUsers({ searchTerm: this.searchTerm, skip: (page - 1) * 10 }).first().subscribe(
+        this.dataService.getUsers({ roleFilter: this.roleFilter, searchTerm: this.searchTerm, skip: (page - 1) * 10 }).first().subscribe(
             data => {
                 this.users = data.users
                 this.totalItems = data.count

@@ -3,17 +3,27 @@
         <h3 class="panel-title">Users </h3>
     </div>
     <div class="panel-body">
-        <div class="row">
+        <div class="form-group row">
             <div class="col-md-4">
-                <div class="form-group">
-                    <input type="text" id="search_field" class="form-control" placeholder="Filter by name" [(ngModel)]="searchTerm" (ngModelChange)="keyUp$.next($event)">
-                </div>
+                <label>Search</label>
+                <input type="text" name="search" id="search_field" class="form-control form-control-sm" placeholder="Filter by name" [(ngModel)]="searchTerm"
+                    (ngModelChange)="keyUp$.next($event)">
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="isAdmin()">
+            <div class="col-md-4">
+                <label for="role">Role</label>
+                <select class="form-control form-control-sm" name="role" [(ngModel)]="roleFilter" (change)="fetchConsideringPaging()">
+                    <option value="">All</option>
+                    <option value="regular">Regular</option>
+                    <option value="manager">Manager</option>
+                    <option value="admin">Admin</option>
+                </select>
             </div>
         </div>
 
+
         <table class="table table-hover">
-
-
             <thead>
                 <tr>
                     <th>Name</th>
@@ -32,32 +42,32 @@
                     <td>{{item.role}}</td>
                     <td>{{item.email}}</td>
                     <td class="text-center">
-                        <a class="link" (click)="onUpdateClick(item)">
+                        <a id="updateUserInfoButton" class="link" (click)="onUpdateClick(item)">
                             <i class="fa fa-edit  text-default"> </i>
                         </a>
                     </td>
                     <td class="text-center" *ngIf="!item.active">
-                        <a class="link" (click)="onActivateClick(item)">
+                        <a id="activateButton" class="link" (click)="onActivateClick(item)">
                             <i class="fa fa-check-square  text-default"> </i>
                         </a>
                     </td>
                     <td class="text-center" *ngIf="item.active">
-                        <a>
-                            <i class="fa fa fa-check  text-default"> </i>
+                        <a id="activatedIcon">
+                            <i class="fa fa-check  text-success"> </i>
                         </a>
                     </td>
                     <td *ngIf="isAdmin()" class="text-center">
-                        <a class="link" (click)="onTimingsClick(item)">
+                        <a id="timingsButton" class="link" (click)="onTimingsClick(item)">
                             <i class="fa fa-clock-o text-warning"> </i>
                         </a>
                     </td>
                     <td class="text-center">
-                        <a class="link" (click)="onDeleteClick(item)">
+                        <a id="deleteButton" class="link" (click)="onDeleteClick(item)">
                             <i class="fa fa-trash text-danger"> </i>
                         </a>
                     </td>
                     <td *ngIf="isAdmin()" class="text-center">
-                        <a class="link" (click)="onChangeRoleClick(item)">
+                        <a id="userRoleButton" class="link" (click)="onChangeRoleClick(item)">
                             <i class="fa fa-user-o text-warning"> </i>
                         </a>
                     </td>

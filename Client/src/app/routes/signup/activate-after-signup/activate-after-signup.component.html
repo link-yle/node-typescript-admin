@@ -14,5 +14,5 @@
         <input type="text" label="Activation Code" name="activationCode" placeholder="Enter recovery code" class="form-control" formControlName="activationCode">
     </app-code-input-layout>
 
-    <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="submit(form.value)">Activate</button>
+    <button class="btn btn-default" [disabled]="!form.valid" type="submit" (click)="submit(form.value)">Activate</button>
 </form>

@@ -11,6 +11,7 @@ import { TimingsComponent } from './components/timings/view-time/timings.compone
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 import { LoginLayoutComponent } from './components/layout/login-layout/login-layout.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgProgressModule } from 'ngx-progressbar';
@@ -23,6 +24,7 @@ import { AppInputsModule } from 'app/shared/components/ui-inputs/inputs.module';
     FormsModule,
     ReactiveFormsModule,
     AlertModule.forRoot(),
+    TypeaheadModule.forRoot(),
     HttpModule,
     RouterModule,
     MatSnackBarModule,
@@ -45,7 +47,8 @@ import { AppInputsModule } from 'app/shared/components/ui-inputs/inputs.module';
     EditUserComponent,
     BrowserAnimationsModule,
     NgProgressModule,
-    AppInputsModule
+    AppInputsModule,
+    TypeaheadModule
 
   ],
   declarations: [

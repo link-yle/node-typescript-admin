@@ -37,8 +37,8 @@ export class DataService {
         return this.http.delete(`users/${id}`)
     }
 
-    getUsers({ skip = 0, searchTerm = '' }) {
-        const params = new HttpParams().set('skip', skip.toString()).set('filter', searchTerm);
+    getUsers({ skip = 0, searchTerm = '', roleFilter = '' }) {
+        const params = new HttpParams().set('skip', skip.toString()).set('searchFilter', searchTerm).append('roleFilter', roleFilter);
         return this.http.get<{ users: User[], count: number }>('users', { params })
     }
 

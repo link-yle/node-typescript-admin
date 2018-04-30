@@ -104,11 +104,11 @@ describe('ApiService: DataService', () => {
     });
 
     describe('get users', () => {
-        it('should have appropriate url ', () => {
+        fit('should have appropriate url ', () => {
             const dummy = 'ok';
             service.getUsers({ skip: 10, searchTerm: 'aa' }).subscribe()
             const req = httpMock.expectOne(req => req.method === 'GET');
-            expect(req.request.urlWithParams).toBe('http://localhost:3000/users?skip=10&filter=aa')
+            expect(req.request.urlWithParams).toBe('http://localhost:3000/users?skip=10&searchFilter=aa')
             req.flush(dummy);
         });
     });

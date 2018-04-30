@@ -1,16 +1,13 @@
 import { TestBed, async } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
-import { NgProgressModule } from '@ngx-progressbar/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppModule } from 'app/app.module';
 
 describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
-      imports: [NgProgressModule.forRoot(), RouterTestingModule]
+      imports: [AppModule]
     })
   });
 

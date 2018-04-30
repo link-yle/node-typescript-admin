@@ -16,6 +16,6 @@
         <input type="password" name="confirmPassword" class="form-control" placeholder="Enter Password" formControlName="confirmPassword">
     </app-confirm-password-input-layout>
 
-    <button class="btn btn-primary" [disabled]="!form.valid" type="submit" (click)="signup()">Signup</button>
-    <button class="btn btn-primary" id="secure-signup-button" [disabled]="!form.valid" type="submit" (click)="signupSecurely()">Signup securely</button>
+    <button class="btn btn-default" [disabled]="!form.valid" type="submit" (click)="signup()">Signup</button>
+    <button class="btn btn-default" id="secure-signup-button" [disabled]="!form.valid" type="submit" (click)="signupSecurely()">Signup securely</button>
 </form>
