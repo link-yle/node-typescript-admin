@@ -25,8 +25,8 @@ describe("Users endpoint", function () {
         }
         let token
         beforeAll((done) => {
-            request.post('/users').json(newUser).end(() => {
-                request.post('/users/login').json(loginPayload).end((err, res) => {
+            request.post('/users').send(newUser).end(() => {
+                request.post('/users/login').send(loginPayload).end((err, res) => {
                     token = res.body.token
                     done();
                 })
@@ -41,9 +41,9 @@ describe("Users endpoint", function () {
                 .send(updatePasswordPayload)
                 .end((err, res) => {
                     expect(res.status).toBe(200)
-                    request.post('/users/login').json(loginPayload).end((err, res) => {
+                    request.post('/users/login').send(loginPayload).end((err, res) => {
                         expect(res.status).toBe(401)
-                        request.post('/users/login').json({ email: loginPayload.email, password: updatePasswordPayload.newPassword }).end((err, res) => {
+                        request.post('/users/login').send({ email: loginPayload.email, password: updatePasswordPayload.newPassword }).end((err, res) => {
                             expect(res.status).toBe(200)
                             done();
                         })

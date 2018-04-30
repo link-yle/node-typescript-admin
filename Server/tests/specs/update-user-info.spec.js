@@ -29,8 +29,8 @@ describe("Users endpoint", function () {
         let token
         let user
         beforeAll((done) => {
-            request.post('/users').json(newUser).end((err, res) => {
-                request.post('/users/login').json(loginPayload).end((err, res) => {
+            request.post('/users').send(newUser).end((err, res) => {
+                request.post('/users/login').send(loginPayload).end((err, res) => {
                     token = res.body.token
                     user = res.body.user
                     done();
@@ -39,7 +39,7 @@ describe("Users endpoint", function () {
         })
 
         it("should not allow unauthenticated users", function (done) {
-            request.put(`/users/${user._id}/info`).json(updatedInfoPayload).end((err, res) => {
+            request.put(`/users/${user._id}/info`).send(updatedInfoPayload).end((err, res) => {
                 expect(res.status).toBe(401)
                 done();
             })

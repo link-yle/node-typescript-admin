@@ -11,7 +11,7 @@ describe("Users endpoint", function () {
 	describe("Getting users", function () {
 		let token
 		beforeAll((done) => {
-			request.post('/users/login').json(adminCredentials).end((err, res) => {
+			request.post('/users/login').send(adminCredentials).end((err, res) => {
 				token = res.body.token
 				done()
 			})

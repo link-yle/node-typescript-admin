@@ -31,14 +31,14 @@ describe("Users endpoint", function () {
         let userToken
         let timeZoneId
         beforeAll((done) => {
-            request.post('/users').json(newUser).end((err, res) => {
+            request.post('/users').send(newUser).end((err, res) => {
                 id = res.body._id
                 done()
             })
         })
         describe("Acting as same user", function () {
             beforeAll((done) => {
-                request.post('/users/login').json(newUserCredentials).end((err, res) => {
+                request.post('/users/login').send(newUserCredentials).end((err, res) => {
                     userToken = res.body.token
                     request.post(`/users/${id}/timezones`)
                         .set({ 'Authorization': `Bearer ${userToken}` })

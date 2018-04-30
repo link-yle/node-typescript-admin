@@ -5,7 +5,7 @@ const { connectToDb } = require('../../../helpers/requestsSpecHelper')
 const faker = require('faker')
 
 
-fdescribe("Users endpoint", function () {
+describe("Users endpoint", function () {
     beforeAll(() => {
         connectToDb()
     })
