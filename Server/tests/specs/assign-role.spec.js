@@ -23,7 +23,7 @@ describe("Users endpoint", function () {
                 timeZones: [],
                 password: '456565654ds'
             }
-            request.post('/users').send(newUser).end((err, res) => {
+            request.post('/users').json(newUser).end((err, res) => {
                 newUserId = res.body._id
                 done();
             })
@@ -31,13 +31,13 @@ describe("Users endpoint", function () {
 
         describe('Acting as an admin', () => {
             beforeAll((done) => {
-                request.post('/users/login').send(adminCredentials).end((err, res) => {
+                request.post('/users/login').json(adminCredentials).end((err, res) => {
                     adminToken = res.body.token
                     done()
                 })
             })
             it("should not allow unauthenticated users", function (done) {
-                request.patch(`/users/${newUserId}/role`).send({ role: 'manager' }).end((err, res) => {
+                request.patch(`/users/${newUserId}/role`).json({ role: 'manager' }).end((err, res) => {
                     expect(res.status).toBe(401)
                     done();
                 })
@@ -90,13 +90,13 @@ describe("Users endpoint", function () {
         describe('Acting as a manager', () => {
             let managerToken
             beforeAll((done) => {
-                request.post('/users/login').send(managerCredentials).end((err, res) => {
+                request.post('/users/login').json(managerCredentials).end((err, res) => {
                     managerToken = res.body.token
                     done()
                 })
             })
             it("should not allow unauthenticated users", function (done) {
-                request.patch(`/users/${newUserId}/role`).send({ role: 'manager' }).end((err, res) => {
+                request.patch(`/users/${newUserId}/role`).json({ role: 'manager' }).end((err, res) => {
                     expect(res.status).toBe(401)
                     done();
                 })

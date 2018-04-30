@@ -41,9 +41,9 @@ describe("Users endpoint", function () {
         let id
         let userToken
         beforeAll((done) => {
-            request.post('/users').send(newUser).end((err, res) => {
+            request.post('/users').json(newUser).end((err, res) => {
                 id = res.body._id
-                request.post('/users').send(newUser2).end((err, res) => {
+                request.post('/users').json(newUser2).end((err, res) => {
                     done()
                 })
             })
@@ -51,7 +51,7 @@ describe("Users endpoint", function () {
         describe("Acting as same user", function () {
 
             beforeAll((done) => {
-                request.post('/users/login').send(newUserCredentials).end((err, res) => {
+                request.post('/users/login').json(newUserCredentials).end((err, res) => {
                     userToken = res.body.token
                     done()
                 })
@@ -86,7 +86,7 @@ describe("Users endpoint", function () {
 
         describe("Acting as different user", function () {
             beforeAll((done) => {
-                request.post('/users/login').send(newUser2Credentials).end((err, res) => {
+                request.post('/users/login').json(newUser2Credentials).end((err, res) => {
                     userToken = res.body.token
                     done()
                 })

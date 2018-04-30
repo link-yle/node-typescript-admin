@@ -5,7 +5,7 @@
     </p>
 </div>
 
-<h1>Login</h1>
+<h1 class="mb-4">Login</h1>
 <br>
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
     <app-email-input-layout [isNotValid]="form.get('email').dirty && form.get('email').invalid">
@@ -17,7 +17,7 @@
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
 </form>
 <hr>
-<button class="btn btn-primary"  id="forget-password-button" routerLink="/login/recover_password_by_email">Forgotten password?</button>
-<br>
+<button class="btn btn-primary mb-4"  id="forget-password-button" routerLink="/login/recover_password_by_email">Forgotten password?</button>
+<br class="mb-4">
 <span>Do not have an account?</span>
 <button class="btn btn-primary" id="signup-button" routerLink="/login/signup">Sign Up</button>

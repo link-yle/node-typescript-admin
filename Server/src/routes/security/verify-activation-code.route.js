@@ -7,12 +7,12 @@ module.exports = async (req, res, next) => {
         if (!user){
             return next({ nF: 'User' })
         } else if (user.activationCode !== req.body.code) {
-            return res.status(403).send({msg: 'Wrong activation code' })
+            return res.status(403).json({msg: 'Wrong activation code' })
         } else {
             user.activationCode = undefined
             user.active = true
             await user.save()
-            return res.status(200).send({ success: 'Your account has been activated successfully' })
+            return res.status(200).json({ success: 'Your account has been activated successfully' })
         }
     } catch (e) {
         return next(e)

@@ -6,25 +6,23 @@ module.exports = app => {
         if (err.isJoi) {
             err.isJoi = undefined
             err._object = undefined
-            return res.status(422).send(err)
+            return res.status(422).json(err)
         }
         else if (err.nF) {
-            return res.status(404).send({msg: `${err.nF} is not found in our system` })
+            return res.status(404).json({msg: `${err.nF} is not found in our system` })
         }
-        else if (err.name === 'NoUserFound') return res.status(404).send({msg: `User is not found in our system` })
-        else if (err.code === 11000 && err.index === 0) return res.status(409).json('Email already exists')
+        else if (err.name === 'NoUserFound') return res.status(404).json({msg: `User is not found in our system` })
+        else if (err.code === 11000 && err.index === 0) return res.status(409).json({msg:'Email already exists'})
         else return next(err)
     });
 
     app.use(function (err, req, res, next) {
         if (err.name = 'CastError') {
             if (err instanceof mongoose.Error.CastError) {
-                return res.status(422).send('Please send proper input')
+                return res.status(422).json({msg:'Please send proper input'})
             }
-            else return res.status(500).send('Internal Server Error')
-
+            else return res.status(500).json({msg:'Internal Server Error'})
         } else return next(err)
-
     });
 
 

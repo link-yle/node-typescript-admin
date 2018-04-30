@@ -27,13 +27,13 @@ describe("Users endpoint", function () {
 
 		describe("Acting as an admin", function () {
 			beforeEach((done) => {
-				request.post('/users').send(newUser).end((err, res) => {
+				request.post('/users').json(newUser).end((err, res) => {
 					id = res.body._id
 					done()
 				})
 			})
 			beforeAll((done) => {
-				request.post('/users/login').send(adminCredentials).end((err, res) => {
+				request.post('/users/login').json(adminCredentials).end((err, res) => {
 					adminToken = res.body.token
 					done()
 				})
@@ -75,13 +75,13 @@ describe("Users endpoint", function () {
 				password: '456565654ds'
 			}
 			beforeEach((done) => {
-				request.post('/users').send(newUser).end((err, res) => {
+				request.post('/users').json(newUser).end((err, res) => {
 					id = res.body._id
 					done()
 				})
 			})
 			beforeAll((done) => {
-				request.post('/users/login').send(managerCredentials).end((err, res) => {
+				request.post('/users/login').json(managerCredentials).end((err, res) => {
 					managerToken = res.body.token
 					done()
 				})
