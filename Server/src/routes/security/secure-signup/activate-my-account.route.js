@@ -1,5 +1,5 @@
 
-const getUserByEmail = require('../../data-layer/get-user-by-email')
+const getUserByEmail = require('../../../data-layer/get-user-by-email')
 
 module.exports = async (req, res, next) => {
     try {
