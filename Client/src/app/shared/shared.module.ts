@@ -13,8 +13,7 @@ import { LoginLayoutComponent } from './components/layout/login-layout/login-lay
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgProgressModule } from '@ngx-progressbar/core';
-import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { NgProgressModule } from 'ngx-progressbar';
 import { TimeZoneFormComponent } from 'app/shared/components/timings/timezone-form/timezone-form.component';
 import { AppInputsModule } from 'app/shared/components/ui-inputs/inputs.module';
 
@@ -27,8 +26,7 @@ import { AppInputsModule } from 'app/shared/components/ui-inputs/inputs.module';
     HttpModule,
     RouterModule,
     MatSnackBarModule,
-    NgProgressModule.forRoot(),
-    NgProgressHttpModule,
+    NgProgressModule,
     BrowserAnimationsModule,
     AppInputsModule
   ],
@@ -45,7 +43,6 @@ import { AppInputsModule } from 'app/shared/components/ui-inputs/inputs.module';
     TimingsComponent,
     TimeZoneFormComponent,
     EditUserComponent,
-    // MatSnackBarModule,
     BrowserAnimationsModule,
     NgProgressModule,
     AppInputsModule
