@@ -22,11 +22,15 @@
                     <td>{{item.city}}</td>
                     <td>{{getTime(item.gmtTimeDifference)}}</td>
                     <td>{{item.gmtTimeDifference}}</td>
-                    <td class="text-center" (click)="onEditTimeClick(item)">
-                        <i href="javascript:void(0);" class="fa fa-edit text-warning"> </i>
+                    <td class="text-center">
+                        <a class="link" (click)="onEditTimeClick(item)">
+                            <i class="fa fa-edit text-warning"> </i>
+                        </a>
                     </td>
-                    <td class="text-center" (click)="onDeleteClick(item)">
-                        <i href="javascript:void(0);" class="fa fa-trash text-danger"> </i>
+                    <td class="text-center ">
+                        <a class="link" (click)="onDeleteClick(item)">
+                            <i class="fa fa-trash text-danger"> </i>
+                        </a>
                     </td>
                 </tr>
             </tbody>

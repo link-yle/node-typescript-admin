@@ -1,20 +1,20 @@
 <app-nav>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a routerLinkActive="active" routerLink='/my-time' class="nav-link" href="javascript:void(0);">My timings</a>
-          </li>
-          <li class="nav-item">
-            <a routerLinkActive="active" routerLink='/my-profile' class="nav-link" href="javascript:void(0);">My profile</a>
-          </li>
-          <li *ngIf="isAtleastManager()" class="nav-item">
-              <a routerLinkActive="active" routerLink='/users' class="nav-link" href="javascript:void(0);">Users</a>
+            <li class="nav-item">
+                <a routerLinkActive="active" routerLink='/my-time' class="nav-link">My timings</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="logout()" href="javascript:void(0);">Logout</a>
+                <a routerLinkActive="active" routerLink='/my-profile' class="nav-link">My profile</a>
+            </li>
+            <li *ngIf="isAtleastManager()" class="nav-item">
+                <a routerLinkActive="active" routerLink='/users' class="nav-link">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link link" href="javascript:void(0);" (click)="logout()">Logout</a>
             </li>
         </ul>
-      </div>
+    </div>
 </app-nav>
 
 <div class="container">

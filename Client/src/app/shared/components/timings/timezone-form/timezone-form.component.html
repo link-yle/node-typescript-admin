@@ -1,16 +1,17 @@
 <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form" *ngIf="form">
-    
-    <div class="form-group">
-        <label for="">Name </label>
-        <input name="name" type="text" class="form-control" id="" placeholder="Enter time zone name" formControlName="name">
-    </div>
-    <div class="form-group">
-        <label for="">City Name </label>
-        <input name="city" type="text" class="form-control" id="" placeholder="Enter City Name " formControlName="city">
-    </div>
+
+    <app-name-input-layout [isNotValid]="form.get('name').dirty && form.get('name').invalid">
+        <input type="text" name="name" class="form-control" formControlName="name">
+    </app-name-input-layout>
+
+    <app-name-input-layout [isNotValid]="form.get('city').dirty && form.get('city').invalid">
+        <input type="text" name="city" class="form-control" formControlName="city">
+    </app-name-input-layout>
+
     <div class="form-group">
         <label for="">GMT Time difference </label>
-        <input name="gmtTimeDifference" type="number" class="form-control" id="" min="-12" max="14" placeholder="Enter Gmt Time Difference" formControlName="gmtTimeDifference">
+        <input name="gmtTimeDifference" type="number" class="form-control" id="" min="-12" max="14" placeholder="Enter Gmt Time Difference"
+            formControlName="gmtTimeDifference">
     </div>
     <app-submit-button [isDisabled]="!form.valid"></app-submit-button>
 </form>

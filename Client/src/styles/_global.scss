@@ -1,26 +1,34 @@
-.top-buffer{
-    margin-top: 20px; 
+.top-buffer {
+    margin-top: 20px;
 }
 
-body{
-    font-family: Muli,Helvetica,Arial,sans-serif;
+body {
+    font-family: Muli, Helvetica, Arial, sans-serif;
 }
 
-.page-container{
+.page-container {
     min-height: 600px;
-    height: auto !important; /* This is a hack to make IE6 fix itself to a set height */
-    height: 600px; 
+    height: auto !important;
+    /* This is a hack to make IE6 fix itself to a set height */
+    height: 600px;
 }
 
-.successAlert{
-    background: map-get($theme-colors,"success");
+.successAlert {
+    background: map-get($theme-colors, "success");
 }
 
-.errorAlert{
-    background: map-get($theme-colors,"danger")
+.errorAlert {
+    background: map-get($theme-colors, "danger")
 }
 
-
-.mat-simple-snackbar-action{
+.mat-simple-snackbar-action {
     color: white
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.link {
+    cursor: pointer;
 }

@@ -17,15 +17,18 @@ export class UnAuthorizedRequestsInterceptor implements HttpInterceptor {
         return next.handle(req).catch((res: HttpErrorResponse) => {
             const apiErrorMessage = res.error.msg
             if (res.status === 401 || res.status === 403) {
-                console.log(res)
                 this.sb.emitErrorSnackBar(apiErrorMessage);
-                this.router.navigate(['login'])
+                if (res.error.number === 1) {
+                    this.router.navigate(['login/signup/activate'])
+                } else {
+                    this.router.navigate(['login'])
+                }
                 return Observable.of(null);
             } else {
                 if (apiErrorMessage) {
                     return Observable.throw(apiErrorMessage);
                 } else {
-                    return Observable.throw(res.message)
+                    return Observable.throw('Sorry.. An error occurred')
                 }
             }
         });

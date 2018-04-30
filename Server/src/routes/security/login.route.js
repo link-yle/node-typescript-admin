@@ -6,10 +6,10 @@ const clearUnneededDataFromPayload = require('../../services/clear-unneeded-data
 module.exports = (req, res, next) => {
     let loginErr = new Error('Email or/and password are wrong')
     return getUserByEmail(req.body.email).then(user => {
-        if (!user) return res.status(401).json({msg: loginErr.message})
-        if(!user.active) return res.status(403).json({msg: "Your account is not activated yet"})
+        if (!user) return res.status(401).json({ msg: loginErr.message })
+        if (!user.active) return res.status(403).json({ number: 1, msg: "Your account is not activated yet" })
         return comparePassword(req.body.password, user.password).then(ok => {
-            if (!ok) return res.status(401).json({msg: loginErr.message})
+            if (!ok) return res.status(401).json({ msg: loginErr.message })
             return res.send({ user: clearUnneededDataFromPayload(user), token: getToken(user._id, user.role) })
         }).catch(err => next(err))
     })
