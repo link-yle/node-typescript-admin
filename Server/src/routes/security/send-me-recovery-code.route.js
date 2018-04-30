@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
     const code = generateRandomCode()
     try {
         const user = await saveRecoveryCodeToDb(req.body.email, code)
-        if(!user) return next({nF: 'User'})
+        if(!user) return res.status(404).json({msg: 'This email does not exist'})
         await mailer.sendEmailWithCode(req.body.email, code)
         return res.send({ success: 'An email has probably been sent with your recovery code (if it already exists)' })
     } catch (e) {
